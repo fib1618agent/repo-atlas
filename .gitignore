@@ -1,0 +1,69 @@
+# Dependencies
+node_modules/
+
+# Build output
+.output/
+dist/
+.nitro/
+.vinxi/
+.tanstack/
+
+# Vite / bundler cache
+.vite/
+.cache/
+*.tsbuildinfo
+
+# Environment & secrets
+.env
+.env.local
+.env.*.local
+.dev.vars
+!.env.example
+
+# Cloudflare Workers
+.wrangler/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+bun-debug.log*
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+Desktop.ini
+
+# Editor / IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Test / coverage
+coverage/
+.nyc_output/
+
+# Python (repo analysis scripts)
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+.venv/
+venv/
+env/
+
+# Graphify (code graph tooling)
+graphify-out/
+
+# Large media sources (keep README assets: png, gif)
+*.source.mp4
+public/screenshots/*.mp4
+
+# Misc
+*.local
