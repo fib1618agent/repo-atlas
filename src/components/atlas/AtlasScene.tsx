@@ -1,6 +1,6 @@
 import { OrbitControls } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, type MutableRefObject } from "react";
 import * as THREE from "three";
 import { CATEGORY_ORDER, CATEGORY_TOKEN, type Repository } from "@/lib/repositories";
 import { useAtlasStore } from "@/lib/atlas-store";
@@ -38,6 +38,45 @@ function getCategoryColor(token: string): THREE.Color {
   return new THREE.Color(hex);
 }
 
+function getRepositoryColor(repo: Repository): THREE.Color {
+  return getCategoryColor(CATEGORY_TOKEN[repo.category]);
+}
+
+/** Same family as the dummy dust dots, with a small per-repo hue shift. */
+function getMarbleColor(repo: Repository): THREE.Color {
+  const color = getRepositoryColor(repo);
+  const hsl = { h: 0, s: 0, l: 0 };
+  color.getHSL(hsl);
+  const hueShift = (hashNumber(`${repo.id}:hue`) - 0.5) * 0.06;
+  color.setHSL((hsl.h + hueShift + 1) % 1, hsl.s, Math.max(0.28, hsl.l * 0.72));
+  return color;
+}
+
+/** Unlit colored spheres — same look as dummy dots, no PBR blow-out. */
+const marbleMaterial = new THREE.MeshBasicMaterial({
+  color: 0xffffff,
+  fog: false,
+  toneMapped: false,
+});
+const haloMaterial = new THREE.MeshBasicMaterial({
+  color: 0xffffff,
+  transparent: true,
+  opacity: 0.22,
+  depthWrite: false,
+  blending: THREE.AdditiveBlending,
+  fog: false,
+  toneMapped: false,
+});
+/** Invisible hit target — larger than the visible marble for easier hover/click. */
+const PICK_HIT_MULTIPLIER = 4.2;
+const pickMaterial = new THREE.MeshBasicMaterial({
+  transparent: true,
+  opacity: 0,
+  depthWrite: false,
+});
+pickMaterial.colorWrite = false;
+pickMaterial.depthWrite = false;
+
 // ── Funnel position ─────────────────────────────────────────────────────────
 function repositoryPosition(repo: Repository, index: number, total: number): THREE.Vector3 {
   const seedA = hashNumber(`${repo.id}:a`);
@@ -68,9 +107,33 @@ function repositoryPosition(repo: Repository, index: number, total: number): THR
   );
 }
 
+type MarbleSeed = {
+  driftFreq: number;
+  driftAmp: number;
+  driftPhase: number;
+  turbFreq: number;
+  turbAmp: number;
+};
+
+function repositoryLivePosition(
+  base: THREE.Vector3,
+  seed: MarbleSeed,
+  time: number,
+  target = new THREE.Vector3(),
+): THREE.Vector3 {
+  const drift = Math.sin(time * seed.driftFreq + seed.driftPhase) * seed.driftAmp;
+  const turbX = Math.sin(time * seed.turbFreq + seed.driftPhase * 1.3) * seed.turbAmp;
+  const turbZ = Math.cos(time * seed.turbFreq + seed.driftPhase * 0.7) * seed.turbAmp;
+  return target.set(base.x + turbX, base.y + drift, base.z + turbZ);
+}
+
+const HIGHLIGHT_PEER_LIMIT = 12;
+
 // ── Marble system ───────────────────────────────────────────────────────────
 function RepositoryMarbles({ repositories }: { repositories: Repository[] }) {
   const meshRef    = useRef<THREE.InstancedMesh>(null);
+  const haloRef    = useRef<THREE.InstancedMesh>(null);
+  const pickRef    = useRef<THREE.InstancedMesh>(null);
   const groupRef   = useRef<THREE.Group>(null);
   const timeRef    = useRef(0);
   const hoveredId   = useAtlasStore((s) => s.hoveredId);
@@ -102,8 +165,10 @@ function RepositoryMarbles({ repositories }: { repositories: Repository[] }) {
 
   useFrame((_, rawDelta) => {
     const mesh = meshRef.current;
+    const halo = haloRef.current;
+    const pick = pickRef.current;
     const group = groupRef.current;
-    if (!mesh || !group) return;
+    if (!mesh || !halo || !pick || !group) return;
 
     const delta = Math.min(rawDelta, 0.05);
     timeRef.current += delta;
@@ -125,9 +190,9 @@ function RepositoryMarbles({ repositories }: { repositories: Repository[] }) {
 
       dummy.position.set(base.x + turbX, base.y + drift, base.z + turbZ);
 
-      // Sizing: base + importance bonus
-      const baseSize  = 0.09 + hashNumber(`${repo.id}:sz`) * 0.08;
-      const impBonus  = repo.importance * 0.12;
+      // Dummy dust is ~0.022; marbles sit just above that as small colored beads
+      const baseSize  = 0.055 + hashNumber(`${repo.id}:sz`) * 0.028;
+      const impBonus  = repo.importance * 0.04;
       const isHovered   = repo.id === hoveredId;
       const isSelected  = repo.id === selectedId;
 
@@ -140,30 +205,49 @@ function RepositoryMarbles({ repositories }: { repositories: Repository[] }) {
         repositories.find((r) => r.id === selectedId)?.category === repo.category;
 
       const dimmed = !filterMatch || (selectedId && !selectedCategoryMatch && !isSelected);
+      const marbleSize = baseSize + impBonus;
       const scale  = isHovered || isSelected
-        ? (baseSize + impBonus) * 2.4
+        ? marbleSize * 1.85
         : dimmed
-        ? (baseSize + impBonus) * 0.28
-        : baseSize + impBonus;
+        ? marbleSize * 0.72
+        : marbleSize;
 
       dummy.scale.setScalar(scale);
       dummy.updateMatrix();
       mesh.setMatrixAt(index, dummy.matrix);
 
-      // Color
-      const token = CATEGORY_TOKEN[repo.category];
-      const color = getCategoryColor(token);
+      dummy.scale.setScalar(scale * 1.7);
+      dummy.updateMatrix();
+      halo.setMatrixAt(index, dummy.matrix);
+
+      dummy.scale.setScalar(scale * PICK_HIT_MULTIPLIER);
+      dummy.updateMatrix();
+      pick.setMatrixAt(index, dummy.matrix);
+
+      const marbleColor = getMarbleColor(repo);
+      const haloColor = marbleColor.clone();
       if (dimmed && !isHovered && !isSelected) {
-        color.multiplyScalar(0.18);
+        marbleColor.multiplyScalar(0.45);
+        haloColor.multiplyScalar(0.18);
       } else if (isHovered || isSelected) {
-        color.multiplyScalar(1.5);
+        marbleColor.offsetHSL(0, 0.04, 0.12);
+        haloColor.multiplyScalar(1.1);
       }
-      mesh.setColorAt(index, color);
+      mesh.setColorAt(index, marbleColor);
+      halo.setColorAt(index, haloColor);
     });
 
     mesh.instanceMatrix.needsUpdate = true;
+    halo.instanceMatrix.needsUpdate = true;
+    pick.instanceMatrix.needsUpdate = true;
     if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
+    if (halo.instanceColor) halo.instanceColor.needsUpdate = true;
   });
+
+  useEffect(() => {
+    if (meshRef.current) meshRef.current.raycast = () => undefined;
+    if (haloRef.current) haloRef.current.raycast = () => undefined;
+  }, []);
 
   const identify = (instanceId: number | undefined): Repository | undefined => {
     if (instanceId === undefined) return undefined;
@@ -172,8 +256,30 @@ function RepositoryMarbles({ repositories }: { repositories: Repository[] }) {
 
   return (
     <group ref={groupRef} rotation={[0.05, -0.25, -0.04]}>
+      <CategoryEdges
+        repositories={repositories}
+        basePositions={basePositions}
+        seeds={seeds}
+        timeRef={timeRef}
+      />
+      <instancedMesh
+        ref={haloRef}
+        args={[undefined, undefined, repositories.length]}
+        frustumCulled={false}
+      >
+        <sphereGeometry args={[1, 10, 8]} />
+        <primitive object={haloMaterial} attach="material" />
+      </instancedMesh>
       <instancedMesh
         ref={meshRef}
+        args={[undefined, undefined, repositories.length]}
+        frustumCulled={false}
+      >
+        <sphereGeometry args={[1, 12, 10]} />
+        <primitive object={marbleMaterial} attach="material" />
+      </instancedMesh>
+      <instancedMesh
+        ref={pickRef}
         args={[undefined, undefined, repositories.length]}
         frustumCulled={false}
         onPointerMove={(e) => {
@@ -184,16 +290,11 @@ function RepositoryMarbles({ repositories }: { repositories: Repository[] }) {
         onClick={(e) => {
           e.stopPropagation();
           const repo = identify(e.instanceId);
-          if (repo) setSelected(repo.id === selectedId ? null : repo.id);
+          if (repo) setSelected(repo.id);
         }}
       >
-        <sphereGeometry args={[1, 12, 10]} />
-        <meshStandardMaterial
-          roughness={0.15}
-          metalness={0.25}
-          emissiveIntensity={0.85}
-          vertexColors
-        />
+        <sphereGeometry args={[1, 8, 6]} />
+        <primitive object={pickMaterial} attach="material" />
       </instancedMesh>
     </group>
   );
@@ -250,10 +351,10 @@ function AtmosphericFunnel() {
     <group ref={groupRef} rotation={[0.05, -0.25, -0.04]}>
       <points geometry={geometry}>
         <pointsMaterial
-          size={0.038}
+          size={0.048}
           vertexColors
           transparent
-          opacity={0.62}
+          opacity={0.55}
           sizeAttenuation
           depthWrite={false}
         />
@@ -289,76 +390,184 @@ function OrbitalTraces() {
   );
 }
 
-// ── Category relationship edges ─────────────────────────────────────────────
-function RelationshipEdges({ repositories }: { repositories: Repository[] }) {
+// ── Category edges (same rotating group as marbles, live positions) ─────────
+function CategoryEdges({
+  repositories,
+  basePositions,
+  seeds,
+  timeRef,
+}: {
+  repositories: Repository[];
+  basePositions: THREE.Vector3[];
+  seeds: MarbleSeed[];
+  timeRef: MutableRefObject<number>;
+}) {
   const selectedId = useAtlasStore((s) => s.selectedId);
   const showRelationships = useAtlasStore((s) => s.showRelationships);
-  const total = repositories.length;
+  const highlightRef = useRef<THREE.LineSegments>(null);
+  const idleRef = useRef<THREE.LineSegments>(null);
 
-  const { idleGeo, highlightGeo } = useMemo(() => {
-    if (!showRelationships) return { idleGeo: null, highlightGeo: null };
+  const idleCapacity = useMemo(() => Math.min(120, repositories.length * 2), [repositories.length]);
+  const highlightCapacity = HIGHLIGHT_PEER_LIMIT;
 
-    const positions = repositories.map((r, i) => repositoryPosition(r, i, total));
-    const idlePts: number[] = [];
-    const hlPts: number[]   = [];
-    const IDLE_BUDGET = 180;
-    let idleCount = 0;
+  const { idlePositions, idleColors } = useMemo(() => {
+    const positions = new Float32Array(idleCapacity * 6);
+    const colors = new Float32Array(idleCapacity * 6);
+    return { idlePositions: positions, idleColors: colors };
+  }, [idleCapacity]);
 
-    const selected = selectedId !== null
-      ? repositories.find((r) => r.id === selectedId)
-      : null;
-    const selectedPos = selected
-      ? positions[repositories.indexOf(selected)]
-      : null;
+  const { highlightPositions, highlightColors } = useMemo(() => {
+    const positions = new Float32Array(highlightCapacity * 6);
+    const colors = new Float32Array(highlightCapacity * 6);
+    return { highlightPositions: positions, highlightColors: colors };
+  }, [highlightCapacity]);
 
+  const idleGeo = useMemo(() => {
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute("position", new THREE.BufferAttribute(idlePositions, 3));
+    geo.setAttribute("color", new THREE.BufferAttribute(idleColors, 3));
+    geo.setDrawRange(0, 0);
+    return geo;
+  }, [idlePositions, idleColors]);
+
+  const highlightGeo = useMemo(() => {
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute("position", new THREE.BufferAttribute(highlightPositions, 3));
+    geo.setAttribute("color", new THREE.BufferAttribute(highlightColors, 3));
+    geo.setDrawRange(0, 0);
+    return geo;
+  }, [highlightPositions, highlightColors]);
+
+  useEffect(() => () => {
+    idleGeo.dispose();
+    highlightGeo.dispose();
+  }, [idleGeo, highlightGeo]);
+
+  // Static idle edges: nearest same-category neighbor per repo (layout positions)
+  useEffect(() => {
+    if (!showRelationships) {
+      idleGeo.setDrawRange(0, 0);
+      return;
+    }
+
+    let edgeCount = 0;
     repositories.forEach((repo, i) => {
-      const pos = positions[i];
+      if (edgeCount >= idleCapacity) return;
+      const pos = basePositions[i];
       if (!pos) return;
 
-      // Highlight edges: connect selected to same-category peers (nearest 8)
-      if (selected && selectedPos && repo.category === selected.category && repo.id !== selected.id) {
-        hlPts.push(selectedPos.x, selectedPos.y, selectedPos.z, pos.x, pos.y, pos.z);
-      }
-
-      // Idle edges: random same-category pairs
-      if (idleCount < IDLE_BUDGET) {
-        for (let j = i + 1; j < repositories.length && idleCount < IDLE_BUDGET; j++) {
-          const other = repositories[j];
-          const otherPos = positions[j];
-          if (!other || !otherPos) continue;
-          if (other.category === repo.category && hashNumber(`edge:${i}:${j}`) < 0.08) {
-            idlePts.push(pos.x, pos.y, pos.z, otherPos.x, otherPos.y, otherPos.z);
-            idleCount++;
-          }
+      let bestDist = Infinity;
+      let bestIndex = -1;
+      repositories.forEach((other, j) => {
+        if (i === j || other.category !== repo.category) return;
+        const otherPos = basePositions[j];
+        if (!otherPos) return;
+        const dist = pos.distanceToSquared(otherPos);
+        if (dist < bestDist) {
+          bestDist = dist;
+          bestIndex = j;
         }
-      }
+      });
+
+      if (bestIndex < 0) return;
+      const peerPos = basePositions[bestIndex];
+      if (!peerPos) return;
+
+      const color = getRepositoryColor(repo);
+      const base = edgeCount * 6;
+      idlePositions[base]     = pos.x;
+      idlePositions[base + 1] = pos.y;
+      idlePositions[base + 2] = pos.z;
+      idlePositions[base + 3] = peerPos.x;
+      idlePositions[base + 4] = peerPos.y;
+      idlePositions[base + 5] = peerPos.z;
+      idleColors[base]     = color.r;
+      idleColors[base + 1] = color.g;
+      idleColors[base + 2] = color.b;
+      idleColors[base + 3] = color.r;
+      idleColors[base + 4] = color.g;
+      idleColors[base + 5] = color.b;
+      edgeCount++;
     });
 
-    const makeGeo = (pts: number[]) => {
-      const geo = new THREE.BufferGeometry();
-      geo.setAttribute("position", new THREE.BufferAttribute(new Float32Array(pts), 3));
-      return geo;
-    };
-    return { idleGeo: makeGeo(idlePts), highlightGeo: makeGeo(hlPts) };
-  }, [repositories, selectedId, showRelationships, total]);
+    idleGeo.setDrawRange(0, edgeCount * 2);
+    idleGeo.attributes["position"]!.needsUpdate = true;
+    idleGeo.attributes["color"]!.needsUpdate = true;
+  }, [repositories, basePositions, showRelationships, idleCapacity, idleGeo, idlePositions, idleColors]);
 
-  useEffect(() => () => { idleGeo?.dispose(); highlightGeo?.dispose(); }, [idleGeo, highlightGeo]);
+  useFrame(() => {
+    if (!showRelationships || selectedId === null) {
+      highlightGeo.setDrawRange(0, 0);
+      return;
+    }
+
+    const selectedIndex = repositories.findIndex((r) => r.id === selectedId);
+    if (selectedIndex < 0) {
+      highlightGeo.setDrawRange(0, 0);
+      return;
+    }
+
+    const selected = repositories[selectedIndex];
+    const selectedBase = basePositions[selectedIndex];
+    const selectedSeed = seeds[selectedIndex];
+    if (!selected || !selectedBase || !selectedSeed) return;
+
+    const time = timeRef.current;
+    const origin = repositoryLivePosition(selectedBase, selectedSeed, time);
+    const peer = new THREE.Vector3();
+    const candidates: { index: number; dist: number }[] = [];
+
+    repositories.forEach((repo, index) => {
+      if (index === selectedIndex || repo.category !== selected.category) return;
+      const base = basePositions[index];
+      const seed = seeds[index];
+      if (!base || !seed) return;
+      repositoryLivePosition(base, seed, time, peer);
+      candidates.push({ index, dist: origin.distanceToSquared(peer) });
+    });
+
+    candidates.sort((a, b) => a.dist - b.dist);
+    const color = getRepositoryColor(selected);
+    let edgeCount = 0;
+
+    for (const { index } of candidates.slice(0, HIGHLIGHT_PEER_LIMIT)) {
+      const base = basePositions[index];
+      const seed = seeds[index];
+      if (!base || !seed) continue;
+
+      repositoryLivePosition(base, seed, time, peer);
+      const offset = edgeCount * 6;
+      highlightPositions[offset]     = origin.x;
+      highlightPositions[offset + 1] = origin.y;
+      highlightPositions[offset + 2] = origin.z;
+      highlightPositions[offset + 3] = peer.x;
+      highlightPositions[offset + 4] = peer.y;
+      highlightPositions[offset + 5] = peer.z;
+      highlightColors[offset]     = color.r;
+      highlightColors[offset + 1] = color.g;
+      highlightColors[offset + 2] = color.b;
+      highlightColors[offset + 3] = color.r;
+      highlightColors[offset + 4] = color.g;
+      highlightColors[offset + 5] = color.b;
+      edgeCount++;
+    }
+
+    highlightGeo.setDrawRange(0, edgeCount * 2);
+    highlightGeo.attributes["position"]!.needsUpdate = true;
+    highlightGeo.attributes["color"]!.needsUpdate = true;
+  });
 
   if (!showRelationships) return null;
 
   return (
-    <group rotation={[0.05, -0.25, -0.04]}>
-      {idleGeo && (
-        <lineSegments geometry={idleGeo}>
-          <lineBasicMaterial color="white" transparent opacity={0.045} depthWrite={false} />
-        </lineSegments>
-      )}
-      {highlightGeo && (
-        <lineSegments geometry={highlightGeo}>
-          <lineBasicMaterial color="#a78bfa" transparent opacity={0.30} depthWrite={false} />
-        </lineSegments>
-      )}
-    </group>
+    <>
+      <lineSegments ref={idleRef} geometry={idleGeo} visible={selectedId === null}>
+        <lineBasicMaterial vertexColors transparent opacity={0.12} depthWrite={false} />
+      </lineSegments>
+      <lineSegments ref={highlightRef} geometry={highlightGeo}>
+        <lineBasicMaterial vertexColors transparent opacity={0.65} depthWrite={false} linewidth={2} />
+      </lineSegments>
+    </>
   );
 }
 
@@ -370,13 +579,12 @@ function Scene({ repositories }: { repositories: Repository[] }) {
       <color attach="background" args={["#05070b"]} />
       <fogExp2 attach="fog" args={["#05070b", 0.028]} />
       <ambientLight intensity={0.70} />
-      <directionalLight position={[6, 9, 7]} intensity={1.8} />
-      <pointLight position={[-6, 5, 4]} intensity={55} color="#7c3aed" />
-      <pointLight position={[6,  2, 3]} intensity={45} color="#06b6d4" />
-      <pointLight position={[0, -5, 2]} intensity={30} color="#fb923c" />
+      <directionalLight position={[6, 9, 7]} intensity={1.4} />
+      <pointLight position={[-6, 5, 4]} intensity={18} color="#7c3aed" />
+      <pointLight position={[6,  2, 3]} intensity={14} color="#06b6d4" />
+      <pointLight position={[0, -5, 2]} intensity={10} color="#fb923c" />
       <AtmosphericFunnel />
       <OrbitalTraces />
-      <RelationshipEdges repositories={repositories} />
       <RepositoryMarbles repositories={repositories} />
       <OrbitControls
         enableDamping
