@@ -403,7 +403,11 @@ function CategoryEdges({
   timeRef: MutableRefObject<number>;
 }) {
   const selectedId = useAtlasStore((s) => s.selectedId);
+  const hoveredId = useAtlasStore((s) => s.hoveredId);
   const showRelationships = useAtlasStore((s) => s.showRelationships);
+  // Hover previews connections; falls back to selection when pointer is idle
+  const focusId = hoveredId ?? selectedId;
+  const isHoverOnly = hoveredId !== null && hoveredId !== selectedId;
   const highlightRef = useRef<THREE.LineSegments>(null);
   const idleRef = useRef<THREE.LineSegments>(null);
 
@@ -496,29 +500,29 @@ function CategoryEdges({
   }, [repositories, basePositions, showRelationships, idleCapacity, idleGeo, idlePositions, idleColors]);
 
   useFrame(() => {
-    if (!showRelationships || selectedId === null) {
+    if (!showRelationships || focusId === null) {
       highlightGeo.setDrawRange(0, 0);
       return;
     }
 
-    const selectedIndex = repositories.findIndex((r) => r.id === selectedId);
-    if (selectedIndex < 0) {
+    const focusIndex = repositories.findIndex((r) => r.id === focusId);
+    if (focusIndex < 0) {
       highlightGeo.setDrawRange(0, 0);
       return;
     }
 
-    const selected = repositories[selectedIndex];
-    const selectedBase = basePositions[selectedIndex];
-    const selectedSeed = seeds[selectedIndex];
-    if (!selected || !selectedBase || !selectedSeed) return;
+    const focus = repositories[focusIndex];
+    const focusBase = basePositions[focusIndex];
+    const focusSeed = seeds[focusIndex];
+    if (!focus || !focusBase || !focusSeed) return;
 
     const time = timeRef.current;
-    const origin = repositoryLivePosition(selectedBase, selectedSeed, time);
+    const origin = repositoryLivePosition(focusBase, focusSeed, time);
     const peer = new THREE.Vector3();
     const candidates: { index: number; dist: number }[] = [];
 
     repositories.forEach((repo, index) => {
-      if (index === selectedIndex || repo.category !== selected.category) return;
+      if (index === focusIndex || repo.category !== focus.category) return;
       const base = basePositions[index];
       const seed = seeds[index];
       if (!base || !seed) return;
@@ -527,7 +531,7 @@ function CategoryEdges({
     });
 
     candidates.sort((a, b) => a.dist - b.dist);
-    const color = getRepositoryColor(selected);
+    const color = getRepositoryColor(focus);
     let edgeCount = 0;
 
     for (const { index } of candidates.slice(0, HIGHLIGHT_PEER_LIMIT)) {
@@ -561,11 +565,17 @@ function CategoryEdges({
 
   return (
     <>
-      <lineSegments ref={idleRef} geometry={idleGeo} visible={selectedId === null}>
+      <lineSegments ref={idleRef} geometry={idleGeo} visible={focusId === null}>
         <lineBasicMaterial vertexColors transparent opacity={0.12} depthWrite={false} />
       </lineSegments>
       <lineSegments ref={highlightRef} geometry={highlightGeo}>
-        <lineBasicMaterial vertexColors transparent opacity={0.65} depthWrite={false} linewidth={2} />
+        <lineBasicMaterial
+          vertexColors
+          transparent
+          opacity={isHoverOnly ? 0.42 : 0.65}
+          depthWrite={false}
+          linewidth={2}
+        />
       </lineSegments>
     </>
   );
