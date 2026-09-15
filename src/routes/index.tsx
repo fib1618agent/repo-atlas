@@ -148,7 +148,10 @@ function RepoAtlasPage() {
   return (
     <main className="atlas-page relative min-h-screen bg-background text-foreground">
       {/* ── Atmospheric glow ── */}
-      <div className="atlas-vortex-glow" aria-hidden />
+      <div
+        className={`atlas-vortex-glow${selected ? " atlas-vortex-glow--panel-open" : ""}`}
+        aria-hidden
+      />
 
       {/* ── Header ── */}
       <header className="atlas-header">
@@ -191,7 +194,7 @@ function RepoAtlasPage() {
 
       {/* ── Canvas ── */}
       <section className="relative min-h-screen pt-[4.5rem]">
-        <div className="atlas-canvas-wrap">
+        <div className={`atlas-canvas-wrap${selected ? " atlas-canvas-wrap--panel-open" : ""}`}>
           {isLoading ? (
             <AtlasLoading />
           ) : (
@@ -457,7 +460,7 @@ function RepoAtlasPage() {
           {selected && <RepositoryPanel repository={selected} />}
 
           {/* Hover card */}
-          {hovered && !selected && (
+          {hovered && hovered.id !== selectedId && (
             <HoverCard repository={hovered} pointer={pointer} />
           )}
         </div>

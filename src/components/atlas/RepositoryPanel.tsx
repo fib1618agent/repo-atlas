@@ -107,7 +107,7 @@ export function RepositoryPanel({ repository }: { repository: Repository }) {
 
   return (
     <aside
-      className="atlas-panel pointer-events-auto"
+      className="atlas-panel"
       aria-label={`${repository.name} repository details`}
     >
       {/* ── Header ── */}

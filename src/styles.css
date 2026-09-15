@@ -138,12 +138,20 @@
   /* Canvas */
   .atlas-canvas-wrap {
     position: absolute; inset: 4.5rem 0 2.5rem 22rem;
+    transition: inset 280ms ease;
+  }
+  .atlas-canvas-wrap--panel-open {
+    right: 26rem;
   }
 
   /* Atmospheric glow behind vortex */
   .atlas-vortex-glow {
     position: absolute; inset: 4.5rem 0 2.5rem 22rem;
     pointer-events: none; z-index: 1;
+    transition: inset 280ms ease;
+  }
+  .atlas-vortex-glow--panel-open {
+    right: 26rem;
     background: radial-gradient(
       ellipse 55% 70% at 50% 42%,
       oklch(0.45 0.18 275 / 0.10) 0%,
@@ -252,7 +260,7 @@
   }
   .atlas-hint span { display: flex; align-items: center; gap: 0.35rem; }
 
-  /* Right panel */
+  /* Right panel — sits beside the canvas, not over it; clicks pass through gaps */
   .atlas-panel {
     position: absolute; top: 5.5rem; right: 1.25rem;
     width: 24rem;
@@ -265,6 +273,8 @@
     backdrop-filter: blur(20px);
     box-shadow: 0 22px 70px oklch(0.02 0.02 260 / 0.55);
     animation: atlas-panel-in 280ms ease both;
+    pointer-events: auto;
+    z-index: 15;
   }
   .atlas-panel::-webkit-scrollbar { width: 4px; }
   .atlas-panel::-webkit-scrollbar-track { background: transparent; }
@@ -312,7 +322,7 @@
 
   /* Hover card */
   .atlas-hover-card {
-    position: fixed; z-index: 30; width: 18rem;
+    position: fixed; z-index: 40; width: 18rem;
     pointer-events: none;
     border: 1px solid oklch(0.91 0.018 255 / 0.12);
     border-radius: calc(var(--radius) + 2px);
