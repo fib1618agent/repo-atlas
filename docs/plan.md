@@ -1,5 +1,7 @@
 # RepoAtlas interactive repository universe
 
+Related: [Dynamic GitHub sources — implementation prompt](./dynamic-sources-prompt.md) (multi-user URLs, SQLite cache, JSON export, AI provider adapter).
+
 ## Goal
 Replace the placeholder home page with the dark editorial RepoAtlas experience from the supplied brief: a living, vertically rotating 3D hurricane where every public `imdadareeph` repository is an interactive colored marble.
 

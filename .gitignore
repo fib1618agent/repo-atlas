@@ -65,5 +65,8 @@ graphify-out/
 *.source.mp4
 public/screenshots/*.mp4
 
+# Agent skill lock (personal machine pin; this app has no project skills)
+skills-lock.json
+
 # Misc
 *.local
