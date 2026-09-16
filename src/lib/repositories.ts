@@ -29,6 +29,9 @@ export interface Repository {
   pushedAt: string | null;
   updatedAt: string;
   defaultBranch: string;
+  sourceLogin?: string;
+  sourceKind?: "user" | "org" | "repo";
+  sourceUrl?: string;
   category: RepoCategory;
   subgroup: string;
   importance: number;

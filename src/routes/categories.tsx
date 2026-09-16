@@ -1,10 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useServerFn } from "@tanstack/react-start";
-import { useQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
 import { ArrowUpRight, Code2 } from "lucide-react";
+import { AtlasSourcesChrome } from "@/components/atlas/AtlasSourcesChrome";
 import { RepoAtlasLogo } from "@/components/atlas/RepoAtlasLogo";
-import { getRepositories } from "@/lib/repositories.functions";
+import { useAtlasRepositories } from "@/lib/use-atlas-repositories";
 import {
   CATEGORY_ORDER,
   CATEGORY_TOKEN,
@@ -73,13 +72,7 @@ const LANG_COLORS: Record<string, string> = {
 };
 
 function CategoriesPage() {
-  const loadRepositories = useServerFn(getRepositories);
-  const { data, isLoading } = useQuery({
-    queryKey: ["repositories", "imdadareeph"],
-    queryFn: () => loadRepositories(),
-    staleTime: 10 * 60 * 1000,
-  });
-  const repositories = data?.repositories ?? [];
+  const { repositories, isLoading, isFetching, sourceKey, isDefault, urls } = useAtlasRepositories();
 
   // Group repos by category
   const byCategory = useMemo<Record<string, Repository[]>>(() => {
@@ -119,6 +112,14 @@ function CategoriesPage() {
           <button type="button" className="atlas-nav-item">About</button>
         </nav>
         <div className="ml-auto flex items-center gap-3">
+          <AtlasSourcesChrome
+            sourceKey={sourceKey}
+            isDefault={isDefault}
+            repositories={repositories}
+            urls={urls}
+            isLoading={isLoading}
+            isFetching={isFetching}
+          />
           <Link
             to="/"
             className="text-xs text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1"
@@ -134,8 +135,10 @@ function CategoriesPage() {
           <p className="atlas-eyebrow mb-2">Taxonomy</p>
           <h1 className="text-3xl font-bold text-foreground">Categories</h1>
           <p className="mt-2 text-sm text-muted-foreground">
-            {isLoading
+            {isLoading && repositories.length === 0
               ? "Loading…"
+              : isFetching && repositories.length > 0
+              ? "Refreshing repositories…"
               : `${totalRepos} repositories across ${CATEGORY_ORDER.length} categories`}
           </p>
         </div>

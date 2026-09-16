@@ -41,6 +41,7 @@ Desktop.ini
 # Editor / IDE
 .idea/
 .vscode/
+.cursor/
 *.swp
 *.swo
 *~
@@ -67,6 +68,12 @@ public/screenshots/*.mp4
 
 # Agent skill lock (personal machine pin; this app has no project skills)
 skills-lock.json
+
+# Atlas SQLite cache (local dev)
+data/atlas.sqlite
+data/atlas.sqlite-wal
+data/atlas.sqlite-shm
+data/atlas-export.json
 
 # Misc
 *.local

@@ -1,6 +1,6 @@
 # RepoAtlas — Progress Tracker
 
-> Last updated: 2026-09-13  
+> Last updated: 2026-09-16  
 > Status legend: `[ ]` Planned · `[/]` In progress · `[x]` Done · `[-]` Skipped / deferred
 
 ---
@@ -134,8 +134,45 @@
 - [x] 4,200 dust particles + up to 92 marble marbles instanced
 - [x] Edge budget capped at 180 idle + up to ~20 highlight edges
 - [ ] Responsive audit on physical devices (tablet/mobile)
-- [ ] Add `GEMINI_API_KEY` env var for AI summaries (optional, fallback always works)
+- [x] Add `GEMINI_API_KEY` env var for AI summaries (optional, fallback always works) — see `.env.example`
 - [ ] Final visual comparison against reference images
+
+---
+
+## Feature 001 — Dynamic GitHub Sources (`specs/001-dynamic-github-sources/`)
+
+### Phase 1–4 — MVP (sources dialog, fetch, routes, loading UX)
+
+- [x] Setup: `.gitignore`, `atlas-config`, Toaster, `SourcesDialog` mount
+- [x] Core: `github-url`, `github-fetch`, refactored `repositories.functions`, `sources-store`, `use-atlas-repositories`
+- [x] UI: `SourcesDialog`, `AtlasLoading`, `AtlasSourcesChrome`; wired `/`, `/catalogue`, `/categories`, `/insights`
+- [x] FR-021: `keepPreviousData`, explore overlay, dialog `Loading…`
+
+### Phase 5–7 — Errors, export, persist
+
+- [x] Error catalog + per-source failures + dialog row mapping
+- [x] `export-repositories.ts` + Export JSON on all routes
+- [x] Zustand hydration gate + 15-minute server cache for custom `sourceKey`
+
+### Phase 8 — SQLite cache (local only)
+
+- [x] `data/schema.sql`, `atlas-store.ts` factory, `atlas-store.sqlite.ts` (dynamic import)
+- [x] Cache wired in `repositories.functions.ts`
+- [x] `db:init`, `db:export`, `db:reset` scripts + `AGENTS.md` docs
+
+### Phase 9 — Environment & AI adapter
+
+- [x] `.env.example` with full variable table
+- [x] `src/lib/ai/*` provider adapter (Gemini wired; OpenAI/Anthropic/Grok stubs)
+- [x] `ai-summary.functions.ts` uses `generateText`; no `VITE_GEMINI_API_KEY`
+- [x] `README.md` environment section
+
+### Phase 10 — Polish
+
+- [x] `bunx tsc --noEmit` passes
+- [x] `bun run build` passes (Cloudflare preset; SQLite lazy-loaded, memory-only on Workers)
+- [x] UI strings cross-checked against `contracts/sources-dialog-ui.md`
+- [ ] Manual quickstart §9–§11 (dialog from every route, duplicate toast, SC-007 FPS)
 
 ---
 
