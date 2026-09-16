@@ -9,7 +9,10 @@
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
     "lint": "eslint .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "db:init": "bun scripts/atlas-db-init.ts",
+    "db:export": "bun scripts/atlas-export.ts",
+    "db:reset": "bun scripts/atlas-db-reset.ts"
   },
   "overrides": {
     "rolldown": "1.2.1"

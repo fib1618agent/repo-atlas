@@ -1,14 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useServerFn } from "@tanstack/react-start";
-import { useQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
   PieChart, Pie, Cell, Legend,
   AreaChart, Area, CartesianGrid,
 } from "recharts";
+import { AtlasSourcesChrome } from "@/components/atlas/AtlasSourcesChrome";
 import { RepoAtlasLogo } from "@/components/atlas/RepoAtlasLogo";
-import { getRepositories } from "@/lib/repositories.functions";
+import { useAtlasRepositories } from "@/lib/use-atlas-repositories";
 import { CATEGORY_ORDER, CATEGORY_TOKEN, formatCompact } from "@/lib/repositories";
 
 export const Route = createFileRoute("/insights")({
@@ -83,13 +82,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 
 /* ── Main page ───────────────────────────────────────────────── */
 function InsightsPage() {
-  const loadRepositories = useServerFn(getRepositories);
-  const { data, isLoading } = useQuery({
-    queryKey: ["repositories", "imdadareeph"],
-    queryFn: () => loadRepositories(),
-    staleTime: 10 * 60 * 1000,
-  });
-  const repos = data?.repositories ?? [];
+  const { repositories: repos, isLoading, isFetching, sourceKey, isDefault, urls } = useAtlasRepositories();
 
   /* ── Derived analytics ────────────────────────────────────── */
   const categoryData = useMemo(() =>
@@ -150,7 +143,7 @@ function InsightsPage() {
     (b.pushedAt ?? "").localeCompare(a.pushedAt ?? "")
   )[0];
 
-  if (isLoading) {
+  if (isLoading && repos.length === 0) {
     return (
       <div className="min-h-screen bg-background text-foreground">
         <header className="atlas-header sticky top-0 z-40">
@@ -176,6 +169,14 @@ function InsightsPage() {
           <button type="button" className="atlas-nav-item">About</button>
         </nav>
         <div className="ml-auto flex items-center gap-3">
+          <AtlasSourcesChrome
+            sourceKey={sourceKey}
+            isDefault={isDefault}
+            repositories={repos}
+            urls={urls}
+            isLoading={isLoading}
+            isFetching={isFetching}
+          />
           <Link
             to="/"
             className="text-xs text-muted-foreground hover:text-foreground transition-colors"
@@ -184,6 +185,12 @@ function InsightsPage() {
           </Link>
         </div>
       </header>
+
+      {isFetching && repos.length > 0 && (
+        <p className="border-b border-border/40 bg-card/30 px-6 py-2 text-center text-xs text-muted-foreground">
+          Refreshing repositories…
+        </p>
+      )}
 
       <div className="mx-auto max-w-7xl px-6 py-8 space-y-12">
         {/* Page heading */}

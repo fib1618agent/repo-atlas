@@ -83,11 +83,23 @@ bun run dev            # http://127.0.0.1:4949
 
 ## Environment
 
+Copy `.env.example` to `.env` and fill in the values you need (`cp .env.example .env`). Never commit `.env`.
+
 | Variable | Purpose |
 |---|---|
-| `GEMINI_API_KEY` | AI summaries in the repository panel (optional; metadata fallback always works) |
-| `GITHUB_TOKEN` | Raises GitHub API rate limit from 60 → 5,000 req/hr |
+| `GITHUB_TOKEN` | Optional. Raises GitHub API rate limit from 60 → 5,000 req/hr |
+| `GEMINI_API_KEY` | Optional. Server-side AI summaries (metadata fallback always works) |
+| `ATLAS_AI_PROVIDER` | Active AI provider: `gemini` (default), `openai`, `anthropic`, or `grok` |
+| `ATLAS_DEFAULT_OWNER` | Default GitHub owner when no custom sources are loaded |
+| `ATLAS_SQLITE_ENABLED` | Enable local SQLite cache (`true` / `false`) |
+| `ATLAS_SQLITE_PATH` | Path to SQLite database file |
+| `ATLAS_CACHE_TTL_MS` | Repository cache TTL in milliseconds |
+| `ATLAS_MAX_SOURCES` | Max GitHub sources per load |
+| `ATLAS_MAX_SPIRAL_REPOS` | Max repos shown in the 3D spiral |
+| `ATLAS_MAX_STORED_REPOS` | Max repos stored in cache |
 | `VITE_SITE_URL` | Canonical public URL for OG tags / sitemap |
+
+See `.env.example` for the full list including model names and provider API keys. Only **Gemini** is wired today; `openai`, `anthropic`, and `grok` are adapter stubs and will fall back to metadata summaries until implemented.
 
 ## Production
 

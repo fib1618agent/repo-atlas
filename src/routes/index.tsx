@@ -1,6 +1,4 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useServerFn } from "@tanstack/react-start";
-import { useQuery } from "@tanstack/react-query";
 import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowRight, Github, Search, Sparkles,
@@ -15,10 +13,15 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { AtlasLoading } from "@/components/atlas/AtlasLoading";
+import { AtlasSourcesChrome } from "@/components/atlas/AtlasSourcesChrome";
 import { RepoAtlasLogo } from "@/components/atlas/RepoAtlasLogo";
 import { RepositoryPanel } from "@/components/atlas/RepositoryPanel";
 import { useAtlasStore } from "@/lib/atlas-store";
-import { getRepositories } from "@/lib/repositories.functions";
+import { atlasErrorMessage } from "@/lib/atlas-errors";
+import { useAtlasRepositories } from "@/lib/use-atlas-repositories";
+import { useSourcesStore } from "@/lib/sources-store";
+import { toast } from "sonner";
 import { CATEGORY_ORDER, CATEGORY_TOKEN, type RepoCategory, type Repository } from "@/lib/repositories";
 
 const AtlasScene = lazy(() =>
@@ -51,13 +54,19 @@ function GitLabIcon({ className }: { className?: string }) {
 
 // ── Page component ──────────────────────────────────────────────────────────
 function RepoAtlasPage() {
-  const loadRepositories = useServerFn(getRepositories);
-  const { data, isLoading } = useQuery({
-    queryKey: ["repositories", "imdadareeph"],
-    queryFn: () => loadRepositories(),
-    staleTime: 10 * 60 * 1000,
-  });
-  const repositories = data?.repositories ?? [];
+  const {
+    repositories,
+    spiralRepositories,
+    isLoading,
+    isFetching,
+    sourceKey,
+    isDefault,
+    urls,
+    dataSource,
+  } = useAtlasRepositories();
+  const setDialogOpen = useSourcesStore((s) => s.setDialogOpen);
+  const showInitialLoad = isLoading && repositories.length === 0;
+  const showRefetchOverlay = isFetching && repositories.length > 0;
 
   const selectedId      = useAtlasStore((s) => s.selectedId);
   const hoveredId       = useAtlasStore((s) => s.hoveredId);
@@ -123,6 +132,14 @@ function RepoAtlasPage() {
   }, [query, repositories]);
 
   useEffect(() => {
+    if (dataSource !== "fallback") return;
+    const flagKey = "repoatlas.toast.fallback";
+    if (sessionStorage.getItem(flagKey)) return;
+    sessionStorage.setItem(flagKey, "1");
+    toast.message(atlasErrorMessage("DEFAULT_FALLBACK"));
+  }, [dataSource]);
+
+  useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") { setSelected(null); setQuery(""); }
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
@@ -166,6 +183,14 @@ function RepoAtlasPage() {
         </nav>
 
         <div className="ml-auto flex items-center gap-3">
+          <AtlasSourcesChrome
+            sourceKey={sourceKey}
+            isDefault={isDefault}
+            repositories={repositories}
+            urls={urls}
+            isLoading={isLoading}
+            isFetching={isFetching}
+          />
           <SearchBox
             query={query}
             setQuery={setQuery}
@@ -195,15 +220,22 @@ function RepoAtlasPage() {
       {/* ── Canvas ── */}
       <section className="relative min-h-screen pt-[4.5rem]">
         <div className={`atlas-canvas-wrap${selected ? " atlas-canvas-wrap--panel-open" : ""}`}>
-          {isLoading ? (
+          {showInitialLoad ? (
             <AtlasLoading />
           ) : (
-            <Suspense fallback={<AtlasLoading />}>
-              <AtlasScene
-                repositories={repositories}
-                onPointerPosition={(x, y) => setPointer({ x, y })}
-              />
-            </Suspense>
+            <div className="relative h-full">
+              <Suspense fallback={<AtlasLoading />}>
+                <AtlasScene
+                  repositories={spiralRepositories}
+                  onPointerPosition={(x, y) => setPointer({ x, y })}
+                />
+              </Suspense>
+              {showRefetchOverlay && (
+                <div className="absolute inset-0 z-20 bg-background/40 backdrop-blur-[1px]">
+                  <AtlasLoading label="Fetching public repositories…" />
+                </div>
+              )}
+            </div>
           )}
         </div>
 
@@ -231,14 +263,12 @@ function RepoAtlasPage() {
                 Start Exploring <ArrowRight className="ml-1 h-4 w-4" />
               </Button>
               <Button
-                asChild
                 size="lg"
                 variant="outline"
                 className="border-border/60 bg-card/50 backdrop-blur-sm hover:bg-accent/60"
+                onClick={() => setDialogOpen(true)}
               >
-                <a href="http://www.imdadareeph.com/" target="_blank" rel="noreferrer">
-                  View Profile
-                </a>
+                Load GitHub users
               </Button>
             </div>
 
@@ -366,7 +396,7 @@ function RepoAtlasPage() {
               )}
             </Accordion>
 
-            {data?.source === "fallback" && (
+            {dataSource === "fallback" && (
               <p className="mt-2 text-[10px] text-muted-foreground">Showing saved snapshot.</p>
             )}
           </div>
@@ -597,14 +627,3 @@ function Stat({ value, label }: { value: number | string; label: string }) {
   );
 }
 
-// ── Loading ──────────────────────────────────────────────────────────────────
-function AtlasLoading() {
-  return (
-    <div className="flex h-full items-center justify-center">
-      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-        <Sparkles className="h-4 w-4 animate-pulse text-primary" />
-        Mapping repositories…
-      </div>
-    </div>
-  );
-}

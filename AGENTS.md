@@ -10,6 +10,9 @@ bun run dev          # Vite + TanStack Start dev server
 bun run build        # production build → .output/
 ./run.sh             # dev server on the first free port from 4949
 bunx tsc --noEmit    # typecheck
+bun run db:init      # create data/atlas.sqlite from schema
+bun run db:export    # dump cached repos to data/atlas-export.json
+bun run db:reset     # ATLAS_DB_RESET=1 bun run db:reset
 ```
 
 ## Conventions

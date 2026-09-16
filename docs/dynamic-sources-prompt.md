@@ -316,7 +316,7 @@ After success: close dialog, toast success, spiral updates (loading overlay may 
 
 ### Spiral / pages
 
-No scene changes. If `isLoading` on custom refetch, reuse existing `AtlasLoading`. Do not empty the canvas to a blank screen if previous data exists — keep previous marbles until new data arrives (`placeholderData: keepPreviousData` from TanStack Query).
+No scene changes. **FR-021**: If `isFetching` on custom refetch and prior `repositories.length > 0`, reuse existing `AtlasLoading` overlay while keeping `AtlasScene` mounted. Do not empty the canvas to a blank screen — keep previous marbles until new data arrives (`placeholderData: keepPreviousData` from TanStack Query). Dialog Load button: `Loading…` + disabled (see `contracts/sources-dialog-ui.md`).
 
 Catalogue / Categories / Insights: same query; existing empty/loading copy stays, plus a small chip when `!isDefault`:
 

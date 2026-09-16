@@ -1,12 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useServerFn } from "@tanstack/react-start";
-import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 import { ArrowLeft, ArrowUpRight, Filter, GitFork, Search, Star, X, CircleDot, Code2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { AtlasSourcesChrome } from "@/components/atlas/AtlasSourcesChrome";
 import { RepoAtlasLogo } from "@/components/atlas/RepoAtlasLogo";
-import { getRepositories } from "@/lib/repositories.functions";
+import { useAtlasRepositories } from "@/lib/use-atlas-repositories";
 import { CATEGORY_ORDER, CATEGORY_TOKEN, formatCompact, formatUpdated, type Repository } from "@/lib/repositories";
 
 export const Route = createFileRoute("/catalogue")({
@@ -31,13 +30,7 @@ const LANG_COLORS: Record<string, string> = {
 type SortKey = "stars" | "forks" | "updated" | "name";
 
 function CataloguePage() {
-  const loadRepositories = useServerFn(getRepositories);
-  const { data, isLoading } = useQuery({
-    queryKey: ["repositories", "imdadareeph"],
-    queryFn: () => loadRepositories(),
-    staleTime: 10 * 60 * 1000,
-  });
-  const repositories = data?.repositories ?? [];
+  const { repositories, isLoading, isFetching, sourceKey, isDefault, urls } = useAtlasRepositories();
 
   const [query, setQuery]     = useState("");
   const [category, setCategory] = useState<string | null>(null);
@@ -90,6 +83,14 @@ function CataloguePage() {
           <button type="button" className="atlas-nav-item">Insights</button>
         </nav>
         <div className="ml-auto flex items-center gap-3">
+          <AtlasSourcesChrome
+            sourceKey={sourceKey}
+            isDefault={isDefault}
+            repositories={repositories}
+            urls={urls}
+            isLoading={isLoading}
+            isFetching={isFetching}
+          />
           <Button asChild variant="ghost" size="sm" className="gap-1.5">
             <Link to="/">
               <ArrowLeft className="h-3.5 w-3.5" />
@@ -107,8 +108,10 @@ function CataloguePage() {
             Repository Catalogue
           </h1>
           <p className="mt-2 text-sm text-muted-foreground">
-            {isLoading
+            {isLoading && repositories.length === 0
               ? "Loading repositories…"
+              : isFetching && repositories.length > 0
+              ? "Refreshing repositories…"
               : `${filtered.length} of ${repositories.length} repositories`}
           </p>
         </div>

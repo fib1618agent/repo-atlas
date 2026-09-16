@@ -1,81 +1,117 @@
 import { createServerFn } from "@tanstack/react-start";
 import fallbackData from "./repositories-fallback.json";
 import { normalizeRepository, type Repository } from "./repositories";
+import {
+  AtlasError,
+  atlasErrorMessage,
+  isAtlasError,
+  serializeAtlasError,
+  type SourceFailure,
+} from "./atlas-errors";
+import { serverAtlasConfig } from "./atlas-config";
+import { parseSourceInputs, sourceKeyFromParsed } from "./github-url";
+import { fetchCustomRepositories, fetchDefaultOwnerRepositories } from "./github-fetch";
+import { getAtlasCache, type CachedRepositoriesResponse } from "./storage/atlas-store";
 
-type RawRepository = Omit<Repository, "category" | "subgroup">;
+type RawRepository = Omit<Repository, "category" | "subgroup" | "importance">;
 
-type GitHubRepo = {
-  id: number;
-  name: string;
-  full_name: string;
-  html_url: string;
-  description: string | null;
-  language: string | null;
-  topics?: string[];
-  stargazers_count: number;
-  forks_count: number;
-  open_issues_count: number;
-  license: { spdx_id?: string | null } | null;
-  fork: boolean;
-  archived: boolean;
-  pushed_at: string | null;
-  updated_at: string;
-  default_branch: string;
+export type RepositoriesResponse = {
+  repositories: Repository[];
+  source: "live" | "cache" | "fallback";
+  sourceKey: string;
+  isDefault: boolean;
+  warnings: { code: string; message: string }[];
+  meta: {
+    requested: number;
+    fetched: number;
+    spiralCap: number;
+    storedCap: number;
+    rateLimitRemaining?: number;
+    sourceFailures?: SourceFailure[];
+  };
 };
 
-let cache: { expiresAt: number; repositories: Repository[] } | undefined;
+function buildDefaultResponse(repositories: Repository[], source: "live" | "fallback"): RepositoriesResponse {
+  const config = serverAtlasConfig();
+  return {
+    repositories,
+    source,
+    sourceKey: config.defaultOwner,
+    isDefault: true,
+    warnings: [],
+    meta: {
+      requested: 1,
+      fetched: repositories.length,
+      spiralCap: config.maxSpiralRepos,
+      storedCap: config.maxStoredRepos,
+    },
+  };
+}
 
-function toRepository(repo: GitHubRepo): Repository {
-  return normalizeRepository({
-    id: repo.id,
-    name: repo.name,
-    fullName: repo.full_name,
-    htmlUrl: repo.html_url,
-    description: repo.description,
-    language: repo.language,
-    topics: repo.topics ?? [],
-    stars: repo.stargazers_count,
-    forks: repo.forks_count,
-    openIssues: repo.open_issues_count,
-    license: repo.license?.spdx_id ?? null,
-    fork: repo.fork,
-    archived: repo.archived,
-    pushedAt: repo.pushed_at,
-    updatedAt: repo.updated_at,
-    defaultBranch: repo.default_branch,
+async function getCached(sourceKey: string): Promise<RepositoriesResponse | undefined> {
+  const cache = await getAtlasCache();
+  const hit = cache.getCachedResponse(sourceKey);
+  return hit ?? undefined;
+}
+
+async function setCache(sourceKey: string, payload: RepositoriesResponse): Promise<void> {
+  const cache = await getAtlasCache();
+  cache.putCachedResponse(sourceKey, payload as CachedRepositoriesResponse);
+}
+
+function normalizeSources(sources?: string[]): string[] {
+  return (sources ?? []).map((s) => s.trim()).filter(Boolean);
+}
+
+function rethrowSerialized(error: AtlasError): never {
+  throw new Error(JSON.stringify(serializeAtlasError(error)));
+}
+
+export const getRepositories = createServerFn({ method: "POST" })
+  .validator((data: { sources?: string[] }) => data)
+  .handler(async ({ data }): Promise<RepositoriesResponse> => {
+    const config = serverAtlasConfig();
+    const sources = normalizeSources(data.sources);
+    const isDefault = sources.length === 0;
+
+    if (isDefault) {
+      const cached = await getCached(config.defaultOwner);
+      if (cached) return cached;
+
+      try {
+        const repositories = await fetchDefaultOwnerRepositories(config.defaultOwner);
+        const response = buildDefaultResponse(repositories, "live");
+        await setCache(config.defaultOwner, response);
+        return response;
+      } catch {
+        const repositories = (fallbackData as RawRepository[]).map(normalizeRepository);
+        const response = buildDefaultResponse(repositories, "fallback");
+        await setCache(config.defaultOwner, response);
+        return response;
+      }
+    }
+
+    const { sources: parsed } = parseSourceInputs(sources);
+    const cacheKey = sourceKeyFromParsed(parsed);
+    const cached = await getCached(cacheKey);
+    if (cached) return cached;
+
+    try {
+      const result = await fetchCustomRepositories(sources);
+      const response: RepositoriesResponse = {
+        repositories: result.repositories,
+        source: "live",
+        sourceKey: result.sourceKey,
+        isDefault: false,
+        warnings: result.warnings,
+        meta: result.meta,
+      };
+      await setCache(result.sourceKey, response);
+      return response;
+    } catch (error) {
+      if (isAtlasError(error)) {
+        rethrowSerialized(error);
+      }
+      rethrowSerialized(new AtlasError("NETWORK", atlasErrorMessage("NETWORK")));
+    }
   });
-}
-
-async function fetchAllRepositories(): Promise<Repository[]> {
-  const all: GitHubRepo[] = [];
-  const token = process.env["GITHUB_TOKEN"] ?? "";
-  const authHeaders: Record<string, string> = token ? { Authorization: `Bearer ${token}` } : {};
-  for (let page = 1; page <= 10; page += 1) {
-    const response = await fetch(`https://api.github.com/users/imdadareeph/repos?per_page=100&page=${page}&sort=updated`, {
-      headers: {
-        Accept: "application/vnd.github+json",
-        "User-Agent": "RepoAtlas",
-        ...authHeaders,
-      },
-    });
-    if (!response.ok) throw new Error(`GitHub returned ${response.status}`);
-    const batch = (await response.json()) as GitHubRepo[];
-    all.push(...batch);
-    if (batch.length < 100) break;
-  }
-  return all.filter((repo) => !repo.archived).map(toRepository);
-}
-
-export const getRepositories = createServerFn({ method: "GET" }).handler(async () => {
-  if (cache && cache.expiresAt > Date.now()) {
-    return { repositories: cache.repositories, source: "live" as const };
-  }
-  try {
-    const repositories = await fetchAllRepositories();
-    cache = { repositories, expiresAt: Date.now() + 15 * 60 * 1000 };
-    return { repositories, source: "live" as const };
-  } catch {
-    const repositories = (fallbackData as RawRepository[]).map(normalizeRepository);
-    return { repositories, source: "fallback" as const };
-  }
-});
