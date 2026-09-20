@@ -5,7 +5,7 @@ import {
   PieChart, Pie, Cell, Legend,
   AreaChart, Area, CartesianGrid,
 } from "recharts";
-import { AtlasSourcesChrome } from "@/components/atlas/AtlasSourcesChrome";
+import { SourcesMenu } from "@/components/atlas/SourcesMenu";
 import { RepoAtlasLogo } from "@/components/atlas/RepoAtlasLogo";
 import { useAtlasRepositories } from "@/lib/use-atlas-repositories";
 import { CATEGORY_ORDER, CATEGORY_TOKEN, formatCompact } from "@/lib/repositories";
@@ -169,7 +169,7 @@ function InsightsPage() {
           <button type="button" className="atlas-nav-item">About</button>
         </nav>
         <div className="ml-auto flex items-center gap-3">
-          <AtlasSourcesChrome
+          <SourcesMenu
             sourceKey={sourceKey}
             isDefault={isDefault}
             repositories={repos}

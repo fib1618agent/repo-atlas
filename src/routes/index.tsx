@@ -14,7 +14,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { AtlasLoading } from "@/components/atlas/AtlasLoading";
-import { AtlasSourcesChrome } from "@/components/atlas/AtlasSourcesChrome";
+import { SourcesMenu } from "@/components/atlas/SourcesMenu";
 import { RepoAtlasLogo } from "@/components/atlas/RepoAtlasLogo";
 import { RepositoryPanel } from "@/components/atlas/RepositoryPanel";
 import { useAtlasStore } from "@/lib/atlas-store";
@@ -183,7 +183,7 @@ function RepoAtlasPage() {
         </nav>
 
         <div className="ml-auto flex items-center gap-3">
-          <AtlasSourcesChrome
+          <SourcesMenu
             sourceKey={sourceKey}
             isDefault={isDefault}
             repositories={repositories}
@@ -297,7 +297,7 @@ function RepoAtlasPage() {
               )}
             </div>
 
-            <Accordion type="single" collapsible defaultValue="categories" className="atlas-legend-accordion">
+            <Accordion type="single" collapsible className="atlas-legend-accordion">
               <AccordionItem value="categories" className="border-border/60">
                 <AccordionTrigger className="atlas-legend-trigger py-2 hover:no-underline">
                   Categories

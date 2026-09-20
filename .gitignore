@@ -42,6 +42,7 @@ Desktop.ini
 .idea/
 .vscode/
 .cursor/
+.claude/settings.local.json
 *.swp
 *.swo
 *~

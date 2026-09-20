@@ -14,7 +14,14 @@ export type AtlasErrorCode =
   | "SQLITE_OPEN_FAILED"
   | "AI_NOT_CONFIGURED"
   | "AI_PROVIDER_UNIMPLEMENTED"
-  | "AI_UPSTREAM";
+  | "AI_UPSTREAM"
+  | "REF_NOT_FOUND"
+  | "ARCHIVE_UNAVAILABLE"
+  | "SNAPSHOT_FAILED"
+  | "SNAPSHOT_NOT_FOUND"
+  | "SNAPSHOT_REPOSITORY_UNAUTHORIZED"
+  | "SNAPSHOT_NOT_EXTRACTABLE"
+  | "SYMBOL_NOT_FOUND";
 
 export type SourceFailure = {
   login: string;
@@ -49,6 +56,13 @@ const ERROR_MESSAGES: Record<AtlasErrorCode, string> = {
   AI_NOT_CONFIGURED: "No API key for {provider}. Add it to .env (see .env.example).",
   AI_PROVIDER_UNIMPLEMENTED: "{provider} is not wired yet. Using the metadata summary.",
   AI_UPSTREAM: "AI summary is unavailable. Showing a metadata summary instead.",
+  REF_NOT_FOUND: 'Ref "{ref}" was not found on the provider.',
+  ARCHIVE_UNAVAILABLE: "Provider archive endpoint is unavailable or rate-limited.",
+  SNAPSHOT_FAILED: "Snapshot acquisition failed.",
+  SNAPSHOT_NOT_FOUND: "No snapshot found for that id.",
+  SNAPSHOT_REPOSITORY_UNAUTHORIZED: "Repository is private or inaccessible to configured credentials.",
+  SNAPSHOT_NOT_EXTRACTABLE: "Snapshot is not completed and cannot be extracted yet.",
+  SYMBOL_NOT_FOUND: "No symbol found for that id.",
 };
 
 export function atlasErrorMessage(

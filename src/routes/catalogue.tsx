@@ -3,7 +3,7 @@ import { useMemo, useState } from "react";
 import { ArrowLeft, ArrowUpRight, Filter, GitFork, Search, Star, X, CircleDot, Code2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { AtlasSourcesChrome } from "@/components/atlas/AtlasSourcesChrome";
+import { SourcesMenu } from "@/components/atlas/SourcesMenu";
 import { RepoAtlasLogo } from "@/components/atlas/RepoAtlasLogo";
 import { useAtlasRepositories } from "@/lib/use-atlas-repositories";
 import { CATEGORY_ORDER, CATEGORY_TOKEN, formatCompact, formatUpdated, type Repository } from "@/lib/repositories";
@@ -79,11 +79,12 @@ function CataloguePage() {
         <nav className="hidden items-center gap-6 lg:flex" aria-label="Primary navigation">
           <Link to="/" className="atlas-nav-item">Explore</Link>
           <span className="atlas-nav-item is-active">Catalogue</span>
-          <button type="button" className="atlas-nav-item">Categories</button>
-          <button type="button" className="atlas-nav-item">Insights</button>
+          <Link to="/categories" className="atlas-nav-item">Categories</Link>
+          <Link to="/insights" className="atlas-nav-item">Insights</Link>
+          <button type="button" className="atlas-nav-item">About</button>
         </nav>
         <div className="ml-auto flex items-center gap-3">
-          <AtlasSourcesChrome
+          <SourcesMenu
             sourceKey={sourceKey}
             isDefault={isDefault}
             repositories={repositories}
