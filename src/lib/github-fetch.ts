@@ -5,6 +5,7 @@ import {
   type SourceFailure,
 } from "./atlas-errors";
 import { serverAtlasConfig } from "./atlas-config";
+import { getGitHubToken } from "./code-intel/persistence/cloudflare-env";
 import { normalizeRepository, type Repository } from "./repositories";
 import { includesDefaultOwner, parseSourceInputs, sourceKeyFromParsed, type ParsedSource } from "./github-url";
 
@@ -45,7 +46,7 @@ export type FetchResult = {
 };
 
 function authHeaders(): Record<string, string> {
-  const token = process.env["GITHUB_TOKEN"] ?? "";
+  const token = getGitHubToken();
   return token ? { Authorization: `Bearer ${token}` } : {};
 }
 

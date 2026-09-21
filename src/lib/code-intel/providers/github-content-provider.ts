@@ -7,6 +7,7 @@ import {
 } from "../domain/repository-identity";
 import { mapWithConcurrency } from "../persistence/r2-client";
 import { parseTarEntries } from "../acquisition/tar-stream";
+import { getGitHubToken } from "../persistence/cloudflare-env";
 import type {
   ArchiveEntry,
   ChangedPath,
@@ -24,7 +25,7 @@ import type {
  */
 
 function authHeaders(): Record<string, string> {
-  const token = process.env["GITHUB_TOKEN"] ?? "";
+  const token = getGitHubToken();
   return token ? { Authorization: `Bearer ${token}` } : {};
 }
 

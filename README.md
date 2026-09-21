@@ -109,3 +109,9 @@ See `.env.example` for the full list including model names and provider API keys
 bun run build          # writes .output/ (Cloudflare Workers via Nitro)
 npx wrangler deploy    # or: npx nitro deploy --prebuilt
 ```
+
+Set `GITHUB_TOKEN` as a Worker secret to avoid GitHub's 60 req/hr unauthenticated rate limit:
+
+```sh
+npx wrangler secret put GITHUB_TOKEN
+```

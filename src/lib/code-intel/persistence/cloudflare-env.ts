@@ -53,6 +53,7 @@ export type CloudflareEnv = {
   SNAPSHOT_QUEUE?: QueueLike;
   /** AST + Symbol Intelligence (specs/002-ast-symbol-intelligence) — topic `repo-atlas-symbol-extraction`, independent of SNAPSHOT_QUEUE (research.md §8). */
   SYMBOL_QUEUE?: QueueLike;
+  GITHUB_TOKEN?: string;
 };
 
 export function getCloudflareEnv(): CloudflareEnv | undefined {
@@ -109,6 +110,10 @@ export function getSnapshotQueue(): QueueLike {
 }
 
 /** AST + Symbol Intelligence (specs/002-ast-symbol-intelligence) — mirrors getSnapshotQueue() exactly, for the independent SYMBOL_QUEUE binding (topic repo-atlas-symbol-extraction). */
+export function getGitHubToken(): string {
+  return resolveEnv()?.GITHUB_TOKEN ?? process.env["GITHUB_TOKEN"] ?? "";
+}
+
 export function getSymbolQueue(): QueueLike {
   const queue = resolveEnv()?.SYMBOL_QUEUE;
   if (!queue) {
