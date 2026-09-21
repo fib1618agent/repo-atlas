@@ -12,6 +12,7 @@ import { useEffect, type ReactNode } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import { SourcesDialog } from "@/components/atlas/SourcesDialog";
 import { Feature001ServerFnRegistration } from "@/lib/code-intel/feature-001-server-fn-registration";
+import { Feature002ServerFnRegistration } from "@/lib/code-intel/feature-002-server-fn-registration";
 import appCss from "../styles.css?url";
 import { reportError } from "../lib/error-reporting";
 
@@ -121,6 +122,7 @@ function RootComponent() {
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
       <Feature001ServerFnRegistration />
+      <Feature002ServerFnRegistration />
       <SourcesDialog />
       <Toaster />
     </QueryClientProvider>

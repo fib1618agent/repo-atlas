@@ -9,6 +9,7 @@ import {
 import { detectLanguage, type SupportedLanguage } from "./language-detector";
 import { getParser } from "./grammar-provider";
 import { toIntermediateRepresentation } from "./to-intermediate-representation";
+import { codeIntelConfig } from "../config";
 import javaQuery from "./queries/java.scm?raw";
 import javascriptQuery from "./queries/javascript.scm?raw";
 import typescriptQuery from "./queries/typescript.scm?raw";
@@ -83,6 +84,30 @@ export async function extractFile(params: ExtractFileParams): Promise<void> {
         language: null,
         status: "skipped_unsupported",
         failureReason: null,
+        extractorVersion,
+      },
+      db,
+    );
+    await replaceSymbolsForFile(fileExtractionId, snapshotId, [], extractorVersion, db);
+    return;
+  }
+
+  // Step 2b: oversized-file fallback (T041, T014's spike-derived circuit
+  // breaker) — skip before ever attempting a parse, same "cheap, path-only
+  // gate before any real work" placement as language detection. `sizeBytes`
+  // is Feature 001's own recorded `SnapshotFile.sizeBytes` (file-inventory
+  // metadata already captured at acquisition time), so this never requires
+  // an R2 read just to make the size decision.
+  const maxFileSizeBytes = codeIntelConfig().maxFileSizeBytes;
+  if (snapshotFile.sizeBytes > maxFileSizeBytes) {
+    const fileExtractionId = await upsertFileExtraction(
+      {
+        snapshotId,
+        snapshotFileId: snapshotFile.id,
+        directoryPath,
+        language,
+        status: "skipped_unsupported",
+        failureReason: `exceeds size ceiling (${snapshotFile.sizeBytes} > ${maxFileSizeBytes} bytes)`,
         extractorVersion,
       },
       db,

@@ -1,7 +1,6 @@
 import { afterEach, beforeAll, beforeEach, describe, expect, test } from "bun:test";
-import { readFileSync } from "node:fs";
-import { resolve } from "node:path";
 import { createSqliteD1 } from "../../support/d1-sqlite-adapter";
+import { installTestWasmModules } from "../../support/wasm-test-modules";
 import {
   createAcquisitionAttempt,
   getOrCreateRepository,
@@ -10,12 +9,7 @@ import {
 import { toCommitSha } from "../../../src/lib/code-intel/domain/repository-identity";
 import type { D1DatabaseLike, R2BucketLike } from "../../../src/lib/code-intel/persistence/cloudflare-env";
 import { setTestCloudflareEnv } from "../../../src/lib/code-intel/persistence/cloudflare-env";
-import {
-  setTestCoreWasmModule,
-  setTestGrammarBytesSource,
-} from "../../../src/lib/code-intel/symbols/grammar-provider";
 import { extractFile } from "../../../src/lib/code-intel/symbols/extraction-pipeline";
-import type { SupportedLanguage } from "../../../src/lib/code-intel/symbols/language-detector";
 
 /**
  * T029 integration tests — the full pipeline (R2 read -> language detection
@@ -49,21 +43,7 @@ function fakeR2Bucket(): R2BucketLike & { seed: (key: string, bytes: Uint8Array)
 let r2: ReturnType<typeof fakeR2Bucket>;
 
 beforeAll(async () => {
-  const ROOT = resolve(import.meta.dir, "../../../node_modules");
-  const coreBytes = readFileSync(resolve(ROOT, "web-tree-sitter/tree-sitter.wasm"));
-  const coreModule = await WebAssembly.compile(coreBytes);
-  setTestCoreWasmModule(coreModule);
-
-  const PUBLIC_WASM = resolve(import.meta.dir, "../../../public/wasm");
-  const ASSET_FILE: Record<SupportedLanguage, string> = {
-    java: "tree-sitter-java.wasm",
-    javascript: "tree-sitter-javascript.wasm",
-    typescript: "tree-sitter-typescript.wasm",
-    tsx: "tree-sitter-tsx.wasm",
-  };
-  setTestGrammarBytesSource(async (language) =>
-    new Uint8Array(readFileSync(resolve(PUBLIC_WASM, ASSET_FILE[language]))),
-  );
+  await installTestWasmModules();
 });
 
 beforeEach(() => {

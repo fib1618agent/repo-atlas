@@ -10,6 +10,7 @@ import {
 } from "../../../src/lib/code-intel/persistence/symbol-d1-client";
 import { extractSnapshotSymbolsHandler } from "../../../src/lib/code-intel/symbol.functions";
 import type { SymbolQueueMessage } from "../../../src/lib/code-intel/symbols/symbol-worker";
+import { SYMBOL_EXTRACTOR_VERSION } from "../../../src/lib/code-intel/config";
 
 function fakeQueue() {
   const sent: SymbolQueueMessage[] = [];
@@ -55,7 +56,7 @@ describe("extractSnapshotSymbolsHandler (T032)", () => {
 
     const result = await extractSnapshotSymbolsHandler({ snapshotId });
 
-    expect(result).toEqual({ snapshotId, status: "in_progress", extractorVersion: "v1", reused: false });
+    expect(result).toEqual({ snapshotId, status: "in_progress", extractorVersion: SYMBOL_EXTRACTOR_VERSION, reused: false });
     expect(queue.sent).toEqual([{ snapshotId, unitIndex: 0, fromCursor: 0 }]);
     const row = await db.prepare("SELECT status FROM snapshot_extractions WHERE snapshot_id = ?").bind(snapshotId).first<{ status: string }>();
     expect(row?.status).toBe("in_progress");
@@ -63,33 +64,33 @@ describe("extractSnapshotSymbolsHandler (T032)", () => {
 
   test("existing completed extraction, same extractor version: reused:true, no new enqueue", async () => {
     const snapshotId = await seedCompletedSnapshot(db, "owner-b");
-    await getOrCreateSnapshotExtraction(snapshotId, "v1", db);
+    await getOrCreateSnapshotExtraction(snapshotId, SYMBOL_EXTRACTOR_VERSION, db);
     await finalizeSnapshotExtraction(snapshotId, "completed", db);
 
     const result = await extractSnapshotSymbolsHandler({ snapshotId });
 
-    expect(result).toEqual({ snapshotId, status: "completed", extractorVersion: "v1", reused: true });
+    expect(result).toEqual({ snapshotId, status: "completed", extractorVersion: SYMBOL_EXTRACTOR_VERSION, reused: true });
     expect(queue.sent).toEqual([]);
   });
 
   test("existing completed_partial extraction, same extractor version: reused:true", async () => {
     const snapshotId = await seedCompletedSnapshot(db, "owner-b2");
-    await getOrCreateSnapshotExtraction(snapshotId, "v1", db);
+    await getOrCreateSnapshotExtraction(snapshotId, SYMBOL_EXTRACTOR_VERSION, db);
     await finalizeSnapshotExtraction(snapshotId, "completed_partial", db);
 
     const result = await extractSnapshotSymbolsHandler({ snapshotId });
 
-    expect(result).toEqual({ snapshotId, status: "completed_partial", extractorVersion: "v1", reused: true });
+    expect(result).toEqual({ snapshotId, status: "completed_partial", extractorVersion: SYMBOL_EXTRACTOR_VERSION, reused: true });
     expect(queue.sent).toEqual([]);
   });
 
   test("existing in_progress extraction (concurrent request): returns in_progress, no duplicate enqueue", async () => {
     const snapshotId = await seedCompletedSnapshot(db, "owner-c");
-    await getOrCreateSnapshotExtraction(snapshotId, "v1", db);
+    await getOrCreateSnapshotExtraction(snapshotId, SYMBOL_EXTRACTOR_VERSION, db);
 
     const result = await extractSnapshotSymbolsHandler({ snapshotId });
 
-    expect(result).toEqual({ snapshotId, status: "in_progress", extractorVersion: "v1", reused: true });
+    expect(result).toEqual({ snapshotId, status: "in_progress", extractorVersion: SYMBOL_EXTRACTOR_VERSION, reused: true });
     expect(queue.sent).toEqual([]);
   });
 
@@ -100,10 +101,10 @@ describe("extractSnapshotSymbolsHandler (T032)", () => {
 
     const result = await extractSnapshotSymbolsHandler({ snapshotId });
 
-    expect(result).toEqual({ snapshotId, status: "in_progress", extractorVersion: "v1", reused: false });
+    expect(result).toEqual({ snapshotId, status: "in_progress", extractorVersion: SYMBOL_EXTRACTOR_VERSION, reused: false });
     expect(queue.sent).toEqual([{ snapshotId, unitIndex: 0, fromCursor: 0 }]);
     const row = await db.prepare("SELECT extractor_version as v FROM snapshot_extractions WHERE snapshot_id = ?").bind(snapshotId).first<{ v: string }>();
-    expect(row?.v).toBe("v1");
+    expect(row?.v).toBe(SYMBOL_EXTRACTOR_VERSION);
   });
 
   test("version-bump restart clears stale extraction_jobs so unit 0 isn't skipped as already-completed", async () => {

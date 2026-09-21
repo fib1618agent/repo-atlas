@@ -8,6 +8,8 @@ export const CODE_INTEL_MAX_RETRY_ATTEMPTS = 5;
 export const CODE_INTEL_LIST_FILES_DEFAULT_LIMIT = 100;
 export const CODE_INTEL_LIST_FILES_MAX_LIMIT = 500;
 export const CODE_INTEL_EXTRACTION_BATCH_SIZE = 50;
+/** T014's spike (research.md §6 risk 3): no hard parse-failure ceiling found through 20 MB once trees are freed per-iteration; this is a defensive circuit-breaker for the local-timing-vs-Workers-CPU-metering gap, not a measured failure point. */
+export const CODE_INTEL_MAX_FILE_SIZE_BYTES = 10 * 1024 * 1024;
 
 /**
  * AST + Symbol Intelligence (specs/002-ast-symbol-intelligence) — deliberately
@@ -20,7 +22,7 @@ export const CODE_INTEL_EXTRACTION_BATCH_SIZE = 50;
  * an operator (doing so would desynchronize the recorded version from what
  * the deployed code actually does, defeating FR-014's purpose).
  */
-export const SYMBOL_EXTRACTOR_VERSION = "v1";
+export const SYMBOL_EXTRACTOR_VERSION = "v2";
 
 export function codeIntelConfig() {
   return {
@@ -54,6 +56,10 @@ export function codeIntelConfig() {
     extractionBatchSize: Number(
       process.env["CODE_INTEL_EXTRACTION_BATCH_SIZE"] ??
         CODE_INTEL_EXTRACTION_BATCH_SIZE,
+    ),
+    maxFileSizeBytes: Number(
+      process.env["CODE_INTEL_MAX_FILE_SIZE_BYTES"] ??
+        CODE_INTEL_MAX_FILE_SIZE_BYTES,
     ),
   };
 }

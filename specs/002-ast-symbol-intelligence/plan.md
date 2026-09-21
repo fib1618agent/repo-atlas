@@ -178,6 +178,7 @@ Mirrors Feature 001's test-shape decisions directly: contract tests (`tests/cont
 | Risk | Mitigation |
 |---|---|
 | `web-tree-sitter`'s exact WASM-instantiation API for the installed version is unverified under Workers (research.md §6, risk 1) | Named explicitly as a pre-implementation spike, not assumed; the contract (`language-grammar-provider.md`) fixes the caller-facing shape independent of this internal detail, so resolving it doesn't ripple into the rest of the design |
+| **INVALIDATED then remediated**: T022's approved runtime `ASSETS.fetch()` → `Language.load(bytes)` grammar path fails live with "Wasm code generation disallowed by embedder" — Cloudflare Workers disallows compiling WASM from runtime-fetched bytes (research.md §6 risk 4, T064 live validation) | See "Architecture Remediation (2026-09-21)" above and tasks.md T066–T068: static build-time `?module` grammar imports + scoped `WebAssembly.instantiate` substitution, gated by local validation (Gate 1) then a separate live Cloudflare validation (Gate 2) before being declared complete |
 | Aggregate grammar + runtime WASM bundle size vs. the 64 MiB Worker limit is unmeasured (research.md §6, risk 2) | Measurement deferred to implementation (`bun run build` after adding the dependency); documented escape hatch (lazy R2-loaded grammars) exists but is explicitly not adopted now, matching the Tier-1-only, no-speculative-infra posture |
 | An adversarially large single file could exceed one invocation's CPU budget despite per-file unit sizing (research.md §6, risk 3) | A file-size ceiling → `skipped_unsupported`-analogous outcome is recommended; exact threshold left to implementation, mirroring Feature 001's own checkpoint-threshold deferral pattern |
 | Repeating Feature 001's HTTP-registration gap (only 2 of 5 functions reachable) | Directly corrected by design: all five functions registered via `Feature002ServerFnRegistration` (research.md §9) |
@@ -186,3 +187,40 @@ Mirrors Feature 001's test-shape decisions directly: contract tests (`tests/cont
 ## Complexity Tracking
 
 Not applicable — no Constitution Check violations.
+
+## Architecture Remediation (2026-09-21) — T022 grammar-loading rewrite
+
+**Status**: Implemented and production-validated — T066, T067, and T068 all passed. This section amends (not replaces) "Language Detection & Grammar Selection" above and the Risks table's risk 1/4 rows. Full evidence trail: `research.md` §6 risk 4 (both 2026-09-21 updates).
+
+**Invalidating finding (live Cloudflare, T064)**: the approved T022 design —
+
+```
+ASSETS.fetch() → Uint8Array → Language.load(bytes)
+```
+
+— fails on a real deployed Worker with `WebAssembly.instantiate(): Wasm code generation disallowed by embedder`. This is a documented Cloudflare Workers platform restriction: a `WebAssembly.Module` may only be compiled from bytes obtained via a **static, build-time** import (which the platform pre-compiles ahead of the sandbox's runtime restrictions); a `WebAssembly.Module` compiled/instantiated from bytes obtained **at runtime** (an `ASSETS.fetch()` response body, in T022's case) is disallowed outright. All 129 local tests passed because they inject bytes/modules directly (`setTestGrammarBytesSource`), a path that structurally never exercises real Worker-sandboxed compilation — this is why the defect was invisible until T064's live validation. The core runtime WASM (`tree-sitter.wasm`, loaded via a genuine build-time `?module` import) is unaffected; only the four **grammar** WASMs, which T022 sourced from `ASSETS` at runtime specifically because `Language.load()` at the pinned `web-tree-sitter@0.25.10` accepts only `Uint8Array | string` (no `loadSync(Module)`), hit this wall.
+
+**Architecture decision**: replace the runtime `ASSETS`-fetch grammar path with four static build-time `?module` imports (one per Tier-1 grammar, mirroring the already-working `coreWasmModule` pattern exactly) plus a scoped `WebAssembly.instantiate` substitution during `Language.load()`, so the precompiled `Module` is used instead of the disallowed bytes-form compile. This is not speculative — it was proven in a real local experiment (research.md §6 risk 4, item 3): `Language.load(bytes)`'s internal `loadWebAssemblyModule` already contains a `WebAssembly.Module`-shortcut branch (`if (binary instanceof WebAssembly.Module) { new WebAssembly.Instance(binary, info); ... }`); the public `Language.load()` wrapper just never exercises it because it always passes bytes. Monkeypatching `WebAssembly.instantiate` for the duration of one `Language.load()` call (restored immediately after) redirects that internal call to the precompiled Module instead. All four Tier-1 grammars parsed correctly (`hasError: false`) under this substitution in the local experiment. A separate real `bun run build` confirmed Nitro's `?module` mechanism is not `node_modules`-special-cased — it produces the same build-time-compiled chunk class for our own `public/wasm/*.wasm` files that the core module already gets.
+
+**Dependency changes**: none. `web-tree-sitter@0.25.10` and `tree-sitter-wasms@0.1.13` stay pinned exactly as approved (research.md §6 risk 1) — upgrading `web-tree-sitter` to `0.26.x`/`0.27.0` was re-confirmed dead (still no `dylink.0`-format `tree-sitter-wasms` release exists). No new npm dependency. No new Cloudflare binding — the `ASSETS`-binding runtime-fetch path (`fetchGrammarBytes`/`resolveBytesSource`/`GrammarBytesSource`) is *removed*, not replaced by a different binding.
+
+**Interface preserved**: `GrammarProvider.getParser(language): Promise<TreeSitterParserHandle>` (`contracts/language-grammar-provider.md`) is unchanged — this fix is internal to `grammar-provider.ts`'s loading mechanism only. No caller (`extraction-pipeline.ts`, `symbol-worker.ts`) requires any change.
+
+**Bundle-size impact**: none material. The four grammar `.wasm` files (≈5.8 MB) move from "static asset fetched via `ASSETS` at runtime" to "build-time-compiled-and-embedded chunk" — the same artifact class the core module already is. Risk 2's measured ~8% Worker-bundle-cap headroom (T063) is unaffected.
+
+**Revised T022 scope** (superseding, not deleting, the original T022 entry in tasks.md — the original stays as the historical record of what was implemented and later invalidated):
+
+1. Add four `?module` imports (`java`, `javascript`, `typescript`, `tsx`) of `public/wasm/tree-sitter-*.wasm`, mirroring `coreWasmModule`.
+2. Remove `fetchGrammarBytes`, `resolveBytesSource`, `AssetsBindingLike`, `getAssetsBinding`, `GrammarBytesSource`, `setTestGrammarBytesSource` — the runtime `ASSETS`-fetch path in its entirety.
+3. Add a scoped `Language.load()` substitution helper that monkeypatches `WebAssembly.instantiate` for the duration of exactly one call, redirecting to the precompiled per-language `Module`, then restores the original.
+4. Replace `setTestGrammarBytesSource` with an equivalent test-injection hook for a precompiled test `Module` (mechanical test-harness change — same rationale `setTestCoreWasmModule` already established for the core runtime).
+5. No change to `getParser`'s public signature, memoization behavior, or the unsupported-language defensive throw.
+
+**Validation gates** (both required; neither may be skipped or merged):
+
+- **Gate 1 — local**: `bunx tsc --noEmit` clean; full `bun test` suite green (no regression to the existing 198); `bun run build` succeeds and the four grammar chunks appear as build-time-compiled `.output/server/wasm/*.wasm` (not `.output/public/wasm/*.wasm` static assets); re-measure aggregate bundle size against the 64 MiB cap (risk 2 follow-up). This gate must pass **before** any deployment is attempted.
+- **Gate 2 — live Cloudflare**: only after Gate 1 passes, deploy (explicit user authorization required, per this session's operating rules — not implied by Gate 1 passing) and re-run `extractSnapshotSymbols` against a real snapshot for all four Tier-1 languages; confirm `file_extractions.status = 'extracted'` (not `failed`) with real, non-empty `symbols` rows, via direct `wrangler d1 execute --remote` inspection (not just `getExtractionStatus`'s summary, per T064's own established diagnostic method). The remediation is not "complete" until this gate passes — Gate 1 alone (as T012/T022's original local-test pass already demonstrated) is not sufficient evidence for this class of Workers-sandbox defect.
+
+**Existing tasks reopened**: none in the completed sense — T022, T063, T064 remain historically accurate records of what was built and what live validation found; they are not edited or unchecked. The remediation is new work (tasks.md T066–T068), not a reopening of prior checked-off tasks. `research.md` §6 risk 4 already carries both the live finding and the investigation update this decision formalizes — no contradiction between plan.md and research.md is introduced.
+
+**Explicitly out of scope for this remediation** (per this task's own constraints): Feature 001, Feature 003, Tier-1 language scope, MCP, Settings, Engineering Graph/future graph functionality — none touched.
