@@ -65,16 +65,16 @@ Rules:
 **Observed:**
 - FACT: `gitnexus` CLI 1.6.8 is installed (`~/.nvm/versions/node/v22.22.3/bin/gitnexus`). Commands include `analyze`, `status`, `query`, `context`, `impact`, `trace`, `cypher`, `detect-changes`, `check`, `mcp`.
 - FACT: an MCP entry `gitnexus` exists in `~/.cursor/mcp.json`. No `gitnexus` entry was found in `~/.claude.json` or `~/.claude/settings.json`.
-- FACT: `~/.gitnexus/registry.json` lists 6 indexed repositories (skillset, app, memory, observability, JavaClaw, universl-adlc). **RepoAtlas is not among them.** (A 7th entry, `ADLC-KQSE`, whose path no longer exists, was auto-pruned by the `gitnexus status`/`list` read commands during this inventory.)
+- FACT: `~/.gitnexus/registry.json` lists 6 indexed repositories (skillset, app, memory, observability, JavaClaw, universl-adlc). **RepoAtlas is not among them.** **[CORRECTED 2026-09-24 17:05 +04:00 — stale: RepoAtlas is now registered as `repo-atlas` in `~/.gitnexus/registry.json`.]** (A 7th entry, `ADLC-KQSE`, whose path no longer exists, was auto-pruned by the `gitnexus status`/`list` read commands during this inventory.)
 - FACT: GitNexus read commands can rewrite the global registry as a side effect; treat even `status`/`list` as non-read-only when a task forbids touching GitNexus state.
-- FACT: `repo-atlas/.gitnexus/` does not exist, and `gitnexus status` inside the repo reports "Repository not indexed."
-- FACT: `.gitignore` has no `.gitnexus` entry.
+- FACT: `repo-atlas/.gitnexus/` does not exist, and `gitnexus status` inside the repo reports "Repository not indexed." **[CORRECTED 2026-09-24 17:05 +04:00 — stale: `repo-atlas/.gitnexus/` now exists (git-ignored, `lbug` + `meta.json`; indexed 2026-09-24T10:32Z at `c576310`, 345 files, 4706 nodes, 7289 edges, 217 processes); the repository is indexed.]**
+- FACT: `.gitignore` has no `.gitnexus` entry. **[CORRECTED 2026-09-24 17:05 +04:00 — stale: `.gitignore:81` now contains `.gitnexus`.]**
 
-**Consequence:** no GitNexus graph, symbols, relationships or process data currently exists for RepoAtlas. It represents no RepoAtlas revision, so freshness is not applicable. No RepoAtlas regeneration command or script was found.
+**Consequence:** no GitNexus graph, symbols, relationships or process data currently exists for RepoAtlas. It represents no RepoAtlas revision, so freshness is not applicable. No RepoAtlas regeneration command or script was found. **[CORRECTED 2026-09-24 17:05 +04:00 — stale: a GitNexus graph now exists for RepoAtlas, representing revision `c576310`; HEAD has since moved (6 later commits), so it is behind HEAD. Regeneration is `gitnexus analyze`, run from the project root (`.claude/skills/gitnexus/gitnexus-cli/SKILL.md`); it also rewrites the GitNexus block in `AGENTS.md` and `CLAUDE.md`, both of which are kept (see `docs/CONTEXT-PROTOCOL.md` §9).]**
 
-**UNKNOWN:** whether it was ever run on RepoAtlas and later removed; how a new index would behave on this repo (not run, per the task's constraint).
+**UNKNOWN:** whether it was ever run on RepoAtlas and later removed; how a new index would behave on this repo (not run, per the task's constraint). **[CORRECTED 2026-09-24 17:05 +04:00 — whether it was ever run is answered: it was run before `c576310`'s index time above; how a re-run behaves remains UNKNOWN.]**
 
-**INFERENCE:** if indexed later, the index would be local-only and generated. Add `.gitnexus/` to `.gitignore` first if it should stay uncommitted.
+**INFERENCE:** if indexed later, the index would be local-only and generated. Add `.gitnexus/` to `.gitignore` first if it should stay uncommitted. **[CORRECTED 2026-09-24 17:05 +04:00 — done: `.gitignore` ignores `.gitnexus`.]**
 
 ## 6. Graphify
 

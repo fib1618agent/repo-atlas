@@ -40,12 +40,36 @@ const SYMBOL_KINDS: ReadonlySet<string> = new Set([
 ]);
 
 /**
+ * Compiled-`Query` memo, per Worker isolate — same lifetime as
+ * `grammar-provider.ts`'s `parserCache`/`languageCache` (module-level, never
+ * evicted, re-evaluated fresh on a cold isolate). Keyed by `Language`
+ * identity (WeakMap) then query source text, so a different grammar or a
+ * different `.scm` body can never reuse another's compiled query. Compiling
+ * a query costs ~4-5ms for typescript/tsx, so it must not repeat per file.
+ */
+const compiledQueryCache = new WeakMap<Language, Map<string, Query>>();
+
+function getCompiledQuery(language: Language, querySource: string): Query {
+  let bySource = compiledQueryCache.get(language);
+  if (!bySource) {
+    bySource = new Map();
+    compiledQueryCache.set(language, bySource);
+  }
+  let query = bySource.get(querySource);
+  if (!query) {
+    query = new Query(language, querySource);
+    bySource.set(querySource, query);
+  }
+  return query;
+}
+
+/**
  * Runs `querySource` (one of the T023–T026 `.scm` files) against `tree`,
  * shared across languages — each `.scm` file emits the same
  * `@symbol.<kind>` + `@symbol.name` capture shape, so one walker suffices.
  */
 function collectRawEntries(tree: Tree, language: Language, querySource: string): RawEntry[] {
-  const query = new Query(language, querySource);
+  const query = getCompiledQuery(language, querySource);
   const matches = query.matches(tree.rootNode);
 
   const entries: RawEntry[] = [];

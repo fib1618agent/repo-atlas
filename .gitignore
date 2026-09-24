@@ -43,6 +43,8 @@ Desktop.ini
 .vscode/
 .cursor/
 .claude/settings.local.json
+# Installed by `gitnexus setup` (use user-level or re-run setup; speckit skills stay symlinked)
+.claude/skills/gitnexus/
 *.swp
 *.swo
 *~
@@ -62,6 +64,16 @@ env/
 
 # Graphify (code graph tooling)
 graphify-out/
+.graphify/
+
+# Playwright / MCP browser validation artifacts (local evidence only)
+.playwright-mcp/
+playwright-report/
+test-results/
+blob-report/
+
+# Feature 005 local measurement scripts output (when created)
+specs/**/evidence/local-measurements/
 
 # Large media sources (keep README assets: png, gif)
 *.source.mp4
@@ -78,4 +90,8 @@ data/atlas-export.json
 
 # Misc
 *.local
+
+# GitNexus local graph index (LadybugDB; regenerate with `gitnexus analyze`)
+.gitnexus/
 .gitnexus
+**/.gitnexus/

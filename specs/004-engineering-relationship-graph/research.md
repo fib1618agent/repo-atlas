@@ -172,3 +172,32 @@ Documentation-only correction. Wording in this feature that calls the 10 ms CPU 
 - "CPU time is capped at 10 ms on Free regardless of trigger type" and "no published Free-tier exception for queue consumers" → not established by the documentation; the Queues page's unqualified 30 s / 5 min wording is the conflicting statement.
 - "confirmed live" (plan.md Constraints and Resource paragraph) is retained only for what it originally established, that the account is on the Workers Free plan; it is not evidence of the Queue Consumer CPU limit.
 - The local measurements and the STOP decision are unchanged; local wall-clock timings remain non-Cloudflare CPU.
+
+
+### A5 — Final T007 decision pass: Cloudflare evidence dossier reconciled (DECISION, 2026-09-24 20:34 +04:00)
+
+Decision/amendment section. A4 above is preserved as the dated historical state (X = CONTRADICTORY, Y = PARTIAL) and is superseded only where stated here. Evidence: `cloudflare-queue-cpu-dossier-2026-09-24.md` (user-supplied, read completely; a copy of the original file so the gate does not rest on a path outside the repository). No new Cloudflare research was done. Labels: DOC = documented Cloudflare fact (as quoted in the dossier, not independently re-fetched in this pass) · REPO = repository evidence · INF = engineering inference · UNK = remaining uncertainty.
+
+**Outcome: B — T007 NEEDS CONTROLLED CALIBRATION.** T007 remains **STOPPED** until the calibration is authorized, run, and a reviewed amendment is made (FR-037). LX-1 NOT AUTHORIZED, T007-CAL-1 NOT AUTHORIZED, no FR-038 waiver, T008+ NOT AUTHORIZED. This record does not clear T007 (FR-030).
+
+**X and Y after the dossier (updates the A4 state).**
+- X = **10 ms CPU per invocation** for a Free Queue Consumer, established by a two-document chain (DOC): Workers Pricing/Limits give Free = 10 ms per invocation; Queues Limits says consumers "share the same per invocation CPU limits as any Workers do". The A4 contradiction (Queues page 30 s default / 5 min configurable) is resolved as Paid-only by a DOC fact A4 had not used: Wrangler `limits.cpu_ms` is "only supported for the Standard Usage Model" (dossier A4), so the 30 s / 5 min values cannot apply to Free. No single sentence states "Free Queue Consumer = 10 ms" (dossier §1, C1). The Paid 5 min vs 15 min disagreement stays unresolved and is irrelevant to Free.
+- Y = active CPU per invocation (I/O wait excluded); one consumer invocation = one MessageBatch, the batch shares the budget, batching does not multiply it; wall time separate (15 min) (DOC + the queue-handler-receives-a-batch model). Rollover tolerance exists; sustained over-limit ends in 1102/`exceededCpu`; unacked work is redelivered (partly INF). PARTIAL remains for: WASM inclusion in CPU time (behavioral, not documented), retry timing after a CPU kill, startup/initialization accounting (UNK).
+- Feature 005 §14.1 re-verification recorded that returned pages did not state Free Queue CPU or queue telemetry on Free; the dossier's chain and Workers Logs statements are read here as sufficient for X and the unit, but the telemetry statement is a documented availability, not an observation (see (e)).
+
+**FR-028 gate (wording from `specs/005-queue-cpu-feasibility-architecture/spec.md` FR-028).**
+
+| Cond. | Wording | State | Basis |
+|---|---|---|---|
+| (a) | CPU accounting semantics established sufficiently | **SATISFIED** (residuals recorded) | DOC: X = 10 ms, active CPU, per invocation = batch, I/O excluded. WASM inclusion is assumed included (conservative direction). Residual UNK: retry timing, init accounting. |
+| (b) | processing unit defined with an explicit budget | **PARTIALLY SATISFIED** | Unit = one file per message, `max_batch_size = 1` (REPO: plan.md one-file-per-unit; wrangler currently `max_batch_size = 10` is Features 001/002 queues). Budget X = 10 ms now defined. Not satisfied: the size gate B is unselected and the controls are unadopted candidates (REPO: `CODE_INTEL_RELATIONSHIP_MAX_FILE_BYTES`, `skipped_oversize`, attempt marker appear in no Feature 004 artifact). Local wall-clock (REPO): small/medium/CALLS-heavy p95 0.19–2.8 ms; dense large p95 9.7–12.2 ms (not Cloudflare CPU). Feature 005 §6.4 (a) is now met, (e)/(f)/(g) are not. |
+| (c) | cold-start behavior understood sufficiently | **PARTIALLY SATISFIED** | DOC/staff: startup gets extra headroom (staff, non-contractual); rollover bank must not be relied on. Local cold-vs-warm line items exist (REPO). Platform cold accounting and isolate reuse UNK. |
+| (d) | a bounded processing architecture exists | **PARTIALLY SATISFIED** | REPO/INF: shape is bounded (one file/unit, indexed D1 resolution, per-file persist and ack, no unbounded traversal). Not fully: no per-invocation size bound exists until B; controls unadopted; files per snapshot and daily volume unbounded (Feature 005 §7.2). |
+| (e) | required telemetry or validation is available, or the gate is otherwise defensibly established | **PARTIALLY SATISFIED** | DOC: Workers Logs invocation log carries CPU time on Free (availability). No queue-invocation CPU observation exists, and FR-029 forbids clearing on design margin alone. Feature 005 discrepancies (log quota, enablement) unsettled. Calibration is the validation path. |
+
+**Why not A (CLEARED):** (b), (c), (d) and (e) are not satisfied; (e) in particular needs authoritative telemetry for this path (FR-029) and the rollover bank means "did not fail" is not evidence. Calibration is required by FR-028(b)/(e), not optional.
+**Why not C (BLOCKED):** X is now a known, fixed 10 ms and the bounded shape passes local comparative measurements for realistic files; the failing region (dense ~700-line fixture) is exactly what a byte gate B is designed to exclude. No evidence shows that no bounded control can satisfy the gate. C would apply if even the smallest calibration band fails (proposal §8).
+
+**Calibration feasibility:** Yes, conditionally. Workers Logs CPU time on Free is documented; a smoke gate verifies it before the ladder. Definition only, NOT run and NOT authorized: `t007-calibration-proposal.md` (T007-CAL-1).
+
+**Not changed:** plan.md and tasks.md need no edit now (T007's `[X]` is a recorded decision, not authorization; the controls are added by a reviewed amendment only after calibration selects B). Feature 005 decision record and A1–A4 are historical and untouched. R4/R5 unchanged.

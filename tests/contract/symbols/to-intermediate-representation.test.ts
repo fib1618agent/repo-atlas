@@ -112,6 +112,17 @@ describe("toIntermediateRepresentation (T028, FR-009, FR-010, FR-013)", () => {
     }
   });
 
+  test("compiled-query cache is keyed by query source: same language, different .scm body, different results", () => {
+    const tree = parse(JavaScript, "class Foo { bar() {} }\nfunction baz() {}\n");
+    const full = toIntermediateRepresentation(tree, JavaScript, jsQuery, 1, "a.js");
+    const fullAgain = toIntermediateRepresentation(tree, JavaScript, jsQuery, 1, "a.js");
+    const classOnlyQuery = "(class_declaration name: (identifier) @symbol.name) @symbol.class";
+    const classOnly = toIntermediateRepresentation(tree, JavaScript, classOnlyQuery, 1, "a.js");
+    expect(fullAgain).toEqual(full);
+    expect(full.length).toBeGreaterThan(classOnly.length);
+    expect(classOnly.map((s) => s.name)).toEqual(["Foo"]);
+  });
+
   test("empty file (no matches) produces an empty IR, not an error", () => {
     const tree = parse(JavaScript, "const x = 1;\n");
     const ir = toIntermediateRepresentation(tree, JavaScript, jsQuery, 1, "g.js");

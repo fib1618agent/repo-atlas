@@ -1,44 +1,29 @@
-# Feature 006 — Settings / Control Plane: T028 Results and T030 Persist
+# T007-CAL-1 Proposal Revision R1
 
-**Timestamp**: 2026-09-24 19:29 +04:00 · **Branch**: `feat/atlas-marble-interaction` · **HEAD**: `f1cef88` · Reporting files only in T030: no source, test, package, lockfile, `.env.example`, roadmap, F001–F005 or F007 change; no commit, push, stash, reset, clean, Cloudflare, Wrangler or GitNexus.
-**Status: T001–T030 DONE (T030 = this persist step) · Feature 006 COMPLETE · `docs/ROADMAP.md` reconciled in the closeout · T028 = PASS with 2 NOT VERIFIED items and 1 narrow-width qualification.**
+**Timestamp**: 2026-09-24 20:49 +0400 · Documentation only. No experiment, no Cloudflare operation, no production code, no T008 or T020–T023, no new T007 decision, no commit/push.
 
-## 1. Automated validation (recorded from T027/T029; not re-run in T030)
-- `bunx tsc --noEmit`: PASS.
-- `bun test`: 323 pass / 0 fail; Feature 006 added 124 tests, all passing.
-- Lint: Feature 006 files clean. Repo-wide 1815 errors / 6 warnings vs T001 baseline 1810 / 6. The +5 delta is exactly the five intentional one-line Settings navigation additions (Prettier errors); it is not a new regression.
+## Result: PROPOSAL READY FOR AUTHORIZATION (authorization itself NOT given)
+`specs/004-engineering-relationship-graph/t007-calibration-proposal.md` rewritten as **R1** applying the six revisions from the 2026-09-24 20:44 +04:00 review. T007 STOPPED; T007-CAL-1 NOT AUTHORIZED; T008+ NOT AUTHORIZED; no FR-038 waiver.
 
-## 2. T028 manual browser validation (Playwright MCP, local `./run.sh`, Chromium, desktop 1280×900 unless stated)
-**PASS**
-- Navigation: Settings link reachable from `/`, `/catalogue`, `/categories`, `/insights`, `/about`.
-- Configuration surface: category badges (A/B/C), default markers, defaults (Max sources 5, spiral 800, stored 2000, TTL 900000, default owner `imdadareeph`, AI provider `gemini`, CODE_INTEL values); Site URL shows the client-visible badge and "Not set"; five secret rows show only configured/not-configured with degradation notes; SQLite location, code-intel DB, snapshot storage, snapshot queue and symbol queue show Unavailable.
-- Secret redaction (separate temporary server, inline `GITHUB_TOKEN` and `GEMINI_API_KEY` sentinels, no `.env`): rows show "configured" only; neither value appears in rendered text, raw HTML, DOM HTML, local/session/cookie storage, or the raw `getConfiguration` server-function body (which carries `status: configured`). Sentinel values are not recorded here.
-- Invalid numeric (separate temporary server, `ATLAS_MAX_SOURCES=abc`): Max sources renders "Invalid / unavailable", with the default (5) as reference only; raw body has `state: invalid`, no `value` field, no `abc`, path or stack trace; other rows unaffected.
-- Preferences: Auto-rotate and Show relationships each reflect on Explore immediately (label "Resume rotation / Off"; Links button loses active state). Persist across reload. Reset restores true/true with default markers and toast "Preferences reset to defaults"; Explore then shows defaults.
-- Corrupted `repoatlas.preferences.v1`: malformed JSON and `[1,2]` → both defaults; `{"autoRotate":false,"showRelationships":"banana"}` and `{"autoRotate":false}` → autoRotate false, showRelationships default true (per-item fallback); no page errors; Explore usable.
-- Blocked storage (simulated only on a `?t028block=1` URL by making `window.localStorage` throw): notice "Browser storage is unavailable, so these preferences will not be remembered after you close this page."; switches still toggle.
-- Code intelligence (plain dev): Unavailable / "Not available in this environment" / `no_binding`.
-- Server-function responses (`getConfiguration`, `getCodeIntelStatus`, plain, sentinel and invalid runs): no secrets, filesystem paths, SQL, infrastructure identifiers, stack traces or exception details.
-- Read-only boundary: only two preference switches and "Reset preferences"; no control to edit configuration or secrets, start/pause/retry/clear/re-run processing, or browse per-snapshot code intelligence.
-- Explore regression: loads with canvas, no visible error, no console errors; its own rotation/Links controls work and share state with Settings; Settings → Explore → Settings works.
+## Six revisions (where)
+1. §2: pinned scratch harness; T020–T023 do not exist; not production code, not T008+; does not prove final CPU; later implementation-level Cloudflare re-check required.
+2. §10: FR-036 resource/lifecycle (scratch Worker, Queue, DLQ, D1, R2; Free config; pre-run checks; recorded identifiers; teardown; deleted-resource confirmation). No identifiers invented; production names listed only to exclude them.
+3. §3: matrix (ordinary 4/16/32 KiB for Java, TS, JS, TSX; dense ascending with two-consecutive-failure stop; Minified-JS ladder; nodes/KiB recorded; JS/TSX dense at B_cand with step-down; CALLS-heavy).
+4. §5: Stage 1 = 30 per cell (screening evidence only); Stage 2 = 100 at selected B (Java dense, TS dense, minified JS); cold = idle-gap candidates only, first-after-deploy counts, in-handler init, judged by max.
+5. §7: CPU-failure list, integer upper-bound rule, rollover statement, retry/DLQ classification, missing CPU fails observation.
+6. §8: MINIMUM_USEFUL_B = 16 KiB pre-registered; B = minimum of largest passing bands over five families; no extrapolation; below 16 KiB does not clear T007 (§9 C rule).
 
-**NOT VERIFIED** (not upgraded)
-1. Absolute proof that a preference change can never trigger an atlas-data refetch. Evidence: during tested toggles and returns to Explore, a page-level fetch hook logged only the Settings server functions (`getConfiguration`, `getCodeIntelStatus`) and no atlas-data request; the hook intercepts `fetch` only, so it does not prove absence of every possible request.
-2. LAN reachability (SEC-005 network-reachable check). Evidence: dev server bound to 127.0.0.1 only; a request to the machine's LAN address got no connection; no second device or browser context was available; performing it would require changing exposure, which was not authorized. Raw server-function responses were inspected locally instead (see above).
+## Corrections and consistency
+- **Correction to my 2026-09-24 20:44 review:** it treated tasks.md T074 as the later re-check. T074 is a *local* review of T073's local simulation (wall-clock), not a Cloudflare measurement. R1 keeps T074 as the local check and states that the Cloudflare implementation-level re-check has no existing task and must be added by the reviewed Feature 004 amendment (§2, §9).
+- Kept distinct (§0): Cloudflare 10 ms (DOC) vs 5 ms p95 (PARAM) vs 8 ms max (PARAM) vs 16 KiB (PARAM, pre-registered). The 5/8 ms and M = 2 need owner approval before the run; 16 KiB is owner-set.
+- Dense/minified 4 KiB failure alone is not automatic C (§9). Smoke-gate failure is not C.
+- Volume recomputed: typical ≈ 1,240 messages ≈ 3,700 Queue ops (worst ≈ 1,420 / 4,300), within Free 10,000/day but shared with production use; the earlier 720/2,200 figures are superseded.
+- Interpretive choices to review: ordinary failures at 16/32 KiB count as failing bands; CALLS-heavy retained; Dense-JS/TSX are step-down checks not full ladders; Stage 2 covers three families.
 
-**Qualification (not a silent PASS or FAIL): narrow width 390×844**
-Page itself does not overflow (document scroll width 375 in a 390 viewport). The configuration table sits in a horizontal-scroll wrapper (table 377 px in a 327 px container, about 50 px internal scroll); the third-column header and some values ("Effective value / sta…", `github:imdadare…`, the "default" chip on Max file size, the GitHub token note) are clipped until scrolled. Badges, both switches (36×20) and Reset preferences (130×32) stay usable; Preferences and Code Intelligence sections are readable. Affected requirement: NFR-004; whether this is acceptable is a user decision. No remediation started.
+## Files changed
+- Modified (untracked file, rewritten): `specs/004-engineering-relationship-graph/t007-calibration-proposal.md` (previous R0 kept at the session scratchpad only).
+- Modified: `docs/claude_report/reports.md`, `docs/progress/PROGRESS.md`, `docs/ROADMAP.md` (change-history row), `docs/session_handoffs/CURRENT.md`, `docs/prompts/claude-prompts/prompt-log.md` (condensed).
+- Not modified: research.md, plan.md, tasks.md, Feature 005 record, source code. Pre-existing modified files (AGENTS.md, AGENT-GOVERNANCE.md, roadmap.md, `src/components/atlas/RepositoryPanel.tsx`, `src/routeTree.gen.ts`, `src/routes/catalogue.tsx`, the to-intermediate-representation files) are not from this task.
 
-## 3. Scope (T029) and pre-existing work
-F006 did not modify `package.json`, lockfiles, `.env.example`, `sources-store.ts`, `atlas-config.ts`, `code-intel/config.ts`, AI/storage implementation, F001–F005 or F007 source, or `docs/ROADMAP.md`.
-Pre-existing uncommitted work, **not** F006: `AGENTS.md`, `docs/AGENT-GOVERNANCE.md`, `roadmap.md`, `specs/004-engineering-relationship-graph/{plan,research,tasks}.md`, Query-cache experiment (`src/lib/code-intel/symbols/to-intermediate-representation.ts`, `tests/contract/symbols/to-intermediate-representation.test.ts`, `scripts/query-cold-start-experiment.ts`, `specs/002-ast-symbol-intelligence/query-cold-start-results.md`), `.claude/skills/gitnexus/`.
-F006 files (uncommitted): `specs/006-settings-control-plane/`, `src/lib/control-plane/`, `src/components/settings/`, `src/routes/settings.tsx`, generated `src/routeTree.gen.ts`, one nav line each in `src/routes/{index,catalogue,categories,insights,about}.tsx`, `src/lib/atlas-store.ts`, `src/lib/atlas-errors.ts`, `tests/unit/control-plane/`, `tests/integration/control-plane/`. (Attribution per T029; T030 did not re-audit.)
-
-## 4. Evidence
-Untracked validation-artifact directory `.playwright-mcp/` (kept, not committed, `.gitignore` unchanged), including `t028-settings-desktop-plain.png`, `t028-settings-390.png`, `t028-blocked-storage.png`, `t028-invalid-max-sources.png`, `t028-sentinel-getConfiguration.json`, plus Playwright snapshot/console logs.
-
-## 5. Temporary state
-Both temporary servers (sentinel, `ATLAS_MAX_SOURCES=abc`) stopped; `repoatlas.preferences.v1` removed (original state: absent); viewport restored. Dev server on 4950 (started for T028) and the older Vite process on 4949 (PID 55263, untouched) may still be running.
-
-## 6. Open user decisions
-Commit/review of Feature 006; acceptance of the two NOT VERIFIED items; whether the narrow-width clipping needs remediation; (`docs/ROADMAP.md` reconciled in the closeout; `specs/006-…/tasks.md` checkboxes remain unchecked because F006 specs were not to be modified: user may authorize ticking them); Feature 004 decisions unchanged (T007 STOPPED). Feature 007 not started.
+## Next
+Owner decision: authorize T007-CAL-1 by name with the §0 parameters approved, or decline/defer.

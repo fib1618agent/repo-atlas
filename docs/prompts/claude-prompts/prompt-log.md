@@ -4697,3 +4697,171 @@ Before changing anything, inspect the current:
 
 8. STOP after the documentation reconciliation. Do NOT start Feature 007. Do NOT commit or push. Report: A. Files changed; B. Feature 006 final roadmap state; C. docs/ROADMAP.md reconciliation; D. T030 status correction; E. T028 qualifications preserved; F. Playwright evidence handling; G. Pre-existing work preserved; H. git diff scope; I. Deviations; J. Final roadmap table; K. Exact next prompt. The next prompt should NOT start Feature 007 automatically. Wait for further instruction after the closeout.
 ````
+
+
+## Feature 004 final T007 decision pass (2026-09-24 20:34 +04:00) — CONDENSED (opening verbatim; body summarized, not character-for-character)
+
+`````
+/goal 005-final-t007-decision
+
+We need to make the FINAL engineering decision on Feature 004 T007 (Engineering Relationship Graph CPU feasibility).
+
+IMPORTANT:
+This is the final T007 decision pass.
+Do NOT start another Cloudflare research loop.
+Do NOT repeat the previous evidence-gathering work.
+The Cloudflare evidence dossier has already been prepared and is available at:
+
+/mnt/data/RepoAtlas T007 — Cloudflare Queue Consumer CPU Limits.md
+
+Read that dossier completely before making the decision.
+
+Repository:
+ /Users/imdadareeph/Documents/dev/git/fib1618agent/repo-atlas
+
+Relevant specification:
+ specs/004-engineering-relationship-graph/
+
+Also inspect the existing Feature 004 and Feature 005 specification/research artifacts as needed.
+
+[Remainder of the prompt (background, T007 original gate, current Feature 004 design, candidate controls, decision A/B/C, calibration question, documentation reconciliation, strict anti-loop rule, scope safety, validation, and the single final question "Given the newly established Cloudflare Free Queue Consumer 10 ms CPU constraint, does the current bounded Feature 004 architecture satisfy the original T007 gate, require one controlled calibration, or remain blocked?") was pasted by the user; the full text is preserved in the session transcript. CONDENSED entry: verbatim capture of the long body was not reproduced character-for-character.]
+`````
+
+
+## T007-CAL-1 calibration-proposal review (2026-09-24 20:44 +04:00) — CONDENSED
+
+User referenced `docs/investigations/RepoAtlas T007 — Cloudflare Queue Consumer CPU Limits.md` (the authoritative dossier, identical to the repository copy) and asked for a review only of `t007-calibration-proposal.md`: validate scope, matrix (Java/TS, 4–128 KiB, dense/ordinary, 30 per cell, JS/TSX and CALLS-heavy at B, `max_batch_size = 1`, `max_retries = 1`, DLQ, scratch resources only), the 5 ms / 8 ms / zero-`exceededCpu` thresholds (engineering choices, not Cloudflare limits), B selection and the 4 KiB → C rule; answer 13 questions; decide whether an FR-038 waiver is needed; end with PROPOSAL APPROVED FOR AUTHORIZATION or PROPOSAL NEEDS REVISION. No experiment, no Cloudflare operation, no production code, no T008, no new T007 decision, no commit or push.
+
+
+## T007-CAL-1 proposal revision R1 (2026-09-24 20:49 +04:00) — CONDENSED
+
+User instructed: apply exactly the six review revisions to `specs/004-engineering-relationship-graph/t007-calibration-proposal.md` (pinned scratch harness; FR-036 resource/lifecycle section; matrix with minified JS, nodes/KiB, ordinary 4/16/+1 band, dense ascending with two-failure stop; 30-invocation screening plus 100-invocation confirmation, cold handling by idle gap; CPU/result interpretation rules; pre-registered B selection with MINIMUM_USEFUL_B = 16 KiB). Preserve 5 ms / 8 ms as engineering margins needing owner approval, not Cloudflare limits. Do not run the experiment, no Cloudflare operation, no T008 or T020–T023, no new T007 decision, no commit or push. Show the diff, verify consistency and the six revisions, end with PROPOSAL READY FOR AUTHORIZATION.
+
+
+## Feature 009 — resume audit (2026-09-24 22:55 +04:00)
+
+`````
+Read:
+
+1. CLAUDE.md
+2. docs/session_handoffs/F009-repository-intelligence-visualization.md
+3. docs/ROADMAP.md
+4. docs/progress/PROGRESS.md
+
+Resume Feature 009 only.
+
+Do NOT modify anything yet.
+Do NOT investigate Feature 004.
+Do NOT modify CURRENT.md.
+Do NOT start Feature 007.
+Do NOT commit anything.
+
+First verify the current Feature 009 state against the handoff and
+report only:
+
+- current git status
+- Feature 009 files currently changed/untracked
+- remaining T027/T026/T029/T030 work
+- current acceptance-test gaps
+- D1/D2 state
+- exact D3 decision currently encoded by the implementation, if any
+- any implementation that would need changing after the D3 decision
+
+Stop after the audit.
+`````
+
+
+## Feature 009 — decisions D1/D2/D3 and closure work (2026-09-24 23:00 +04:00)
+
+`````
+D1 CONFIRMED:
+Feature 009 is read-only. It must not acquire intelligence, mutate D1,
+trigger ingestion, or create repositories as a side effect.
+
+D2 CONFIRMED:
+Use the existing SVG renderer plus accessible outline as the Feature 009
+visualization architecture.
+
+D3 CONFIRMED:
+Choose Option (a). Feature 009 consumes intelligence produced by the
+existing F001/F002 intelligence pipelines. Production Feature 009 code
+must not introduce acquisition, REPOATLAS_REAL_DATA, sqlite, Wrangler,
+or Cloudflare-specific acquisition logic.
+
+The opt-in real-data integration test may remain as validation evidence.
+
+Sources-store hydration:
+DO NOT FIX IT IN FEATURE 009. Treat it as a separate pre-existing issue.
+Keep any AT-009-01 workaround explicitly documented as test-environment
+workaround/evidence.
+
+Now proceed with Feature 009 closure work.
+
+IMPORTANT:
+- Read CLAUDE.md and the F009 handoff first.
+- Do NOT modify CURRENT.md.
+- Do NOT modify Feature 004 files.
+- Do NOT investigate Feature 004/T007.
+- Do NOT start Feature 007.
+- Do NOT run eslint --fix against directories.
+- Do NOT introduce new architecture beyond the decisions above.
+
+Execute in this order:
+
+1. Complete T027 validation:
+   - Explore entry button
+   - /categories
+   - /insights
+   - /about
+   - not_found browser validation
+   - provider_error browser validation
+   - provider failure browser validation
+   - 390x844 tap-target re-measure
+
+2. Execute T026 final gates.
+   - Run the normal TypeScript/test/lint gates.
+   - Do NOT auto-fix lint.
+   - Record baseline/current lint state if baseline errors remain.
+
+3. Fix the two documentation gaps:
+   - research.md R11
+   - research.md R6 wording so the <=60 limit is explicitly the SVG
+     map limit and MAX_SYMBOLS_FETCH=200 remains the text-list limit.
+
+4. Review evidence for T024 and T025 and tick only those checkboxes
+   that the evidence actually supports.
+
+5. Execute T029 scope audit.
+
+6. Prepare T030 closure updates for:
+   - PROGRESS.md
+   - Feature 009 reports/documentation
+   - prompt log
+   - F009 handoff
+   - ROADMAP.md
+
+IMPORTANT FOR reports.md:
+A concurrent Feature 004 session owns that file. Do NOT modify reports.md
+until it is confirmed safe. If it cannot safely be updated now, record
+that as a closure dependency and do not work around it by editing or
+overwriting the file.
+
+7. Update the Feature 009 roadmap row from NOT STARTED to the evidence-
+   supported status. Do not mark COMPLETE unless every required closure
+   gate is actually satisfied.
+
+8. Do NOT commit yet.
+
+At the end, provide:
+
+A. T027 result for every item.
+B. T026 result, including lint baseline/current.
+C. T024/T025 result.
+D. T029 result.
+E. T030 files updated and files intentionally deferred.
+F. Final Feature 009 status.
+G. Exact proposed commit file list.
+H. Any remaining blocker.
+
+Stop before committing.
+`````

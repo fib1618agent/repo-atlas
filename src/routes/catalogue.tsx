@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { SourcesMenu } from "@/components/atlas/SourcesMenu";
 import { RepoAtlasLogo } from "@/components/atlas/RepoAtlasLogo";
+import { IntelligenceLink } from "@/components/repo-intel/IntelligenceLink";
 import { useAtlasRepositories } from "@/lib/use-atlas-repositories";
 import { CATEGORY_ORDER, CATEGORY_TOKEN, formatCompact, formatUpdated, type Repository } from "@/lib/repositories";
 
@@ -264,7 +265,10 @@ function CataloguePage() {
         ) : (
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {filtered.map((repo) => (
-              <RepoCard key={repo.id} repo={repo} />
+              <div key={repo.id} className="flex h-full flex-col gap-1.5">
+                <RepoCard repo={repo} />
+                <IntelligenceLink fullName={repo.fullName} />
+              </div>
             ))}
           </div>
         )}
@@ -282,7 +286,7 @@ function RepoCard({ repo }: { repo: Repository }) {
       href={repo.htmlUrl}
       target="_blank"
       rel="noreferrer"
-      className="group flex flex-col rounded-lg border border-border/60 bg-card/60 p-4 backdrop-blur-sm transition-all hover:border-primary/30 hover:bg-card/80 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/30"
+      className="group flex flex-1 flex-col rounded-lg border border-border/60 bg-card/60 p-4 backdrop-blur-sm transition-all hover:border-primary/30 hover:bg-card/80 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/30"
     >
       {/* Header */}
       <div className="flex items-start justify-between gap-2">
