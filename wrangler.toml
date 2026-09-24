@@ -1,0 +1,43 @@
+# Cloudflare bindings for the Code Intelligence Foundation feature
+# (specs/001-code-intelligence-foundation). This is the first Cloudflare
+# bindings config in this repo — the existing atlas app runs on the
+# `cloudflare-module` Nitro preset (vite.config.ts) without needing any
+# bindings (its cache is memory-only in production, see src/lib/storage/atlas-store.ts).
+#
+# Local dev: `bunx wrangler dev --local` (or the project's dev command run
+# through Wrangler) uses `--local` D1/R2/Queues emulation, matching prod
+# binding shapes exactly (unlike the existing app's memory-vs-SQLite split).
+#
+# name/compatibility_date intentionally minimal; Nitro's cloudflare-module
+# preset merges its own build output config with this file at deploy time.
+
+name = "repo-atlas"
+compatibility_date = "2024-09-19"
+compatibility_flags = ["nodejs_compat"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "repo-atlas-code-intel"
+database_id = "b0b8b909-ea16-4cf0-9dd1-07a31289e5e4"
+
+[[r2_buckets]]
+binding = "SNAPSHOTS"
+bucket_name = "repo-atlas-snapshots"
+
+[[queues.producers]]
+binding = "SNAPSHOT_QUEUE"
+queue = "repo-atlas-snapshot-acquisition"
+
+[[queues.consumers]]
+queue = "repo-atlas-snapshot-acquisition"
+max_batch_size = 10
+max_retries = 5
+
+[[queues.producers]]
+binding = "SYMBOL_QUEUE"
+queue = "repo-atlas-symbol-extraction"
+
+[[queues.consumers]]
+queue = "repo-atlas-symbol-extraction"
+max_batch_size = 10
+max_retries = 5

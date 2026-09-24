@@ -23,11 +23,17 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { mapSourceFailuresToRows } from "@/lib/atlas-error-ui";
 import { ATLAS_DEFAULT_OWNER, ATLAS_MAX_SOURCES } from "@/lib/atlas-config";
-import { AtlasError, atlasErrorMessage, parseAtlasError } from "@/lib/atlas-errors";
-import { dedupeSources, parseGitHubSource } from "@/lib/github-url";
+import { atlasErrorMessage, parseAtlasError } from "@/lib/atlas-errors";
+import { dedupeSources } from "@/lib/github-url";
 import { getRepositories } from "@/lib/repositories.functions";
+import { validateRowsForMode, type SourceInputMode } from "@/lib/source-input-mode";
+import {
+  buildSelectedRepositoriesForAnalysis,
+  type SelectedRepositoryForAnalysis,
+} from "@/lib/repository-intelligence-extension-points";
 import { useSourcesStore } from "@/lib/sources-store";
 
 const DEFAULT_PREFILL = `https://github.com/${ATLAS_DEFAULT_OWNER}`;
@@ -49,7 +55,12 @@ export function SourcesDialog() {
   const resetToDefault = useSourcesStore((s) => s.resetToDefault);
 
   const [rows, setRows] = useState<string[]>(() => initialRows(isDefault, urls));
+  const [mode, setMode] = useState<SourceInputMode>("users");
   const [rowErrors, setRowErrors] = useState<Record<number, string>>({});
+  // Extension point only (US6, T024) — populated after a successful Mode 2
+  // (Repositories) load; consumed by no code yet. Never sent to a server
+  // function, never triggers analysis.
+  const [selectedForAnalysis, setSelectedForAnalysis] = useState<SelectedRepositoryForAnalysis[]>([]);
   const [formError, setFormError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [resetOpen, setResetOpen] = useState(false);
@@ -57,16 +68,20 @@ export function SourcesDialog() {
   useEffect(() => {
     if (dialogOpen) {
       setRows(initialRows(isDefault, urls));
+      setMode("users");
       setRowErrors({});
       setFormError(null);
+      setSelectedForAnalysis([]);
     }
   }, [dialogOpen, isDefault, urls]);
 
   const closeDialog = () => {
     setDialogOpen(false);
     setRows(initialRows(isDefault, urls));
+    setMode("users");
     setRowErrors({});
     setFormError(null);
+    setSelectedForAnalysis([]);
   };
 
   const addRow = () => {
@@ -102,20 +117,7 @@ export function SourcesDialog() {
       return;
     }
 
-    const parsed: ReturnType<typeof parseGitHubSource>[] = [];
-    const errors: Record<number, string> = {};
-    rows.forEach((row, index) => {
-      const trimmed = row.trim();
-      if (!trimmed) return;
-      try {
-        parsed.push(parseGitHubSource(trimmed));
-      } catch (error) {
-        errors[index] =
-          error instanceof AtlasError
-            ? error.message
-            : atlasErrorMessage("VALIDATION_INVALID_URL", { input: trimmed });
-      }
-    });
+    const { parsed, errors } = validateRowsForMode(rows, mode);
 
     if (Object.keys(errors).length > 0) {
       setRowErrors(errors);
@@ -141,6 +143,13 @@ export function SourcesDialog() {
       const response = await loadRepositories({ data: { sources: inputs } });
       setLoaded(inputs, response.sourceKey);
       queryClient.setQueryData(["repositories", response.sourceKey], response);
+
+      // Extension point only (US6, T024) — no analysis triggered, no
+      // snapshot acquired, no Feature 001 call. Users mode is unaffected.
+      if (mode === "repositories") {
+        setSelectedForAnalysis(buildSelectedRepositoriesForAnalysis(unique));
+      }
+
       setDialogOpen(false);
 
       toast.success(
@@ -195,6 +204,17 @@ export function SourcesDialog() {
               atlas stays until you click Load.
             </DialogDescription>
           </DialogHeader>
+
+          <Tabs value={mode} onValueChange={(value) => setMode(value as SourceInputMode)}>
+            <TabsList>
+              <TabsTrigger value="users" disabled={loading}>
+                Users
+              </TabsTrigger>
+              <TabsTrigger value="repositories" disabled={loading}>
+                Repositories
+              </TabsTrigger>
+            </TabsList>
+          </Tabs>
 
           <div className="space-y-3 py-2">
             {rows.map((row, index) => (

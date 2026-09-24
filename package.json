@@ -12,7 +12,8 @@
     "format": "prettier --write .",
     "db:init": "bun scripts/atlas-db-init.ts",
     "db:export": "bun scripts/atlas-export.ts",
-    "db:reset": "bun scripts/atlas-db-reset.ts"
+    "db:reset": "bun scripts/atlas-db-reset.ts",
+    "test": "bun test --isolate"
   },
   "overrides": {
     "rolldown": "1.2.1"
@@ -69,15 +70,18 @@
     "tailwind-merge": "^3.5.0",
     "tailwindcss": "^4.2.1",
     "three": "^0.186.0",
+    "tree-sitter-wasms": "^0.1.13",
     "tw-animate-css": "^1.3.4",
     "vaul": "^1.1.2",
     "vite-tsconfig-paths": "^6.0.2",
+    "web-tree-sitter": "0.25.10",
     "zod": "^3.25.76",
     "zustand": "^5.0.15"
   },
   "devDependencies": {
     "@eslint/js": "^9.32.0",
     "@tanstack/devtools-vite": "^0.8.1",
+    "@types/bun": "^1.4.2",
     "@types/node": "^22.16.5",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",

@@ -10,13 +10,21 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as CatalogueRouteImport } from './routes/catalogue'
 import { Route as CategoriesRouteImport } from './routes/categories'
 import { Route as InsightsRouteImport } from './routes/insights'
+import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as RepositoryOwnerNameRouteImport } from './routes/repository.$owner.$name'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CatalogueRoute = CatalogueRouteImport.update({
@@ -34,39 +42,83 @@ const InsightsRoute = InsightsRouteImport.update({
   path: '/insights',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RepositoryOwnerNameRoute = RepositoryOwnerNameRouteImport.update({
+  id: '/repository/$owner/$name',
+  path: '/repository/$owner/$name',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/catalogue': typeof CatalogueRoute
   '/categories': typeof CategoriesRoute
   '/insights': typeof InsightsRoute
+  '/settings': typeof SettingsRoute
+  '/repository/$owner/$name': typeof RepositoryOwnerNameRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/catalogue': typeof CatalogueRoute
   '/categories': typeof CategoriesRoute
   '/insights': typeof InsightsRoute
+  '/settings': typeof SettingsRoute
+  '/repository/$owner/$name': typeof RepositoryOwnerNameRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/catalogue': typeof CatalogueRoute
   '/categories': typeof CategoriesRoute
   '/insights': typeof InsightsRoute
+  '/settings': typeof SettingsRoute
+  '/repository/$owner/$name': typeof RepositoryOwnerNameRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/catalogue' | '/categories' | '/insights'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/catalogue'
+    | '/categories'
+    | '/insights'
+    | '/settings'
+    | '/repository/$owner/$name'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/catalogue' | '/categories' | '/insights'
-  id: '__root__' | '/' | '/catalogue' | '/categories' | '/insights'
+  to:
+    | '/'
+    | '/about'
+    | '/catalogue'
+    | '/categories'
+    | '/insights'
+    | '/settings'
+    | '/repository/$owner/$name'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/catalogue'
+    | '/categories'
+    | '/insights'
+    | '/settings'
+    | '/repository/$owner/$name'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
   CatalogueRoute: typeof CatalogueRoute
   CategoriesRoute: typeof CategoriesRoute
   InsightsRoute: typeof InsightsRoute
+  SettingsRoute: typeof SettingsRoute
+  RepositoryOwnerNameRoute: typeof RepositoryOwnerNameRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -76,6 +128,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/catalogue': {
@@ -99,14 +158,31 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof InsightsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/repository/$owner/$name': {
+      id: '/repository/$owner/$name'
+      path: '/repository/$owner/$name'
+      fullPath: '/repository/$owner/$name'
+      preLoaderRoute: typeof RepositoryOwnerNameRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
   CatalogueRoute: CatalogueRoute,
   CategoriesRoute: CategoriesRoute,
   InsightsRoute: InsightsRoute,
+  SettingsRoute: SettingsRoute,
+  RepositoryOwnerNameRoute: RepositoryOwnerNameRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

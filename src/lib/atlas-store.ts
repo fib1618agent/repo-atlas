@@ -1,4 +1,9 @@
 import { create } from "zustand";
+import {
+  PREFERENCE_DEFAULTS,
+  readStoredPreferences,
+  writeStoredPreferences,
+} from "./control-plane/preferences";
 import type { RepoCategory } from "./repositories";
 
 interface AtlasState {
@@ -17,16 +22,19 @@ interface AtlasState {
   toggleAutoRotate: () => void;
   toggleRelationships: () => void;
   resetFilters: () => void;
+  resetPreferences: () => void;
 }
 
-export const useAtlasStore = create<AtlasState>((set) => ({
+const storedPreferences = readStoredPreferences();
+
+export const useAtlasStore = create<AtlasState>((set, get) => ({
   hoveredId: null,
   selectedId: null,
   category: null,
   language: null,
   topic: null,
-  autoRotate: true,
-  showRelationships: true,
+  autoRotate: storedPreferences.autoRotate,
+  showRelationships: storedPreferences.showRelationships,
   setHovered: (hoveredId) => set({ hoveredId }),
   setSelected: (selectedId) => set({ selectedId }),
   setCategory: (category) => set((state) => ({ category: state.category === category ? null : category })),
@@ -35,4 +43,23 @@ export const useAtlasStore = create<AtlasState>((set) => ({
   toggleAutoRotate: () => set((state) => ({ autoRotate: !state.autoRotate })),
   toggleRelationships: () => set((state) => ({ showRelationships: !state.showRelationships })),
   resetFilters: () => set({ category: null, language: null, topic: null, selectedId: null }),
+  resetPreferences: () => {
+    const { autoRotate, showRelationships } = get();
+    const unchanged =
+      autoRotate === PREFERENCE_DEFAULTS.autoRotate &&
+      showRelationships === PREFERENCE_DEFAULTS.showRelationships;
+    // A change is persisted by the subscriber below; when already at defaults, still write them once.
+    if (unchanged) writeStoredPreferences(PREFERENCE_DEFAULTS);
+    else set({ ...PREFERENCE_DEFAULTS });
+  },
 }));
+
+// Persist only the two preferences, and only when one of them changed (no zustand `persist`).
+useAtlasStore.subscribe((state, prev) => {
+  if (
+    state.autoRotate !== prev.autoRotate ||
+    state.showRelationships !== prev.showRelationships
+  ) {
+    writeStoredPreferences(state);
+  }
+});

@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo } from "react";
 import { ArrowUpRight, Code2 } from "lucide-react";
-import { AtlasSourcesChrome } from "@/components/atlas/AtlasSourcesChrome";
+import { SourcesMenu } from "@/components/atlas/SourcesMenu";
 import { RepoAtlasLogo } from "@/components/atlas/RepoAtlasLogo";
 import { useAtlasRepositories } from "@/lib/use-atlas-repositories";
 import {
@@ -109,10 +109,11 @@ function CategoriesPage() {
           <Link to="/catalogue" className="atlas-nav-item">Catalogue</Link>
           <span className="atlas-nav-item is-active">Categories</span>
           <Link to="/insights" className="atlas-nav-item">Insights</Link>
-          <button type="button" className="atlas-nav-item">About</button>
+          <Link to="/about" className="atlas-nav-item">About</Link>
+          <Link to="/settings" className="atlas-nav-item">Settings</Link>
         </nav>
         <div className="ml-auto flex items-center gap-3">
-          <AtlasSourcesChrome
+          <SourcesMenu
             sourceKey={sourceKey}
             isDefault={isDefault}
             repositories={repositories}

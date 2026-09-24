@@ -1,5 +1,6 @@
 import { ArrowUpRight, GitFork, Star, X, CircleDot, CalendarDays, Code2, Link2, Sparkles, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { IntelligenceButton } from "@/components/repo-intel/IntelligenceButton";
 import { useAtlasStore } from "@/lib/atlas-store";
 import { CATEGORY_TOKEN, formatCompact, formatUpdated, type Repository } from "@/lib/repositories";
 import { getAISummary } from "@/lib/ai-summary.functions";
@@ -203,6 +204,7 @@ export function RepositoryPanel({ repository }: { repository: Repository }) {
           View Repository <ArrowUpRight className="ml-1 h-4 w-4" />
         </a>
       </Button>
+      <IntelligenceButton fullName={repository.fullName} />
     </aside>
   );
 }

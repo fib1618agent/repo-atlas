@@ -1,0 +1,86 @@
+/** Code Intelligence Foundation config — tunables, safe on the server only (no secrets). */
+
+export const CODE_INTEL_MAX_R2_CONCURRENCY = 6;
+export const CODE_INTEL_CHECKPOINT_FILE_COUNT = 200;
+export const CODE_INTEL_CHECKPOINT_CPU_MS_BUDGET = 20_000;
+export const CODE_INTEL_QUEUE_BATCH_SIZE = 10;
+export const CODE_INTEL_MAX_RETRY_ATTEMPTS = 5;
+export const CODE_INTEL_LIST_FILES_DEFAULT_LIMIT = 100;
+export const CODE_INTEL_LIST_FILES_MAX_LIMIT = 500;
+export const CODE_INTEL_EXTRACTION_BATCH_SIZE = 50;
+/** T014's spike (research.md §6 risk 3): no hard parse-failure ceiling found through 20 MB once trees are freed per-iteration; this is a defensive circuit-breaker for the local-timing-vs-Workers-CPU-metering gap, not a measured failure point. */
+export const CODE_INTEL_MAX_FILE_SIZE_BYTES = 10 * 1024 * 1024;
+
+/**
+ * AST + Symbol Intelligence (specs/002-ast-symbol-intelligence) — deliberately
+ * NOT part of `codeIntelConfig()`'s env-var-overridable tunables below, unlike
+ * everything else in this file. This identifies which version of *this
+ * repository's own* extraction logic (the `.scm` query files, symbol-identity
+ * hashing, IR construction) produced a result — per research.md §10 and
+ * data-model.md's "Re-extraction mechanism," it is meant to be bumped by a
+ * code change whenever that logic changes, not overridden per-deployment by
+ * an operator (doing so would desynchronize the recorded version from what
+ * the deployed code actually does, defeating FR-014's purpose).
+ */
+export const SYMBOL_EXTRACTOR_VERSION = "v2";
+
+/**
+ * Engineering Relationship Graph (specs/004-engineering-relationship-graph) —
+ * mirrors SYMBOL_EXTRACTOR_VERSION's own rationale exactly: bumped by a code
+ * change to this feature's own extraction/resolution logic, never overridden
+ * per-deployment.
+ */
+export const RELATIONSHIP_EXTRACTOR_VERSION = "v1";
+
+/** Engineering Relationship Graph — bounded batch size for the parse-free `contains` phase (directories/symbols per unit). No CPU-budget pressure (research.md §1/§4 — pure D1 reads), so this is generous relative to CODE_INTEL_EXTRACTION_BATCH_SIZE. */
+export const CODE_INTEL_RELATIONSHIP_CONTAINS_BATCH_SIZE = 200;
+/** Engineering Relationship Graph — ceiling on candidates recorded per AMBIGUOUS relationship (research.md §2's bounded-lookup rule — never an unbounded candidate list). */
+export const CODE_INTEL_RELATIONSHIP_MAX_CANDIDATES = 20;
+
+export function codeIntelConfig() {
+  return {
+    maxR2Concurrency: Number(
+      process.env["CODE_INTEL_MAX_R2_CONCURRENCY"] ??
+        CODE_INTEL_MAX_R2_CONCURRENCY,
+    ),
+    checkpointFileCount: Number(
+      process.env["CODE_INTEL_CHECKPOINT_FILE_COUNT"] ??
+        CODE_INTEL_CHECKPOINT_FILE_COUNT,
+    ),
+    checkpointCpuMsBudget: Number(
+      process.env["CODE_INTEL_CHECKPOINT_CPU_MS_BUDGET"] ??
+        CODE_INTEL_CHECKPOINT_CPU_MS_BUDGET,
+    ),
+    queueBatchSize: Number(
+      process.env["CODE_INTEL_QUEUE_BATCH_SIZE"] ?? CODE_INTEL_QUEUE_BATCH_SIZE,
+    ),
+    maxRetryAttempts: Number(
+      process.env["CODE_INTEL_MAX_RETRY_ATTEMPTS"] ??
+        CODE_INTEL_MAX_RETRY_ATTEMPTS,
+    ),
+    listFilesDefaultLimit: Number(
+      process.env["CODE_INTEL_LIST_FILES_DEFAULT_LIMIT"] ??
+        CODE_INTEL_LIST_FILES_DEFAULT_LIMIT,
+    ),
+    listFilesMaxLimit: Number(
+      process.env["CODE_INTEL_LIST_FILES_MAX_LIMIT"] ??
+        CODE_INTEL_LIST_FILES_MAX_LIMIT,
+    ),
+    extractionBatchSize: Number(
+      process.env["CODE_INTEL_EXTRACTION_BATCH_SIZE"] ??
+        CODE_INTEL_EXTRACTION_BATCH_SIZE,
+    ),
+    maxFileSizeBytes: Number(
+      process.env["CODE_INTEL_MAX_FILE_SIZE_BYTES"] ??
+        CODE_INTEL_MAX_FILE_SIZE_BYTES,
+    ),
+    relationshipContainsBatchSize: Number(
+      process.env["CODE_INTEL_RELATIONSHIP_CONTAINS_BATCH_SIZE"] ??
+        CODE_INTEL_RELATIONSHIP_CONTAINS_BATCH_SIZE,
+    ),
+    relationshipMaxCandidates: Number(
+      process.env["CODE_INTEL_RELATIONSHIP_MAX_CANDIDATES"] ??
+        CODE_INTEL_RELATIONSHIP_MAX_CANDIDATES,
+    ),
+  };
+}

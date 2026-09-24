@@ -1,3 +1,11 @@
+> **STALE / NON-AUTHORITATIVE**
+>
+> This file is a historical product-UI checklist. It is **not** the current execution roadmap and its checkboxes do not reflect current status.
+> The authoritative current RepoAtlas roadmap is [`docs/ROADMAP.md`](docs/ROADMAP.md).
+> Historical content below is preserved unchanged.
+
+---
+
 # RepoAtlas roadmap
 
 - [ ] Build live GitHub repository data layer with caching and a bundled outage fallback.

@@ -1,0 +1,33 @@
+??	docs/audit_reports/audit-log.md
+??	docs/claude_report/reports.md
+??	docs/investigations/004-relationship-graph-cpu-and-reference-architecture.md
+??	docs/investigations/004-single-pass-architecture-spike.md
+ M	docs/progress/PROGRESS.md
+??	docs/prompts/analyze/analyze-remediation-report.md
+??	docs/prompts/claude-prompts/prompt-log.md
+??	specs/005-queue-cpu-feasibility-architecture/checklists/requirements.md
+??	specs/005-queue-cpu-feasibility-architecture/contracts/decision-record.md
+??	specs/005-queue-cpu-feasibility-architecture/contracts/live-experiment-proposal.md
+??	specs/005-queue-cpu-feasibility-architecture/contracts/measurement-protocol.md
+??	specs/005-queue-cpu-feasibility-architecture/contracts/waiver.md
+??	specs/005-queue-cpu-feasibility-architecture/data-model.md
+??	specs/005-queue-cpu-feasibility-architecture/decision-record.md
+??	specs/005-queue-cpu-feasibility-architecture/evidence/README.md
+??	specs/005-queue-cpu-feasibility-architecture/evidence/baseline/set-A-files.txt
+??	specs/005-queue-cpu-feasibility-architecture/evidence/baseline/set-A.sha256
+??	specs/005-queue-cpu-feasibility-architecture/evidence/baseline/set-B.patch
+??	specs/005-queue-cpu-feasibility-architecture/evidence/baseline/set-B.sha256
+??	specs/005-queue-cpu-feasibility-architecture/evidence/baseline/set-C-recorded.txt
+??	specs/005-queue-cpu-feasibility-architecture/evidence/baseline/state.txt
+??	specs/005-queue-cpu-feasibility-architecture/plan.md
+??	specs/005-queue-cpu-feasibility-architecture/quickstart.md
+??	specs/005-queue-cpu-feasibility-architecture/research.md
+??	specs/005-queue-cpu-feasibility-architecture/spec.md
+??	specs/005-queue-cpu-feasibility-architecture/tasks.md
+ M	src/routeTree.gen.ts
+??	src/routes/about.tsx
+ M	src/routes/catalogue.tsx
+ M	src/routes/categories.tsx
+ M	src/routes/index.tsx
+ M	src/routes/insights.tsx
+ M	tests/integration/repositories/initial-sources.test.ts
