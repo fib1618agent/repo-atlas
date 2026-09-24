@@ -331,7 +331,7 @@ export async function fetchCustomRepositories(inputs: string[]): Promise<FetchRe
     catalogue = catalogue.slice(0, config.maxStoredRepos);
     warnings.push({
       code: "CATALOGUE_TRUNCATED",
-      message: "Loaded the 2000 most-starred repositories across your sources.",
+      message: `Loaded the ${config.maxStoredRepos} most-starred repositories across your sources.`,
     });
   }
 

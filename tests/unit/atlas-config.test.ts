@@ -1,7 +1,18 @@
 import { afterEach, beforeEach, describe, expect, test } from "bun:test";
-import { serverAtlasConfig, ATLAS_DEFAULT_OWNER } from "../../src/lib/atlas-config";
+import {
+  serverAtlasConfig,
+  ATLAS_DEFAULT_OWNER,
+  ATLAS_MAX_SPIRAL_REPOS,
+  ATLAS_MAX_STORED_REPOS,
+} from "../../src/lib/atlas-config";
 
-const ENV_KEYS = ["ATLAS_LOAD_INITIAL_SOURCES", "ATLAS_INITIAL_SOURCES", "ATLAS_DEFAULT_OWNER"] as const;
+const ENV_KEYS = [
+  "ATLAS_LOAD_INITIAL_SOURCES",
+  "ATLAS_INITIAL_SOURCES",
+  "ATLAS_DEFAULT_OWNER",
+  "ATLAS_MAX_SPIRAL_REPOS",
+  "ATLAS_MAX_STORED_REPOS",
+] as const;
 let savedEnv: Record<string, string | undefined>;
 
 beforeEach(() => {
@@ -95,6 +106,14 @@ describe("serverAtlasConfig — StartupSourceConfig parsing (T021)", () => {
     expect(() => serverAtlasConfig()).not.toThrow();
     const config = serverAtlasConfig();
     expect(config.initialSources).toEqual([{ type: "github", owner: "octocat" }]);
+  });
+
+  test("empty numeric env vars fall back to defaults (Vercel empty-string quirk)", () => {
+    process.env["ATLAS_MAX_SPIRAL_REPOS"] = "";
+    process.env["ATLAS_MAX_STORED_REPOS"] = "   ";
+    const config = serverAtlasConfig();
+    expect(config.maxSpiralRepos).toBe(ATLAS_MAX_SPIRAL_REPOS);
+    expect(config.maxStoredRepos).toBe(ATLAS_MAX_STORED_REPOS);
   });
 
   test("invalid configuration: all entries invalid produces an empty list, not a crash and not a fallback substitution", () => {
