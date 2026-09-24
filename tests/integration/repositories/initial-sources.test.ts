@@ -85,6 +85,21 @@ describe("getRepositories — config-driven initial sources (T028)", () => {
     expect(response.repositories.map((r) => r.name)).toEqual(["a"]);
   });
 
+  test("FR-027: configured initial source fetch fails, falls back to bundled dataset instead of throwing", async () => {
+    process.env["ATLAS_DEFAULT_OWNER"] = "t028-default-owner-fail";
+    fetchDefaultOwnerRepositories.mockImplementationOnce(async () => {
+      throw new Error("simulated GitHub failure (rate-limited/unreachable)");
+    });
+
+    const response = await getRepositoriesHandler({});
+
+    expect(fetchDefaultOwnerRepositories).toHaveBeenCalledTimes(1);
+    expect(fetchCustomRepositories).not.toHaveBeenCalled();
+    expect(response.source).toBe("fallback");
+    expect(response.isDefault).toBe(true);
+    expect(response.repositories.length).toBeGreaterThan(0);
+  });
+
   test("multiple initial sources: combined via the same multi-source pipeline as custom sources", async () => {
     process.env["ATLAS_DEFAULT_OWNER"] = "t028-default-owner-2";
     process.env["ATLAS_INITIAL_SOURCES"] = JSON.stringify([

@@ -128,6 +128,7 @@ Single TanStack Start project (existing structure) — `src/`, `tests/` at repos
     - Multiple configured `initialSources` are processed together.
     - Unsupported provider types are ignored safely.
     - Existing persisted custom sources behavior remains unchanged.
+  - **Remediation (post-`/speckit-analyze` finding E1, added later)**: E1 flagged that FR-027 (startup auto-load failure → fallback dataset, not a silent blank atlas) was correctly *implemented* in T020's `loadInitialSourcesResponse` (both the single-default-owner fast path and the multi-entry path each wrap their fetch in `try/catch` → `fallbackData`) but had no dedicated automated test. Added a 7th test: `"FR-027: configured initial source fetch fails, falls back to bundled dataset instead of throwing"` — `fetchDefaultOwnerRepositories` mocked to throw, asserts `response.source === "fallback"`, `isDefault === true`, non-empty `repositories`, no throw, and confirms `fetchCustomRepositories` was never called (correct branch taken). 7/7 pass in this file (38/38 across all of `tests/unit/`+`tests/integration/repositories/`). No production code touched — `repositories.functions.ts`'s existing fallback logic was already correct. `tsc` clean; `bun run build` succeeds; Feature 001 31/31; Feature 002 103/103.
 
 **Checkpoint**: Startup loading is explicit and operator-configurable with zero behavior change at defaults, and the default-path extension now has dedicated automated coverage (closes analysis finding E1).
 
