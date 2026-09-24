@@ -78,3 +78,4 @@ data/atlas-export.json
 
 # Misc
 *.local
+.gitnexus

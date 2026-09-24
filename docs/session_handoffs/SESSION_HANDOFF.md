@@ -1,3 +1,5 @@
+> **SUPERSEDED (2026-09-24).** Historical only: describes the Feature 003 / Code Intelligence state as of 2026-09-21. Do not use it for current state. Current handoff: `docs/session_handoffs/CURRENT.md`.
+
 # Session Handoff
 
 **Written**: 2026-09-21 (before context compaction). Read this file fully before doing anything — it replaces the prior conversation.

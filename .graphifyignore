@@ -1,0 +1,168 @@
+# RepoAtlas — Graphify scan exclusions
+# Syntax: gitignore (merged with .gitignore; patterns here can only exclude MORE)
+# See docs/AGENT-GOVERNANCE.md §6 (Graphify). Merged with .gitignore by graphify detect.
+
+# -----------------------------------------------------------------------------
+# 1. Package managers & dependency caches
+# -----------------------------------------------------------------------------
+node_modules/
+jspm_packages/
+bower_components/
+
+.pnpm-store/
+.pnpm-debug.log*
+
+.yarn/
+.yarn/cache/
+.yarn/unplugged/
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+.pnp.js
+
+.npm/
+.turbo/
+
+# -----------------------------------------------------------------------------
+# 2. Build, distribution & compilation outputs
+# -----------------------------------------------------------------------------
+dist/
+build/
+target/
+out/
+bin/
+obj/
+
+# TanStack Start / Nitro / Vite / Cloudflare (this repo)
+.output/
+.nitro/
+.vinxi/
+.tanstack/
+.vite/
+.wrangler/
+
+storybook-static/
+.serverless/
+dist-protected/
+*.tsbuildinfo
+
+# Bundled / generated server chunks (if present outside .output)
+**/_libs/
+**/_ssr/
+**/_chunks/
+
+# -----------------------------------------------------------------------------
+# 3. Lockfiles, logs, secrets & local env
+# -----------------------------------------------------------------------------
+package-lock.json
+npm-shrinkwrap.json
+yarn.lock
+pnpm-lock.yaml
+bun.lock
+bun.lockb
+Cargo.lock
+poetry.lock
+Pipfile.lock
+Gemfile.lock
+composer.lock
+go.sum
+go.work.sum
+
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+bun-debug.log*
+lerna-debug.log*
+
+.env
+.env.*
+.dev.vars
+!.env.example
+
+# -----------------------------------------------------------------------------
+# 4. Graphify output & cache (never index own artifacts)
+# -----------------------------------------------------------------------------
+graphify-out/
+.graphify/
+
+# -----------------------------------------------------------------------------
+# 5. Editor, IDE & local agent/tooling (not application source)
+# -----------------------------------------------------------------------------
+.idea/
+.vscode/
+.cursor/
+*.swp
+*.swo
+*~
+.claude/settings.local.json
+
+# -----------------------------------------------------------------------------
+# 6. Test, coverage & quality tool artifacts
+# -----------------------------------------------------------------------------
+coverage/
+.nyc_output/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.hypothesis/
+htmlcov/
+lcov-report/
+visual-tests/
+visual-test/
+__snapshots__/
+snapshots/
+
+# -----------------------------------------------------------------------------
+# 7. OS & misc junk
+# -----------------------------------------------------------------------------
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+Desktop.ini
+*.local
+
+# -----------------------------------------------------------------------------
+# 8. Python (process_repos.py and local venvs)
+# -----------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+.venv/
+venv/
+env/
+
+# -----------------------------------------------------------------------------
+# 9. Local databases, exports & derived indexes (not source)
+# -----------------------------------------------------------------------------
+data/atlas.sqlite
+data/atlas.sqlite-wal
+data/atlas.sqlite-shm
+data/atlas-export.json
+
+# GitNexus local index (also in .gitignore; repeated here for Graphify scans)
+.gitnexus
+.gitnexus/
+**/.gitnexus/
+**/.gitnexus/**
+
+# -----------------------------------------------------------------------------
+# 10. Large binaries & media (WASM grammars are vendored bytes, not TS graph)
+# -----------------------------------------------------------------------------
+public/wasm/
+*.wasm
+*.source.mp4
+public/screenshots/*.mp4
+
+# -----------------------------------------------------------------------------
+# 11. Verbose non-architecture docs (optional noise reduction)
+# -----------------------------------------------------------------------------
+docs/prompts/claude-prompts/prompt-log.md
+skills-lock.json
+
+# Evidence baselines (hashes/patches/tsc dumps — not product code)
+specs/**/evidence/baseline/
