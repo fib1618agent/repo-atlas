@@ -45,13 +45,34 @@ function parseInitialSources(raw: string | undefined): InitialSourceEntry[] {
   return entries;
 }
 
+/**
+ * Vercel env UI often leaves keys present with empty values; `Number("")` is 0 and
+ * would truncate the catalogue to zero repos. Invalid non-numeric strings stay NaN
+ * so Settings can still flag misconfiguration.
+ */
+function envPositiveInt(raw: string | undefined, fallback: number): number {
+  if (raw === undefined) return fallback;
+  const trimmed = raw.trim();
+  if (trimmed === "") return fallback;
+  const n = Number(trimmed);
+  if (!Number.isFinite(n)) return Number.NaN;
+  if (n < 1) return fallback;
+  return Math.floor(n);
+}
+
 export function serverAtlasConfig() {
   return {
     defaultOwner: process.env["ATLAS_DEFAULT_OWNER"] ?? ATLAS_DEFAULT_OWNER,
-    maxSources: Number(process.env["ATLAS_MAX_SOURCES"] ?? ATLAS_MAX_SOURCES),
-    maxSpiralRepos: Number(process.env["ATLAS_MAX_SPIRAL_REPOS"] ?? ATLAS_MAX_SPIRAL_REPOS),
-    maxStoredRepos: Number(process.env["ATLAS_MAX_STORED_REPOS"] ?? ATLAS_MAX_STORED_REPOS),
-    cacheTtlMs: Number(process.env["ATLAS_CACHE_TTL_MS"] ?? ATLAS_CACHE_TTL_MS),
+    maxSources: envPositiveInt(process.env["ATLAS_MAX_SOURCES"], ATLAS_MAX_SOURCES),
+    maxSpiralRepos: envPositiveInt(
+      process.env["ATLAS_MAX_SPIRAL_REPOS"],
+      ATLAS_MAX_SPIRAL_REPOS,
+    ),
+    maxStoredRepos: envPositiveInt(
+      process.env["ATLAS_MAX_STORED_REPOS"],
+      ATLAS_MAX_STORED_REPOS,
+    ),
+    cacheTtlMs: envPositiveInt(process.env["ATLAS_CACHE_TTL_MS"], ATLAS_CACHE_TTL_MS),
     loadInitialSources: process.env["ATLAS_LOAD_INITIAL_SOURCES"] !== "false",
     initialSources: parseInitialSources(process.env["ATLAS_INITIAL_SOURCES"]),
   };
