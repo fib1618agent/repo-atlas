@@ -4410,3 +4410,290 @@ Report:
 
 STOP.
 ```
+
+
+## Feature 006 T030 — persist final state (2026-09-24 19:29 +04:00) — verbatim
+
+````
+Continue Feature 006 — Settings / Control Plane.
+
+Start ONLY T030.
+
+Do not modify implementation or tests.
+Do not reopen T028.
+Do not attempt to turn NOT VERIFIED results into PASS.
+Do not start any new feature or remediation task.
+
+Read the exact T030 requirements from:
+
+specs/006-settings-control-plane/tasks.md
+
+Then persist the final Feature 006 state according to the repository's established reporting conventions.
+
+==================================================
+T030 REPORTING FILES
+==================================================
+
+Update ONLY the reporting artifacts explicitly required by T030:
+
+- docs/progress/PROGRESS.md
+- docs/claude_report/reports.md
+- the established prompt log
+- CURRENT.md
+
+Do NOT modify:
+
+- docs/ROADMAP.md
+- root roadmap.md
+- Feature 006 implementation files
+- Feature 006 tests
+- F001–F005 files
+- F007 files
+- package.json
+- .env.example
+
+Follow the existing formatting and conventions of each reporting file. Read the relevant existing sections/history before editing.
+
+==================================================
+FEATURE 006 FINAL STATE
+==================================================
+
+Record Feature 006 as having reached T030 after:
+
+T001–T027 DONE
+T028 DONE
+T029 DONE
+T030 CURRENT
+
+Do not claim that every T028 acceptance observation was fully verified.
+
+T028 had:
+
+PASS:
+- navigation
+- configuration surface
+- configuration defaults
+- client-visible Site URL behavior
+- secret redaction
+- invalid numeric configuration
+- preference immediate behavior
+- preference persistence
+- reset behavior
+- corrupted storage fallback
+- blocked storage behavior
+- code-intelligence unavailable state
+- server-function response safety
+- read-only boundary
+- narrow viewport overall usability
+- Explore regression
+
+NOT VERIFIED:
+1. Absolute proof that preference changes can never trigger an atlas-data refetch.
+   Evidence:
+   - no atlas-data request was observed during tested preference changes
+   - the available interception method did not prove absence of every possible request 
+2. LAN reachability.
+   Evidence:
+   - application was bound to 127.0.0.1
+   - no second device/browser context was available
+   - LAN validation therefore could not be performed without changing exposure.
+
+NARROW-WIDTH OBSERVATION:
+- 390×844 viewport
+- page itself did not overflow
+- configuration table used a horizontal-scroll wrapper
+- approximately 50px of internal horizontal scrolling existed
+- some third-column content was clipped before horizontal scrolling
+- interactive controls remained usable
+- record this as an observation/qualification, not as a silent PASS or FAIL.
+
+Do not reinterpret these results.
+
+==================================================
+T028 SECURITY EVIDENCE
+==================================================
+
+Record that the sentinel run verified:
+
+- GITHUB_TOKEN value never appeared in rendered text
+- GEMINI_API_KEY value never appeared in rendered text
+- sentinel values were absent from HTML/DOM
+- sentinel values were absent from storage
+- sentinel values were absent from raw getConfiguration response
+- secret rows exposed only configured/not-configured state.
+
+Record that invalid:
+
+ATLAS_MAX_SOURCES=abc
+
+produced:
+
+"Invalid / unavailable"
+
+with no fabricated effective value and no leaked sentinel/path/stack information.
+
+Record that raw server-function inspection found no:
+
+- secrets
+- filesystem paths
+- SQL
+- infrastructure identifiers
+- stack traces
+- exception details.
+
+==================================================
+TEST STATE
+==================================================
+
+Record the final automated validation state:
+
+- tsc: PASS
+- full test suite: 323 PASS / 0 FAIL
+- Feature 006 tests: 124 additional tests, all passing
+- Feature 006 lint: CLEAN
+- repo-wide lint: 1815 errors / 6 warnings
+- T001 baseline: 1810 errors / 6 warnings
+- known +5 lint delta consists only of the five intentional Settings navigation-line Prettier errors.
+
+Do not describe the repo-wide lint result as a new regression.
+
+==================================================
+SCOPE STATE
+==================================================
+
+Record that T029 confirmed Feature 006 did not modify:
+
+- package.json
+- lockfiles
+- .env.example
+- sources-store.ts
+- atlas-config.ts
+- code-intel/config.ts
+- AI/storage implementation
+- F001–F005 source
+- F007 source
+- docs/ROADMAP.md
+
+Record the pre-existing uncommitted work separately from Feature 006.
+
+Do not attribute the pre-existing changes to Feature 006.
+
+==================================================
+PLAYWRIGHT EVIDENCE
+==================================================
+
+Record the generated T028 evidence directory:
+
+.playwright-mcp/
+
+and the relevant evidence files, including:
+
+- t028-settings-desktop-plain.png
+- t028-settings-390.png
+- t028-blocked-storage.png
+- t028-invalid-max-sources.png
+- t028-sentinel-getConfiguration.json
+
+Do NOT delete the evidence.
+
+Do NOT modify .gitignore merely to hide it.
+
+Do NOT commit it.
+
+If T030's established reporting convention requires noting untracked validation artifacts, record .playwright-mcp/ as an untracked validation-artifact directory.
+
+==================================================
+REPOSITORY SAFETY
+==================================================
+
+Do NOT:
+
+- commit
+- push
+- stash
+- reset
+- clean
+- deploy
+- use Cloudflare/Wrangler
+- use GitNexus
+- modify source code
+- modify tests
+- modify roadmap files.
+
+Preserve all existing working-tree changes.
+
+==================================================
+FINAL STATE
+==================================================
+
+After writing the required T030 reporting artifacts, verify the files were written correctly.
+
+Do not perform unrelated cleanup.
+
+Do not start a remediation task for the narrow-width observation.
+Do not reopen T028.
+Do not attempt another LAN test.
+Do not attempt to prove the impossible negative refetch assertion.
+
+Stop after T030.
+
+Report exactly:
+
+A. T030 completed
+B. Reporting files updated
+C. Feature 006 final status
+D. T028 results persisted
+E. NOT VERIFIED items persisted
+F. Narrow-width observation persisted
+G. Automated validation state
+H. Scope/pre-existing-change state
+I. Playwright evidence state
+J. Files changed by T030
+K. Any deviations
+L. Final Feature 006 position
+M. Exact next prompt
+
+Do not start Feature 007.
+````
+
+
+## Feature 006 closeout and roadmap reconciliation (2026-09-24 19:32 +04:00) — CONDENSED (all constraints and report items preserved; not character-for-character)
+
+````
+Feature 006 is fully executed through T030.
+
+Perform ONLY the Feature 006 documentation closeout and roadmap reconciliation.
+
+Do NOT modify application code.
+Do NOT modify tests.
+Do NOT modify Feature 006 specifications.
+Do NOT start Feature 007.
+Do NOT commit.
+Do NOT push.
+Do NOT use git stash/reset/clean.
+Do NOT use Cloudflare/Wrangler/GitNexus.
+
+Before changing anything, inspect the current:
+- docs/ROADMAP.md
+- root roadmap.md
+- docs/progress/PROGRESS.md
+- docs/claude_report/reports.md
+- docs/session_handoffs/CURRENT.md
+- specs/006-settings-control-plane/tasks.md
+
+1. FEATURE 006 FINAL STATUS: Ensure the authoritative/current roadmap representation records: Feature 006 — Settings / Control Plane; Status: DONE; Tasks: T001–T030 DONE. Do not invent or alter task status. Preserve the existing documented qualifications: T028 NOT VERIFIED (1) absolute proof that preference changes can never trigger atlas-data refetch (observed no atlas-data request during tested changes, interception could not prove the universal negative); (2) LAN reachability (bound to 127.0.0.1, no second device/context; do not change network exposure to turn this into PASS). Narrow-width qualification: 390×844, page did not overflow, config table horizontal scrolling ~50px internal, some third-column content clipped before scrolling, controls usable; preserve as NFR-004 qualification/observation; do not silently convert to PASS or FAIL.
+
+2. docs/ROADMAP.md: currently stale, reportedly still describes Feature 006 as NOT STARTED and associates 006 with the MCP feature. Determine the minimum documentation-only correction. Do not redesign; do not reorder unrelated features; do not rewrite historical sections; do not alter Feature 004 or 005 status; do not alter Feature 007 beyond what preserves correct sequencing; preserve the established structure; do not add a Dependency column; use the established columns: Seq | Feature | Status | Task progress | Task pending | Current position / next | Gate / Blocker. Feature 006 = DONE with T001–T030 DONE; Feature 007 = PENDING / not started. If docs/ROADMAP.md is intended to be historical/non-authoritative per its content, make the smallest reconciliation consistent with its documented ownership.
+
+3. ROOT roadmap.md: do NOT rewrite. If it already has the non-authoritative banner pointing to docs/ROADMAP.md, leave it intact; update only if existing documentation explicitly requires a current-state correction.
+
+4. REPORTING CONSISTENCY: T030 wrote "T001–T029 DONE and T030 CURRENT"; final state must represent T030 as DONE/completed. Update only if necessary in PROGRESS.md, reports.md, CURRENT.md; do not rewrite historical entries unnecessarily; preserve the detailed T028 evidence and qualifications.
+
+5. PLAYWRIGHT EVIDENCE: do NOT delete .playwright-mcp/; do NOT modify .gitignore; do NOT commit it; keep the existing statement that it is an untracked validation-artifact directory; do not decide to permanently add or remove it.
+
+6. PRE-EXISTING WORK: do not attribute to Feature 006: AGENTS.md, docs/AGENT-GOVERNANCE.md, roadmap.md, specs/004-… changes, to-intermediate-representation.ts, its contract test, query-cache experiment files, .claude/skills/gitnexus/. Preserve their state.
+
+7. VALIDATION: inspect git diff; verify only intended documentation files changed; do not run application tests; no deployment; no code changes. Confirm: Feature 006 = DONE; T001–T030 = DONE; Feature 007 = PENDING / not started; Feature 005 = BLOCKED at T007; Feature 004 = DONE. Do not infer or alter any other feature state.
+
+8. STOP after the documentation reconciliation. Do NOT start Feature 007. Do NOT commit or push. Report: A. Files changed; B. Feature 006 final roadmap state; C. docs/ROADMAP.md reconciliation; D. T030 status correction; E. T028 qualifications preserved; F. Playwright evidence handling; G. Pre-existing work preserved; H. git diff scope; I. Deviations; J. Final roadmap table; K. Exact next prompt. The next prompt should NOT start Feature 007 automatically. Wait for further instruction after the closeout.
+````
