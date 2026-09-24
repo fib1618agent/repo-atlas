@@ -21,7 +21,8 @@ export type AtlasErrorCode =
   | "SNAPSHOT_NOT_FOUND"
   | "SNAPSHOT_REPOSITORY_UNAUTHORIZED"
   | "SNAPSHOT_NOT_EXTRACTABLE"
-  | "SYMBOL_NOT_FOUND";
+  | "SYMBOL_NOT_FOUND"
+  | "SETTINGS_UNAVAILABLE";
 
 export type SourceFailure = {
   login: string;
@@ -63,6 +64,7 @@ const ERROR_MESSAGES: Record<AtlasErrorCode, string> = {
   SNAPSHOT_REPOSITORY_UNAUTHORIZED: "Repository is private or inaccessible to configured credentials.",
   SNAPSHOT_NOT_EXTRACTABLE: "Snapshot is not completed and cannot be extracted yet.",
   SYMBOL_NOT_FOUND: "No symbol found for that id.",
+  SETTINGS_UNAVAILABLE: "Settings could not be loaded. Try again.",
 };
 
 export function atlasErrorMessage(

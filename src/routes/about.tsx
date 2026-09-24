@@ -72,6 +72,7 @@ function AboutPage() {
           <Link to="/categories" className="atlas-nav-item">Categories</Link>
           <Link to="/insights" className="atlas-nav-item">Insights</Link>
           <span className="atlas-nav-item is-active">About</span>
+          <Link to="/settings" className="atlas-nav-item">Settings</Link>
         </nav>
         <div className="ml-auto flex items-center gap-3">
           <Link

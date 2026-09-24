@@ -110,6 +110,7 @@ function CategoriesPage() {
           <span className="atlas-nav-item is-active">Categories</span>
           <Link to="/insights" className="atlas-nav-item">Insights</Link>
           <Link to="/about" className="atlas-nav-item">About</Link>
+          <Link to="/settings" className="atlas-nav-item">Settings</Link>
         </nav>
         <div className="ml-auto flex items-center gap-3">
           <SourcesMenu
