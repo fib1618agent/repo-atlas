@@ -1,0 +1,5 @@
+command: bunx tsc --noEmit
+run at: 2026-09-23 22:41:00 +04 (task T002; recorded as a baseline only — not interpreted, no source changes made)
+exit code: 0
+--- full output (stdout+stderr) ---
+--- end of output (0 lines) ---

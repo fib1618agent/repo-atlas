@@ -1,0 +1,35 @@
+timestamp: 2026-09-23 22:40:20 +04 (UTC+0400)
+git HEAD: c576310586cfbdfdfbd75f0cd3824d62ced32bb5
+branch: feat/atlas-marble-interaction
+staged changes (git diff --cached --name-status):
+--- git status --short (full output, including untracked) ---
+ M data/code-intel-schema.sql
+ M docs/progress/PROGRESS.md
+ M specs/003-github-source-enhancement/tasks.md
+ M src/lib/code-intel/config.ts
+ M src/lib/code-intel/symbols/to-intermediate-representation.ts
+ M src/routeTree.gen.ts
+ M src/routes/catalogue.tsx
+ M src/routes/categories.tsx
+ M src/routes/index.tsx
+ M src/routes/insights.tsx
+ M tests/contract/symbols/to-intermediate-representation.test.ts
+ M tests/integration/repositories/initial-sources.test.ts
+?? docs/audit_reports/
+?? docs/claude_report/
+?? docs/investigations/
+?? docs/prompts/
+?? scripts/query-cold-start-experiment.ts
+?? scripts/relationship-combined-single-pass-decomposition.ts
+?? scripts/relationship-cpu-decomposition.ts
+?? scripts/relationship-cpu-real-files.ts
+?? scripts/relationship-cpu-spike.ts
+?? scripts/relationship-single-pass-spike.ts
+?? specs/002-ast-symbol-intelligence/cloudflare-queue-cpu-observability-report.md
+?? specs/002-ast-symbol-intelligence/cloudflare-queue-cpu-research-report.md
+?? specs/002-ast-symbol-intelligence/query-cold-start-results.md
+?? specs/004-engineering-relationship-graph/
+?? specs/005-queue-cpu-feasibility-architecture/
+?? src/lib/code-intel/domain/relationship.ts
+?? src/lib/code-intel/relationships/
+?? src/routes/about.tsx
