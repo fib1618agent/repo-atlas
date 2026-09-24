@@ -23,12 +23,12 @@ Nothing.
 
 ## Decisions
 None made. Owed by the user: Feature 006 commit/review; accept or resolve the two NOT VERIFIED items and the narrow-width qualification; (`docs/ROADMAP.md` already reconciled); optionally authorize ticking `specs/006-…/tasks.md` checkboxes (all unchecked). Feature 004:
-1. How X (Free-plan Queue Consumer CPU limit) and Y (accounting unit) are established: documentation-only raw-text re-read, authorized live experiment `LX-1`, an FR-038 waiver naming X, M and the unit, or a reviewed in-place Feature 004 amendment.
+1. How X (Free-plan Queue Consumer CPU limit; per A4 CONTRADICTORY) and Y (accounting unit; per A4 PARTIAL) are established: documentation-only raw-text re-read, authorized live experiment `LX-1`, an FR-038 waiver naming X, M and the unit, or a reviewed in-place Feature 004 amendment.
 2. Whether to approve wording amendments R3–R6 and the EXPORTS mechanism.
 3. Whether to add a `SessionStart` hook (matching `compact`) that re-injects this file (`docs/CONTEXT-PROTOCOL.md` §10).
 
 ## Blockers
-Feature 004 T007 **STOPPED**. Authority: `decision-record.md` §14.3 (FR-028 a–e unsatisfied, no waiver). `[X]` on `specs/004-…/tasks.md` T007 is not authorization. `LX-1` is `NOT AUTHORIZED`. No Cloudflare, Wrangler, deploy, commit or push without explicit instruction.
+Feature 004 T007 **STOPPED**. Authority: `decision-record.md` §14.3 (FR-028 a–e unsatisfied, no waiver). `[X]` on `specs/004-…/tasks.md` T007 is not authorization. `LX-1` is `NOT AUTHORIZED`; no FR-038 waiver; T008+ NOT AUTHORIZED. X/Y per Feature 004 `research.md` Amendments A4 (Cloudflare documentation review, 2026-09-24 17:09 +04:00): X = CONTRADICTORY, Y = PARTIAL; "10 ms CPU per invocation for a Free Queue Consumer" is NOT directly confirmed. No Cloudflare, Wrangler, deploy, commit or push without explicit instruction.
 
 ## Verification
 Run 2026-09-24: `bunx tsc --noEmit` exit 0 and Feature 005 Set A/B hash check 0 mismatches (Stage 3); Set A hash check re-run during the persist task, no mismatch reported. **Not re-run:** `bun test`, `bun run build`. No application code changed since.
