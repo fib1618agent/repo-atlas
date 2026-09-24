@@ -166,7 +166,7 @@ function InsightsPage() {
           <Link to="/catalogue" className="atlas-nav-item">Catalogue</Link>
           <Link to="/categories" className="atlas-nav-item">Categories</Link>
           <span className="atlas-nav-item is-active">Insights</span>
-          <button type="button" className="atlas-nav-item">About</button>
+          <Link to="/about" className="atlas-nav-item">About</Link>
         </nav>
         <div className="ml-auto flex items-center gap-3">
           <SourcesMenu

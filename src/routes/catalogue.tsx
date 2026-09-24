@@ -81,7 +81,7 @@ function CataloguePage() {
           <span className="atlas-nav-item is-active">Catalogue</span>
           <Link to="/categories" className="atlas-nav-item">Categories</Link>
           <Link to="/insights" className="atlas-nav-item">Insights</Link>
-          <button type="button" className="atlas-nav-item">About</button>
+          <Link to="/about" className="atlas-nav-item">About</Link>
         </nav>
         <div className="ml-auto flex items-center gap-3">
           <SourcesMenu
