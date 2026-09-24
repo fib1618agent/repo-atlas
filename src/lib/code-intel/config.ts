@@ -24,6 +24,19 @@ export const CODE_INTEL_MAX_FILE_SIZE_BYTES = 10 * 1024 * 1024;
  */
 export const SYMBOL_EXTRACTOR_VERSION = "v2";
 
+/**
+ * Engineering Relationship Graph (specs/004-engineering-relationship-graph) —
+ * mirrors SYMBOL_EXTRACTOR_VERSION's own rationale exactly: bumped by a code
+ * change to this feature's own extraction/resolution logic, never overridden
+ * per-deployment.
+ */
+export const RELATIONSHIP_EXTRACTOR_VERSION = "v1";
+
+/** Engineering Relationship Graph — bounded batch size for the parse-free `contains` phase (directories/symbols per unit). No CPU-budget pressure (research.md §1/§4 — pure D1 reads), so this is generous relative to CODE_INTEL_EXTRACTION_BATCH_SIZE. */
+export const CODE_INTEL_RELATIONSHIP_CONTAINS_BATCH_SIZE = 200;
+/** Engineering Relationship Graph — ceiling on candidates recorded per AMBIGUOUS relationship (research.md §2's bounded-lookup rule — never an unbounded candidate list). */
+export const CODE_INTEL_RELATIONSHIP_MAX_CANDIDATES = 20;
+
 export function codeIntelConfig() {
   return {
     maxR2Concurrency: Number(
@@ -60,6 +73,14 @@ export function codeIntelConfig() {
     maxFileSizeBytes: Number(
       process.env["CODE_INTEL_MAX_FILE_SIZE_BYTES"] ??
         CODE_INTEL_MAX_FILE_SIZE_BYTES,
+    ),
+    relationshipContainsBatchSize: Number(
+      process.env["CODE_INTEL_RELATIONSHIP_CONTAINS_BATCH_SIZE"] ??
+        CODE_INTEL_RELATIONSHIP_CONTAINS_BATCH_SIZE,
+    ),
+    relationshipMaxCandidates: Number(
+      process.env["CODE_INTEL_RELATIONSHIP_MAX_CANDIDATES"] ??
+        CODE_INTEL_RELATIONSHIP_MAX_CANDIDATES,
     ),
   };
 }
