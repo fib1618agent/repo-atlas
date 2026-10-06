@@ -1,0 +1,213 @@
+{
+  "measurement": "M-L4 part 2 (main-thread-warm, worker-cold)",
+  "claimMode": "precheck-variant",
+  "dataset": "repo-atlas-rm",
+  "note": "iteration 0 discarded; new worker threads every run → worker VM/WASM/grammar are cold each time; peakRss is process-wide and monotonic across iterations",
+  "environmentHash": "e2b32efaacbd45bf",
+  "warm": {
+    "c1": {
+      "iterations": [
+        {
+          "iteration": 0,
+          "kept": false,
+          "engineWallMs": 1376.1784579999803,
+          "cpuMs": 1640.548,
+          "peakRssMiB": 259.8,
+          "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+          "busyErrors": 0
+        },
+        {
+          "iteration": 1,
+          "kept": true,
+          "engineWallMs": 1380.1972090000054,
+          "cpuMs": 1654.167,
+          "peakRssMiB": 672,
+          "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+          "busyErrors": 0
+        },
+        {
+          "iteration": 2,
+          "kept": true,
+          "engineWallMs": 1427.7804159999941,
+          "cpuMs": 1658.8539999999998,
+          "peakRssMiB": 704,
+          "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+          "busyErrors": 0
+        },
+        {
+          "iteration": 3,
+          "kept": true,
+          "engineWallMs": 1347.7619169999962,
+          "cpuMs": 1625.1239999999998,
+          "peakRssMiB": 747.8,
+          "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+          "busyErrors": 0
+        }
+      ],
+      "warmWallMs": {
+        "n": 3,
+        "min": 1347.7619169999962,
+        "median": 1380.1972090000054,
+        "p95": 1427.7804159999941,
+        "max": 1427.7804159999941,
+        "mean": 1385.2465139999986,
+        "stdev": 32.861950198675935,
+        "cv": 0.02372281746718474
+      },
+      "graphHashesEqual": true
+    },
+    "c2": {
+      "iterations": [
+        {
+          "iteration": 0,
+          "kept": false,
+          "engineWallMs": 1237.6327500000189,
+          "cpuMs": 2059.1549999999997,
+          "peakRssMiB": 357.8,
+          "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+          "busyErrors": 0
+        },
+        {
+          "iteration": 1,
+          "kept": true,
+          "engineWallMs": 1195.6621250000026,
+          "cpuMs": 2013.163,
+          "peakRssMiB": 673.9,
+          "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+          "busyErrors": 0
+        },
+        {
+          "iteration": 2,
+          "kept": true,
+          "engineWallMs": 1268.3125829999917,
+          "cpuMs": 2052.205,
+          "peakRssMiB": 708.8,
+          "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+          "busyErrors": 0
+        },
+        {
+          "iteration": 3,
+          "kept": true,
+          "engineWallMs": 1234.9637090000033,
+          "cpuMs": 1985.994,
+          "peakRssMiB": 747.5,
+          "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+          "busyErrors": 0
+        }
+      ],
+      "warmWallMs": {
+        "n": 3,
+        "min": 1195.6621250000026,
+        "median": 1234.9637090000033,
+        "p95": 1268.3125829999917,
+        "max": 1268.3125829999917,
+        "mean": 1232.9794723333325,
+        "stdev": 29.692593445325357,
+        "cv": 0.02408198523300155
+      },
+      "graphHashesEqual": true
+    },
+    "c4": {
+      "iterations": [
+        {
+          "iteration": 0,
+          "kept": false,
+          "engineWallMs": 1214.097333999991,
+          "cpuMs": 2829.7259999999997,
+          "peakRssMiB": 487.1,
+          "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+          "busyErrors": 0
+        },
+        {
+          "iteration": 1,
+          "kept": true,
+          "engineWallMs": 1266.561458000011,
+          "cpuMs": 2710.678,
+          "peakRssMiB": 683,
+          "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+          "busyErrors": 0
+        },
+        {
+          "iteration": 2,
+          "kept": true,
+          "engineWallMs": 1199.7607090000238,
+          "cpuMs": 2735.1639999999998,
+          "peakRssMiB": 715.4,
+          "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+          "busyErrors": 0
+        },
+        {
+          "iteration": 3,
+          "kept": true,
+          "engineWallMs": 1279.1212089999754,
+          "cpuMs": 2792.709,
+          "peakRssMiB": 753.9,
+          "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+          "busyErrors": 0
+        }
+      ],
+      "warmWallMs": {
+        "n": 3,
+        "min": 1199.7607090000238,
+        "median": 1266.561458000011,
+        "p95": 1279.1212089999754,
+        "max": 1279.1212089999754,
+        "mean": 1248.4811253333366,
+        "stdev": 34.83002595523759,
+        "cv": 0.027897919518757794
+      },
+      "graphHashesEqual": true
+    },
+    "c8": {
+      "iterations": [
+        {
+          "iteration": 0,
+          "kept": false,
+          "engineWallMs": 1328.862083999993,
+          "cpuMs": 4271.715,
+          "peakRssMiB": 667.5,
+          "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+          "busyErrors": 0
+        },
+        {
+          "iteration": 1,
+          "kept": true,
+          "engineWallMs": 1409.1452090000093,
+          "cpuMs": 4175.055,
+          "peakRssMiB": 706.8,
+          "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+          "busyErrors": 0
+        },
+        {
+          "iteration": 2,
+          "kept": true,
+          "engineWallMs": 1412.9123340000224,
+          "cpuMs": 4360.871999999999,
+          "peakRssMiB": 749.8,
+          "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+          "busyErrors": 0
+        },
+        {
+          "iteration": 3,
+          "kept": true,
+          "engineWallMs": 1302.7090000000026,
+          "cpuMs": 4234.717000000001,
+          "peakRssMiB": 774.5,
+          "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+          "busyErrors": 0
+        }
+      ],
+      "warmWallMs": {
+        "n": 3,
+        "min": 1302.7090000000026,
+        "median": 1409.1452090000093,
+        "p95": 1412.9123340000224,
+        "max": 1412.9123340000224,
+        "mean": 1374.9221810000115,
+        "stdev": 51.08558466140562,
+        "cv": 0.03715525530634027
+      },
+      "graphHashesEqual": true
+    }
+  }
+}

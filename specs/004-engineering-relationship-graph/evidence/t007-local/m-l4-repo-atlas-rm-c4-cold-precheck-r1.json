@@ -1,0 +1,349 @@
+{
+  "measurement": "M-L5",
+  "basis": "LOCAL-RUNTIME (+PROTOTYPE relationship stage)",
+  "warmth": "cold (fresh process per run)",
+  "dataset": "repo-atlas-rm",
+  "workers": 4,
+  "runs": 1,
+  "environmentHash": "e2b32efaacbd45bf",
+  "claimMode": "precheck-variant",
+  "harnessRev": "revB (sequential worker init; indexed fe join)",
+  "initMode": "sequential",
+  "environment": {
+    "os": "macOS 14.5 (23F79), Darwin 23.5.0 arm64",
+    "cpuModel": "Apple M3 Max",
+    "physicalCores": 14,
+    "logicalCores": 14,
+    "perfLevels": "2",
+    "ramBytes": 38654705664,
+    "storage": "Device Name: APPLE SSD AP1024Z           Medium Type: SSD",
+    "bunVersion": "1.3.14",
+    "bunRevision": "0d9b296af33f2b851fcbf4df3e9ec89751734ba4",
+    "nodeVersion": "v22.22.3",
+    "typescriptVersion": "Version 5.9.3",
+    "webTreeSitterVersion": "0.25.10",
+    "sqliteVersion": "3.43.2",
+    "sqliteDriver": "bun:sqlite (built-in)",
+    "repoAtlasCommit": "430e1703386ebd9264122d54a3ba398d43b363f9",
+    "repoAtlasBranch": "feat/atlas-marble-interaction",
+    "packageName": "tanstack_start_ts",
+    "harnessVersion": "t007-local-harness/1",
+    "workerRuntime": "Bun Worker threads (one web-tree-sitter WASM instance + one bun:sqlite connection per worker)",
+    "sqliteJournalModeDefault": "WAL (synchronous=NORMAL, busy_timeout=15000) — recorded variable in M-L3",
+    "atlasEnv": {
+      "BUN_INSTALL": "/Users/imdadareeph/.bun"
+    }
+  },
+  "summary": {
+    "engineWallMs": {
+      "n": 1,
+      "min": 1122.053,
+      "median": 1122.053,
+      "p95": 1122.053,
+      "max": 1122.053,
+      "mean": 1122.053,
+      "stdev": 0,
+      "cv": 0
+    },
+    "processWallMs": {
+      "n": 1,
+      "min": 1210.5019579999998,
+      "median": 1210.5019579999998,
+      "p95": 1210.5019579999998,
+      "max": 1210.5019579999998,
+      "mean": 1210.5019579999998,
+      "stdev": 0,
+      "cv": 0
+    },
+    "peakRssMiB": {
+      "n": 1,
+      "min": 446.8,
+      "median": 446.8,
+      "p95": 446.8,
+      "max": 446.8,
+      "mean": 446.8,
+      "stdev": 0,
+      "cv": 0
+    },
+    "deterministic": true
+  },
+  "runsData": [
+    {
+      "run": 0,
+      "loadAvgAtStart": "{ 3.59 4.10 4.40 }",
+      "power": "Now drawing from 'AC Power'  -InternalBattery-0 (id=20578403)\t17%; charging; 11:04 remaining present: true",
+      "processWallMs": 1210.5019579999998,
+      "engine": {
+        "wallMs": 1122.053,
+        "initWallMs": 43.834958,
+        "enqueueMs": 12.325541999999999,
+        "workerInit": [
+          {
+            "id": "w0-84296",
+            "initMs": 9.532166
+          },
+          {
+            "id": "w1-84296",
+            "initMs": 8.098917
+          },
+          {
+            "id": "w2-84296",
+            "initMs": 6.993958000000003
+          },
+          {
+            "id": "w3-84296",
+            "initMs": 7.704625
+          }
+        ]
+      },
+      "cpu": {
+        "userMs": 2259.517,
+        "systemMs": 522.056,
+        "cpuWallRatio": 2.479003219990499
+      },
+      "memory": {
+        "peakRss": 468451328,
+        "avgRss": 384618496,
+        "peakHeapUsed": 1614456,
+        "peakExternal": 579640,
+        "sampleCount": 24,
+        "peakRssMiB": 446.8,
+        "avgRssMiB": 366.8,
+        "rssFirstMiB": 155.2,
+        "rssMidMiB": 189.1,
+        "rssLastMiB": 446.3,
+        "rssSlopeBytesPerUnitSecondHalf": 24810.48072079438
+      },
+      "jobs": {
+        "after": {
+          "COMPLETED": 1181,
+          "SKIPPED": 5
+        },
+        "snapshotStatus": "completed",
+        "claimAttempts": 1238,
+        "attemptsSum": 0,
+        "reclaimsSum": 0,
+        "jobRows": 1186,
+        "idleMs": 166.6242880000002,
+        "busyErrors": 0,
+        "reclaimed": 0,
+        "retries": 0
+      },
+      "perKind": {
+        "symbols": {
+          "units": 473,
+          "states": {
+            "COMPLETED": 473
+          },
+          "claimMs": 195.25582999999983,
+          "runningMs": 39.175587999999955,
+          "phaseSum": {
+            "total": 1214.6443489999992,
+            "persist": 707.7315929999988,
+            "complete": 61.75895900000053,
+            "completeLock": 28.890379999999737,
+            "extractOther": 445.1537969999988
+          },
+          "counts": {
+            "symbols": 662,
+            "extractionFailed": 5,
+            "oversize": 0
+          },
+          "shortCircuits": 0,
+          "runMsStats": {
+            "n": 473,
+            "min": 0.11333400000000893,
+            "median": 0.5549159999999915,
+            "p95": 11.17512499999998,
+            "max": 150.87962499999998,
+            "mean": 2.571666251585624,
+            "stdev": 9.470104283294392,
+            "cv": 3.6824779566381785
+          }
+        },
+        "contains": {
+          "units": 474,
+          "states": {
+            "COMPLETED": 474
+          },
+          "claimMs": 238.59090600000036,
+          "runningMs": 81.50574799999919,
+          "phaseSum": {
+            "total": 267.1169209999981,
+            "derive": 8.68767799999938,
+            "persistLock": 181.52639200000084,
+            "persistBody": 38.88303599999949,
+            "persistCommit": 37.634917999999345,
+            "persist": 258.0443459999997
+          },
+          "counts": {
+            "relationships": 1238
+          },
+          "shortCircuits": 0,
+          "runMsStats": {
+            "n": 474,
+            "min": 0.06383400000004258,
+            "median": 0.09089599999998654,
+            "p95": 0.9239999999999782,
+            "max": 91.55616700000002,
+            "mean": 0.5661257151898733,
+            "stdev": 4.924466117750187,
+            "cv": 8.698538126109616
+          }
+        },
+        "parsed": {
+          "units": 239,
+          "states": {
+            "COMPLETED": 234,
+            "SKIPPED": 5
+          },
+          "claimMs": 363.43899699999974,
+          "runningMs": 51.05962499999998,
+          "phaseSum": {
+            "classify": 7.9583380000005945,
+            "read": 8.872032999999647,
+            "parse": 121.44220899999914,
+            "facts": 184.48287200000016,
+            "resolve": 197.63316699999962,
+            "keys": 10.543413999998734,
+            "persistLock": 918.0541179999991,
+            "persistBody": 273.2410529999996,
+            "persistCommit": 107.66254000000242,
+            "persist": 1298.9577110000014,
+            "complete": 3.6786669999992228,
+            "total": 1836.9694989999998
+          },
+          "counts": {
+            "facts": 9517,
+            "relationships": 9517,
+            "duplicateKeys": 0,
+            "candidates": 2139,
+            "astNodes": 271995,
+            "bytes": 1027496,
+            "resolved": 2803,
+            "ambiguous": 538,
+            "unknown": 6176,
+            "lookups": 9517,
+            "skippedUpstream": 5
+          },
+          "shortCircuits": 0,
+          "runMsStats": {
+            "n": 239,
+            "min": 0.04383399999994708,
+            "median": 3.7606660000000147,
+            "p95": 30.342457999999965,
+            "max": 96.50758399999995,
+            "mean": 7.702531895397488,
+            "stdev": 13.28510245552012,
+            "cv": 1.7247708462536062
+          }
+        }
+      },
+      "derived": {
+        "tier1Files": 239,
+        "symbols": 662,
+        "relationshipsParsed": 9517,
+        "relationshipsTotal": 10755,
+        "candidates": 2139,
+        "facts": 9517,
+        "duplicateKeys": 0,
+        "filesPerSecWall": 213.002416106904,
+        "symbolsPerSecWall": 589.9899559111734,
+        "relationshipsPerSecWall": 9585.10872481068,
+        "resolutionsPerSecWall": 8481.774033846885,
+        "parsedPersistShare": 0.7071199122833131,
+        "symbolsPersistShare": 0.582665694351326,
+        "containsPersistShare": 0.9660351917578501,
+        "jobOverheadShareOfUnitTime": 0.2408714677943564,
+        "parsedPersistShareNet": 0.7051173384779222,
+        "parsedWriteOnlyShareNet": 0.20535176343720166,
+        "parsedLockShare": 0.4997655750407205,
+        "claimMsTotal": 797.2857329999999,
+        "runningMsTotal": 171.74096099999912,
+        "idlePollMs": 166.6242880000002,
+        "evidenceStates": [
+          {
+            "t": "CALLS",
+            "s": "AMBIGUOUS",
+            "n": 538
+          },
+          {
+            "t": "CALLS",
+            "s": "RESOLVED",
+            "n": 2071
+          },
+          {
+            "t": "CALLS",
+            "s": "UNKNOWN",
+            "n": 5685
+          },
+          {
+            "t": "CONTAINS",
+            "s": "EXTRACTED",
+            "n": 1238
+          },
+          {
+            "t": "EXPORTS",
+            "s": "RESOLVED",
+            "n": 277
+          },
+          {
+            "t": "EXTENDS",
+            "s": "RESOLVED",
+            "n": 8
+          },
+          {
+            "t": "EXTENDS",
+            "s": "UNKNOWN",
+            "n": 1
+          },
+          {
+            "t": "IMPLEMENTS",
+            "s": "RESOLVED",
+            "n": 2
+          },
+          {
+            "t": "IMPORTS",
+            "s": "RESOLVED",
+            "n": 445
+          },
+          {
+            "t": "IMPORTS",
+            "s": "UNKNOWN",
+            "n": 490
+          }
+        ],
+        "fileExtractionStatus": [
+          {
+            "status": "extracted",
+            "n": 234
+          },
+          {
+            "status": "failed",
+            "n": 5
+          },
+          {
+            "status": "skipped_unsupported",
+            "n": 234
+          }
+        ],
+        "astNodes": 271995,
+        "parsedBytes": 1027496
+      },
+      "db": {
+        "bytes": 4599808,
+        "mib": 4.4
+      },
+      "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+      "relHash": "565e34bda36b5da822a23f6fa3b31460bb17ceebfbda677ed495b6350487299d",
+      "counts": {
+        "symbols": 662,
+        "files": 473,
+        "dirs": 104,
+        "relationships": 10755,
+        "candidates": 2139
+      },
+      "invariantViolations": []
+    }
+  ]
+}

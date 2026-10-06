@@ -1,0 +1,1893 @@
+{
+  "measurement": "M-L4 part 1 (G6 job-overhead baseline)",
+  "basis": "LOCAL-RUNTIME (+PROTOTYPE relationship stage)",
+  "warmth": "process-cold (fresh process per arm; page cache/blobs warm)",
+  "dataset": "repo-atlas-rm",
+  "rounds": 8,
+  "discardedWarmupRounds": 1,
+  "definition": "overhead = (engine c=1 work wall − inline-main work wall) / inline-main work wall; work wall excludes worker/wasm init; MEASURED RESULT — the 15% threshold is NOT applied here",
+  "equivalenceNotes": [
+    "same runUnit code and unit order in all arms",
+    "inline arms skip only claim / RUNNING / COMPLETED job-table writes",
+    "inline-main runs on the main thread; engine-c1 and inline-worker run in one worker thread",
+    "sampler and per-unit RSS are OFF in all arms",
+    "identical graph hash, table counts, invariants and completeness required (checked)",
+    "arm order rotated per round"
+  ],
+  "environmentHash": "e2b32efaacbd45bf",
+  "summary": {
+    "workWallMs": {
+      "inline-main": {
+        "n": 8,
+        "min": 1057.617208,
+        "median": 1091.5681045000001,
+        "p95": 1175.908375,
+        "max": 1175.908375,
+        "mean": 1096.1317448749999,
+        "stdev": 36.72267589301565,
+        "cv": 0.03350206402169605
+      },
+      "engine-c1": {
+        "n": 8,
+        "min": 1173.2139590000002,
+        "median": 1239.7192085000001,
+        "p95": 1259.212208,
+        "max": 1259.212208,
+        "mean": 1228.464286625,
+        "stdev": 29.91361291850982,
+        "cv": 0.024350413149325213
+      },
+      "inline-worker": {
+        "n": 8,
+        "min": 1049.817459,
+        "median": 1083.3336669999999,
+        "p95": 1123.484791,
+        "max": 1123.484791,
+        "mean": 1083.06910425,
+        "stdev": 20.29670441544656,
+        "cv": 0.018739990214660912
+      }
+    },
+    "engineC1_vs_inlineMain_PREREGISTERED_G6_metric": {
+      "n": 8,
+      "min": 0.035514565494952056,
+      "median": 0.12282432186128092,
+      "p95": 0.18412821342823713,
+      "max": 0.18412821342823713,
+      "mean": 0.12180757006376688,
+      "stdev": 0.04206683157136654,
+      "cv": 0.3453548211276552,
+      "roundsAbove15pct": 2,
+      "rounds": 8
+    },
+    "engineC1_vs_inlineWorker_jobTableEffect": {
+      "n": 8,
+      "min": 0.09033800406817286,
+      "median": 0.12761716040404417,
+      "p95": 0.17714444678520058,
+      "max": 0.17714444678520058,
+      "mean": 0.13441965082332827,
+      "stdev": 0.026882021767194834,
+      "cv": 0.19998580268986618,
+      "roundsAbove15pct": 3,
+      "rounds": 8
+    },
+    "inlineWorker_vs_inlineMain_threadEffect": {
+      "n": 8,
+      "min": -0.07703105099493837,
+      "median": -0.0004009206429960331,
+      "p95": 0.02692432363867128,
+      "max": 0.02692432363867128,
+      "mean": -0.010872732269077996,
+      "stdev": 0.03626496702229126,
+      "cv": -3.3354051332091266,
+      "roundsAbove15pct": 0,
+      "rounds": 8
+    },
+    "overheadOfMedians_engineVsInlineMain": 0.13572318885944512,
+    "allGraphHashesEqual": true,
+    "allInvariantsAndCompletenessClean": true,
+    "tableCountsEqual": true,
+    "perKindMedianUnitMsSum": {
+      "symbols": {
+        "inline-main": 312.84857449999976,
+        "engine-c1": 325.22140249999984,
+        "inline-worker": 305.179831
+      },
+      "contains": {
+        "inline-main": 68.58833150000007,
+        "engine-c1": 67.97449,
+        "inline-worker": 68.51995899999983
+      },
+      "parsed": {
+        "inline-main": 708.7179574999997,
+        "engine-c1": 720.4047330000005,
+        "inline-worker": 704.8158350000006
+      }
+    }
+  },
+  "runs": [
+    {
+      "round": -1,
+      "warmup": true,
+      "order": [
+        "inline-main",
+        "engine-c1",
+        "inline-worker"
+      ],
+      "inline-main": {
+        "arm": "inline-main",
+        "label": "m-l4-base-inline-main-0",
+        "load": "{ 6.77 5.54 4.90 }",
+        "processWallMs": 1131.6110839999997,
+        "workWallMs": 1094.4372919999998,
+        "cpuMs": 1431.25,
+        "perKind": {
+          "symbols": {
+            "units": 473,
+            "unitMsSum": 326.8877420000001,
+            "phaseSum": {
+              "total": 326.3858380000002,
+              "persist": 96.23081299999923,
+              "complete": 2.594751000000084,
+              "completeLock": 1.2124039999998253,
+              "extractOther": 227.56027400000087
+            }
+          },
+          "contains": {
+            "units": 474,
+            "unitMsSum": 66.38650399999966,
+            "phaseSum": {
+              "total": 65.85475000000008,
+              "derive": 7.270409999999799,
+              "persistLock": 1.3090759999994361,
+              "persistBody": 31.322295000000224,
+              "persistCommit": 25.794001000000208,
+              "persist": 58.42537199999987
+            }
+          },
+          "parsed": {
+            "units": 239,
+            "unitMsSum": 699.9465509999998,
+            "phaseSum": {
+              "classify": 4.63508400000012,
+              "read": 6.684792000001153,
+              "parse": 107.6351569999996,
+              "facts": 97.91729399999963,
+              "resolve": 154.37536899999958,
+              "keys": 9.156240000001503,
+              "persistLock": 1.01388100000014,
+              "persistBody": 219.3583219999996,
+              "persistCommit": 91.89988500000055,
+              "persist": 312.2720880000003,
+              "complete": 0.16937200000052144,
+              "total": 698.2551239999999
+            }
+          }
+        },
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "invariantViolations": [],
+        "tableCounts": {
+          "fe": 473,
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139
+        }
+      },
+      "engine-c1": {
+        "arm": "engine-c1",
+        "label": "m-l4-base-engine-c1-0",
+        "load": "{ 6.39 5.48 4.88 }",
+        "processWallMs": 1350.8251659999996,
+        "workWallMs": 1293.7982089999998,
+        "cpuMs": 1536.2440000000001,
+        "perKind": {
+          "symbols": {
+            "units": 473,
+            "unitMsSum": 325.3524269999993,
+            "claimMs": 27.843794000000063,
+            "runningMs": 12.219122999999872,
+            "phaseSum": {
+              "total": 324.77366,
+              "persist": 91.32025000000115,
+              "complete": 12.356995999999842,
+              "completeLock": 1.1887289999999773,
+              "extractOther": 221.09641399999904
+            }
+          },
+          "contains": {
+            "units": 474,
+            "unitMsSum": 68.28627799999833,
+            "claimMs": 30.593208000000345,
+            "runningMs": 17.161206000000277,
+            "phaseSum": {
+              "total": 67.7553730000003,
+              "derive": 6.984299000000533,
+              "persistLock": 1.270259999999439,
+              "persistBody": 33.82953600000013,
+              "persistCommit": 25.518837999999846,
+              "persist": 60.61863399999942
+            }
+          },
+          "parsed": {
+            "units": 239,
+            "unitMsSum": 774.7235469999987,
+            "claimMs": 28.605496000001665,
+            "runningMs": 5.9272070000005215,
+            "phaseSum": {
+              "classify": 5.501375000001076,
+              "read": 10.685628999998926,
+              "parse": 116.66283499999923,
+              "facts": 99.60250200000013,
+              "resolve": 177.83041599999996,
+              "keys": 11.315702000000329,
+              "persistLock": 1.3835399999990727,
+              "persistBody": 246.44408900000133,
+              "persistCommit": 96.47496099999933,
+              "persist": 344.3025899999997,
+              "complete": 2.60350099999971,
+              "total": 772.4259980000003
+            }
+          }
+        },
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "invariantViolations": [],
+        "tableCounts": {
+          "fe": 473,
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139
+        }
+      },
+      "inline-worker": {
+        "arm": "inline-worker",
+        "label": "m-l4-base-inline-worker-0",
+        "load": "{ 6.03 5.42 4.87 }",
+        "processWallMs": 1146.7937919999986,
+        "workWallMs": 1101.3414579999999,
+        "cpuMs": 1361.299,
+        "perKind": {
+          "symbols": {
+            "units": 473,
+            "unitMsSum": 297.1969939999997,
+            "claimMs": 0,
+            "runningMs": 0,
+            "phaseSum": {
+              "total": 296.7405060000001,
+              "persist": 84.23804899999962,
+              "complete": 2.428509999999747,
+              "completeLock": 1.138084000000159,
+              "extractOther": 210.07394700000071
+            }
+          },
+          "contains": {
+            "units": 474,
+            "unitMsSum": 71.64987800000011,
+            "claimMs": 0,
+            "runningMs": 0,
+            "phaseSum": {
+              "total": 71.14682699999969,
+              "derive": 7.0258249999996565,
+              "persistLock": 1.243782000000067,
+              "persistBody": 30.840556000000106,
+              "persistCommit": 31.90731800000009,
+              "persist": 63.99165600000026
+            }
+          },
+          "parsed": {
+            "units": 239,
+            "unitMsSum": 728.691949000001,
+            "claimMs": 0,
+            "runningMs": 0,
+            "phaseSum": {
+              "classify": 4.83466700000065,
+              "read": 8.545414999999707,
+              "parse": 109.62554199999892,
+              "facts": 98.39934699999941,
+              "resolve": 161.62175100000064,
+              "keys": 10.125704000000098,
+              "persistLock": 1.2278810000011617,
+              "persistBody": 224.49045200000018,
+              "persistCommit": 102.73169899999971,
+              "persist": 328.45003200000104,
+              "complete": 0.1613869999997064,
+              "total": 727.1401289999988
+            }
+          }
+        },
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "invariantViolations": [],
+        "tableCounts": {
+          "fe": 473,
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139
+        }
+      }
+    },
+    {
+      "round": 0,
+      "warmup": false,
+      "order": [
+        "engine-c1",
+        "inline-worker",
+        "inline-main"
+      ],
+      "engine-c1": {
+        "arm": "engine-c1",
+        "label": "m-l4-base-engine-c1-1",
+        "load": "{ 5.95 5.42 4.87 }",
+        "processWallMs": 1304.6351669999985,
+        "workWallMs": 1243.651625,
+        "cpuMs": 1468.3429999999998,
+        "perKind": {
+          "symbols": {
+            "units": 473,
+            "unitMsSum": 316.2585080000002,
+            "claimMs": 26.271754000000023,
+            "runningMs": 11.259469999999975,
+            "phaseSum": {
+              "total": 315.680927,
+              "persist": 86.84158300000051,
+              "complete": 11.982241999999744,
+              "completeLock": 1.1505469999993245,
+              "extractOther": 216.8571019999997
+            }
+          },
+          "contains": {
+            "units": 474,
+            "unitMsSum": 68.39084700000046,
+            "claimMs": 31.36878400000012,
+            "runningMs": 19.0535449999997,
+            "phaseSum": {
+              "total": 67.82521000000048,
+              "derive": 7.239637000000755,
+              "persistLock": 1.2806600000000117,
+              "persistBody": 33.86713200000065,
+              "persistCommit": 25.25078199999956,
+              "persist": 60.398574000000224
+            }
+          },
+          "parsed": {
+            "units": 239,
+            "unitMsSum": 736.1340700000004,
+            "claimMs": 26.631367999999554,
+            "runningMs": 5.324135999998816,
+            "phaseSum": {
+              "classify": 4.511166000000458,
+              "read": 6.5895469999993,
+              "parse": 107.56175699999807,
+              "facts": 96.39175000000074,
+              "resolve": 161.51928799999985,
+              "keys": 11.422829999999465,
+              "persistLock": 1.1036259999989966,
+              "persistBody": 228.15988000000004,
+              "persistCommit": 111.22091600000016,
+              "persist": 340.4844219999992,
+              "complete": 2.1064540000013494,
+              "total": 734.429122
+            }
+          }
+        },
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "invariantViolations": [],
+        "tableCounts": {
+          "fe": 473,
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139
+        }
+      },
+      "inline-worker": {
+        "arm": "inline-worker",
+        "label": "m-l4-base-inline-worker-1",
+        "load": "{ 5.79 5.39 4.86 }",
+        "processWallMs": 1143.443457999998,
+        "workWallMs": 1097.376167,
+        "cpuMs": 1357.6399999999999,
+        "perKind": {
+          "symbols": {
+            "units": 473,
+            "unitMsSum": 312.8654129999999,
+            "claimMs": 0,
+            "runningMs": 0,
+            "phaseSum": {
+              "total": 312.2673019999997,
+              "persist": 89.91279099999899,
+              "complete": 2.4173320000000373,
+              "completeLock": 1.1624139999999343,
+              "extractOther": 219.93717900000064
+            }
+          },
+          "contains": {
+            "units": 474,
+            "unitMsSum": 71.19811699999997,
+            "claimMs": 0,
+            "runningMs": 0,
+            "phaseSum": {
+              "total": 70.6734170000002,
+              "derive": 7.029666000000304,
+              "persistLock": 1.2502029999994306,
+              "persistBody": 30.962704000000542,
+              "persistCommit": 31.24767400000036,
+              "persist": 63.46058100000033
+            }
+          },
+          "parsed": {
+            "units": 239,
+            "unitMsSum": 709.7434129999999,
+            "claimMs": 0,
+            "runningMs": 0,
+            "phaseSum": {
+              "classify": 4.43054100000046,
+              "read": 6.3637539999996875,
+              "parse": 107.07242099999843,
+              "facts": 95.04776100000078,
+              "resolve": 154.8319600000009,
+              "keys": 10.7639909999981,
+              "persistLock": 0.9785759999999755,
+              "persistBody": 221.02850300000114,
+              "persistCommit": 102.14529799999974,
+              "persist": 324.15237700000085,
+              "complete": 0.1985900000007632,
+              "total": 708.2548809999993
+            }
+          }
+        },
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "invariantViolations": [],
+        "tableCounts": {
+          "fe": 473,
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139
+        }
+      },
+      "inline-main": {
+        "arm": "inline-main",
+        "label": "m-l4-base-inline-main-1",
+        "load": "{ 5.79 5.39 4.86 }",
+        "processWallMs": 1108.0081250000003,
+        "workWallMs": 1068.604708,
+        "cpuMs": 1333.886,
+        "perKind": {
+          "symbols": {
+            "units": 473,
+            "unitMsSum": 310.55840900000004,
+            "phaseSum": {
+              "total": 310.0726880000002,
+              "persist": 92.30530600000067,
+              "complete": 2.446659000000146,
+              "completeLock": 1.1521740000004286,
+              "extractOther": 215.32072299999942
+            }
+          },
+          "contains": {
+            "units": 474,
+            "unitMsSum": 64.18233100000043,
+            "phaseSum": {
+              "total": 63.719411000000605,
+              "derive": 6.754906999999889,
+              "persistLock": 1.218701999999837,
+              "persistBody": 29.779095000000154,
+              "persistCommit": 25.837046999999075,
+              "persist": 56.834843999999066
+            }
+          },
+          "parsed": {
+            "units": 239,
+            "unitMsSum": 692.7029169999994,
+            "phaseSum": {
+              "classify": 4.325284000000067,
+              "read": 6.383872999999198,
+              "parse": 106.22808599999854,
+              "facts": 96.27242500000006,
+              "resolve": 151.38120300000128,
+              "keys": 9.062498999999775,
+              "persistLock": 0.9717529999989551,
+              "persistBody": 219.35532900000072,
+              "persistCommit": 91.67033199999929,
+              "persist": 311.99741399999897,
+              "complete": 0.14799300000191806,
+              "total": 691.1554169999989
+            }
+          }
+        },
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "invariantViolations": [],
+        "tableCounts": {
+          "fe": 473,
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139
+        }
+      }
+    },
+    {
+      "round": 1,
+      "warmup": false,
+      "order": [
+        "inline-worker",
+        "inline-main",
+        "engine-c1"
+      ],
+      "inline-worker": {
+        "arm": "inline-worker",
+        "label": "m-l4-base-inline-worker-2",
+        "load": "{ 5.81 5.40 4.87 }",
+        "processWallMs": 1130.7295419999973,
+        "workWallMs": 1082.627375,
+        "cpuMs": 1344.1470000000002,
+        "perKind": {
+          "symbols": {
+            "units": 473,
+            "unitMsSum": 306.34374300000025,
+            "claimMs": 0,
+            "runningMs": 0,
+            "phaseSum": {
+              "total": 305.86517299999997,
+              "persist": 89.33107700000073,
+              "complete": 2.3503810000000556,
+              "completeLock": 1.1494670000001186,
+              "extractOther": 214.1837149999992
+            }
+          },
+          "contains": {
+            "units": 474,
+            "unitMsSum": 70.33908600000001,
+            "claimMs": 0,
+            "runningMs": 0,
+            "phaseSum": {
+              "total": 69.85321500000043,
+              "derive": 6.946511000000555,
+              "persistLock": 1.250468999999157,
+              "persistBody": 30.19146400000011,
+              "persistCommit": 31.29737100000051,
+              "persist": 62.73930399999978
+            }
+          },
+          "parsed": {
+            "units": 239,
+            "unitMsSum": 702.493125000001,
+            "claimMs": 0,
+            "runningMs": 0,
+            "phaseSum": {
+              "classify": 4.387084000001266,
+              "read": 6.78037200000017,
+              "parse": 106.61315700000046,
+              "facts": 95.03407400000003,
+              "resolve": 156.04824299999888,
+              "keys": 9.022415999999225,
+              "persistLock": 0.9637050000004592,
+              "persistBody": 220.8759579999995,
+              "persistCommit": 95.6023330000009,
+              "persist": 317.44199600000087,
+              "complete": 0.1460029999985295,
+              "total": 700.8775820000006
+            }
+          }
+        },
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "invariantViolations": [],
+        "tableCounts": {
+          "fe": 473,
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139
+        }
+      },
+      "inline-main": {
+        "arm": "inline-main",
+        "label": "m-l4-base-inline-main-2",
+        "load": "{ 5.51 5.35 4.85 }",
+        "processWallMs": 1155.5689579999998,
+        "workWallMs": 1121.920417,
+        "cpuMs": 1438.682,
+        "perKind": {
+          "symbols": {
+            "units": 473,
+            "unitMsSum": 315.1387399999995,
+            "phaseSum": {
+              "total": 314.6751259999999,
+              "persist": 93.47023299999994,
+              "complete": 2.517474999999923,
+              "completeLock": 1.1774939999998608,
+              "extractOther": 218.68741800000006
+            }
+          },
+          "contains": {
+            "units": 474,
+            "unitMsSum": 82.63754199999971,
+            "phaseSum": {
+              "total": 82.01340999999934,
+              "derive": 8.132959999998832,
+              "persistLock": 1.5642479999999068,
+              "persistBody": 36.20516699999956,
+              "persistCommit": 35.95825299999973,
+              "persist": 73.7276679999992
+            }
+          },
+          "parsed": {
+            "units": 239,
+            "unitMsSum": 722.8219590000008,
+            "phaseSum": {
+              "classify": 4.979587000001345,
+              "read": 7.83574399999992,
+              "parse": 110.23570499999886,
+              "facts": 95.7897029999998,
+              "resolve": 159.92913000000027,
+              "keys": 9.254958999999303,
+              "persistLock": 1.1554670000007263,
+              "persistBody": 227.2964520000004,
+              "persistCommit": 98.839833,
+              "persist": 327.2917520000011,
+              "complete": 0.18771100000060414,
+              "total": 721.1433670000013
+            }
+          }
+        },
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "invariantViolations": [],
+        "tableCounts": {
+          "fe": 473,
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139
+        }
+      },
+      "engine-c1": {
+        "arm": "engine-c1",
+        "label": "m-l4-base-engine-c1-2",
+        "load": "{ 5.30 5.31 4.84 }",
+        "processWallMs": 1315.5142500000002,
+        "workWallMs": 1259.212208,
+        "cpuMs": 1507.892,
+        "perKind": {
+          "symbols": {
+            "units": 473,
+            "unitMsSum": 328.6496410000001,
+            "claimMs": 28.356883000000284,
+            "runningMs": 11.86592400000021,
+            "phaseSum": {
+              "total": 327.9962570000004,
+              "persist": 88.29059600000089,
+              "complete": 12.02728400000004,
+              "completeLock": 1.2245360000000396,
+              "extractOther": 227.6783769999995
+            }
+          },
+          "contains": {
+            "units": 474,
+            "unitMsSum": 72.59507900000062,
+            "claimMs": 32.653408000000695,
+            "runningMs": 16.75099399999914,
+            "phaseSum": {
+              "total": 71.92927600000041,
+              "derive": 7.822825000000023,
+              "persistLock": 1.3269669999999678,
+              "persistBody": 36.17399500000005,
+              "persistCommit": 26.390957999999728,
+              "persist": 63.89191999999974
+            }
+          },
+          "parsed": {
+            "units": 239,
+            "unitMsSum": 724.9205900000006,
+            "claimMs": 35.04250599999932,
+            "runningMs": 5.520591000000536,
+            "phaseSum": {
+              "classify": 4.688325999998881,
+              "read": 7.306834000000549,
+              "parse": 107.82088499999878,
+              "facts": 95.80205000000149,
+              "resolve": 162.07070200000146,
+              "keys": 11.762037999999961,
+              "persistLock": 1.0980450000002975,
+              "persistBody": 230.74654400000065,
+              "persistCommit": 96.10391800000036,
+              "persist": 327.9485070000013,
+              "complete": 2.2438860000008845,
+              "total": 723.1282399999993
+            }
+          }
+        },
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "invariantViolations": [],
+        "tableCounts": {
+          "fe": 473,
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139
+        }
+      }
+    },
+    {
+      "round": 2,
+      "warmup": false,
+      "order": [
+        "inline-main",
+        "engine-c1",
+        "inline-worker"
+      ],
+      "inline-main": {
+        "arm": "inline-main",
+        "label": "m-l4-base-inline-main-3",
+        "load": "{ 5.12 5.27 4.83 }",
+        "processWallMs": 1118.6505000000034,
+        "workWallMs": 1082.973625,
+        "cpuMs": 1347.0140000000001,
+        "perKind": {
+          "symbols": {
+            "units": 473,
+            "unitMsSum": 304.6816210000005,
+            "phaseSum": {
+              "total": 304.17071399999946,
+              "persist": 88.20732099999819,
+              "complete": 2.499670000000066,
+              "completeLock": 1.2023840000004924,
+              "extractOther": 213.4637230000012
+            }
+          },
+          "contains": {
+            "units": 474,
+            "unitMsSum": 66.90371800000071,
+            "phaseSum": {
+              "total": 66.44269899999966,
+              "derive": 6.584129999998822,
+              "persistLock": 1.2356870000011781,
+              "persistBody": 29.0487439999996,
+              "persistCommit": 29.45354399999934,
+              "persist": 59.73797500000012
+            }
+          },
+          "parsed": {
+            "units": 239,
+            "unitMsSum": 710.2028300000002,
+            "phaseSum": {
+              "classify": 4.564326999999139,
+              "read": 6.60026200000209,
+              "parse": 107.0379940000002,
+              "facts": 97.55050199999857,
+              "resolve": 156.00387600000175,
+              "keys": 8.96890900000102,
+              "persistLock": 1.0380049999994867,
+              "persistBody": 224.0421700000008,
+              "persistCommit": 97.2226699999988,
+              "persist": 322.3028449999991,
+              "complete": 0.1447100000002024,
+              "total": 708.620373
+            }
+          }
+        },
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "invariantViolations": [],
+        "tableCounts": {
+          "fe": 473,
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139
+        }
+      },
+      "engine-c1": {
+        "arm": "engine-c1",
+        "label": "m-l4-base-engine-c1-3",
+        "load": "{ 4.95 5.23 4.82 }",
+        "processWallMs": 1247.8975829999981,
+        "workWallMs": 1190.298167,
+        "cpuMs": 1447.1870000000001,
+        "perKind": {
+          "symbols": {
+            "units": 473,
+            "unitMsSum": 327.35668199999986,
+            "claimMs": 28.092080999999926,
+            "runningMs": 12.132713000000045,
+            "phaseSum": {
+              "total": 326.7425969999998,
+              "persist": 89.25080800000106,
+              "complete": 11.965261000000194,
+              "completeLock": 1.177507000000812,
+              "extractOther": 225.52652799999856
+            }
+          },
+          "contains": {
+            "units": 474,
+            "unitMsSum": 64.18858399999965,
+            "claimMs": 30.26928800000036,
+            "runningMs": 15.14767400000028,
+            "phaseSum": {
+              "total": 63.692580999999336,
+              "derive": 6.623209999998494,
+              "persistLock": 1.2028440000006526,
+              "persistBody": 32.2589100000007,
+              "persistCommit": 23.465739999998902,
+              "persist": 56.92749400000025
+            }
+          },
+          "parsed": {
+            "units": 239,
+            "unitMsSum": 679.0739970000005,
+            "claimMs": 26.24978099999953,
+            "runningMs": 4.91684000000015,
+            "phaseSum": {
+              "classify": 4.004502000000116,
+              "read": 5.598421999999118,
+              "parse": 103.0363350000008,
+              "facts": 92.49608799999874,
+              "resolve": 153.7193710000007,
+              "keys": 9.964340000000448,
+              "persistLock": 0.9503339999997138,
+              "persistBody": 218.24721600000038,
+              "persistCommit": 84.61015600000002,
+              "persist": 303.8077060000001,
+              "complete": 2.0030859999990867,
+              "total": 677.8057199999994
+            }
+          }
+        },
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "invariantViolations": [],
+        "tableCounts": {
+          "fe": 473,
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139
+        }
+      },
+      "inline-worker": {
+        "arm": "inline-worker",
+        "label": "m-l4-base-inline-worker-3",
+        "load": "{ 4.95 5.23 4.82 }",
+        "processWallMs": 1111.2540829999998,
+        "workWallMs": 1065.8707499999998,
+        "cpuMs": 1337.663,
+        "perKind": {
+          "symbols": {
+            "units": 473,
+            "unitMsSum": 299.901,
+            "claimMs": 0,
+            "runningMs": 0,
+            "phaseSum": {
+              "total": 299.35015300000003,
+              "persist": 83.18005300000044,
+              "complete": 2.3748070000004304,
+              "completeLock": 1.1600749999996047,
+              "extractOther": 213.79529299999916
+            }
+          },
+          "contains": {
+            "units": 474,
+            "unitMsSum": 66.73058100000111,
+            "claimMs": 0,
+            "runningMs": 0,
+            "phaseSum": {
+              "total": 66.21261399999975,
+              "derive": 7.0252790000001255,
+              "persistLock": 1.2624970000009057,
+              "persistBody": 30.572584999999265,
+              "persistCommit": 27.204539999999554,
+              "persist": 59.039621999999724
+            }
+          },
+          "parsed": {
+            "units": 239,
+            "unitMsSum": 695.6924610000009,
+            "claimMs": 0,
+            "runningMs": 0,
+            "phaseSum": {
+              "classify": 4.292162000000644,
+              "read": 7.260759000000462,
+              "parse": 105.3254960000001,
+              "facts": 93.7365000000002,
+              "resolve": 152.0743280000001,
+              "keys": 9.370785999999555,
+              "persistLock": 0.9444900000005987,
+              "persistBody": 220.69638399999963,
+              "persistCommit": 95.34674800000056,
+              "persist": 316.9876220000008,
+              "complete": 0.13265400000034333,
+              "total": 694.2716630000002
+            }
+          }
+        },
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "invariantViolations": [],
+        "tableCounts": {
+          "fe": 473,
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139
+        }
+      }
+    },
+    {
+      "round": 3,
+      "warmup": false,
+      "order": [
+        "engine-c1",
+        "inline-worker",
+        "inline-main"
+      ],
+      "engine-c1": {
+        "arm": "engine-c1",
+        "label": "m-l4-base-engine-c1-4",
+        "load": "{ 4.87 5.21 4.81 }",
+        "processWallMs": 1317.2157499999958,
+        "workWallMs": 1255.5269170000001,
+        "cpuMs": 1506.183,
+        "perKind": {
+          "symbols": {
+            "units": 473,
+            "unitMsSum": 330.04941999999994,
+            "claimMs": 28.43021500000009,
+            "runningMs": 12.34846699999989,
+            "phaseSum": {
+              "total": 329.392211,
+              "persist": 92.0561710000015,
+              "complete": 12.550047000000333,
+              "completeLock": 1.2066630000001304,
+              "extractOther": 224.78599299999817
+            }
+          },
+          "contains": {
+            "units": 474,
+            "unitMsSum": 70.96566900000056,
+            "claimMs": 31.883041999999534,
+            "runningMs": 16.16729299999912,
+            "phaseSum": {
+              "total": 70.3615280000003,
+              "derive": 7.509114999999326,
+              "persistLock": 1.3052870000005328,
+              "persistBody": 36.12438199999974,
+              "persistCommit": 25.257663000000093,
+              "persist": 62.68733200000037
+            }
+          },
+          "parsed": {
+            "units": 239,
+            "unitMsSum": 729.6710109999989,
+            "claimMs": 27.610415000000728,
+            "runningMs": 5.620033999999691,
+            "phaseSum": {
+              "classify": 4.831656999999382,
+              "read": 7.829917999997917,
+              "parse": 108.70558600000135,
+              "facts": 97.28228599999994,
+              "resolve": 165.79533799999888,
+              "keys": 11.619162000000301,
+              "persistLock": 1.1476230000006353,
+              "persistBody": 234.82911100000035,
+              "persistCommit": 89.76638099999877,
+              "persist": 325.74311499999976,
+              "complete": 2.3071730000007165,
+              "total": 727.7929169999998
+            }
+          }
+        },
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "invariantViolations": [],
+        "tableCounts": {
+          "fe": 473,
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139
+        }
+      },
+      "inline-worker": {
+        "arm": "inline-worker",
+        "label": "m-l4-base-inline-worker-4",
+        "load": "{ 5.12 5.26 4.83 }",
+        "processWallMs": 1174.905875000004,
+        "workWallMs": 1123.484791,
+        "cpuMs": 1386.422,
+        "perKind": {
+          "symbols": {
+            "units": 473,
+            "unitMsSum": 312.5232950000004,
+            "claimMs": 0,
+            "runningMs": 0,
+            "phaseSum": {
+              "total": 311.99858099999983,
+              "persist": 87.86233699999812,
+              "complete": 2.4966269999999824,
+              "completeLock": 1.1692549999999358,
+              "extractOther": 221.63961700000175
+            }
+          },
+          "contains": {
+            "units": 474,
+            "unitMsSum": 69.90208899999993,
+            "claimMs": 0,
+            "runningMs": 0,
+            "phaseSum": {
+              "total": 69.34924499999966,
+              "derive": 7.121532000000741,
+              "persistLock": 1.2743890000006672,
+              "persistBody": 31.370454999999367,
+              "persistCommit": 29.435829000000354,
+              "persist": 62.08067300000039
+            }
+          },
+          "parsed": {
+            "units": 239,
+            "unitMsSum": 737.508660999998,
+            "claimMs": 0,
+            "runningMs": 0,
+            "phaseSum": {
+              "classify": 4.9033789999992905,
+              "read": 7.311580999999592,
+              "parse": 110.74696200000022,
+              "facts": 99.17387399999933,
+              "resolve": 163.47807199999988,
+              "keys": 10.068501999999455,
+              "persistLock": 1.0814570000009667,
+              "persistBody": 229.4860359999987,
+              "persistCommit": 103.75479900000005,
+              "persist": 334.3222919999997,
+              "complete": 0.1937180000007288,
+              "total": 735.6286299999997
+            }
+          }
+        },
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "invariantViolations": [],
+        "tableCounts": {
+          "fe": 473,
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139
+        }
+      },
+      "inline-main": {
+        "arm": "inline-main",
+        "label": "m-l4-base-inline-main-4",
+        "load": "{ 5.19 5.27 4.84 }",
+        "processWallMs": 1136.4040000000023,
+        "workWallMs": 1101.7495000000001,
+        "cpuMs": 1439.76,
+        "perKind": {
+          "symbols": {
+            "units": 473,
+            "unitMsSum": 324.7924600000002,
+            "phaseSum": {
+              "total": 324.2480669999999,
+              "persist": 98.53864200000098,
+              "complete": 2.5969940000000875,
+              "completeLock": 1.1854030000001643,
+              "extractOther": 223.11243099999882
+            }
+          },
+          "contains": {
+            "units": 474,
+            "unitMsSum": 68.41574700000058,
+            "phaseSum": {
+              "total": 67.8980270000003,
+              "derive": 7.073034000000007,
+              "persistLock": 1.247098000000335,
+              "persistBody": 31.606731000000025,
+              "persistCommit": 27.805411000000163,
+              "persist": 60.65924000000052
+            }
+          },
+          "parsed": {
+            "units": 239,
+            "unitMsSum": 707.2330849999992,
+            "phaseSum": {
+              "classify": 4.715283999999031,
+              "read": 7.246248000001515,
+              "parse": 108.26424799999995,
+              "facts": 95.11987099999942,
+              "resolve": 156.68067799999983,
+              "keys": 9.25037500000002,
+              "persistLock": 1.0021649999997635,
+              "persistBody": 225.88171299999993,
+              "persistCommit": 91.66690800000038,
+              "persist": 318.5507860000001,
+              "complete": 0.22174499999999853,
+              "total": 705.5911999999996
+            }
+          }
+        },
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "invariantViolations": [],
+        "tableCounts": {
+          "fe": 473,
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139
+        }
+      }
+    },
+    {
+      "round": 4,
+      "warmup": false,
+      "order": [
+        "inline-worker",
+        "inline-main",
+        "engine-c1"
+      ],
+      "inline-worker": {
+        "arm": "inline-worker",
+        "label": "m-l4-base-inline-worker-5",
+        "load": "{ 5.02 5.23 4.83 }",
+        "processWallMs": 1133.3432080000057,
+        "workWallMs": 1084.039959,
+        "cpuMs": 1359.838,
+        "perKind": {
+          "symbols": {
+            "units": 473,
+            "unitMsSum": 304.0159189999997,
+            "claimMs": 0,
+            "runningMs": 0,
+            "phaseSum": {
+              "total": 303.49133500000005,
+              "persist": 85.9128180000013,
+              "complete": 2.4198339999998275,
+              "completeLock": 1.1530009999995379,
+              "extractOther": 215.15868299999892
+            }
+          },
+          "contains": {
+            "units": 474,
+            "unitMsSum": 66.27240900000118,
+            "claimMs": 0,
+            "runningMs": 0,
+            "phaseSum": {
+              "total": 65.79195599999986,
+              "derive": 6.647298000000603,
+              "persistLock": 1.231802999999104,
+              "persistBody": 29.390616999999793,
+              "persistCommit": 28.383084000000565,
+              "persist": 59.00550399999946
+            }
+          },
+          "parsed": {
+            "units": 239,
+            "unitMsSum": 710.2604569999993,
+            "claimMs": 0,
+            "runningMs": 0,
+            "phaseSum": {
+              "classify": 4.600459999997952,
+              "read": 6.946751000000461,
+              "parse": 107.26249099999865,
+              "facts": 95.53087799999975,
+              "resolve": 156.80520299999944,
+              "keys": 10.657302999999558,
+              "persistLock": 1.0501739999998563,
+              "persistBody": 224.473328000001,
+              "persistCommit": 95.71583899999911,
+              "persist": 321.23934099999997,
+              "complete": 0.15496400000080257,
+              "total": 708.6251229999989
+            }
+          }
+        },
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "invariantViolations": [],
+        "tableCounts": {
+          "fe": 473,
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139
+        }
+      },
+      "inline-main": {
+        "arm": "inline-main",
+        "label": "m-l4-base-inline-main-5",
+        "load": "{ 4.86 5.19 4.82 }",
+        "processWallMs": 1093.2358329999988,
+        "workWallMs": 1057.617208,
+        "cpuMs": 1320.308,
+        "perKind": {
+          "symbols": {
+            "units": 473,
+            "unitMsSum": 298.6263359999999,
+            "phaseSum": {
+              "total": 298.131992,
+              "persist": 86.66308799999894,
+              "complete": 2.3829280000000566,
+              "completeLock": 1.14824100000002,
+              "extractOther": 209.085976000001
+            }
+          },
+          "contains": {
+            "units": 474,
+            "unitMsSum": 66.77325100000041,
+            "phaseSum": {
+              "total": 66.29980099999995,
+              "derive": 6.608618999999862,
+              "persistLock": 1.2258219999995958,
+              "persistBody": 29.961996999999997,
+              "persistCommit": 28.375253999999586,
+              "persist": 59.56307299999918
+            }
+          },
+          "parsed": {
+            "units": 239,
+            "unitMsSum": 691.1228330000004,
+            "phaseSum": {
+              "classify": 4.229908000000023,
+              "read": 6.820249000000217,
+              "parse": 105.82675400000028,
+              "facts": 92.62016599999959,
+              "resolve": 153.06217299999946,
+              "keys": 8.989205000000027,
+              "persistLock": 0.9610880000005864,
+              "persistBody": 221.0107139999996,
+              "persistCommit": 90.91799800000052,
+              "persist": 312.8898000000007,
+              "complete": 0.15783299999986866,
+              "total": 689.8164050000003
+            }
+          }
+        },
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "invariantViolations": [],
+        "tableCounts": {
+          "fe": 473,
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139
+        }
+      },
+      "engine-c1": {
+        "arm": "engine-c1",
+        "label": "m-l4-base-engine-c1-5",
+        "load": "{ 4.86 5.19 4.82 }",
+        "processWallMs": 1320.9665000000095,
+        "workWallMs": 1252.3543750000001,
+        "cpuMs": 1512.971,
+        "perKind": {
+          "symbols": {
+            "units": 473,
+            "unitMsSum": 323.08612299999976,
+            "claimMs": 27.93683500000057,
+            "runningMs": 11.603009000000132,
+            "phaseSum": {
+              "total": 322.4571669999999,
+              "persist": 88.257272000001,
+              "complete": 11.749622000000244,
+              "completeLock": 1.1588790000003968,
+              "extractOther": 222.45027299999862
+            }
+          },
+          "contains": {
+            "units": 474,
+            "unitMsSum": 67.55813299999954,
+            "claimMs": 29.29186900000019,
+            "runningMs": 16.246611000000428,
+            "phaseSum": {
+              "total": 67.00301799999977,
+              "derive": 7.1030439999995,
+              "persistLock": 1.3032029999992005,
+              "persistBody": 34.16641900000059,
+              "persistCommit": 24.27233300000006,
+              "persist": 59.74195499999985
+            }
+          },
+          "parsed": {
+            "units": 239,
+            "unitMsSum": 741.0378780000005,
+            "claimMs": 27.19216099999892,
+            "runningMs": 5.564720999998656,
+            "phaseSum": {
+              "classify": 4.999875999999858,
+              "read": 8.699460999999985,
+              "parse": 111.55562299999929,
+              "facts": 98.64570299999957,
+              "resolve": 169.36808600000023,
+              "keys": 11.722335000001522,
+              "persistLock": 1.1480449999985467,
+              "persistBody": 234.70786699999928,
+              "persistCommit": 92.41417500000199,
+              "persist": 328.2700869999998,
+              "complete": 2.495211999997764,
+              "total": 739.0975459999999
+            }
+          }
+        },
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "invariantViolations": [],
+        "tableCounts": {
+          "fe": 473,
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139
+        }
+      }
+    },
+    {
+      "round": 5,
+      "warmup": false,
+      "order": [
+        "inline-main",
+        "engine-c1",
+        "inline-worker"
+      ],
+      "inline-main": {
+        "arm": "inline-main",
+        "label": "m-l4-base-inline-main-6",
+        "load": "{ 4.87 5.19 4.82 }",
+        "processWallMs": 1212.3199160000077,
+        "workWallMs": 1175.908375,
+        "cpuMs": 1446.6909999999998,
+        "perKind": {
+          "symbols": {
+            "units": 473,
+            "unitMsSum": 330.668211,
+            "phaseSum": {
+              "total": 330.1186710000005,
+              "persist": 96.98922900000039,
+              "complete": 2.5472120000003855,
+              "completeLock": 1.2018299999996565,
+              "extractOther": 230.5822299999997
+            }
+          },
+          "contains": {
+            "units": 474,
+            "unitMsSum": 74.90669699999927,
+            "phaseSum": {
+              "total": 74.32970199999983,
+              "derive": 7.2330840000007015,
+              "persistLock": 1.2714950000000727,
+              "persistBody": 32.958554999999876,
+              "persistCommit": 32.70798500000012,
+              "persist": 66.93803500000007
+            }
+          },
+          "parsed": {
+            "units": 239,
+            "unitMsSum": 768.8093429999997,
+            "phaseSum": {
+              "classify": 5.756418999999198,
+              "read": 11.877166999998963,
+              "parse": 115.26908000000122,
+              "facts": 99.40025299999849,
+              "resolve": 172.74666899999949,
+              "keys": 10.5410339999994,
+              "persistLock": 1.2997440000003735,
+              "persistBody": 242.8761689999995,
+              "persistCommit": 100.56188300000031,
+              "persist": 344.7377960000002,
+              "complete": 0.27133099999963406,
+              "total": 766.6104589999998
+            }
+          }
+        },
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "invariantViolations": [],
+        "tableCounts": {
+          "fe": 473,
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139
+        }
+      },
+      "engine-c1": {
+        "arm": "engine-c1",
+        "label": "m-l4-base-engine-c1-6",
+        "load": "{ 4.96 5.20 4.82 }",
+        "processWallMs": 1276.6679999999906,
+        "workWallMs": 1217.6702500000001,
+        "cpuMs": 1484.3270000000002,
+        "perKind": {
+          "symbols": {
+            "units": 473,
+            "unitMsSum": 321.19013099999984,
+            "claimMs": 27.348914000000214,
+            "runningMs": 11.34049699999996,
+            "phaseSum": {
+              "total": 320.53017700000004,
+              "persist": 89.75040999999865,
+              "complete": 11.719158999999788,
+              "completeLock": 1.1584159999998356,
+              "extractOther": 219.0606080000016
+            }
+          },
+          "contains": {
+            "units": 474,
+            "unitMsSum": 64.59967000000086,
+            "claimMs": 28.416913999999565,
+            "runningMs": 14.503656999999066,
+            "phaseSum": {
+              "total": 64.09167199999979,
+              "derive": 6.7852990000002364,
+              "persistLock": 1.2419469999995272,
+              "persistBody": 33.11630400000115,
+              "persistCommit": 22.801206999999067,
+              "persist": 57.159457999999745
+            }
+          },
+          "parsed": {
+            "units": 239,
+            "unitMsSum": 715.8888760000003,
+            "claimMs": 26.132747999999822,
+            "runningMs": 5.36142100000086,
+            "phaseSum": {
+              "classify": 4.762619999999288,
+              "read": 7.36233099999879,
+              "parse": 108.09737600000011,
+              "facts": 95.75712899999985,
+              "resolve": 164.40424699999932,
+              "keys": 12.15146100000129,
+              "persistLock": 1.1232829999998444,
+              "persistBody": 230.71542699999958,
+              "persistCommit": 83.87190900000036,
+              "persist": 315.7106189999998,
+              "complete": 2.2061340000008727,
+              "total": 714.0802839999997
+            }
+          }
+        },
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "invariantViolations": [],
+        "tableCounts": {
+          "fe": 473,
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139
+        }
+      },
+      "inline-worker": {
+        "arm": "inline-worker",
+        "label": "m-l4-base-inline-worker-6",
+        "load": "{ 4.80 5.17 4.81 }",
+        "processWallMs": 1132.1067089999997,
+        "workWallMs": 1085.3269169999999,
+        "cpuMs": 1344.612,
+        "perKind": {
+          "symbols": {
+            "units": 473,
+            "unitMsSum": 303.5332070000002,
+            "claimMs": 0,
+            "runningMs": 0,
+            "phaseSum": {
+              "total": 303.0176799999996,
+              "persist": 87.81730099999808,
+              "complete": 2.401787000000173,
+              "completeLock": 1.138166999999651,
+              "extractOther": 212.79859200000138
+            }
+          },
+          "contains": {
+            "units": 474,
+            "unitMsSum": 70.61932899999971,
+            "claimMs": 0,
+            "runningMs": 0,
+            "phaseSum": {
+              "total": 70.13094300000063,
+              "derive": 6.828946000000371,
+              "persistLock": 1.254313999999738,
+              "persistBody": 29.68033600000018,
+              "persistCommit": 32.22167300000001,
+              "persist": 63.15632299999993
+            }
+          },
+          "parsed": {
+            "units": 239,
+            "unitMsSum": 707.138545,
+            "claimMs": 0,
+            "runningMs": 0,
+            "phaseSum": {
+              "classify": 4.627001000000291,
+              "read": 7.066876999999806,
+              "parse": 107.20292000000012,
+              "facts": 94.90233100000057,
+              "resolve": 155.92679499999952,
+              "keys": 10.796410999999807,
+              "persistLock": 1.010039000000404,
+              "persistBody": 222.4416240000009,
+              "persistCommit": 96.11329299999886,
+              "persist": 319.56495600000017,
+              "complete": 0.17841700000002447,
+              "total": 705.6110049999994
+            }
+          }
+        },
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "invariantViolations": [],
+        "tableCounts": {
+          "fe": 473,
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139
+        }
+      }
+    },
+    {
+      "round": 6,
+      "warmup": false,
+      "order": [
+        "engine-c1",
+        "inline-worker",
+        "inline-main"
+      ],
+      "engine-c1": {
+        "arm": "engine-c1",
+        "label": "m-l4-base-engine-c1-7",
+        "load": "{ 4.58 5.11 4.80 }",
+        "processWallMs": 1299.1273749999964,
+        "workWallMs": 1235.786792,
+        "cpuMs": 1505.8999999999999,
+        "perKind": {
+          "symbols": {
+            "units": 473,
+            "unitMsSum": 338.3296200000007,
+            "claimMs": 29.620710000000237,
+            "runningMs": 12.105449000000231,
+            "phaseSum": {
+              "total": 337.62462399999976,
+              "persist": 93.36000499999956,
+              "complete": 12.599911000000077,
+              "completeLock": 1.194961000000415,
+              "extractOther": 231.66470800000016
+            }
+          },
+          "contains": {
+            "units": 474,
+            "unitMsSum": 68.74237699999878,
+            "claimMs": 30.701197999999522,
+            "runningMs": 18.73603100000014,
+            "phaseSum": {
+              "total": 68.16870800000055,
+              "derive": 7.326652000000024,
+              "persistLock": 1.294857000000377,
+              "persistBody": 34.63538899999986,
+              "persistCommit": 24.730658000000744,
+              "persist": 60.66090400000098
+            }
+          },
+          "parsed": {
+            "units": 239,
+            "unitMsSum": 703.9222789999992,
+            "claimMs": 25.129040999998892,
+            "runningMs": 5.6117509999996855,
+            "phaseSum": {
+              "classify": 4.534870999999384,
+              "read": 6.670836000000008,
+              "parse": 105.39653299999964,
+              "facts": 95.55778499999974,
+              "resolve": 163.20966299999975,
+              "keys": 10.848551999999813,
+              "persistLock": 0.9985359999997172,
+              "persistBody": 226.96699900000056,
+              "persistCommit": 82.47466900000018,
+              "persist": 310.44020400000045,
+              "complete": 2.070465999999783,
+              "total": 702.2120500000004
+            }
+          }
+        },
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "invariantViolations": [],
+        "tableCounts": {
+          "fe": 473,
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139
+        }
+      },
+      "inline-worker": {
+        "arm": "inline-worker",
+        "label": "m-l4-base-inline-worker-7",
+        "load": "{ 4.53 5.10 4.79 }",
+        "processWallMs": 1095.9864579999994,
+        "workWallMs": 1049.817459,
+        "cpuMs": 1332.4959999999999,
+        "perKind": {
+          "symbols": {
+            "units": 473,
+            "unitMsSum": 309.5260029999997,
+            "claimMs": 0,
+            "runningMs": 0,
+            "phaseSum": {
+              "total": 308.98799900000023,
+              "persist": 89.136499999998,
+              "complete": 2.4949910000000024,
+              "completeLock": 1.153254000000075,
+              "extractOther": 217.3565080000022
+            }
+          },
+          "contains": {
+            "units": 474,
+            "unitMsSum": 63.31753499999951,
+            "claimMs": 0,
+            "runningMs": 0,
+            "phaseSum": {
+              "total": 62.84715900000026,
+              "derive": 6.60346400000077,
+              "persistLock": 1.2174160000004122,
+              "persistBody": 29.13178199999976,
+              "persistCommit": 25.770009000000357,
+              "persist": 56.11920700000053
+            }
+          },
+          "parsed": {
+            "units": 239,
+            "unitMsSum": 672.9084250000003,
+            "claimMs": 0,
+            "runningMs": 0,
+            "phaseSum": {
+              "classify": 4.195503000000713,
+              "read": 6.807468999999344,
+              "parse": 104.82762599999961,
+              "facts": 93.52620200000013,
+              "resolve": 149.20104100000128,
+              "keys": 9.31286299999914,
+              "persistLock": 0.9016690000001972,
+              "persistBody": 212.9590439999999,
+              "persistCommit": 84.67991999999884,
+              "persist": 298.54063299999893,
+              "complete": 0.16733099999964907,
+              "total": 671.5970880000016
+            }
+          }
+        },
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "invariantViolations": [],
+        "tableCounts": {
+          "fe": 473,
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139
+        }
+      },
+      "inline-main": {
+        "arm": "inline-main",
+        "label": "m-l4-base-inline-main-7",
+        "load": "{ 4.49 5.08 4.79 }",
+        "processWallMs": 1137.1970000000001,
+        "workWallMs": 1100.1625840000002,
+        "cpuMs": 1448.654,
+        "perKind": {
+          "symbols": {
+            "units": 473,
+            "unitMsSum": 318.7678379999999,
+            "phaseSum": {
+              "total": 318.2075790000001,
+              "persist": 92.67404999999992,
+              "complete": 2.506586999999911,
+              "completeLock": 1.1826869999997456,
+              "extractOther": 223.02694200000033
+            }
+          },
+          "contains": {
+            "units": 474,
+            "unitMsSum": 68.76091599999955,
+            "phaseSum": {
+              "total": 68.21747399999998,
+              "derive": 7.042258000000459,
+              "persistLock": 1.29119700000075,
+              "persistBody": 31.624334999999462,
+              "persistCommit": 28.10857900000019,
+              "persist": 61.0241110000004
+            }
+          },
+          "parsed": {
+            "units": 239,
+            "unitMsSum": 711.3647830000006,
+            "phaseSum": {
+              "classify": 4.822627000000978,
+              "read": 7.868453999999588,
+              "parse": 109.57459700000078,
+              "facts": 98.72075000000075,
+              "resolve": 156.1580849999997,
+              "keys": 9.743909000000144,
+              "persistLock": 1.1239989999996283,
+              "persistBody": 223.848748,
+              "persistCommit": 91.93615600000015,
+              "persist": 316.9089029999998,
+              "complete": 0.16937999999970543,
+              "total": 709.547034
+            }
+          }
+        },
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "invariantViolations": [],
+        "tableCounts": {
+          "fe": 473,
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139
+        }
+      }
+    },
+    {
+      "round": 7,
+      "warmup": false,
+      "order": [
+        "inline-worker",
+        "inline-main",
+        "engine-c1"
+      ],
+      "inline-worker": {
+        "arm": "inline-worker",
+        "label": "m-l4-base-inline-worker-8",
+        "load": "{ 4.49 5.08 4.79 }",
+        "processWallMs": 1122.2165830000013,
+        "workWallMs": 1076.0094159999999,
+        "cpuMs": 1337.233,
+        "perKind": {
+          "symbols": {
+            "units": 473,
+            "unitMsSum": 303.02620999999976,
+            "claimMs": 0,
+            "runningMs": 0,
+            "phaseSum": {
+              "total": 302.5169560000001,
+              "persist": 88.29353900000072,
+              "complete": 2.3870009999997137,
+              "completeLock": 1.157631000000027,
+              "extractOther": 211.83641599999967
+            }
+          },
+          "contains": {
+            "units": 474,
+            "unitMsSum": 67.13782899999973,
+            "claimMs": 0,
+            "runningMs": 0,
+            "phaseSum": {
+              "total": 66.65201299999984,
+              "derive": 6.629494999999849,
+              "persistLock": 1.2077879999999936,
+              "persistBody": 29.52192099999985,
+              "persistCommit": 29.161577000000307,
+              "persist": 59.89128600000015
+            }
+          },
+          "parsed": {
+            "units": 239,
+            "unitMsSum": 702.0958880000007,
+            "claimMs": 0,
+            "runningMs": 0,
+            "phaseSum": {
+              "classify": 4.701378000000318,
+              "read": 7.058876000000112,
+              "parse": 108.46708799999999,
+              "facts": 94.95755000000048,
+              "resolve": 153.45425600000004,
+              "keys": 10.55279400000012,
+              "persistLock": 1.0711320000003184,
+              "persistBody": 218.59970199999913,
+              "persistCommit": 96.11970600000052,
+              "persist": 315.79053999999996,
+              "complete": 0.17215499999952044,
+              "total": 700.4978350000002
+            }
+          }
+        },
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "invariantViolations": [],
+        "tableCounts": {
+          "fe": 473,
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139
+        }
+      },
+      "inline-main": {
+        "arm": "inline-main",
+        "label": "m-l4-base-inline-main-8",
+        "load": "{ 4.37 5.04 4.78 }",
+        "processWallMs": 1096.1162909999985,
+        "workWallMs": 1060.117542,
+        "cpuMs": 1322.937,
+        "perKind": {
+          "symbols": {
+            "units": 473,
+            "unitMsSum": 305.5465439999998,
+            "phaseSum": {
+              "total": 305.08914100000044,
+              "persist": 89.98698400000018,
+              "complete": 2.383898999999815,
+              "completeLock": 1.1467920000000582,
+              "extractOther": 212.71825800000045
+            }
+          },
+          "contains": {
+            "units": 474,
+            "unitMsSum": 69.20443399999994,
+            "phaseSum": {
+              "total": 68.70613700000047,
+              "derive": 6.940548000000376,
+              "persistLock": 1.2458659999991823,
+              "persistBody": 30.886133000000143,
+              "persistCommit": 29.498253000001057,
+              "persist": 61.63025200000038
+            }
+          },
+          "parsed": {
+            "units": 239,
+            "unitMsSum": 684.2344980000006,
+            "phaseSum": {
+              "classify": 4.101428000000908,
+              "read": 6.125125999999625,
+              "parse": 102.81633600000157,
+              "facts": 95.41371299999929,
+              "resolve": 150.68716399999965,
+              "keys": 8.647417999999732,
+              "persistLock": 0.9295790000001602,
+              "persistBody": 216.50301600000012,
+              "persistCommit": 92.19490999999988,
+              "persist": 309.62750500000016,
+              "complete": 0.15057800000033694,
+              "total": 682.857500999999
+            }
+          }
+        },
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "invariantViolations": [],
+        "tableCounts": {
+          "fe": 473,
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139
+        }
+      },
+      "engine-c1": {
+        "arm": "engine-c1",
+        "label": "m-l4-base-engine-c1-8",
+        "load": "{ 4.10 4.97 4.75 }",
+        "processWallMs": 1229.2904589999962,
+        "workWallMs": 1173.2139590000002,
+        "cpuMs": 1441.317,
+        "perKind": {
+          "symbols": {
+            "units": 473,
+            "unitMsSum": 319.99299699999995,
+            "claimMs": 26.86980200000001,
+            "runningMs": 11.612201999999897,
+            "phaseSum": {
+              "total": 319.44124300000027,
+              "persist": 86.3446319999986,
+              "complete": 11.858416999999864,
+              "completeLock": 1.1990359999998468,
+              "extractOther": 221.23819400000178
+            }
+          },
+          "contains": {
+            "units": 474,
+            "unitMsSum": 62.70116799999954,
+            "claimMs": 28.07904399999984,
+            "runningMs": 13.33913399999983,
+            "phaseSum": {
+              "total": 62.176279999999736,
+              "derive": 6.850328000000559,
+              "persistLock": 1.2758399999996186,
+              "persistBody": 32.22005399999995,
+              "persistCommit": 21.680613000000335,
+              "persist": 55.1765069999999
+            }
+          },
+          "parsed": {
+            "units": 239,
+            "unitMsSum": 679.7454619999995,
+            "claimMs": 23.12608300000022,
+            "runningMs": 5.080325000000698,
+            "phaseSum": {
+              "classify": 4.244962999998165,
+              "read": 5.706696999999849,
+              "parse": 102.27033200000011,
+              "facts": 92.5577440000003,
+              "resolve": 157.82658599999974,
+              "keys": 10.42386200000169,
+              "persistLock": 1.041582999999946,
+              "persistBody": 220.20920900000147,
+              "persistCommit": 78.67779700000006,
+              "persist": 299.92858900000147,
+              "complete": 2.07224500000018,
+              "total": 678.319372999998
+            }
+          }
+        },
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "invariantViolations": [],
+        "tableCounts": {
+          "fe": 473,
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+import { resolve } from "node:path";
+import { BLOBS } from "../../scripts/t007-local/lib/datasets";
+import { freshRunDb } from "../../scripts/t007-local/lib/run";
+const ds = process.argv[2] ?? "smoke", workers = process.argv[3] ?? "2", n = Number(process.argv[4] ?? 30);
+const engine = resolve("scripts/t007-local/engine.ts");
+const codes: Record<string, number> = {};
+for (let i = 0; i < n; i++) {
+  const { dbPath, snapshotId } = freshRunDb(ds, `crash-${i}`);
+  const p = Bun.spawn(["bun", engine, "--db", dbPath, "--snapshot", String(snapshotId), "--blobs", BLOBS, "--workers", workers], { stdout: "pipe", stderr: "pipe" });
+  const code = await p.exited;
+  const err = (await new Response(p.stderr).text()).trim();
+  codes[String(code)] = (codes[String(code)] ?? 0) + 1;
+  if (code !== 0) console.log(`run ${i} exit ${code} signal ${p.signalCode} stderr: ${err.slice(0, 500)}`);
+}
+console.log(ds, "workers", workers, JSON.stringify(codes));

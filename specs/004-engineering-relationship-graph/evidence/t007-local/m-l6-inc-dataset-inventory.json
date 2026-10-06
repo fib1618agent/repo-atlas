@@ -1,0 +1,313 @@
+{
+  "capturedAt": "2026-09-27T14:39:36.832Z",
+  "baseCommit": "430e1703386ebd9264122d54a3ba398d43b363f9",
+  "inc2": {
+    "commit": "3411c44cd3fb6433c8b39fa4cd23acd0079804a9",
+    "filesChanged": 1,
+    "file": "src/lib/atlas-config.ts"
+  },
+  "inc3": {
+    "commit": "5cc054250e305d1678df89fc91d5beab0cdea09d",
+    "filesChanged": 24,
+    "changedFiles": [
+      "eslint.config.js",
+      "scripts/relationship-cpu-real-files.ts",
+      "src/components/atlas/SourcesMenu.tsx",
+      "src/components/repo-intel/StructureOutline.tsx",
+      "src/components/ui/badge.tsx",
+      "src/components/ui/context-menu.tsx",
+      "src/components/ui/navigation-menu.tsx",
+      "src/components/ui/sidebar.tsx",
+      "src/components/ui/tooltip.tsx",
+      "src/lib/atlas-error-ui.ts",
+      "src/lib/code-intel/domain/relationship.ts",
+      "src/lib/code-intel/providers/content-provider.ts",
+      "src/lib/code-intel/symbols/scm-modules.d.ts",
+      "src/lib/control-plane/preferences.ts",
+      "src/lib/repo-intel/format.ts",
+      "src/lib/repo-intel/repository-context.ts",
+      "src/lib/sources-store.ts",
+      "src/routes/categories.tsx",
+      "tests/contract/code-intel/commit-sha-shape.test.ts",
+      "tests/contract/symbols/list-symbols-pagination.test.ts",
+      "tests/integration/code-intel/github-archive-root.test.ts",
+      "tests/integration/symbols/extract-symbols.test.ts",
+      "tests/support/wasm-test-modules.ts",
+      "tests/unit/control-plane/settings-ui.test.tsx"
+    ]
+  },
+  "datasets": {
+    "repo-atlas-inc2": {
+      "commit": "3411c44cd3fb6433c8b39fa4cd23acd0079804a9",
+      "extractMs": 107.4565419999999,
+      "ingest": {
+        "snapshotId": 1,
+        "repositoryId": 1,
+        "fileCount": 473,
+        "totalBytes": 14323008,
+        "skippedSymlinks": 10,
+        "walkMs": 5.216875000000073,
+        "hashMs": 17.6468890000001,
+        "blobWriteMs": 2.8618719999999485,
+        "dbMs": 1.8943329999999605,
+        "totalMs": 38.98116700000014
+      },
+      "inventory": {
+        "totalFiles": 473,
+        "totalBytes": 14323008,
+        "tier1Files": 239,
+        "tier1Bytes": 1082461,
+        "tier1ByLanguage": {
+          "javascript": {
+            "files": 1,
+            "bytes": 1250
+          },
+          "typescript": {
+            "files": 156,
+            "bytes": 698647
+          },
+          "tsx": {
+            "files": 82,
+            "bytes": 382564
+          }
+        },
+        "topExtensions": {
+          "md": {
+            "files": 172,
+            "bytes": 2477447
+          },
+          "ts": {
+            "files": 156,
+            "bytes": 698647
+          },
+          "tsx": {
+            "files": 82,
+            "bytes": 382564
+          },
+          "json": {
+            "files": 12,
+            "bytes": 813724
+          },
+          "scm": {
+            "files": 8,
+            "bytes": 10412
+          },
+          "sh": {
+            "files": 7,
+            "bytes": 71443
+          },
+          "sql": {
+            "files": 5,
+            "bytes": 19274
+          },
+          "txt": {
+            "files": 5,
+            "bytes": 11277
+          },
+          "wasm": {
+            "files": 4,
+            "bytes": 5831535
+          },
+          "py": {
+            "files": 3,
+            "bytes": 7155
+          },
+          "png": {
+            "files": 3,
+            "bytes": 1961957
+          },
+          "gitignore": {
+            "files": 2,
+            "bytes": 1852
+          }
+        },
+        "javaShareOfTier1": 0,
+        "jsTsShareOfTier1": 1,
+        "tier1SizeStats": {
+          "n": 239,
+          "min": 29,
+          "median": 2765,
+          "p95": 15383,
+          "max": 25903,
+          "mean": 4529.125523012553,
+          "stdev": 4976.787735073316,
+          "cv": 1.0988407607133397
+        },
+        "tier1SizeHistogram": [
+          {
+            "upToBytes": 4096,
+            "files": 152
+          },
+          {
+            "upToBytes": 16384,
+            "files": 76
+          },
+          {
+            "upToBytes": 65536,
+            "files": 11
+          },
+          {
+            "upToBytes": 262144,
+            "files": 0
+          },
+          {
+            "upToBytes": 524288,
+            "files": 0
+          },
+          {
+            "upToBytes": 1048576,
+            "files": 0
+          },
+          {
+            "upToBytes": 4194304,
+            "files": 0
+          },
+          {
+            "upToBytes": 10485760,
+            "files": 0
+          },
+          {
+            "upToBytes": "inf",
+            "files": 0
+          }
+        ]
+      }
+    },
+    "repo-atlas-inc3": {
+      "commit": "5cc054250e305d1678df89fc91d5beab0cdea09d",
+      "extractMs": 100.62566600000014,
+      "ingest": {
+        "snapshotId": 1,
+        "repositoryId": 1,
+        "fileCount": 473,
+        "totalBytes": 14324089,
+        "skippedSymlinks": 10,
+        "walkMs": 5.875541999999996,
+        "hashMs": 15.898916000003283,
+        "blobWriteMs": 14.552887999999712,
+        "dbMs": 1.7956659999999829,
+        "totalMs": 49.11991699999999
+      },
+      "inventory": {
+        "totalFiles": 473,
+        "totalBytes": 14324089,
+        "tier1Files": 239,
+        "tier1Bytes": 1083542,
+        "tier1ByLanguage": {
+          "javascript": {
+            "files": 1,
+            "bytes": 1297
+          },
+          "typescript": {
+            "files": 156,
+            "bytes": 699258
+          },
+          "tsx": {
+            "files": 82,
+            "bytes": 382987
+          }
+        },
+        "topExtensions": {
+          "md": {
+            "files": 172,
+            "bytes": 2477447
+          },
+          "ts": {
+            "files": 156,
+            "bytes": 699258
+          },
+          "tsx": {
+            "files": 82,
+            "bytes": 382987
+          },
+          "json": {
+            "files": 12,
+            "bytes": 813724
+          },
+          "scm": {
+            "files": 8,
+            "bytes": 10412
+          },
+          "sh": {
+            "files": 7,
+            "bytes": 71443
+          },
+          "sql": {
+            "files": 5,
+            "bytes": 19274
+          },
+          "txt": {
+            "files": 5,
+            "bytes": 11277
+          },
+          "wasm": {
+            "files": 4,
+            "bytes": 5831535
+          },
+          "py": {
+            "files": 3,
+            "bytes": 7155
+          },
+          "png": {
+            "files": 3,
+            "bytes": 1961957
+          },
+          "gitignore": {
+            "files": 2,
+            "bytes": 1852
+          }
+        },
+        "javaShareOfTier1": 0,
+        "jsTsShareOfTier1": 1,
+        "tier1SizeStats": {
+          "n": 239,
+          "min": 29,
+          "median": 2783,
+          "p95": 15383,
+          "max": 25903,
+          "mean": 4533.648535564854,
+          "stdev": 4976.630964750946,
+          "cv": 1.0977099185592032
+        },
+        "tier1SizeHistogram": [
+          {
+            "upToBytes": 4096,
+            "files": 152
+          },
+          {
+            "upToBytes": 16384,
+            "files": 76
+          },
+          {
+            "upToBytes": 65536,
+            "files": 11
+          },
+          {
+            "upToBytes": 262144,
+            "files": 0
+          },
+          {
+            "upToBytes": 524288,
+            "files": 0
+          },
+          {
+            "upToBytes": 1048576,
+            "files": 0
+          },
+          {
+            "upToBytes": 4194304,
+            "files": 0
+          },
+          {
+            "upToBytes": 10485760,
+            "files": 0
+          },
+          {
+            "upToBytes": "inf",
+            "files": 0
+          }
+        ]
+      }
+    }
+  }
+}

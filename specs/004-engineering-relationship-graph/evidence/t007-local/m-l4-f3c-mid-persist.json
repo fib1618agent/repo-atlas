@@ -1,0 +1,32 @@
+{
+  "measurement": "M-L4 part 3 (rev C)",
+  "dataset": "repo-atlas-rm",
+  "environmentHash": "e2b32efaacbd45bf",
+  "loadAvgAtStart": "{ 6.06 5.31 4.71 }",
+  "power": "Now drawing from 'AC Power'  -InternalBattery-0 (id=20578403)\t18%; charging; 11:44 remaining present: true",
+  "cleanReferenceHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+  "cleanRunsEqual": true,
+  "droppedKeyMetricPerCleanRun": [
+    0,
+    0,
+    0
+  ],
+  "test": "F-3c transient failure INSIDE the persist transaction (rollback + retry)",
+  "injected": 20,
+  "engineRetries": 20,
+  "hashEqualsClean": true,
+  "droppedKeyMetric": 0,
+  "snapshotStatus": "completed",
+  "invariantAndCompletenessViolations": [],
+  "jobs": {
+    "states": {
+      "COMPLETED": 1181,
+      "SKIPPED": 5
+    },
+    "attemptsSum": 20,
+    "reclaimsSum": 0,
+    "jobRows": 1186
+  },
+  "classification": "PASS-CRITERIA-MET",
+  "durationMs": 1460.0769579999996
+}

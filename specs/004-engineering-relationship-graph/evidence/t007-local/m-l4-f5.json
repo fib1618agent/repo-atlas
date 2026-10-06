@@ -1,0 +1,138 @@
+{
+  "measurement": "M-L4 part 3",
+  "dataset": "repo-atlas-rm",
+  "environmentHash": "e2b32efaacbd45bf",
+  "loadAvgAtStart": "{ 3.59 4.05 4.22 }",
+  "power": "Now drawing from 'AC Power'  -InternalBattery-0 (id=20578403)\t19%; charging; (no estimate) present: true",
+  "cleanReferenceHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+  "cleanRunsEqual": true,
+  "test": "F-5 pause/resume + cancel",
+  "contractLimitation": "local-job-engine.md guarantee 4 says pause/cancel are explicit and per-repository but defines no PAUSED job state or terminal cancelled state. Harness represents pause with a control flag (t7_control) and cancel-halt as 'stop claiming, leave job rows untouched'. Only BEHAVIOUR (plan §8 F-5 expectations) is evaluated; state-representation semantics are NOT evaluated and none is invented.",
+  "pause": [
+    {
+      "workers": 2,
+      "armed": true,
+      "pauseToQuietMs": 5.6612499999992,
+      "noNewClaimsWhilePaused": true,
+      "statesWhilePaused": {
+        "COMPLETED": 485,
+        "PENDING": 701
+      },
+      "invariantViolationsWhilePaused": [],
+      "resumedToCompletion": true,
+      "hashEqualsClean": true
+    },
+    {
+      "workers": 2,
+      "armed": true,
+      "pauseToQuietMs": 10.798624999999447,
+      "noNewClaimsWhilePaused": true,
+      "statesWhilePaused": {
+        "COMPLETED": 500,
+        "PENDING": 686
+      },
+      "invariantViolationsWhilePaused": [],
+      "resumedToCompletion": true,
+      "hashEqualsClean": true
+    },
+    {
+      "workers": 2,
+      "armed": true,
+      "pauseToQuietMs": 467.741082999999,
+      "noNewClaimsWhilePaused": true,
+      "statesWhilePaused": {
+        "COMPLETED": 995,
+        "PENDING": 188,
+        "SKIPPED": 3
+      },
+      "invariantViolationsWhilePaused": [],
+      "resumedToCompletion": true,
+      "hashEqualsClean": true
+    },
+    {
+      "workers": 4,
+      "armed": true,
+      "pauseToQuietMs": 202.79841599999963,
+      "noNewClaimsWhilePaused": true,
+      "statesWhilePaused": {
+        "COMPLETED": 850,
+        "PENDING": 336
+      },
+      "invariantViolationsWhilePaused": [],
+      "resumedToCompletion": true,
+      "hashEqualsClean": true
+    },
+    {
+      "workers": 4,
+      "armed": true,
+      "pauseToQuietMs": 41.27720899999986,
+      "noNewClaimsWhilePaused": true,
+      "statesWhilePaused": {
+        "COMPLETED": 525,
+        "PENDING": 661
+      },
+      "invariantViolationsWhilePaused": [],
+      "resumedToCompletion": true,
+      "hashEqualsClean": true
+    },
+    {
+      "workers": 4,
+      "armed": true,
+      "pauseToQuietMs": 28.4285839999975,
+      "noNewClaimsWhilePaused": true,
+      "statesWhilePaused": {
+        "COMPLETED": 516,
+        "PENDING": 670
+      },
+      "invariantViolationsWhilePaused": [],
+      "resumedToCompletion": true,
+      "hashEqualsClean": true
+    }
+  ],
+  "cancelHalt": [
+    {
+      "haltToEngineExitMs": 369.7481669999979,
+      "statesAtHalt": {
+        "COMPLETED": 969,
+        "PENDING": 216,
+        "SKIPPED": 1
+      },
+      "noRunningOrClaimedLeft": true,
+      "pendingRemain": 216,
+      "invariantViolationsAtHalt": [],
+      "engineReportedStatusAtHalt": "completed",
+      "consistencyProbe_finishedAfterClearingFlag": true,
+      "consistencyProbe_hashEqualsClean": true
+    },
+    {
+      "haltToEngineExitMs": 175.78679100000227,
+      "statesAtHalt": {
+        "COMPLETED": 763,
+        "PENDING": 423
+      },
+      "noRunningOrClaimedLeft": true,
+      "pendingRemain": 423,
+      "invariantViolationsAtHalt": [],
+      "engineReportedStatusAtHalt": "completed",
+      "consistencyProbe_finishedAfterClearingFlag": true,
+      "consistencyProbe_hashEqualsClean": true
+    },
+    {
+      "haltToEngineExitMs": 5.847084000000905,
+      "statesAtHalt": {
+        "COMPLETED": 482,
+        "PENDING": 704
+      },
+      "noRunningOrClaimedLeft": true,
+      "pendingRemain": 704,
+      "invariantViolationsAtHalt": [],
+      "engineReportedStatusAtHalt": "completed",
+      "consistencyProbe_finishedAfterClearingFlag": true,
+      "consistencyProbe_hashEqualsClean": true
+    }
+  ],
+  "classification": "PASS-CRITERIA-MET (behaviour only; cancel terminal-state semantics NOT EVALUABLE — contract limitation)",
+  "pauseBehaviourOk": true,
+  "cancelHaltBehaviourOk": true,
+  "durationMs": 18651.177709
+}

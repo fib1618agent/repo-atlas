@@ -1,0 +1,134 @@
+{
+  "measurement": "M-L4 part 3",
+  "dataset": "repo-atlas-rm",
+  "environmentHash": "e2b32efaacbd45bf",
+  "loadAvgAtStart": "{ 4.56 4.28 4.31 }",
+  "power": "Now drawing from 'AC Power'  -InternalBattery-0 (id=20578403)\t19%; charging; (no estimate) present: true",
+  "cleanReferenceHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+  "cleanRunsEqual": true,
+  "test": "F-2 per-file failure containment",
+  "victims": [
+    "tests/contract/symbols/symbol-d1-client.test.ts",
+    "tests/integration/repo-intel/read-model.test.ts",
+    "tests/unit/control-plane/settings-ui.test.tsx"
+  ],
+  "snapshotStatus": "completed_partial",
+  "failedJobs": [
+    {
+      "unit_ref": "424",
+      "state": "FAILED",
+      "attempts": 1,
+      "error": "{\"code\":\"injected-permanent\",\"message\":\"injected deterministic failure (parsed)\",\"transient\":false}"
+    },
+    {
+      "unit_ref": "439",
+      "state": "FAILED",
+      "attempts": 1,
+      "error": "{\"code\":\"injected-permanent\",\"message\":\"injected deterministic failure (parsed)\",\"transient\":false}"
+    },
+    {
+      "unit_ref": "463",
+      "state": "FAILED",
+      "attempts": 1,
+      "error": "{\"code\":\"injected-permanent\",\"message\":\"injected deterministic failure (parsed)\",\"transient\":false}"
+    }
+  ],
+  "otherFilesDiffVsClean": 0,
+  "diffFiles": [],
+  "victimParsedRows": [
+    {
+      "path": "tests/contract/symbols/symbol-d1-client.test.ts",
+      "parsedRowsRemaining": 0,
+      "containsRowsRetained": true
+    },
+    {
+      "path": "tests/integration/repo-intel/read-model.test.ts",
+      "parsedRowsRemaining": 0,
+      "containsRowsRetained": true
+    },
+    {
+      "path": "tests/unit/control-plane/settings-ui.test.tsx",
+      "parsedRowsRemaining": 0,
+      "containsRowsRetained": true
+    }
+  ],
+  "jobs": {
+    "states": {
+      "COMPLETED": 1178,
+      "FAILED": 3,
+      "SKIPPED": 5
+    },
+    "attemptsSum": 3,
+    "reclaimsSum": 0,
+    "jobRows": 1186
+  },
+  "invariantViolations": [],
+  "containedOnParsedUnits": true,
+  "secondarySymbolsUnitFailure": {
+    "failedUnit": "symbols:tests/contract/symbols/symbol-d1-client.test.ts",
+    "jobs": {
+      "states": {
+        "COMPLETED": 1178,
+        "FAILED": 2,
+        "SKIPPED": 6
+      },
+      "attemptsSum": 2,
+      "reclaimsSum": 0,
+      "jobRows": 1186
+    },
+    "failedRows": [
+      {
+        "kind": "symbols",
+        "unit_ref": "424",
+        "state": "FAILED",
+        "error": "{\"code\":\"injected-permanent\",\"message\":\"injected deterministic failure (symbols)\",\"transient\":false}"
+      },
+      {
+        "kind": "contains",
+        "unit_ref": "424",
+        "state": "FAILED",
+        "error": "{\"code\":\"missing-file-extraction\",\"message\":\"424\",\"transient\":false}"
+      },
+      {
+        "kind": "parsed",
+        "unit_ref": "240",
+        "state": "SKIPPED",
+        "error": "upstream-not-extracted:failed"
+      },
+      {
+        "kind": "parsed",
+        "unit_ref": "251",
+        "state": "SKIPPED",
+        "error": "upstream-not-extracted:failed"
+      },
+      {
+        "kind": "parsed",
+        "unit_ref": "271",
+        "state": "SKIPPED",
+        "error": "upstream-not-extracted:failed"
+      },
+      {
+        "kind": "parsed",
+        "unit_ref": "292",
+        "state": "SKIPPED",
+        "error": "upstream-not-extracted:failed"
+      },
+      {
+        "kind": "parsed",
+        "unit_ref": "392",
+        "state": "SKIPPED",
+        "error": "upstream-not-extracted:failed"
+      },
+      {
+        "kind": "parsed",
+        "unit_ref": "424",
+        "state": "SKIPPED",
+        "error": "upstream-not-extracted:missing"
+      }
+    ],
+    "snapshotStatus": "completed_partial",
+    "invariantViolations": []
+  },
+  "classification": "PASS-CRITERIA-MET",
+  "durationMs": 3274.028083000001
+}

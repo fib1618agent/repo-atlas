@@ -1,0 +1,565 @@
+{
+  "capturedAt": "2026-09-25T18:41:17.563Z",
+  "datasets": {
+    "repo-atlas-rm": {
+      "def": {
+        "name": "repo-atlas-rm",
+        "tier": "R-M",
+        "role": "approved real repository (primary scale gate)",
+        "gitDir": "~/Documents/dev/git/fib1618agent/repo-atlas",
+        "commit": "430e1703386ebd9264122d54a3ba398d43b363f9",
+        "pathspec": [],
+        "owner": "local",
+        "repo": "repo-atlas"
+      },
+      "extractMs": 137.869875,
+      "ingest": {
+        "snapshotId": 1,
+        "repositoryId": 1,
+        "fileCount": 473,
+        "totalBytes": 14322961,
+        "skippedSymlinks": 10,
+        "walkMs": 5.350957999999991,
+        "hashMs": 42.1034570000007,
+        "blobWriteMs": 81.87997100000024,
+        "dbMs": 2.303875000000005,
+        "totalMs": 153.53275000000002
+      },
+      "inventory": {
+        "totalFiles": 473,
+        "totalBytes": 14322961,
+        "tier1Files": 239,
+        "tier1Bytes": 1082414,
+        "tier1ByLanguage": {
+          "javascript": {
+            "files": 1,
+            "bytes": 1250
+          },
+          "typescript": {
+            "files": 156,
+            "bytes": 698600
+          },
+          "tsx": {
+            "files": 82,
+            "bytes": 382564
+          }
+        },
+        "topExtensions": {
+          "md": {
+            "files": 172,
+            "bytes": 2477447
+          },
+          "ts": {
+            "files": 156,
+            "bytes": 698600
+          },
+          "tsx": {
+            "files": 82,
+            "bytes": 382564
+          },
+          "json": {
+            "files": 12,
+            "bytes": 813724
+          },
+          "scm": {
+            "files": 8,
+            "bytes": 10412
+          },
+          "sh": {
+            "files": 7,
+            "bytes": 71443
+          },
+          "sql": {
+            "files": 5,
+            "bytes": 19274
+          },
+          "txt": {
+            "files": 5,
+            "bytes": 11277
+          },
+          "wasm": {
+            "files": 4,
+            "bytes": 5831535
+          },
+          "py": {
+            "files": 3,
+            "bytes": 7155
+          },
+          "png": {
+            "files": 3,
+            "bytes": 1961957
+          },
+          "gitignore": {
+            "files": 2,
+            "bytes": 1852
+          }
+        },
+        "javaShareOfTier1": 0,
+        "jsTsShareOfTier1": 1,
+        "tier1SizeStats": {
+          "n": 239,
+          "min": 29,
+          "median": 2765,
+          "p95": 15383,
+          "max": 25903,
+          "mean": 4528.928870292887,
+          "stdev": 4976.8503061510655,
+          "cv": 1.0989022898540712
+        },
+        "tier1SizeHistogram": [
+          {
+            "upToBytes": 4096,
+            "files": 152
+          },
+          {
+            "upToBytes": 16384,
+            "files": 76
+          },
+          {
+            "upToBytes": 65536,
+            "files": 11
+          },
+          {
+            "upToBytes": 262144,
+            "files": 0
+          },
+          {
+            "upToBytes": 524288,
+            "files": 0
+          },
+          {
+            "upToBytes": 1048576,
+            "files": 0
+          },
+          {
+            "upToBytes": 4194304,
+            "files": 0
+          },
+          {
+            "upToBytes": 10485760,
+            "files": 0
+          },
+          {
+            "upToBytes": "inf",
+            "files": 0
+          }
+        ]
+      },
+      "qualification": {
+        "rule": "100–1,000 Tier-1 files",
+        "ok": true
+      }
+    },
+    "repo-atlas-rs": {
+      "def": {
+        "name": "repo-atlas-rs",
+        "tier": "R-S",
+        "role": "real-repository subset (src/lib of repo-atlas @ same commit)",
+        "gitDir": "~/Documents/dev/git/fib1618agent/repo-atlas",
+        "commit": "430e1703386ebd9264122d54a3ba398d43b363f9",
+        "pathspec": [
+          "src/lib"
+        ],
+        "owner": "local",
+        "repo": "repo-atlas-src-lib"
+      },
+      "extractMs": 21.501291999999978,
+      "ingest": {
+        "snapshotId": 1,
+        "repositoryId": 1,
+        "fileCount": 92,
+        "totalBytes": 351411,
+        "skippedSymlinks": 0,
+        "walkMs": 0.6319579999999974,
+        "hashMs": 2.8054550000002223,
+        "blobWriteMs": 0.6780709999999885,
+        "dbMs": 0.5497080000000096,
+        "totalMs": 7.53408300000001
+      },
+      "inventory": {
+        "totalFiles": 92,
+        "totalBytes": 351411,
+        "tier1Files": 83,
+        "tier1Bytes": 296172,
+        "tier1ByLanguage": {
+          "typescript": {
+            "files": 81,
+            "bytes": 294500
+          },
+          "tsx": {
+            "files": 2,
+            "bytes": 1672
+          }
+        },
+        "topExtensions": {
+          "ts": {
+            "files": 81,
+            "bytes": 294500
+          },
+          "scm": {
+            "files": 8,
+            "bytes": 10412
+          },
+          "tsx": {
+            "files": 2,
+            "bytes": 1672
+          },
+          "json": {
+            "files": 1,
+            "bytes": 44827
+          }
+        },
+        "javaShareOfTier1": 0,
+        "jsTsShareOfTier1": 1,
+        "tier1SizeStats": {
+          "n": 83,
+          "min": 82,
+          "median": 2292,
+          "p95": 11321,
+          "max": 21286,
+          "mean": 3568.3373493975905,
+          "stdev": 3891.915483044209,
+          "cv": 1.090680365100919
+        },
+        "tier1SizeHistogram": [
+          {
+            "upToBytes": 4096,
+            "files": 60
+          },
+          {
+            "upToBytes": 16384,
+            "files": 21
+          },
+          {
+            "upToBytes": 65536,
+            "files": 2
+          },
+          {
+            "upToBytes": 262144,
+            "files": 0
+          },
+          {
+            "upToBytes": 524288,
+            "files": 0
+          },
+          {
+            "upToBytes": 1048576,
+            "files": 0
+          },
+          {
+            "upToBytes": 4194304,
+            "files": 0
+          },
+          {
+            "upToBytes": 10485760,
+            "files": 0
+          },
+          {
+            "upToBytes": "inf",
+            "files": 0
+          }
+        ]
+      },
+      "qualification": {
+        "rule": "≤ 100 Tier-1 files",
+        "ok": true
+      }
+    },
+    "gitnexus-rl": {
+      "def": {
+        "name": "gitnexus-rl",
+        "tier": "R-L",
+        "role": "JS/TS-dominant R-L candidate (reference repo, read-only)",
+        "gitDir": "~/Documents/dev/git/fib1618agent/repotlas-references/GitNexus",
+        "commit": "233ca28492f5dd8957425e273779f1571cd45035",
+        "pathspec": [],
+        "owner": "ref",
+        "repo": "GitNexus"
+      },
+      "extractMs": 1983.814166,
+      "ingest": {
+        "snapshotId": 1,
+        "repositoryId": 1,
+        "fileCount": 5666,
+        "totalBytes": 270735904,
+        "skippedSymlinks": 0,
+        "walkMs": 146.32133399999975,
+        "hashMs": 373.9479950000059,
+        "blobWriteMs": 938.1030870000081,
+        "dbMs": 16.310333999999784,
+        "totalMs": 1719.5211249999998
+      },
+      "inventory": {
+        "totalFiles": 5666,
+        "totalBytes": 270735904,
+        "tier1Files": 3174,
+        "tier1Bytes": 34303239,
+        "tier1ByLanguage": {
+          "javascript": {
+            "files": 194,
+            "bytes": 2035305
+          },
+          "typescript": {
+            "files": 2636,
+            "bytes": 31608854
+          },
+          "tsx": {
+            "files": 81,
+            "bytes": 585684
+          },
+          "java": {
+            "files": 263,
+            "bytes": 73396
+          }
+        },
+        "topExtensions": {
+          "ts": {
+            "files": 2635,
+            "bytes": 31608452
+          },
+          "py": {
+            "files": 322,
+            "bytes": 1571527
+          },
+          "java": {
+            "files": 263,
+            "bytes": 73396
+          },
+          "rs": {
+            "files": 209,
+            "bytes": 42326
+          },
+          "json": {
+            "files": 196,
+            "bytes": 3648731
+          },
+          "cs": {
+            "files": 185,
+            "bytes": 117404
+          },
+          "h": {
+            "files": 183,
+            "bytes": 155885
+          },
+          "kt": {
+            "files": 167,
+            "bytes": 44737
+          },
+          "md": {
+            "files": 156,
+            "bytes": 1623565
+          },
+          "php": {
+            "files": 153,
+            "bytes": 45390
+          },
+          "cpp": {
+            "files": 133,
+            "bytes": 35641
+          },
+          "go": {
+            "files": 128,
+            "bytes": 36507
+          }
+        },
+        "javaShareOfTier1": 0.08286074354127285,
+        "jsTsShareOfTier1": 0.9171392564587272,
+        "tier1SizeStats": {
+          "n": 3174,
+          "min": 34,
+          "median": 4710.5,
+          "p95": 41378,
+          "max": 436084,
+          "mean": 10807.573724007561,
+          "stdev": 21089.689997777274,
+          "cv": 1.9513806277286254
+        },
+        "tier1SizeHistogram": [
+          {
+            "upToBytes": 4096,
+            "files": 1477
+          },
+          {
+            "upToBytes": 16384,
+            "files": 1141
+          },
+          {
+            "upToBytes": 65536,
+            "files": 481
+          },
+          {
+            "upToBytes": 262144,
+            "files": 73
+          },
+          {
+            "upToBytes": 524288,
+            "files": 2
+          },
+          {
+            "upToBytes": 1048576,
+            "files": 0
+          },
+          {
+            "upToBytes": 4194304,
+            "files": 0
+          },
+          {
+            "upToBytes": 10485760,
+            "files": 0
+          },
+          {
+            "upToBytes": "inf",
+            "files": 0
+          }
+        ]
+      },
+      "qualification": {
+        "rule": "plan §5.1/§5.2: Tier-1 files within 1,000–5,000 AND dominant-language share ≥ 70% of Tier-1 files",
+        "tier1InRange": true,
+        "rawTrackedFilesInRange": false,
+        "dominantShare": 0.9171392564587272,
+        "dominantOk": true
+      }
+    },
+    "iata-rl": {
+      "def": {
+        "name": "iata-rl",
+        "tier": "R-L",
+        "role": "Java-dominant R-L candidate (owner's local repo, read-only)",
+        "gitDir": "~/Documents/dev/git/johndoetechguy/iata-one-order",
+        "commit": "a686149cbd00f8186022030d687aed4d8efdb3be",
+        "pathspec": [],
+        "owner": "local",
+        "repo": "iata-one-order"
+      },
+      "extractMs": 263.68020799999977,
+      "ingest": {
+        "snapshotId": 1,
+        "repositoryId": 1,
+        "fileCount": 1369,
+        "totalBytes": 11196328,
+        "skippedSymlinks": 0,
+        "walkMs": 4.596749999999702,
+        "hashMs": 54.96046400002069,
+        "blobWriteMs": 174.62794099998973,
+        "dbMs": 4.009667000000263,
+        "totalMs": 275.0452919999998
+      },
+      "inventory": {
+        "totalFiles": 1369,
+        "totalBytes": 11196328,
+        "tier1Files": 1304,
+        "tier1Bytes": 8027370,
+        "tier1ByLanguage": {
+          "java": {
+            "files": 1304,
+            "bytes": 8027370
+          }
+        },
+        "topExtensions": {
+          "java": {
+            "files": 1304,
+            "bytes": 8027370
+          },
+          "xsd": {
+            "files": 52,
+            "bytes": 2429021
+          },
+          "properties": {
+            "files": 2,
+            "bytes": 183
+          },
+          "md": {
+            "files": 2,
+            "bytes": 3682
+          },
+          "(none)": {
+            "files": 2,
+            "bytes": 23147
+          },
+          "xml": {
+            "files": 2,
+            "bytes": 8379
+          },
+          "gitattributes": {
+            "files": 1,
+            "bytes": 38
+          },
+          "gitignore": {
+            "files": 1,
+            "bytes": 421
+          },
+          "cmd": {
+            "files": 1,
+            "bytes": 8481
+          },
+          "episode": {
+            "files": 1,
+            "bytes": 277830
+          },
+          "json": {
+            "files": 1,
+            "bytes": 417776
+          }
+        },
+        "javaShareOfTier1": 1,
+        "jsTsShareOfTier1": 0,
+        "tier1SizeStats": {
+          "n": 1304,
+          "min": 215,
+          "median": 4364,
+          "p95": 15419,
+          "max": 272278,
+          "mean": 6155.958588957055,
+          "stdev": 8657.633487159086,
+          "cv": 1.4063826716914067
+        },
+        "tier1SizeHistogram": [
+          {
+            "upToBytes": 4096,
+            "files": 605
+          },
+          {
+            "upToBytes": 16384,
+            "files": 648
+          },
+          {
+            "upToBytes": 65536,
+            "files": 50
+          },
+          {
+            "upToBytes": 262144,
+            "files": 0
+          },
+          {
+            "upToBytes": 524288,
+            "files": 1
+          },
+          {
+            "upToBytes": 1048576,
+            "files": 0
+          },
+          {
+            "upToBytes": 4194304,
+            "files": 0
+          },
+          {
+            "upToBytes": 10485760,
+            "files": 0
+          },
+          {
+            "upToBytes": "inf",
+            "files": 0
+          }
+        ]
+      },
+      "qualification": {
+        "rule": "plan §5.1/§5.2: Tier-1 files within 1,000–5,000 AND dominant-language share ≥ 70% of Tier-1 files",
+        "tier1InRange": true,
+        "rawTrackedFilesInRange": true,
+        "dominantShare": 1,
+        "dominantOk": true
+      }
+    }
+  }
+}
