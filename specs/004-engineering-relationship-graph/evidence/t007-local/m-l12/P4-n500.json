@@ -1,0 +1,478 @@
+{
+  "id": "P4-n500",
+  "file": ".cache/t007-local/fixtures/P4-n500.ts",
+  "lang": "typescript",
+  "bytes": 14368,
+  "lines": 605,
+  "budgetMs": 120000,
+  "mL1": {
+    "coldFirstParseMs": 9.359707999999998,
+    "astNodes": 5744,
+    "nodesPerLine": 9.494214876033057,
+    "nodesPerByte": 0.3997772828507795,
+    "hasError": false,
+    "symbols": 102,
+    "parseMs": {
+      "n": 20,
+      "min": 1.7090000000000032,
+      "median": 2.310479000000001,
+      "max": 3.0435840000000027,
+      "p95": 2.505042000000003,
+      "insufficientN": false
+    },
+    "symbolsIrMs": {
+      "n": 20,
+      "min": 0.7336250000000035,
+      "median": 0.8686670000000021,
+      "max": 17.100540999999993,
+      "p95": 1.4596659999999986,
+      "insufficientN": false
+    },
+    "nodesPerMsMedian": 2486.064577951151
+  },
+  "mL2": {
+    "extraction": {
+      "status": "extracted",
+      "language": "typescript",
+      "r": null
+    },
+    "stages": {
+      "symbols": {
+        "iterations": 20,
+        "insufficientN": false,
+        "unitWallMs": {
+          "n": 20,
+          "min": 4.3347499999999854,
+          "median": 4.611728999999997,
+          "max": 6.0303340000000105,
+          "p95": 5.210332999999991,
+          "insufficientN": false
+        },
+        "cpuMs": {
+          "n": 20,
+          "min": 4.335,
+          "median": 4.843,
+          "max": 14.682,
+          "p95": 12.592,
+          "insufficientN": false
+        },
+        "phases": {
+          "total": {
+            "n": 20,
+            "min": 4.332792000000012,
+            "median": 4.608853999999994,
+            "max": 5.860707999999988,
+            "p95": 5.205999999999989,
+            "insufficientN": false
+          },
+          "persist": {
+            "n": 20,
+            "min": 1.6686279999999272,
+            "median": 1.7669379999999109,
+            "max": 2.0989959999998575,
+            "p95": 2.0418329999996843,
+            "insufficientN": false
+          },
+          "complete": {
+            "n": 20,
+            "min": 0.005707999999998492,
+            "median": 0.007166500000010956,
+            "max": 0.06845799999999258,
+            "p95": 0.014415999999982887,
+            "insufficientN": false
+          },
+          "completeLock": {
+            "n": 20,
+            "min": 0.0025420000000053733,
+            "median": 0.0030629999999973734,
+            "max": 0.00633400000000961,
+            "p95": 0.004249999999984766,
+            "insufficientN": false
+          },
+          "extractOther": {
+            "n": 20,
+            "min": 2.658373000000097,
+            "median": 2.821141000000182,
+            "max": 3.821997000000181,
+            "p95": 3.0981710000001215,
+            "insufficientN": false
+          }
+        },
+        "counts": {
+          "symbols": 102,
+          "extractionFailed": 0,
+          "oversize": 0
+        },
+        "states": [
+          "COMPLETED"
+        ]
+      },
+      "contains-dirs": {
+        "iterations": 20,
+        "insufficientN": false,
+        "unitWallMs": {
+          "n": 20,
+          "min": 0.0724999999999909,
+          "median": 0.10543750000000784,
+          "max": 0.4768750000000068,
+          "p95": 0.1349999999999909,
+          "insufficientN": false
+        },
+        "cpuMs": {
+          "n": 20,
+          "min": 0.07,
+          "median": 0.105,
+          "max": 0.745,
+          "p95": 0.647,
+          "insufficientN": false
+        },
+        "phases": {
+          "total": {
+            "n": 20,
+            "min": 0.07133300000000986,
+            "median": 0.10381250000000364,
+            "max": 0.3616670000000113,
+            "p95": 0.13254200000000083,
+            "insufficientN": false
+          },
+          "derive": {
+            "n": 20,
+            "min": 0.0049579999999878055,
+            "median": 0.0052080000000103155,
+            "max": 0.10083399999999187,
+            "p95": 0.015917000000001735,
+            "insufficientN": false
+          },
+          "persistLock": {
+            "n": 20,
+            "min": 0.002166999999985819,
+            "median": 0.002375000000000682,
+            "max": 0.003375000000005457,
+            "p95": 0.003334000000023707,
+            "insufficientN": false
+          },
+          "persistBody": {
+            "n": 20,
+            "min": 0.024374999999992042,
+            "median": 0.027270499999985987,
+            "max": 0.18129099999998743,
+            "p95": 0.042541999999997415,
+            "insufficientN": false
+          },
+          "persistCommit": {
+            "n": 20,
+            "min": 0.035042000000004236,
+            "median": 0.0673334999999895,
+            "max": 0.0760840000000087,
+            "p95": 0.07150000000001455,
+            "insufficientN": false
+          },
+          "persist": {
+            "n": 20,
+            "min": 0.06508299999998712,
+            "median": 0.09658400000000711,
+            "max": 0.2428340000000162,
+            "p95": 0.11533299999999258,
+            "insufficientN": false
+          }
+        },
+        "counts": {
+          "relationships": 1
+        },
+        "states": [
+          "COMPLETED"
+        ]
+      },
+      "contains": {
+        "iterations": 20,
+        "insufficientN": false,
+        "unitWallMs": {
+          "n": 20,
+          "min": 2.176832999999988,
+          "median": 2.307937499999994,
+          "max": 2.9144170000000145,
+          "p95": 2.41191699999996,
+          "insufficientN": false
+        },
+        "cpuMs": {
+          "n": 20,
+          "min": 2.178,
+          "median": 2.3185000000000002,
+          "max": 3.008,
+          "p95": 2.849,
+          "insufficientN": false
+        },
+        "phases": {
+          "total": {
+            "n": 20,
+            "min": 2.175791000000004,
+            "median": 2.306646000000015,
+            "max": 2.911625000000015,
+            "p95": 2.40945899999997,
+            "insufficientN": false
+          },
+          "derive": {
+            "n": 20,
+            "min": 0.05662499999999682,
+            "median": 0.0672284999999988,
+            "max": 0.18704200000001947,
+            "p95": 0.09462500000000773,
+            "insufficientN": false
+          },
+          "persistLock": {
+            "n": 20,
+            "min": 0.0027919999999994616,
+            "median": 0.0030630000000115842,
+            "max": 0.003916000000003805,
+            "p95": 0.003375000000005457,
+            "insufficientN": false
+          },
+          "persistBody": {
+            "n": 20,
+            "min": 1.9941250000000537,
+            "median": 2.1071460000000144,
+            "max": 2.620999999999981,
+            "p95": 2.2289169999999956,
+            "insufficientN": false
+          },
+          "persistCommit": {
+            "n": 20,
+            "min": 0.07175000000000864,
+            "median": 0.10862499999998931,
+            "max": 0.16608300000001464,
+            "p95": 0.15399999999999636,
+            "insufficientN": false
+          },
+          "persist": {
+            "n": 20,
+            "min": 2.1049580000000105,
+            "median": 2.2223755000000125,
+            "max": 2.723042000000021,
+            "p95": 2.348416000000043,
+            "insufficientN": false
+          }
+        },
+        "counts": {
+          "relationships": 103
+        },
+        "states": [
+          "COMPLETED"
+        ]
+      },
+      "parsed": {
+        "iterations": 20,
+        "insufficientN": false,
+        "unitWallMs": {
+          "n": 20,
+          "min": 20.76629200000002,
+          "median": 21.498812499999985,
+          "max": 36.85683399999999,
+          "p95": 23.702792000000045,
+          "insufficientN": false
+        },
+        "cpuMs": {
+          "n": 20,
+          "min": 20.861,
+          "median": 21.813499999999998,
+          "max": 37.125,
+          "p95": 32.83,
+          "insufficientN": false
+        },
+        "phases": {
+          "classify": {
+            "n": 20,
+            "min": 0.0548750000000382,
+            "median": 0.06558300000000372,
+            "max": 0.14237500000001546,
+            "p95": 0.08920799999998508,
+            "insufficientN": false
+          },
+          "read": {
+            "n": 20,
+            "min": 0.0458749999999668,
+            "median": 0.05874950000000467,
+            "max": 0.08208400000000893,
+            "p95": 0.07320799999996552,
+            "insufficientN": false
+          },
+          "parse": {
+            "n": 20,
+            "min": 1.7542500000000132,
+            "median": 1.790083500000037,
+            "max": 1.871167000000014,
+            "p95": 1.854791999999975,
+            "insufficientN": false
+          },
+          "facts": {
+            "n": 20,
+            "min": 1.2546250000000327,
+            "median": 1.334854000000007,
+            "max": 13.245834000000002,
+            "p95": 1.480542000000014,
+            "insufficientN": false
+          },
+          "resolve": {
+            "n": 20,
+            "min": 6.480874999999969,
+            "median": 6.665750000000003,
+            "max": 7.223875000000021,
+            "p95": 7.107916999999986,
+            "insufficientN": false
+          },
+          "resolveSameFile": {
+            "n": 20,
+            "min": 6.332827000000975,
+            "median": 6.525449999999637,
+            "max": 6.893413000000066,
+            "p95": 6.6744530000002555,
+            "insufficientN": false
+          },
+          "resolveByName": {
+            "n": 20,
+            "min": 0,
+            "median": 0,
+            "max": 0,
+            "p95": 0,
+            "insufficientN": false
+          },
+          "resolveFiles": {
+            "n": 20,
+            "min": 0,
+            "median": 0,
+            "max": 0,
+            "p95": 0,
+            "insufficientN": false
+          },
+          "resolveOther": {
+            "n": 20,
+            "min": 0.12411799999961204,
+            "median": 0.1417540000004749,
+            "max": 0.5494219999997654,
+            "p95": 0.27524800000122696,
+            "insufficientN": false
+          },
+          "lookupSameFileCalls": {
+            "n": 20,
+            "min": 500,
+            "median": 500,
+            "max": 500,
+            "p95": 500,
+            "insufficientN": false
+          },
+          "lookupSameFileRows": {
+            "n": 20,
+            "min": 500,
+            "median": 500,
+            "max": 500,
+            "p95": 500,
+            "insufficientN": false
+          },
+          "lookupByNameCalls": {
+            "n": 20,
+            "min": 0,
+            "median": 0,
+            "max": 0,
+            "p95": 0,
+            "insufficientN": false
+          },
+          "lookupByNameRows": {
+            "n": 20,
+            "min": 0,
+            "median": 0,
+            "max": 0,
+            "p95": 0,
+            "insufficientN": false
+          },
+          "keys": {
+            "n": 20,
+            "min": 0.2710840000000303,
+            "median": 0.2926455000000203,
+            "max": 0.39058299999999235,
+            "p95": 0.32816700000000765,
+            "insufficientN": false
+          },
+          "persistLock": {
+            "n": 20,
+            "min": 0.005249999999932697,
+            "median": 0.006812500000023647,
+            "max": 0.014833000000010088,
+            "p95": 0.011957999999992808,
+            "insufficientN": false
+          },
+          "persistBody": {
+            "n": 20,
+            "min": 10.073334000000045,
+            "median": 10.620166499999982,
+            "max": 11.311249999999973,
+            "p95": 11.178833999999995,
+            "insufficientN": false
+          },
+          "persistCommit": {
+            "n": 20,
+            "min": 0.29579100000000835,
+            "median": 0.5298330000000249,
+            "max": 3.2159580000000005,
+            "p95": 2.8748749999999745,
+            "insufficientN": false
+          },
+          "persist": {
+            "n": 20,
+            "min": 10.599916000000007,
+            "median": 11.236062500000003,
+            "max": 13.690166999999974,
+            "p95": 13.297875000000033,
+            "insufficientN": false
+          },
+          "complete": {
+            "n": 20,
+            "min": 0.0014169999999467109,
+            "median": 0.0022084999999947286,
+            "max": 0.009334000000023934,
+            "p95": 0.0038749999999936335,
+            "insufficientN": false
+          },
+          "total": {
+            "n": 20,
+            "min": 20.752250000000004,
+            "median": 21.476624999999984,
+            "max": 36.348708999999985,
+            "p95": 23.680624999999964,
+            "insufficientN": false
+          }
+        },
+        "counts": {
+          "facts": 500,
+          "relationships": 500,
+          "duplicateKeys": 0,
+          "candidates": 0,
+          "astNodes": 5744,
+          "bytes": 14368,
+          "resolved": 500,
+          "ambiguous": 0,
+          "unknown": 0,
+          "lookups": 500
+        },
+        "states": [
+          "COMPLETED"
+        ],
+        "sumOfPhaseMediansMs": 21.44372800000008,
+        "unitTotalMedianMs": 21.476624999999984,
+        "phaseSumError": 0.0015317583651949993
+      }
+    },
+    "tables": {
+      "symbols": 102,
+      "relationships": 604,
+      "candidates": 0
+    },
+    "invariantViolations": [],
+    "dbBytes": 454656
+  },
+  "memory": {
+    "rssBaselineMiB": 85.5,
+    "peakRssMiB": 254.875,
+    "rssGrowthMiB": 169.375,
+    "peakExternalMiB": 69.03759288787842,
+    "samples": 3
+  }
+}

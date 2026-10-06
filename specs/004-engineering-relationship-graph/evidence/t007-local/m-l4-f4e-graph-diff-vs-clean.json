@@ -1,0 +1,42 @@
+{
+  "note": "Diff of each F-4e run DB (still in .cache/t007-local/runs) against clean run 0 using canonicalGraph lines. Run 1: 4 symbol-parent CONTAINS rows are missing and 4 file→symbol CONTAINS rows are extra ⇒ 4 nested symbols lost their parent link (parent_symbol_id NULL) — a silent nesting change under concurrent duplicate execution of the production symbols write (two-pass insert + parent update); all invariants clean.",
+  "runs": [
+    {
+      "run": 0,
+      "hashEqualsClean": true,
+      "missingLines": 0,
+      "extraLines": 0,
+      "missingKinds": [],
+      "extraKinds": [],
+      "extraDanglingRefs": 0
+    },
+    {
+      "run": 1,
+      "hashEqualsClean": false,
+      "missingLines": 4,
+      "extraLines": 4,
+      "missingKinds": [
+        "CONTAINS|EXTRACTED|symbol-parent|<key>|<key>|",
+        "CONTAINS|EXTRACTED|symbol-parent|<key>|<key>|",
+        "CONTAINS|EXTRACTED|symbol-parent|<key>|<key>|",
+        "CONTAINS|EXTRACTED|symbol-parent|<key>|<key>|"
+      ],
+      "extraKinds": [
+        "CONTAINS|EXTRACTED|directory-hierarchy|tests/integration/symbols/symbol-identity-stability.test.ts|<key>|",
+        "CONTAINS|EXTRACTED|directory-hierarchy|tests/integration/symbols/symbol-identity-stability.test.ts|<key>|",
+        "CONTAINS|EXTRACTED|directory-hierarchy|tests/integration/symbols/symbol-identity-stability.test.ts|<key>|",
+        "CONTAINS|EXTRACTED|directory-hierarchy|tests/integration/symbols/symbol-identity-stability.test.ts|<key>|"
+      ],
+      "extraDanglingRefs": 0
+    },
+    {
+      "run": 2,
+      "hashEqualsClean": true,
+      "missingLines": 0,
+      "extraLines": 0,
+      "missingKinds": [],
+      "extraKinds": [],
+      "extraDanglingRefs": 0
+    }
+  ]
+}

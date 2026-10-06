@@ -1,0 +1,98 @@
+{
+  "measurement": "M-L4 part 3 (rev C)",
+  "dataset": "repo-atlas-rm",
+  "environmentHash": "e2b32efaacbd45bf",
+  "loadAvgAtStart": "{ 5.66 5.26 4.70 }",
+  "power": "Now drawing from 'AC Power'  -InternalBattery-0 (id=20578403)\t18%; charging; 11:44 remaining present: true",
+  "cleanReferenceHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+  "cleanRunsEqual": true,
+  "droppedKeyMetricPerCleanRun": [
+    0,
+    0,
+    0
+  ],
+  "test": "F-4e concurrent duplicate execution of the same unit (stale-but-live worker; lease 2 ms ≪ unit time). PROBE — semantics not defined by the contract beyond guarantee 1 'no job silently duplicated'",
+  "attempts": [
+    {
+      "run": 0,
+      "engineError": null,
+      "workers": 4,
+      "leaseMs": 2,
+      "reclaimsSum": 194,
+      "jobs": {
+        "states": {
+          "COMPLETED": 1181,
+          "SKIPPED": 5
+        },
+        "attemptsSum": 0,
+        "reclaimsSum": 194,
+        "jobRows": 1186
+      },
+      "failedSample": [],
+      "hashEqualsClean": true,
+      "invariantAndCompletenessViolations": [],
+      "totals": {
+        "sy": 662,
+        "re": 10755,
+        "ca": 2139,
+        "fe": 473
+      },
+      "totalsEqualClean": true
+    },
+    {
+      "run": 1,
+      "engineError": null,
+      "workers": 4,
+      "leaseMs": 2,
+      "reclaimsSum": 190,
+      "jobs": {
+        "states": {
+          "COMPLETED": 1181,
+          "SKIPPED": 5
+        },
+        "attemptsSum": 0,
+        "reclaimsSum": 190,
+        "jobRows": 1186
+      },
+      "failedSample": [],
+      "hashEqualsClean": false,
+      "invariantAndCompletenessViolations": [],
+      "totals": {
+        "sy": 662,
+        "re": 10755,
+        "ca": 2139,
+        "fe": 473
+      },
+      "totalsEqualClean": true
+    },
+    {
+      "run": 2,
+      "engineError": null,
+      "workers": 4,
+      "leaseMs": 2,
+      "reclaimsSum": 193,
+      "jobs": {
+        "states": {
+          "COMPLETED": 1181,
+          "SKIPPED": 5
+        },
+        "attemptsSum": 0,
+        "reclaimsSum": 193,
+        "jobRows": 1186
+      },
+      "failedSample": [],
+      "hashEqualsClean": true,
+      "invariantAndCompletenessViolations": [],
+      "totals": {
+        "sy": 662,
+        "re": 10755,
+        "ca": 2139,
+        "fe": 473
+      },
+      "totalsEqualClean": true
+    }
+  ],
+  "classification": "CRITERIA-NOT-MET",
+  "note": "classification recorded as measured; no fencing token exists in the contract, none was added",
+  "durationMs": 5933.685542
+}

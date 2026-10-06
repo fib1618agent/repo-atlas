@@ -1,0 +1,932 @@
+{
+  "measurement": "M-L4 part 3",
+  "dataset": "repo-atlas-rm",
+  "environmentHash": "e2b32efaacbd45bf",
+  "loadAvgAtStart": "{ 3.94 4.06 4.28 }",
+  "power": "Now drawing from 'AC Power'  -InternalBattery-0 (id=20578403)\t18%; charging; 12:34 remaining present: true",
+  "cleanReferenceHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+  "cleanRunsEqual": true,
+  "test": "F-6 oversized file",
+  "fixture": {
+    "files": 5,
+    "bytes": 15294720
+  },
+  "cases": [
+    {
+      "label": "m-l4-f6-512k",
+      "capBytes": 524288,
+      "oversizedFiles": [
+        {
+          "path": "src/big-3m.ts",
+          "sizeBytes": 3145730,
+          "reason": "exceeds size ceiling (3145730 > 524288 bytes)"
+        },
+        {
+          "path": "src/big-600k.ts",
+          "sizeBytes": 614422,
+          "reason": "exceeds size ceiling (614422 > 524288 bytes)"
+        },
+        {
+          "path": "src/generated-11m.js",
+          "sizeBytes": 11534349,
+          "reason": "exceeds size ceiling (11534349 > 524288 bytes)"
+        }
+      ],
+      "skippedJobs": [
+        {
+          "kind": "symbols",
+          "unit_ref": "1",
+          "state": "SKIPPED",
+          "error": "exceeds size ceiling (3145730 > 524288 bytes)"
+        },
+        {
+          "kind": "symbols",
+          "unit_ref": "2",
+          "state": "SKIPPED",
+          "error": "exceeds size ceiling (614422 > 524288 bytes)"
+        },
+        {
+          "kind": "symbols",
+          "unit_ref": "3",
+          "state": "SKIPPED",
+          "error": "exceeds size ceiling (11534349 > 524288 bytes)"
+        },
+        {
+          "kind": "parsed",
+          "unit_ref": "1",
+          "state": "SKIPPED",
+          "error": "upstream-not-extracted:skipped_unsupported"
+        },
+        {
+          "kind": "parsed",
+          "unit_ref": "2",
+          "state": "SKIPPED",
+          "error": "upstream-not-extracted:skipped_unsupported"
+        },
+        {
+          "kind": "parsed",
+          "unit_ref": "3",
+          "state": "SKIPPED",
+          "error": "upstream-not-extracted:skipped_unsupported"
+        }
+      ],
+      "structuralMetadataRetained": true,
+      "noSymbolsForSkipped": true,
+      "silentDisappearances": 0,
+      "snapshotStatus": "completed",
+      "invariantViolations": [],
+      "engineWallMs": 115.69154200000048,
+      "peakRssMiB": 460,
+      "parsedFilesExtracted": [
+        "src/payment.ts",
+        "src/pricing.ts"
+      ]
+    },
+    {
+      "label": "m-l4-f6-default10m",
+      "capBytes": "default (10 MiB)",
+      "oversizedFiles": [
+        {
+          "path": "src/generated-11m.js",
+          "sizeBytes": 11534349,
+          "reason": "exceeds size ceiling (11534349 > 10485760 bytes)"
+        }
+      ],
+      "skippedJobs": [
+        {
+          "kind": "symbols",
+          "unit_ref": "3",
+          "state": "SKIPPED",
+          "error": "exceeds size ceiling (11534349 > 10485760 bytes)"
+        },
+        {
+          "kind": "parsed",
+          "unit_ref": "3",
+          "state": "SKIPPED",
+          "error": "upstream-not-extracted:skipped_unsupported"
+        }
+      ],
+      "structuralMetadataRetained": true,
+      "noSymbolsForSkipped": true,
+      "silentDisappearances": 0,
+      "snapshotStatus": "completed",
+      "invariantViolations": [],
+      "engineWallMs": 1292.937750000001,
+      "peakRssMiB": 588,
+      "parsedFilesExtracted": [
+        "src/big-3m.ts",
+        "src/big-600k.ts",
+        "src/payment.ts",
+        "src/pricing.ts"
+      ]
+    },
+    {
+      "label": "m-l4-f6-rm-8k",
+      "capBytes": 8192,
+      "oversizedFiles": [
+        {
+          "path": "scripts/query-cold-start-experiment.ts",
+          "sizeBytes": 13776,
+          "reason": "exceeds size ceiling (13776 > 8192 bytes)"
+        },
+        {
+          "path": "scripts/relationship-combined-single-pass-decomposition.ts",
+          "sizeBytes": 20037,
+          "reason": "exceeds size ceiling (20037 > 8192 bytes)"
+        },
+        {
+          "path": "scripts/relationship-cpu-decomposition.ts",
+          "sizeBytes": 17773,
+          "reason": "exceeds size ceiling (17773 > 8192 bytes)"
+        },
+        {
+          "path": "scripts/relationship-cpu-spike.ts",
+          "sizeBytes": 12748,
+          "reason": "exceeds size ceiling (12748 > 8192 bytes)"
+        },
+        {
+          "path": "scripts/relationship-single-pass-spike.ts",
+          "sizeBytes": 22800,
+          "reason": "exceeds size ceiling (22800 > 8192 bytes)"
+        },
+        {
+          "path": "src/components/atlas/AtlasScene.tsx",
+          "sizeBytes": 23161,
+          "reason": "exceeds size ceiling (23161 > 8192 bytes)"
+        },
+        {
+          "path": "src/components/atlas/RepositoryPanel.tsx",
+          "sizeBytes": 8821,
+          "reason": "exceeds size ceiling (8821 > 8192 bytes)"
+        },
+        {
+          "path": "src/components/atlas/SourcesDialog.tsx",
+          "sizeBytes": 10688,
+          "reason": "exceeds size ceiling (10688 > 8192 bytes)"
+        },
+        {
+          "path": "src/components/repo-intel/RepositoryIntelligenceView.tsx",
+          "sizeBytes": 12663,
+          "reason": "exceeds size ceiling (12663 > 8192 bytes)"
+        },
+        {
+          "path": "src/components/repo-intel/StructureMap.tsx",
+          "sizeBytes": 11266,
+          "reason": "exceeds size ceiling (11266 > 8192 bytes)"
+        },
+        {
+          "path": "src/components/settings/ConfigurationSection.tsx",
+          "sizeBytes": 8388,
+          "reason": "exceeds size ceiling (8388 > 8192 bytes)"
+        },
+        {
+          "path": "src/components/ui/chart.tsx",
+          "sizeBytes": 10570,
+          "reason": "exceeds size ceiling (10570 > 8192 bytes)"
+        },
+        {
+          "path": "src/components/ui/menubar.tsx",
+          "sizeBytes": 8515,
+          "reason": "exceeds size ceiling (8515 > 8192 bytes)"
+        },
+        {
+          "path": "src/components/ui/sidebar.tsx",
+          "sizeBytes": 23975,
+          "reason": "exceeds size ceiling (23975 > 8192 bytes)"
+        },
+        {
+          "path": "src/lib/code-intel/persistence/d1-client.ts",
+          "sizeBytes": 19615,
+          "reason": "exceeds size ceiling (19615 > 8192 bytes)"
+        },
+        {
+          "path": "src/lib/code-intel/persistence/symbol-d1-client.ts",
+          "sizeBytes": 21286,
+          "reason": "exceeds size ceiling (21286 > 8192 bytes)"
+        },
+        {
+          "path": "src/lib/code-intel/symbol.functions.ts",
+          "sizeBytes": 8227,
+          "reason": "exceeds size ceiling (8227 > 8192 bytes)"
+        },
+        {
+          "path": "src/lib/code-intel/symbols/grammar-provider.ts",
+          "sizeBytes": 13042,
+          "reason": "exceeds size ceiling (13042 > 8192 bytes)"
+        },
+        {
+          "path": "src/lib/github-fetch.ts",
+          "sizeBytes": 11321,
+          "reason": "exceeds size ceiling (11321 > 8192 bytes)"
+        },
+        {
+          "path": "src/lib/repo-intel/intelligence-read-model.ts",
+          "sizeBytes": 13708,
+          "reason": "exceeds size ceiling (13708 > 8192 bytes)"
+        },
+        {
+          "path": "src/routes/about.tsx",
+          "sizeBytes": 11921,
+          "reason": "exceeds size ceiling (11921 > 8192 bytes)"
+        },
+        {
+          "path": "src/routes/catalogue.tsx",
+          "sizeBytes": 15383,
+          "reason": "exceeds size ceiling (15383 > 8192 bytes)"
+        },
+        {
+          "path": "src/routes/categories.tsx",
+          "sizeBytes": 11969,
+          "reason": "exceeds size ceiling (11969 > 8192 bytes)"
+        },
+        {
+          "path": "src/routes/index.tsx",
+          "sizeBytes": 25903,
+          "reason": "exceeds size ceiling (25903 > 8192 bytes)"
+        },
+        {
+          "path": "src/routes/insights.tsx",
+          "sizeBytes": 18778,
+          "reason": "exceeds size ceiling (18778 > 8192 bytes)"
+        },
+        {
+          "path": "tests/contract/symbols/symbol-d1-client.test.ts",
+          "sizeBytes": 24277,
+          "reason": "exceeds size ceiling (24277 > 8192 bytes)"
+        },
+        {
+          "path": "tests/integration/control-plane/code-intel-status.test.ts",
+          "sizeBytes": 9172,
+          "reason": "exceeds size ceiling (9172 > 8192 bytes)"
+        },
+        {
+          "path": "tests/integration/repo-intel/read-model.test.ts",
+          "sizeBytes": 19633,
+          "reason": "exceeds size ceiling (19633 > 8192 bytes)"
+        },
+        {
+          "path": "tests/integration/symbols/extraction-pipeline.test.ts",
+          "sizeBytes": 11042,
+          "reason": "exceeds size ceiling (11042 > 8192 bytes)"
+        },
+        {
+          "path": "tests/integration/symbols/symbol-worker.test.ts",
+          "sizeBytes": 11761,
+          "reason": "exceeds size ceiling (11761 > 8192 bytes)"
+        },
+        {
+          "path": "tests/unit/control-plane/configuration-read-model.test.ts",
+          "sizeBytes": 14261,
+          "reason": "exceeds size ceiling (14261 > 8192 bytes)"
+        },
+        {
+          "path": "tests/unit/control-plane/preferences-persistence.test.ts",
+          "sizeBytes": 8835,
+          "reason": "exceeds size ceiling (8835 > 8192 bytes)"
+        },
+        {
+          "path": "tests/unit/control-plane/settings-ui.test.tsx",
+          "sizeBytes": 14671,
+          "reason": "exceeds size ceiling (14671 > 8192 bytes)"
+        },
+        {
+          "path": "tests/unit/repo-intel/repo-intel-ui.test.tsx",
+          "sizeBytes": 9661,
+          "reason": "exceeds size ceiling (9661 > 8192 bytes)"
+        }
+      ],
+      "skippedJobs": [
+        {
+          "kind": "symbols",
+          "unit_ref": "98",
+          "state": "SKIPPED",
+          "error": "exceeds size ceiling (13776 > 8192 bytes)"
+        },
+        {
+          "kind": "symbols",
+          "unit_ref": "99",
+          "state": "SKIPPED",
+          "error": "exceeds size ceiling (20037 > 8192 bytes)"
+        },
+        {
+          "kind": "symbols",
+          "unit_ref": "100",
+          "state": "SKIPPED",
+          "error": "exceeds size ceiling (17773 > 8192 bytes)"
+        },
+        {
+          "kind": "symbols",
+          "unit_ref": "102",
+          "state": "SKIPPED",
+          "error": "exceeds size ceiling (12748 > 8192 bytes)"
+        },
+        {
+          "kind": "symbols",
+          "unit_ref": "103",
+          "state": "SKIPPED",
+          "error": "exceeds size ceiling (22800 > 8192 bytes)"
+        },
+        {
+          "kind": "symbols",
+          "unit_ref": "237",
+          "state": "SKIPPED",
+          "error": "exceeds size ceiling (23161 > 8192 bytes)"
+        },
+        {
+          "kind": "symbols",
+          "unit_ref": "240",
+          "state": "SKIPPED",
+          "error": "exceeds size ceiling (8821 > 8192 bytes)"
+        },
+        {
+          "kind": "symbols",
+          "unit_ref": "241",
+          "state": "SKIPPED",
+          "error": "exceeds size ceiling (10688 > 8192 bytes)"
+        },
+        {
+          "kind": "symbols",
+          "unit_ref": "250",
+          "state": "SKIPPED",
+          "error": "exceeds size ceiling (12663 > 8192 bytes)"
+        },
+        {
+          "kind": "symbols",
+          "unit_ref": "251",
+          "state": "SKIPPED",
+          "error": "exceeds size ceiling (11266 > 8192 bytes)"
+        },
+        {
+          "kind": "symbols",
+          "unit_ref": "255",
+          "state": "SKIPPED",
+          "error": "exceeds size ceiling (8388 > 8192 bytes)"
+        },
+        {
+          "kind": "symbols",
+          "unit_ref": "268",
+          "state": "SKIPPED",
+          "error": "exceeds size ceiling (10570 > 8192 bytes)"
+        },
+        {
+          "kind": "symbols",
+          "unit_ref": "281",
+          "state": "SKIPPED",
+          "error": "exceeds size ceiling (8515 > 8192 bytes)"
+        },
+        {
+          "kind": "symbols",
+          "unit_ref": "292",
+          "state": "SKIPPED",
+          "error": "exceeds size ceiling (23975 > 8192 bytes)"
+        },
+        {
+          "kind": "symbols",
+          "unit_ref": "329",
+          "state": "SKIPPED",
+          "error": "exceeds size ceiling (19615 > 8192 bytes)"
+        },
+        {
+          "kind": "symbols",
+          "unit_ref": "331",
+          "state": "SKIPPED",
+          "error": "exceeds size ceiling (21286 > 8192 bytes)"
+        },
+        {
+          "kind": "symbols",
+          "unit_ref": "342",
+          "state": "SKIPPED",
+          "error": "exceeds size ceiling (8227 > 8192 bytes)"
+        },
+        {
+          "kind": "symbols",
+          "unit_ref": "344",
+          "state": "SKIPPED",
+          "error": "exceeds size ceiling (13042 > 8192 bytes)"
+        },
+        {
+          "kind": "symbols",
+          "unit_ref": "366",
+          "state": "SKIPPED",
+          "error": "exceeds size ceiling (11321 > 8192 bytes)"
+        },
+        {
+          "kind": "symbols",
+          "unit_ref": "372",
+          "state": "SKIPPED",
+          "error": "exceeds size ceiling (13708 > 8192 bytes)"
+        },
+        {
+          "kind": "symbols",
+          "unit_ref": "400",
+          "state": "SKIPPED",
+          "error": "exceeds size ceiling (11921 > 8192 bytes)"
+        },
+        {
+          "kind": "symbols",
+          "unit_ref": "401",
+          "state": "SKIPPED",
+          "error": "exceeds size ceiling (15383 > 8192 bytes)"
+        },
+        {
+          "kind": "symbols",
+          "unit_ref": "402",
+          "state": "SKIPPED",
+          "error": "exceeds size ceiling (11969 > 8192 bytes)"
+        },
+        {
+          "kind": "symbols",
+          "unit_ref": "403",
+          "state": "SKIPPED",
+          "error": "exceeds size ceiling (25903 > 8192 bytes)"
+        },
+        {
+          "kind": "symbols",
+          "unit_ref": "404",
+          "state": "SKIPPED",
+          "error": "exceeds size ceiling (18778 > 8192 bytes)"
+        },
+        {
+          "kind": "symbols",
+          "unit_ref": "424",
+          "state": "SKIPPED",
+          "error": "exceeds size ceiling (24277 > 8192 bytes)"
+        },
+        {
+          "kind": "symbols",
+          "unit_ref": "438",
+          "state": "SKIPPED",
+          "error": "exceeds size ceiling (9172 > 8192 bytes)"
+        },
+        {
+          "kind": "symbols",
+          "unit_ref": "439",
+          "state": "SKIPPED",
+          "error": "exceeds size ceiling (19633 > 8192 bytes)"
+        },
+        {
+          "kind": "symbols",
+          "unit_ref": "444",
+          "state": "SKIPPED",
+          "error": "exceeds size ceiling (11042 > 8192 bytes)"
+        },
+        {
+          "kind": "symbols",
+          "unit_ref": "448",
+          "state": "SKIPPED",
+          "error": "exceeds size ceiling (11761 > 8192 bytes)"
+        },
+        {
+          "kind": "symbols",
+          "unit_ref": "457",
+          "state": "SKIPPED",
+          "error": "exceeds size ceiling (14261 > 8192 bytes)"
+        },
+        {
+          "kind": "symbols",
+          "unit_ref": "460",
+          "state": "SKIPPED",
+          "error": "exceeds size ceiling (8835 > 8192 bytes)"
+        },
+        {
+          "kind": "symbols",
+          "unit_ref": "463",
+          "state": "SKIPPED",
+          "error": "exceeds size ceiling (14671 > 8192 bytes)"
+        },
+        {
+          "kind": "symbols",
+          "unit_ref": "469",
+          "state": "SKIPPED",
+          "error": "exceeds size ceiling (9661 > 8192 bytes)"
+        },
+        {
+          "kind": "parsed",
+          "unit_ref": "98",
+          "state": "SKIPPED",
+          "error": "upstream-not-extracted:skipped_unsupported"
+        },
+        {
+          "kind": "parsed",
+          "unit_ref": "99",
+          "state": "SKIPPED",
+          "error": "upstream-not-extracted:skipped_unsupported"
+        },
+        {
+          "kind": "parsed",
+          "unit_ref": "100",
+          "state": "SKIPPED",
+          "error": "upstream-not-extracted:skipped_unsupported"
+        },
+        {
+          "kind": "parsed",
+          "unit_ref": "102",
+          "state": "SKIPPED",
+          "error": "upstream-not-extracted:skipped_unsupported"
+        },
+        {
+          "kind": "parsed",
+          "unit_ref": "103",
+          "state": "SKIPPED",
+          "error": "upstream-not-extracted:skipped_unsupported"
+        },
+        {
+          "kind": "parsed",
+          "unit_ref": "237",
+          "state": "SKIPPED",
+          "error": "upstream-not-extracted:skipped_unsupported"
+        },
+        {
+          "kind": "parsed",
+          "unit_ref": "240",
+          "state": "SKIPPED",
+          "error": "upstream-not-extracted:skipped_unsupported"
+        },
+        {
+          "kind": "parsed",
+          "unit_ref": "241",
+          "state": "SKIPPED",
+          "error": "upstream-not-extracted:skipped_unsupported"
+        },
+        {
+          "kind": "parsed",
+          "unit_ref": "250",
+          "state": "SKIPPED",
+          "error": "upstream-not-extracted:skipped_unsupported"
+        },
+        {
+          "kind": "parsed",
+          "unit_ref": "251",
+          "state": "SKIPPED",
+          "error": "upstream-not-extracted:skipped_unsupported"
+        },
+        {
+          "kind": "parsed",
+          "unit_ref": "255",
+          "state": "SKIPPED",
+          "error": "upstream-not-extracted:skipped_unsupported"
+        },
+        {
+          "kind": "parsed",
+          "unit_ref": "268",
+          "state": "SKIPPED",
+          "error": "upstream-not-extracted:skipped_unsupported"
+        },
+        {
+          "kind": "parsed",
+          "unit_ref": "281",
+          "state": "SKIPPED",
+          "error": "upstream-not-extracted:skipped_unsupported"
+        },
+        {
+          "kind": "parsed",
+          "unit_ref": "292",
+          "state": "SKIPPED",
+          "error": "upstream-not-extracted:skipped_unsupported"
+        },
+        {
+          "kind": "parsed",
+          "unit_ref": "329",
+          "state": "SKIPPED",
+          "error": "upstream-not-extracted:skipped_unsupported"
+        },
+        {
+          "kind": "parsed",
+          "unit_ref": "331",
+          "state": "SKIPPED",
+          "error": "upstream-not-extracted:skipped_unsupported"
+        },
+        {
+          "kind": "parsed",
+          "unit_ref": "342",
+          "state": "SKIPPED",
+          "error": "upstream-not-extracted:skipped_unsupported"
+        },
+        {
+          "kind": "parsed",
+          "unit_ref": "344",
+          "state": "SKIPPED",
+          "error": "upstream-not-extracted:skipped_unsupported"
+        },
+        {
+          "kind": "parsed",
+          "unit_ref": "366",
+          "state": "SKIPPED",
+          "error": "upstream-not-extracted:skipped_unsupported"
+        },
+        {
+          "kind": "parsed",
+          "unit_ref": "372",
+          "state": "SKIPPED",
+          "error": "upstream-not-extracted:skipped_unsupported"
+        },
+        {
+          "kind": "parsed",
+          "unit_ref": "400",
+          "state": "SKIPPED",
+          "error": "upstream-not-extracted:skipped_unsupported"
+        },
+        {
+          "kind": "parsed",
+          "unit_ref": "401",
+          "state": "SKIPPED",
+          "error": "upstream-not-extracted:skipped_unsupported"
+        },
+        {
+          "kind": "parsed",
+          "unit_ref": "402",
+          "state": "SKIPPED",
+          "error": "upstream-not-extracted:skipped_unsupported"
+        },
+        {
+          "kind": "parsed",
+          "unit_ref": "403",
+          "state": "SKIPPED",
+          "error": "upstream-not-extracted:skipped_unsupported"
+        },
+        {
+          "kind": "parsed",
+          "unit_ref": "404",
+          "state": "SKIPPED",
+          "error": "upstream-not-extracted:skipped_unsupported"
+        },
+        {
+          "kind": "parsed",
+          "unit_ref": "424",
+          "state": "SKIPPED",
+          "error": "upstream-not-extracted:skipped_unsupported"
+        },
+        {
+          "kind": "parsed",
+          "unit_ref": "438",
+          "state": "SKIPPED",
+          "error": "upstream-not-extracted:skipped_unsupported"
+        },
+        {
+          "kind": "parsed",
+          "unit_ref": "439",
+          "state": "SKIPPED",
+          "error": "upstream-not-extracted:skipped_unsupported"
+        },
+        {
+          "kind": "parsed",
+          "unit_ref": "444",
+          "state": "SKIPPED",
+          "error": "upstream-not-extracted:skipped_unsupported"
+        },
+        {
+          "kind": "parsed",
+          "unit_ref": "448",
+          "state": "SKIPPED",
+          "error": "upstream-not-extracted:skipped_unsupported"
+        },
+        {
+          "kind": "parsed",
+          "unit_ref": "457",
+          "state": "SKIPPED",
+          "error": "upstream-not-extracted:skipped_unsupported"
+        },
+        {
+          "kind": "parsed",
+          "unit_ref": "460",
+          "state": "SKIPPED",
+          "error": "upstream-not-extracted:skipped_unsupported"
+        },
+        {
+          "kind": "parsed",
+          "unit_ref": "463",
+          "state": "SKIPPED",
+          "error": "upstream-not-extracted:skipped_unsupported"
+        },
+        {
+          "kind": "parsed",
+          "unit_ref": "469",
+          "state": "SKIPPED",
+          "error": "upstream-not-extracted:skipped_unsupported"
+        }
+      ],
+      "structuralMetadataRetained": true,
+      "noSymbolsForSkipped": true,
+      "silentDisappearances": 0,
+      "snapshotStatus": "completed",
+      "invariantViolations": [],
+      "engineWallMs": 1354.3019999999997,
+      "peakRssMiB": 594,
+      "parsedFilesExtracted": [
+        "eslint.config.js",
+        "nitro.config.ts",
+        "plugins/cloudflare-queue.ts",
+        "plugins/cloudflare-symbol-queue.ts",
+        "scripts/atlas-db-init.ts",
+        "scripts/atlas-db-reset.ts",
+        "scripts/atlas-export.ts",
+        "scripts/relationship-cpu-real-files.ts",
+        "src/components/atlas/AtlasControls.tsx",
+        "src/components/atlas/AtlasLoading.tsx",
+        "src/components/atlas/ConnectedSourcesDialog.tsx",
+        "src/components/atlas/RepoAtlasLogo.tsx",
+        "src/components/atlas/SourcesMenu.tsx",
+        "src/components/repo-intel/Breadcrumb.tsx",
+        "src/components/repo-intel/CompositionBar.tsx",
+        "src/components/repo-intel/IntelligenceButton.tsx",
+        "src/components/repo-intel/IntelligenceLink.tsx",
+        "src/components/repo-intel/IntelligenceStatePanel.tsx",
+        "src/components/repo-intel/RelationshipLayerNotice.tsx",
+        "src/components/repo-intel/RepositoryHeader.tsx",
+        "src/components/repo-intel/StructureOutline.tsx",
+        "src/components/repo-intel/SymbolPanel.tsx",
+        "src/components/settings/CodeIntelStatusSection.tsx",
+        "src/components/settings/PreferencesSection.tsx",
+        "src/components/ui/accordion.tsx",
+        "src/components/ui/alert-dialog.tsx",
+        "src/components/ui/alert.tsx",
+        "src/components/ui/aspect-ratio.tsx",
+        "src/components/ui/avatar.tsx",
+        "src/components/ui/badge.tsx",
+        "src/components/ui/breadcrumb.tsx",
+        "src/components/ui/button.tsx",
+        "src/components/ui/calendar.tsx",
+        "src/components/ui/card.tsx",
+        "src/components/ui/carousel.tsx",
+        "src/components/ui/checkbox.tsx",
+        "src/components/ui/collapsible.tsx",
+        "src/components/ui/context-menu.tsx",
+        "src/components/ui/dialog.tsx",
+        "src/components/ui/drawer.tsx",
+        "src/components/ui/dropdown-menu.tsx",
+        "src/components/ui/form.tsx",
+        "src/components/ui/hover-card.tsx",
+        "src/components/ui/input-otp.tsx",
+        "src/components/ui/input.tsx",
+        "src/components/ui/label.tsx",
+        "src/components/ui/navigation-menu.tsx",
+        "src/components/ui/pagination.tsx",
+        "src/components/ui/popover.tsx",
+        "src/components/ui/progress.tsx",
+        "src/components/ui/radio-group.tsx",
+        "src/components/ui/resizable.tsx",
+        "src/components/ui/scroll-area.tsx",
+        "src/components/ui/select.tsx",
+        "src/components/ui/separator.tsx",
+        "src/components/ui/sheet.tsx",
+        "src/components/ui/skeleton.tsx",
+        "src/components/ui/slider.tsx",
+        "src/components/ui/sonner.tsx",
+        "src/components/ui/switch.tsx",
+        "src/components/ui/table.tsx",
+        "src/components/ui/tabs.tsx",
+        "src/components/ui/textarea.tsx",
+        "src/components/ui/toggle-group.tsx",
+        "src/components/ui/toggle.tsx",
+        "src/components/ui/tooltip.tsx",
+        "src/hooks/use-mobile.tsx",
+        "src/lib/ai/anthropic.ts",
+        "src/lib/ai/gemini.ts",
+        "src/lib/ai/grok.ts",
+        "src/lib/ai/openai.ts",
+        "src/lib/ai/providers.ts",
+        "src/lib/ai/types.ts",
+        "src/lib/ai-summary.functions.ts",
+        "src/lib/atlas-config.ts",
+        "src/lib/atlas-error-ui.ts",
+        "src/lib/atlas-errors.ts",
+        "src/lib/atlas-store.ts",
+        "src/lib/code-intel/acquisition/archive-path.ts",
+        "src/lib/code-intel/acquisition/archive-pipeline.ts",
+        "src/lib/code-intel/acquisition/content-address.ts",
+        "src/lib/code-intel/acquisition/incremental-pipeline.ts",
+        "src/lib/code-intel/acquisition/stream-utils.ts",
+        "src/lib/code-intel/acquisition/tar-stream.ts",
+        "src/lib/code-intel/config.ts",
+        "src/lib/code-intel/domain/relationship.ts",
+        "src/lib/code-intel/domain/repository-identity.ts",
+        "src/lib/code-intel/domain/snapshot.ts",
+        "src/lib/code-intel/domain/symbol.ts",
+        "src/lib/code-intel/feature-001-server-fn-registration.tsx",
+        "src/lib/code-intel/feature-002-server-fn-registration.tsx",
+        "src/lib/code-intel/persistence/cloudflare-env.ts",
+        "src/lib/code-intel/persistence/r2-client.ts",
+        "src/lib/code-intel/providers/content-provider.ts",
+        "src/lib/code-intel/providers/github-content-provider.ts",
+        "src/lib/code-intel/providers/metadata-provider.ts",
+        "src/lib/code-intel/queue/snapshot-worker.ts",
+        "src/lib/code-intel/relationships/relationship-identity.ts",
+        "src/lib/code-intel/snapshot.functions.ts",
+        "src/lib/code-intel/symbols/extraction-pipeline.ts",
+        "src/lib/code-intel/symbols/language-detector.ts",
+        "src/lib/code-intel/symbols/scm-modules.d.ts",
+        "src/lib/code-intel/symbols/symbol-identity.ts",
+        "src/lib/code-intel/symbols/symbol-worker.ts",
+        "src/lib/code-intel/symbols/to-intermediate-representation.ts",
+        "src/lib/code-intel/symbols/wasm-modules.d.ts",
+        "src/lib/connected-sources.ts",
+        "src/lib/control-plane/code-intel-status.ts",
+        "src/lib/control-plane/configuration-collector.ts",
+        "src/lib/control-plane/configuration-read-model.ts",
+        "src/lib/control-plane/control-plane.functions.ts",
+        "src/lib/control-plane/preferences.ts",
+        "src/lib/control-plane/setting-registry.ts",
+        "src/lib/error-capture.ts",
+        "src/lib/error-page.ts",
+        "src/lib/error-reporting.ts",
+        "src/lib/export-repositories.ts",
+        "src/lib/github-url.ts",
+        "src/lib/repo-intel/composition.ts",
+        "src/lib/repo-intel/copy.ts",
+        "src/lib/repo-intel/format.ts",
+        "src/lib/repo-intel/identity.ts",
+        "src/lib/repo-intel/keyboard.ts",
+        "src/lib/repo-intel/language-colors.ts",
+        "src/lib/repo-intel/layout.ts",
+        "src/lib/repo-intel/level-items.ts",
+        "src/lib/repo-intel/limits.ts",
+        "src/lib/repo-intel/paths.ts",
+        "src/lib/repo-intel/relationship-layer.ts",
+        "src/lib/repo-intel/repository-context.ts",
+        "src/lib/repo-intel/repository-intelligence.functions.ts",
+        "src/lib/repo-intel/search.ts",
+        "src/lib/repo-intel/states.ts",
+        "src/lib/repo-intel/symbol-tree.ts",
+        "src/lib/repo-intel/use-repository-context.ts",
+        "src/lib/repositories.functions.ts",
+        "src/lib/repositories.ts",
+        "src/lib/repository-intelligence-extension-points.ts",
+        "src/lib/source-input-mode.ts",
+        "src/lib/sources-store.ts",
+        "src/lib/storage/atlas-store.ts",
+        "src/lib/use-atlas-repositories.ts",
+        "src/lib/utils.ts",
+        "src/routeTree.gen.ts",
+        "src/router.tsx",
+        "src/routes/__root.tsx",
+        "src/routes/repository.$owner.$name.tsx",
+        "src/routes/settings.tsx",
+        "src/server.ts",
+        "src/start.ts",
+        "src/types/bun-sqlite.d.ts",
+        "src/types/r3f.d.ts",
+        "tests/contract/code-intel/archive-path.test.ts",
+        "tests/contract/code-intel/commit-sha-shape.test.ts",
+        "tests/contract/code-intel/idempotent-insert.test.ts",
+        "tests/contract/code-intel/ref-resolution.test.ts",
+        "tests/contract/code-intel/repository-identity.test.ts",
+        "tests/contract/code-intel/tar-stream.test.ts",
+        "tests/contract/symbols/grammar-provider.test.ts",
+        "tests/contract/symbols/java-extraction.test.ts",
+        "tests/contract/symbols/javascript-extraction.test.ts",
+        "tests/contract/symbols/language-detector.test.ts",
+        "tests/contract/symbols/list-symbols-filtering.test.ts",
+        "tests/contract/symbols/list-symbols-pagination.test.ts",
+        "tests/contract/symbols/symbol-identity.test.ts",
+        "tests/contract/symbols/symbol-provenance.test.ts",
+        "tests/contract/symbols/to-intermediate-representation.test.ts",
+        "tests/contract/symbols/typescript-extraction.test.ts",
+        "tests/integration/code-intel/attempt-level-retry.test.ts",
+        "tests/integration/code-intel/checkpoint-resume.test.ts",
+        "tests/integration/code-intel/duplicate-delivery.test.ts",
+        "tests/integration/code-intel/file-inventory.test.ts",
+        "tests/integration/code-intel/github-archive-root.test.ts",
+        "tests/integration/code-intel/partial-failure.test.ts",
+        "tests/integration/code-intel/persistence-across-invocations.test.ts",
+        "tests/integration/code-intel/repository-history.test.ts",
+        "tests/integration/code-intel/reproducible-snapshot.test.ts",
+        "tests/integration/repo-intel/real-data.test.ts",
+        "tests/integration/repositories/initial-sources.test.ts",
+        "tests/integration/symbols/extract-snapshot-symbols.test.ts",
+        "tests/integration/symbols/extract-symbols.test.ts",
+        "tests/integration/symbols/list-symbols-paging.test.ts",
+        "tests/integration/symbols/partial-coverage.test.ts",
+        "tests/integration/symbols/symbol-identity-stability.test.ts",
+        "tests/support/d1-sqlite-adapter.ts",
+        "tests/support/fake-github.ts",
+        "tests/support/memory-r2.ts",
+        "tests/support/tar-fixture.ts",
+        "tests/support/wasm-test-modules.ts",
+        "tests/unit/atlas-config.test.ts",
+        "tests/unit/connected-sources.test.ts",
+        "tests/unit/control-plane/client-boundary.test.ts",
+        "tests/unit/control-plane/configuration-redaction.test.ts",
+        "tests/unit/control-plane/deferred-scope.test.ts",
+        "tests/unit/control-plane/preferences.test.ts",
+        "tests/unit/control-plane/setting-registry.test.ts",
+        "tests/unit/repo-intel/deferred-scope.test.ts",
+        "tests/unit/repo-intel/identity.test.ts",
+        "tests/unit/repo-intel/keyboard-context.test.ts",
+        "tests/unit/repo-intel/layout.test.ts",
+        "tests/unit/repo-intel/relationship-layer.test.ts",
+        "tests/unit/source-input-mode.test.ts",
+        "vite.config.ts"
+      ]
+    }
+  ],
+  "expectations": {
+    "cap512k_skipsAll3Over512KiB": true,
+    "default10m_skipsOnlyTheElevenMiB": true,
+    "structuralMetadataRetainedEverywhere": true,
+    "noSilentDisappearance": true,
+    "invariantsClean": true,
+    "r_m_lowCapSkipsSomeAndKeepsRest": true
+  },
+  "classification": "PASS-CRITERIA-MET",
+  "durationMs": 3059.0677079999987
+}

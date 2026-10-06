@@ -1,0 +1,5886 @@
+{
+  "measurement": "M-L3 SQLite characterization",
+  "basis": "LOCAL-RUNTIME (bun:sqlite) + PROTOTYPE relationship rows; real R-M rows as base, larger scales are SYNTHETIC multiplications (ids offset, fresh keys; symbols cloned with name suffix) — NOT R-S/R-L measurements",
+  "harnessVersion": "t007-local-harness/1",
+  "environment": {
+    "static": {
+      "os": "macOS 14.5 (23F79), Darwin 23.5.0 arm64",
+      "cpuModel": "Apple M3 Max",
+      "physicalCores": 14,
+      "logicalCores": 14,
+      "perfLevels": "2",
+      "ramBytes": 38654705664,
+      "storage": "Device Name: APPLE SSD AP1024Z           Medium Type: SSD",
+      "bunVersion": "1.3.14",
+      "bunRevision": "0d9b296af33f2b851fcbf4df3e9ec89751734ba4",
+      "nodeVersion": "v22.22.3",
+      "typescriptVersion": "Version 5.9.3",
+      "webTreeSitterVersion": "0.25.10",
+      "sqliteVersion": "3.43.2",
+      "sqliteDriver": "bun:sqlite (built-in)",
+      "repoAtlasCommit": "430e1703386ebd9264122d54a3ba398d43b363f9",
+      "repoAtlasBranch": "feat/atlas-marble-interaction",
+      "packageName": "tanstack_start_ts",
+      "harnessVersion": "t007-local-harness/1",
+      "workerRuntime": "Bun Worker threads (one web-tree-sitter WASM instance + one bun:sqlite connection per worker)",
+      "sqliteJournalModeDefault": "WAL (synchronous=NORMAL, busy_timeout=15000) — recorded variable in M-L3",
+      "atlasEnv": {
+        "BUN_INSTALL": "/Users/imdadareeph/.bun"
+      }
+    },
+    "dynamic": {
+      "capturedAt": "2026-09-26T01:42:01.910Z",
+      "loadAvg": "{ 2.06 2.13 2.28 }",
+      "power": "Now drawing from 'AC Power'  -InternalBattery-0 (id=20578403)\t15%; charging; 4:52 remaining present: true",
+      "thermal": "Note: No thermal warning level has been recorded Note: No performance warning level has been recorded Note: No CPU power status has been recorded",
+      "topCpuProcesses": "23.8 /System/Library/PrivateFrameworks/SkyLight.framework/Resources/WindowServer; 16.6 /Applications/Google Chrome.app/Contents/MacOS/Google Chrome;  6.9 /Applications/Google Chrome.app/Contents/Frameworks/Google Chrome Framework.framework/Versions/153.0.8010.48/Helpers/Google Chrome Helper.app/Contents/MacOS/Google Chrome Helper;  3.3 /usr/libexec/ApplicationFirewall/socketfilterfw;  2.9 bun;",
+      "freeDiskGiB": "69"
+    },
+    "envHash": "e2b32efaacbd45bf"
+  },
+  "loadAvg": {
+    "start": [
+      1.98,
+      2.12,
+      2.27
+    ],
+    "afterWrites": [
+      2.68,
+      2.53,
+      2.45
+    ],
+    "end": [
+      2.59,
+      2.52,
+      2.44
+    ]
+  },
+  "config": {
+    "journalModes": [
+      "WAL",
+      "DELETE"
+    ],
+    "synchronous": "NORMAL",
+    "busyTimeoutMs": 15000,
+    "foreignKeys": "ON",
+    "schema": "production data/code-intel-schema.sql + harness scratch extension (unchanged)",
+    "pageSizeQueries": 100,
+    "samplesPerClassPerPass": 500,
+    "readRepetitions": 3,
+    "scales": [
+      1,
+      4,
+      16,
+      64
+    ],
+    "idOffsetPerCopy": 1000000,
+    "coldDefinition": "fresh connection, first pass; SQLite page cache + prepared statements cold; OS page cache NOT dropped (needs privileges) — 'connection-cold / OS-warm'",
+    "warmDefinition": "passes 2–4 on the same connection",
+    "writeMethod": "BEGIN IMMEDIATE … COMMIT batches; prepared statements; INSERT relationships ON CONFLICT DO NOTHING then candidates via lastInsertRowid (same as prototype persistRows); fresh VACUUMed empty-relationships DB copy + fresh connection per run",
+    "notPreRegistered_notRun": [
+      "synchronous=FULL",
+      "concurrent reader/writer contention (M-L4 covers write-lock wait)",
+      "2-hop traversal",
+      "R-S/R-L real-tier DB sizes"
+    ]
+  },
+  "baseGraph": {
+    "snapshotId": 1,
+    "relationships": 10755,
+    "candidates": 2139,
+    "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+    "referenceHashMatch": true,
+    "outDegree": {
+      "n": 833,
+      "min": 1,
+      "median": 4,
+      "p95": 54,
+      "max": 356,
+      "mean": 12.911164465786314,
+      "stdev": 29.692975272221695,
+      "cv": 2.299790646374772
+    },
+    "inDegree": {
+      "n": 1238,
+      "min": 1,
+      "median": 1,
+      "p95": 12,
+      "max": 188,
+      "mean": 3.264135702746365,
+      "stdev": 7.564831671027918,
+      "cv": 2.317560408001129
+    },
+    "hubOut": [
+      "file|424",
+      356
+    ],
+    "hubIn": [
+      "symbol|483",
+      188
+    ]
+  },
+  "writes": [
+    {
+      "scale": 1,
+      "batch": "all",
+      "journal": "WAL",
+      "synchronous": "NORMAL",
+      "runs": 5,
+      "relationshipRows": 10755,
+      "candidateRows": 2139,
+      "countsVerified": true,
+      "wallMs": {
+        "n": 5,
+        "min": 218.64174999999977,
+        "median": 222.34804099999928,
+        "p95": 258.6968330000009,
+        "max": 258.6968330000009,
+        "mean": 228.6800166000001,
+        "stdev": 15.090771090828351,
+        "cv": 0.06599077311256564
+      },
+      "relsPerS": {
+        "n": 5,
+        "min": 41573.75981483299,
+        "median": 48370.113591421454,
+        "p95": 49190.056336449976,
+        "max": 49190.056336449976,
+        "mean": 47218.401898873955,
+        "stdev": 2843.5757002266078,
+        "cv": 0.060221769180511385
+      },
+      "rowsPerS": {
+        "n": 5,
+        "min": 49842.12543490996,
+        "median": 57990.16686636804,
+        "p95": 58973.18330099358,
+        "max": 58973.18330099358,
+        "mean": 56609.39786927763,
+        "stdev": 3409.118091931367,
+        "cv": 0.06022176918051132
+      },
+      "perCommitMs": {
+        "n": 5,
+        "min": 218.63845799999945,
+        "median": 222.3462500000005,
+        "p95": 258.6950829999996,
+        "max": 258.6950829999996,
+        "mean": 228.67579999999998,
+        "stdev": 15.092158896528245,
+        "cv": 0.06599805880870756
+      },
+      "commitsPerRun": 1,
+      "mainBytes": {
+        "n": 5,
+        "min": 827392,
+        "median": 827392,
+        "p95": 827392,
+        "max": 827392,
+        "mean": 827392,
+        "stdev": 0,
+        "cv": 0
+      },
+      "walBytesBeforeCheckpoint": {
+        "n": 5,
+        "min": 3819272,
+        "median": 3819272,
+        "p95": 3819272,
+        "max": 3819272,
+        "mean": 3819272,
+        "stdev": 0,
+        "cv": 0
+      },
+      "ckptMs": {
+        "n": 5,
+        "min": 4.50683300000037,
+        "median": 4.889874999999847,
+        "p95": 5.69774999999936,
+        "max": 5.69774999999936,
+        "mean": 4.9789084,
+        "stdev": 0.39022377550270704,
+        "cv": 0.07837536748069257
+      },
+      "bytesAfterCheckpoint": {
+        "n": 5,
+        "min": 4583424,
+        "median": 4583424,
+        "p95": 4583424,
+        "max": 4583424,
+        "mean": 4583424,
+        "stdev": 0,
+        "cv": 0
+      },
+      "insufficientN": false
+    },
+    {
+      "scale": 1,
+      "batch": "all",
+      "journal": "DELETE",
+      "synchronous": "NORMAL",
+      "runs": 5,
+      "relationshipRows": 10755,
+      "candidateRows": 2139,
+      "countsVerified": true,
+      "wallMs": {
+        "n": 5,
+        "min": 215.10962500000005,
+        "median": 219.54820800000016,
+        "p95": 223.28533300000072,
+        "max": 223.28533300000072,
+        "mean": 219.9145166,
+        "stdev": 2.9793369218619445,
+        "cv": 0.01354770466235763
+      },
+      "relsPerS": {
+        "n": 5,
+        "min": 48167.068815039296,
+        "median": 48986.9632641228,
+        "p95": 49997.76276863482,
+        "max": 49997.76276863482,
+        "mean": 48914.39076097882,
+        "stdev": 666.166254969049,
+        "cv": 0.013619023862001759
+      },
+      "rowsPerS": {
+        "n": 5,
+        "min": 57746.7396839718,
+        "median": 58729.698217350015,
+        "p95": 59941.5298129965,
+        "max": 59941.5298129965,
+        "mean": 58642.69218708144,
+        "stdev": 798.6562242278858,
+        "cv": 0.01361902386200175
+      },
+      "perCommitMs": {
+        "n": 5,
+        "min": 215.10762500000055,
+        "median": 219.54420800000025,
+        "p95": 223.28320800000074,
+        "max": 223.28320800000074,
+        "mean": 219.91220820000018,
+        "stdev": 2.979370231098335,
+        "cv": 0.013547998337539918
+      },
+      "commitsPerRun": 1,
+      "mainBytes": {
+        "n": 5,
+        "min": 4583424,
+        "median": 4583424,
+        "p95": 4583424,
+        "max": 4583424,
+        "mean": 4583424,
+        "stdev": 0,
+        "cv": 0
+      },
+      "walBytesBeforeCheckpoint": {
+        "n": 5,
+        "min": 0,
+        "median": 0,
+        "p95": 0,
+        "max": 0,
+        "mean": 0,
+        "stdev": 0,
+        "cv": 0
+      },
+      "ckptMs": {
+        "n": 5,
+        "min": 0,
+        "median": 0,
+        "p95": 0,
+        "max": 0,
+        "mean": 0,
+        "stdev": 0,
+        "cv": 0
+      },
+      "bytesAfterCheckpoint": {
+        "n": 5,
+        "min": 4583424,
+        "median": 4583424,
+        "p95": 4583424,
+        "max": 4583424,
+        "mean": 4583424,
+        "stdev": 0,
+        "cv": 0
+      },
+      "insufficientN": false
+    },
+    {
+      "scale": 1,
+      "batch": 1000,
+      "journal": "WAL",
+      "synchronous": "NORMAL",
+      "runs": 5,
+      "relationshipRows": 10755,
+      "candidateRows": 2139,
+      "countsVerified": true,
+      "wallMs": {
+        "n": 5,
+        "min": 240.3237079999999,
+        "median": 254.53333400000065,
+        "p95": 278.2462080000005,
+        "max": 278.2462080000005,
+        "mean": 256.803025,
+        "stdev": 14.043535709386708,
+        "cv": 0.05468602135581038
+      },
+      "relsPerS": {
+        "n": 5,
+        "min": 38652.81786697334,
+        "median": 42253.797689225146,
+        "p95": 44752.13906070393,
+        "max": 44752.13906070393,
+        "mean": 42004.022962747105,
+        "stdev": 2263.3192613535134,
+        "cv": 0.05388339263029224
+      },
+      "rowsPerS": {
+        "n": 5,
+        "min": 46340.25416799203,
+        "median": 50657.412125045936,
+        "p95": 53652.63422117308,
+        "max": 53652.63422117308,
+        "mean": 50357.961141948974,
+        "stdev": 2713.4577922726344,
+        "cv": 0.0538833926302922
+      },
+      "perCommitMs": {
+        "n": 55,
+        "min": 16.206083999999464,
+        "median": 22.905000000000655,
+        "p95": 27.619582999999693,
+        "max": 37.82166700000016,
+        "mean": 23.344040127272702,
+        "stdev": 3.3596587768869646,
+        "cv": 0.1439193369515286
+      },
+      "commitsPerRun": 11,
+      "mainBytes": {
+        "n": 5,
+        "min": 4349952,
+        "median": 4349952,
+        "p95": 4349952,
+        "max": 4349952,
+        "mean": 4349952,
+        "stdev": 0,
+        "cv": 0
+      },
+      "walBytesBeforeCheckpoint": {
+        "n": 5,
+        "min": 1339032,
+        "median": 1339032,
+        "p95": 1339032,
+        "max": 1339032,
+        "mean": 1339032,
+        "stdev": 0,
+        "cv": 0
+      },
+      "ckptMs": {
+        "n": 5,
+        "min": 2.4893339999998716,
+        "median": 2.706958000000668,
+        "p95": 8.51104099999975,
+        "max": 8.51104099999975,
+        "mean": 4.012166600000091,
+        "stdev": 2.3061195895473086,
+        "cv": 0.5747816128939551
+      },
+      "bytesAfterCheckpoint": {
+        "n": 5,
+        "min": 4583424,
+        "median": 4583424,
+        "p95": 4583424,
+        "max": 4583424,
+        "mean": 4583424,
+        "stdev": 0,
+        "cv": 0
+      },
+      "insufficientN": false
+    },
+    {
+      "scale": 1,
+      "batch": 1000,
+      "journal": "DELETE",
+      "synchronous": "NORMAL",
+      "runs": 5,
+      "relationshipRows": 10755,
+      "candidateRows": 2139,
+      "countsVerified": true,
+      "wallMs": {
+        "n": 5,
+        "min": 245.44266700000117,
+        "median": 252.9142499999998,
+        "p95": 285.0720000000001,
+        "max": 285.0720000000001,
+        "mean": 258.1775918000003,
+        "stdev": 14.28590512393244,
+        "cv": 0.055333636913768844
+      },
+      "relsPerS": {
+        "n": 5,
+        "min": 37727.31099511701,
+        "median": 42524.29430132944,
+        "p95": 43818.78722007184,
+        "max": 43818.78722007184,
+        "mean": 41778.05766895786,
+        "stdev": 2182.6244427992874,
+        "cv": 0.052243320168065925
+      },
+      "rowsPerS": {
+        "n": 5,
+        "min": 45230.67856541504,
+        "median": 50981.70625024098,
+        "p95": 52533.653409168415,
+        "max": 52533.653409168415,
+        "mean": 50087.05491246328,
+        "stdev": 2616.714046067318,
+        "cv": 0.05224332016806592
+      },
+      "perCommitMs": {
+        "n": 55,
+        "min": 18.664875000000393,
+        "median": 23.04083299999911,
+        "p95": 27.988875000000917,
+        "max": 38.49295799999891,
+        "mean": 23.46965149090912,
+        "stdev": 3.1832094728423628,
+        "cv": 0.13563087948175825
+      },
+      "commitsPerRun": 11,
+      "mainBytes": {
+        "n": 5,
+        "min": 4583424,
+        "median": 4583424,
+        "p95": 4583424,
+        "max": 4583424,
+        "mean": 4583424,
+        "stdev": 0,
+        "cv": 0
+      },
+      "walBytesBeforeCheckpoint": {
+        "n": 5,
+        "min": 0,
+        "median": 0,
+        "p95": 0,
+        "max": 0,
+        "mean": 0,
+        "stdev": 0,
+        "cv": 0
+      },
+      "ckptMs": {
+        "n": 5,
+        "min": 0,
+        "median": 0,
+        "p95": 0,
+        "max": 0,
+        "mean": 0,
+        "stdev": 0,
+        "cv": 0
+      },
+      "bytesAfterCheckpoint": {
+        "n": 5,
+        "min": 4583424,
+        "median": 4583424,
+        "p95": 4583424,
+        "max": 4583424,
+        "mean": 4583424,
+        "stdev": 0,
+        "cv": 0
+      },
+      "insufficientN": false
+    },
+    {
+      "scale": 1,
+      "batch": 100,
+      "journal": "WAL",
+      "synchronous": "NORMAL",
+      "runs": 5,
+      "relationshipRows": 10755,
+      "candidateRows": 2139,
+      "countsVerified": true,
+      "wallMs": {
+        "n": 5,
+        "min": 311.0630000000001,
+        "median": 311.8546669999996,
+        "p95": 334.86016700000073,
+        "max": 334.86016700000073,
+        "mean": 317.9619749999998,
+        "stdev": 9.158793750324069,
+        "cv": 0.028804682542068354
+      },
+      "relsPerS": {
+        "n": 5,
+        "min": 32117.884000219045,
+        "median": 34487.218368292095,
+        "p95": 34574.989632325276,
+        "max": 34574.989632325276,
+        "mean": 33852.07459723385,
+        "stdev": 947.0508984023999,
+        "cv": 0.027976155366258887
+      },
+      "rowsPerS": {
+        "n": 5,
+        "min": 38505.62494642718,
+        "median": 41346.18257933596,
+        "p95": 41451.41016450043,
+        "max": 41451.41016450043,
+        "mean": 40584.71872215093,
+        "stdev": 1135.4043964668097,
+        "cv": 0.027976155366258873
+      },
+      "perCommitMs": {
+        "n": 540,
+        "min": 1.476582999999664,
+        "median": 2.6610625000002983,
+        "p95": 5.415917000000263,
+        "max": 7.078832999999577,
+        "mean": 2.9438485222222206,
+        "stdev": 0.9830972378659373,
+        "cv": 0.3339496684169834
+      },
+      "commitsPerRun": 108,
+      "mainBytes": {
+        "n": 5,
+        "min": 4448256,
+        "median": 4448256,
+        "p95": 4448256,
+        "max": 4448256,
+        "mean": 4448256,
+        "stdev": 0,
+        "cv": 0
+      },
+      "walBytesBeforeCheckpoint": {
+        "n": 5,
+        "min": 2776912,
+        "median": 2776912,
+        "p95": 2776912,
+        "max": 2776912,
+        "mean": 2776912,
+        "stdev": 0,
+        "cv": 0
+      },
+      "ckptMs": {
+        "n": 5,
+        "min": 2.4718339999999444,
+        "median": 2.6491249999999127,
+        "p95": 3.3633330000011483,
+        "max": 3.3633330000011483,
+        "mean": 2.8066750000001774,
+        "stdev": 0.3131063769183562,
+        "cv": 0.11155776031009518
+      },
+      "bytesAfterCheckpoint": {
+        "n": 5,
+        "min": 4583424,
+        "median": 4583424,
+        "p95": 4583424,
+        "max": 4583424,
+        "mean": 4583424,
+        "stdev": 0,
+        "cv": 0
+      },
+      "insufficientN": false
+    },
+    {
+      "scale": 1,
+      "batch": 100,
+      "journal": "DELETE",
+      "synchronous": "NORMAL",
+      "runs": 5,
+      "relationshipRows": 10755,
+      "candidateRows": 2139,
+      "countsVerified": true,
+      "wallMs": {
+        "n": 5,
+        "min": 377.57033299999966,
+        "median": 391.82808300000033,
+        "p95": 395.02833400000054,
+        "max": 395.02833400000054,
+        "mean": 389.2160666,
+        "stdev": 6.406483745255284,
+        "cv": 0.016459967342096572
+      },
+      "relsPerS": {
+        "n": 5,
+        "min": 27225.895143005073,
+        "median": 27448.262303342843,
+        "p95": 28484.759156117307,
+        "max": 28484.759156117307,
+        "mean": 27640.07459005395,
+        "stdev": 462.2377893847997,
+        "cv": 0.016723463892211497
+      },
+      "rowsPerS": {
+        "n": 5,
+        "min": 32640.69660380357,
+        "median": 32907.28908780127,
+        "p95": 34149.928829286524,
+        "max": 34149.928829286524,
+        "mean": 33137.249815356176,
+        "stdev": 554.1696007743014,
+        "cv": 0.016723463892211507
+      },
+      "perCommitMs": {
+        "n": 540,
+        "min": 1.991541999999754,
+        "median": 3.671187499999178,
+        "p95": 4.523833000001105,
+        "max": 7.540499999999156,
+        "mean": 3.603649611111093,
+        "stdev": 0.7127590800232704,
+        "cv": 0.19778811952905415
+      },
+      "commitsPerRun": 108,
+      "mainBytes": {
+        "n": 5,
+        "min": 4583424,
+        "median": 4583424,
+        "p95": 4583424,
+        "max": 4583424,
+        "mean": 4583424,
+        "stdev": 0,
+        "cv": 0
+      },
+      "walBytesBeforeCheckpoint": {
+        "n": 5,
+        "min": 0,
+        "median": 0,
+        "p95": 0,
+        "max": 0,
+        "mean": 0,
+        "stdev": 0,
+        "cv": 0
+      },
+      "ckptMs": {
+        "n": 5,
+        "min": 0,
+        "median": 0,
+        "p95": 0,
+        "max": 0,
+        "mean": 0,
+        "stdev": 0,
+        "cv": 0
+      },
+      "bytesAfterCheckpoint": {
+        "n": 5,
+        "min": 4583424,
+        "median": 4583424,
+        "p95": 4583424,
+        "max": 4583424,
+        "mean": 4583424,
+        "stdev": 0,
+        "cv": 0
+      },
+      "insufficientN": false
+    },
+    {
+      "scale": 1,
+      "batch": 1,
+      "journal": "WAL",
+      "synchronous": "NORMAL",
+      "runs": 5,
+      "relationshipRows": 10755,
+      "candidateRows": 2139,
+      "countsVerified": true,
+      "wallMs": {
+        "n": 5,
+        "min": 981.4692090000026,
+        "median": 1004.3914999999997,
+        "p95": 1026.1586669999997,
+        "max": 1026.1586669999997,
+        "mean": 1002.2551751999996,
+        "stdev": 18.28243152038281,
+        "cv": 0.01824129420607338
+      },
+      "relsPerS": {
+        "n": 5,
+        "min": 10480.835319008227,
+        "median": 10707.975923730939,
+        "p95": 10958.06154831697,
+        "max": 10958.06154831697,
+        "mean": 10734.37337596661,
+        "stdev": 195.89684550954337,
+        "cv": 0.01824949055229814
+      },
+      "rowsPerS": {
+        "n": 5,
+        "min": 12565.308284824927,
+        "median": 12837.623576065711,
+        "p95": 13137.447290004557,
+        "max": 13137.447290004557,
+        "mean": 12869.271065524268,
+        "stdev": 234.8576407252486,
+        "cv": 0.01824949055229811
+      },
+      "perCommitMs": {
+        "n": 53775,
+        "min": 0.037000000000261934,
+        "median": 0.0633750000015425,
+        "p95": 0.10029100000247126,
+        "max": 7.667417000000569,
+        "mean": 0.09312823064620909,
+        "stdev": 0.22202185653741982,
+        "cv": 2.384044612432004
+      },
+      "commitsPerRun": 10755,
+      "mainBytes": {
+        "n": 5,
+        "min": 4575232,
+        "median": 4575232,
+        "p95": 4575232,
+        "max": 4575232,
+        "mean": 4575232,
+        "stdev": 0,
+        "cv": 0
+      },
+      "walBytesBeforeCheckpoint": {
+        "n": 5,
+        "min": 1602712,
+        "median": 1602712,
+        "p95": 1602712,
+        "max": 1602712,
+        "mean": 1602712,
+        "stdev": 0,
+        "cv": 0
+      },
+      "ckptMs": {
+        "n": 5,
+        "min": 1.6600829999988491,
+        "median": 1.9923330000001442,
+        "p95": 2.491416000000754,
+        "max": 2.491416000000754,
+        "mean": 2.006091399999059,
+        "stdev": 0.2842971243932686,
+        "cv": 0.1417169349279908
+      },
+      "bytesAfterCheckpoint": {
+        "n": 5,
+        "min": 4583424,
+        "median": 4583424,
+        "p95": 4583424,
+        "max": 4583424,
+        "mean": 4583424,
+        "stdev": 0,
+        "cv": 0
+      },
+      "insufficientN": false
+    },
+    {
+      "scale": 1,
+      "batch": 1,
+      "journal": "DELETE",
+      "synchronous": "NORMAL",
+      "runs": 5,
+      "relationshipRows": 10755,
+      "candidateRows": 2139,
+      "countsVerified": true,
+      "wallMs": {
+        "n": 5,
+        "min": 4094.7436670000025,
+        "median": 4419.484165999998,
+        "p95": 5932.174583000004,
+        "max": 5932.174583000004,
+        "mean": 4666.9760498000005,
+        "stdev": 667.1271638312963,
+        "cv": 0.14294634399503411
+      },
+      "relsPerS": {
+        "n": 5,
+        "min": 1812.9945182026336,
+        "median": 2433.541923906059,
+        "p95": 2626.538038675229,
+        "max": 2626.538038675229,
+        "mean": 2345.969598637963,
+        "stdev": 291.4897347894872,
+        "cv": 0.1242512839717625
+      },
+      "rowsPerS": {
+        "n": 5,
+        "min": 2173.570554877244,
+        "median": 2917.5350596787284,
+        "p95": 3148.9150600351836,
+        "max": 3148.9150600351836,
+        "mean": 2812.5459790644254,
+        "stdev": 349.46244912837267,
+        "cv": 0.12425128397176248
+      },
+      "perCommitMs": {
+        "n": 53775,
+        "min": 0.23595799999748124,
+        "median": 0.33729200000379933,
+        "p95": 0.5802079999994021,
+        "max": 1731.0920000000006,
+        "mean": 0.4338600789028358,
+        "stdev": 7.946631931325746,
+        "cv": 18.316116918204447
+      },
+      "commitsPerRun": 10755,
+      "mainBytes": {
+        "n": 5,
+        "min": 4583424,
+        "median": 4583424,
+        "p95": 4583424,
+        "max": 4583424,
+        "mean": 4583424,
+        "stdev": 0,
+        "cv": 0
+      },
+      "walBytesBeforeCheckpoint": {
+        "n": 5,
+        "min": 0,
+        "median": 0,
+        "p95": 0,
+        "max": 0,
+        "mean": 0,
+        "stdev": 0,
+        "cv": 0
+      },
+      "ckptMs": {
+        "n": 5,
+        "min": 0,
+        "median": 0,
+        "p95": 0,
+        "max": 0,
+        "mean": 0,
+        "stdev": 0,
+        "cv": 0
+      },
+      "bytesAfterCheckpoint": {
+        "n": 5,
+        "min": 4583424,
+        "median": 4583424,
+        "p95": 4583424,
+        "max": 4583424,
+        "mean": 4583424,
+        "stdev": 0,
+        "cv": 0
+      },
+      "insufficientN": false
+    },
+    {
+      "scale": 4,
+      "batch": 1000,
+      "journal": "WAL",
+      "synchronous": "NORMAL",
+      "runs": 5,
+      "relationshipRows": 43020,
+      "candidateRows": 8556,
+      "countsVerified": true,
+      "wallMs": {
+        "n": 5,
+        "min": 1126.2901249999995,
+        "median": 1146.2011249999996,
+        "p95": 1156.9726670000018,
+        "max": 1156.9726670000018,
+        "mean": 1142.3314751999992,
+        "stdev": 11.272474216833071,
+        "cv": 0.009867953795862526
+      },
+      "relsPerS": {
+        "n": 5,
+        "min": 37183.24661165045,
+        "median": 37532.67996487093,
+        "p95": 38196.19744956924,
+        "max": 38196.19744956924,
+        "mean": 37663.49716616173,
+        "stdev": 372.4453196029705,
+        "cv": 0.009888760939002475
+      },
+      "rowsPerS": {
+        "n": 5,
+        "min": 44578.40835059236,
+        "median": 44997.338490659764,
+        "p95": 45792.81914595498,
+        "max": 45792.81914595498,
+        "mean": 45154.17317159362,
+        "stdev": 446.51882389221026,
+        "cv": 0.009888760939002515
+      },
+      "perCommitMs": {
+        "n": 220,
+        "min": 0.5805830000026617,
+        "median": 24.56414600000062,
+        "p95": 34.856541000001016,
+        "max": 38.16766700000153,
+        "mean": 25.961301154545303,
+        "stdev": 5.950890072080739,
+        "cv": 0.229221564691832
+      },
+      "commitsPerRun": 44,
+      "mainBytes": {
+        "n": 5,
+        "min": 15802368,
+        "median": 15802368,
+        "p95": 15802368,
+        "max": 15802368,
+        "mean": 15802368,
+        "stdev": 0,
+        "cv": 0
+      },
+      "walBytesBeforeCheckpoint": {
+        "n": 5,
+        "min": 3922272,
+        "median": 3922272,
+        "p95": 3922272,
+        "max": 3922272,
+        "mean": 3922272,
+        "stdev": 0,
+        "cv": 0
+      },
+      "ckptMs": {
+        "n": 5,
+        "min": 9.983916999997746,
+        "median": 10.06604199999856,
+        "p95": 10.278833000003942,
+        "max": 10.278833000003942,
+        "mean": 10.121516799999517,
+        "stdev": 0.11020981389722935,
+        "cv": 0.010888665807207336
+      },
+      "bytesAfterCheckpoint": {
+        "n": 5,
+        "min": 16207872,
+        "median": 16207872,
+        "p95": 16207872,
+        "max": 16207872,
+        "mean": 16207872,
+        "stdev": 0,
+        "cv": 0
+      },
+      "insufficientN": false
+    },
+    {
+      "scale": 4,
+      "batch": 1000,
+      "journal": "DELETE",
+      "synchronous": "NORMAL",
+      "runs": 5,
+      "relationshipRows": 43020,
+      "candidateRows": 8556,
+      "countsVerified": true,
+      "wallMs": {
+        "n": 5,
+        "min": 1250.5988750000033,
+        "median": 1269.4635830000043,
+        "p95": 1295.4486249999973,
+        "max": 1295.4486249999973,
+        "mean": 1269.446566600002,
+        "stdev": 15.54885687142158,
+        "cv": 0.012248531982773063
+      },
+      "relsPerS": {
+        "n": 5,
+        "min": 33208.57282163551,
+        "median": 33888.329351153865,
+        "p95": 34399.519190355815,
+        "max": 34399.519190355815,
+        "mean": 33893.8390440141,
+        "stdev": 412.7638353430499,
+        "cv": 0.012178137590346142
+      },
+      "rowsPerS": {
+        "n": 5,
+        "min": 39813.234585045866,
+        "median": 40628.18397524668,
+        "p95": 41241.04141705698,
+        "max": 41241.04141705698,
+        "mean": 40634.78945918343,
+        "stdev": 494.8560569886818,
+        "cv": 0.012178137590346116
+      },
+      "perCommitMs": {
+        "n": 220,
+        "min": 1.9895830000023125,
+        "median": 29.40881250000166,
+        "p95": 37.69474999999511,
+        "max": 47.747208999993745,
+        "mean": 28.8503589272725,
+        "stdev": 6.890517406433685,
+        "cv": 0.2388364534321276
+      },
+      "commitsPerRun": 44,
+      "mainBytes": {
+        "n": 5,
+        "min": 16207872,
+        "median": 16207872,
+        "p95": 16207872,
+        "max": 16207872,
+        "mean": 16207872,
+        "stdev": 0,
+        "cv": 0
+      },
+      "walBytesBeforeCheckpoint": {
+        "n": 5,
+        "min": 0,
+        "median": 0,
+        "p95": 0,
+        "max": 0,
+        "mean": 0,
+        "stdev": 0,
+        "cv": 0
+      },
+      "ckptMs": {
+        "n": 5,
+        "min": 0,
+        "median": 0,
+        "p95": 0,
+        "max": 0,
+        "mean": 0,
+        "stdev": 0,
+        "cv": 0
+      },
+      "bytesAfterCheckpoint": {
+        "n": 5,
+        "min": 16207872,
+        "median": 16207872,
+        "p95": 16207872,
+        "max": 16207872,
+        "mean": 16207872,
+        "stdev": 0,
+        "cv": 0
+      },
+      "insufficientN": false
+    },
+    {
+      "scale": 16,
+      "batch": 1000,
+      "journal": "WAL",
+      "synchronous": "NORMAL",
+      "runs": 5,
+      "relationshipRows": 172080,
+      "candidateRows": 34224,
+      "countsVerified": true,
+      "wallMs": {
+        "n": 5,
+        "min": 6857.711125000002,
+        "median": 6926.0506250000035,
+        "p95": 6931.87204100001,
+        "max": 6931.87204100001,
+        "mean": 6905.8104666000045,
+        "stdev": 30.384796274493556,
+        "cv": 0.004399888531758845
+      },
+      "relsPerS": {
+        "n": 5,
+        "min": 24824.462855372512,
+        "median": 24845.328068909388,
+        "p95": 25092.92048956057,
+        "max": 25092.92048956057,
+        "mean": 24918.630594533446,
+        "stdev": 109.92276217223328,
+        "cv": 0.0044112681776480814
+      },
+      "rowsPerS": {
+        "n": 5,
+        "min": 29761.65728100169,
+        "median": 29786.672256672955,
+        "p95": 30083.506907707484,
+        "max": 30083.506907707484,
+        "mean": 29874.553499387657,
+        "stdev": 131.78466717329377,
+        "cv": 0.004411268177648077
+      },
+      "perCommitMs": {
+        "n": 865,
+        "min": 3.52283300000272,
+        "median": 42.351792000001296,
+        "p95": 52.47299999999814,
+        "max": 64.95591699999932,
+        "mean": 39.91723047514458,
+        "stdev": 10.031089073504347,
+        "cv": 0.2512972206263269
+      },
+      "commitsPerRun": 173,
+      "mainBytes": {
+        "n": 5,
+        "min": 62947328,
+        "median": 62947328,
+        "p95": 62947328,
+        "max": 62947328,
+        "mean": 62947328,
+        "stdev": 0,
+        "cv": 0
+      },
+      "walBytesBeforeCheckpoint": {
+        "n": 5,
+        "min": 655112,
+        "median": 655112,
+        "p95": 655112,
+        "max": 655112,
+        "mean": 655112,
+        "stdev": 0,
+        "cv": 0
+      },
+      "ckptMs": {
+        "n": 5,
+        "min": 5.451542000009795,
+        "median": 5.480834000001778,
+        "p95": 5.6837089999899035,
+        "max": 5.6837089999899035,
+        "mean": 5.5245334000021105,
+        "stdev": 0.0834146438349966,
+        "cv": 0.015098948236056411
+      },
+      "bytesAfterCheckpoint": {
+        "n": 5,
+        "min": 62971904,
+        "median": 62971904,
+        "p95": 62971904,
+        "max": 62971904,
+        "mean": 62971904,
+        "stdev": 0,
+        "cv": 0
+      },
+      "insufficientN": false
+    },
+    {
+      "scale": 16,
+      "batch": 1000,
+      "journal": "DELETE",
+      "synchronous": "NORMAL",
+      "runs": 5,
+      "relationshipRows": 172080,
+      "candidateRows": 34224,
+      "countsVerified": true,
+      "wallMs": {
+        "n": 5,
+        "min": 7596.587542000008,
+        "median": 7681.633375000005,
+        "p95": 7869.6245419999905,
+        "max": 7869.6245419999905,
+        "mean": 7733.314725000001,
+        "stdev": 109.9525443708003,
+        "cv": 0.014218035639406915
+      },
+      "relsPerS": {
+        "n": 5,
+        "min": 21866.35449780524,
+        "median": 22401.485673611685,
+        "p95": 22652.276308092838,
+        "max": 22652.276308092838,
+        "mean": 22256.263945901846,
+        "stdev": 315.5423798095919,
+        "cv": 0.014177688608320726
+      },
+      "rowsPerS": {
+        "n": 5,
+        "min": 26215.227791232057,
+        "median": 26856.788124179366,
+        "p95": 27157.45706337044,
+        "max": 27157.45706337044,
+        "mean": 26682.684083538672,
+        "stdev": 378.2987861706082,
+        "cv": 0.014177688608320771
+      },
+      "perCommitMs": {
+        "n": 865,
+        "min": 6.470333000004757,
+        "median": 46.38191700000607,
+        "p95": 59.14970799999719,
+        "max": 77.3224579999951,
+        "mean": 44.700299821965004,
+        "stdev": 11.300817993997551,
+        "cv": 0.2528130244988762
+      },
+      "commitsPerRun": 173,
+      "mainBytes": {
+        "n": 5,
+        "min": 62971904,
+        "median": 62971904,
+        "p95": 62971904,
+        "max": 62971904,
+        "mean": 62971904,
+        "stdev": 0,
+        "cv": 0
+      },
+      "walBytesBeforeCheckpoint": {
+        "n": 5,
+        "min": 0,
+        "median": 0,
+        "p95": 0,
+        "max": 0,
+        "mean": 0,
+        "stdev": 0,
+        "cv": 0
+      },
+      "ckptMs": {
+        "n": 5,
+        "min": 0,
+        "median": 0,
+        "p95": 0,
+        "max": 0,
+        "mean": 0,
+        "stdev": 0,
+        "cv": 0
+      },
+      "bytesAfterCheckpoint": {
+        "n": 5,
+        "min": 62971904,
+        "median": 62971904,
+        "p95": 62971904,
+        "max": 62971904,
+        "mean": 62971904,
+        "stdev": 0,
+        "cv": 0
+      },
+      "insufficientN": false
+    },
+    {
+      "scale": 64,
+      "batch": 1000,
+      "journal": "WAL",
+      "synchronous": "NORMAL",
+      "runs": 3,
+      "relationshipRows": 688320,
+      "candidateRows": 136896,
+      "countsVerified": true,
+      "wallMs": {
+        "n": 3,
+        "min": 39564.388749999984,
+        "median": 39598.87141599998,
+        "p95": 39847.38620799998,
+        "max": 39847.38620799998,
+        "mean": 39670.215457999984,
+        "stdev": 126.06709736033078,
+        "cv": 0.003177877808448046
+      },
+      "relsPerS": {
+        "n": 3,
+        "min": 17273.905907078268,
+        "median": 17382.3135707318,
+        "p95": 17397.463268025345,
+        "max": 17397.463268025345,
+        "mean": 17351.227581945135,
+        "stdev": 55.023385241701014,
+        "cv": 0.0031711522992733804
+      },
+      "rowsPerS": {
+        "n": 3,
+        "min": 20709.413553311686,
+        "median": 20839.38179274903,
+        "p95": 20857.544526073343,
+        "max": 20857.544526073343,
+        "mean": 20802.113290711353,
+        "stdev": 65.96666939158484,
+        "cv": 0.0031711522992733895
+      },
+      "perCommitMs": {
+        "n": 2067,
+        "min": 10.44512499999837,
+        "median": 61.52062499997555,
+        "p95": 69.63349999999627,
+        "max": 98.21275000000605,
+        "mean": 57.575583377842534,
+        "stdev": 11.869690875693129,
+        "cv": 0.2061584126347051
+      },
+      "commitsPerRun": 689,
+      "mainBytes": {
+        "n": 3,
+        "min": 250744832,
+        "median": 250744832,
+        "p95": 250744832,
+        "max": 250744832,
+        "mean": 250744832,
+        "stdev": 0,
+        "cv": 0
+      },
+      "walBytesBeforeCheckpoint": {
+        "n": 3,
+        "min": 2587392,
+        "median": 2587392,
+        "p95": 2587392,
+        "max": 2587392,
+        "mean": 2587392,
+        "stdev": 0,
+        "cv": 0
+      },
+      "ckptMs": {
+        "n": 3,
+        "min": 16.265665999992052,
+        "median": 17.038959000026807,
+        "p95": 17.133417000004556,
+        "max": 17.133417000004556,
+        "mean": 16.81268066667447,
+        "stdev": 0.38871528793724947,
+        "cv": 0.023120363471111887
+      },
+      "bytesAfterCheckpoint": {
+        "n": 3,
+        "min": 250867712,
+        "median": 250867712,
+        "p95": 250867712,
+        "max": 250867712,
+        "mean": 250867712,
+        "stdev": 0,
+        "cv": 0
+      },
+      "insufficientN": false
+    },
+    {
+      "scale": 64,
+      "batch": 1000,
+      "journal": "DELETE",
+      "synchronous": "NORMAL",
+      "runs": 3,
+      "relationshipRows": 688320,
+      "candidateRows": 136896,
+      "countsVerified": true,
+      "wallMs": {
+        "n": 3,
+        "min": 43602.668125000026,
+        "median": 43628.93954199995,
+        "p95": 44272.72045799997,
+        "max": 44272.72045799997,
+        "mean": 43834.77604166665,
+        "stdev": 309.8591407784566,
+        "cv": 0.007068797168803224
+      },
+      "relsPerS": {
+        "n": 3,
+        "min": 15547.271386970357,
+        "median": 15776.684173984566,
+        "p95": 15786.189919083068,
+        "max": 15786.189919083068,
+        "mean": 15703.38182667933,
+        "stdev": 110.45494356543828,
+        "cv": 0.007033831615670223
+      },
+      "rowsPerS": {
+        "n": 3,
+        "min": 18639.378639107,
+        "median": 18914.418013887214,
+        "p95": 18925.814301874205,
+        "max": 18925.814301874205,
+        "mean": 18826.53698495614,
+        "stdev": 132.42269105836925,
+        "cv": 0.007033831615670223
+      },
+      "perCommitMs": {
+        "n": 2067,
+        "min": 19.694834000023548,
+        "median": 67.46670900000026,
+        "p95": 78.3318750000326,
+        "max": 106.85583299997961,
+        "mean": 63.619762166424735,
+        "stdev": 13.093083280022068,
+        "cv": 0.20580214125559762
+      },
+      "commitsPerRun": 689,
+      "mainBytes": {
+        "n": 3,
+        "min": 250867712,
+        "median": 250867712,
+        "p95": 250867712,
+        "max": 250867712,
+        "mean": 250867712,
+        "stdev": 0,
+        "cv": 0
+      },
+      "walBytesBeforeCheckpoint": {
+        "n": 3,
+        "min": 0,
+        "median": 0,
+        "p95": 0,
+        "max": 0,
+        "mean": 0,
+        "stdev": 0,
+        "cv": 0
+      },
+      "ckptMs": {
+        "n": 3,
+        "min": 0,
+        "median": 0,
+        "p95": 0,
+        "max": 0,
+        "mean": 0,
+        "stdev": 0,
+        "cv": 0
+      },
+      "bytesAfterCheckpoint": {
+        "n": 3,
+        "min": 250867712,
+        "median": 250867712,
+        "p95": 250867712,
+        "max": 250867712,
+        "mean": 250867712,
+        "stdev": 0,
+        "cv": 0
+      },
+      "insufficientN": false
+    }
+  ],
+  "reads": [
+    {
+      "scale": 1,
+      "journal": "WAL",
+      "reps": 3,
+      "samplesPerClassPerPass": 500,
+      "classes": {
+        "R1 symbols-by-name (resolver byName, LIMIT 21)": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.00958299997728318,
+            "median": 0.015041499980725348,
+            "p95": 0.022332999971695244,
+            "max": 0.1412080000154674,
+            "mean": 0.014972056665496591,
+            "stdev": 0.006129569962913544,
+            "cv": 0.4094006655103879
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.00941699999384582,
+            "median": 0.014499999990221113,
+            "p95": 0.020625000004656613,
+            "max": 0.07300000003306195,
+            "mean": 0.014278012444200511,
+            "stdev": 0.004228922471661193,
+            "cv": 0.296184254509381
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 0,
+            "median": 0,
+            "p95": 2,
+            "max": 12,
+            "mean": 0.618,
+            "stdev": 0.9771093422266821,
+            "cv": 1.5810830780367024
+          },
+          "perRepWarmMedianMs": [
+            0.014833499997621402,
+            0.014687499991850927,
+            0.014270499988924712
+          ]
+        },
+        "R2 files-by-6-paths (import candidates)": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.009166000003460795,
+            "median": 0.010249999992083758,
+            "p95": 0.014082999958191067,
+            "max": 0.14362499996786937,
+            "mean": 0.010993424000257315,
+            "stdev": 0.004714924809487953,
+            "cv": 0.4288859239284862
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.008541999966837466,
+            "median": 0.009874999988824129,
+            "p95": 0.013291999988723546,
+            "max": 0.06925000000046566,
+            "mean": 0.01037805888914348,
+            "stdev": 0.001913654103426188,
+            "cv": 0.18439422283757395
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 2,
+            "median": 3,
+            "p95": 3,
+            "max": 3,
+            "mean": 2.994,
+            "stdev": 0.07722693830522939,
+            "cv": 0.025793900569548892
+          },
+          "perRepWarmMedianMs": [
+            0.010208000021521002,
+            0.009750000026542693,
+            0.00966599996900186
+          ]
+        },
+        "R3 symbols-in-file by name (resolver same-file)": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.007833999989088625,
+            "median": 0.00941699999384582,
+            "p95": 0.013957999995909631,
+            "max": 0.11112499999580905,
+            "mean": 0.010213340665524205,
+            "stdev": 0.0035885856777820376,
+            "cv": 0.3513625752145468
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.007707999960985035,
+            "median": 0.009167000011075288,
+            "p95": 0.012541999982204288,
+            "max": 0.03233299998100847,
+            "mean": 0.009645234000235278,
+            "stdev": 0.0016815451672766847,
+            "cv": 0.1743394890404594
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 0,
+            "median": 1,
+            "p95": 1,
+            "max": 3,
+            "mean": 0.9626666666666667,
+            "stdev": 0.4774301577775997,
+            "cv": 0.4959454547551243
+          },
+          "perRepWarmMedianMs": [
+            0.009415999986231327,
+            0.009166000003460795,
+            0.008916999970097095
+          ]
+        },
+        "T1 outgoing page (all types, LIMIT 100)": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.007249999966006726,
+            "median": 0.010458000004291534,
+            "p95": 0.02995799999916926,
+            "max": 0.06925000000046566,
+            "mean": 0.013587704666540959,
+            "stdev": 0.008866686055624363,
+            "cv": 0.6525521619157747
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.006999999983236194,
+            "median": 0.010125000029802322,
+            "p95": 0.028667000005953014,
+            "max": 0.22316599998157471,
+            "mean": 0.01319926133299143,
+            "stdev": 0.009351053143373428,
+            "cv": 0.7084527616708791
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 1,
+            "median": 5,
+            "p95": 56,
+            "max": 100,
+            "mean": 11.952,
+            "stdev": 20.298777368764533,
+            "cv": 1.6983582135847166
+          },
+          "perRepWarmMedianMs": [
+            0.010250000021187589,
+            0.01064550003502518,
+            0.009542000014334917
+          ]
+        },
+        "T2 outgoing page type=CALLS": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.003499999991618097,
+            "median": 0.0049374999944120646,
+            "p95": 0.018999999971129,
+            "max": 0.072708000021521,
+            "mean": 0.006926521332740473,
+            "stdev": 0.005351336963442461,
+            "cv": 0.7725865129654064
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.003416999999899417,
+            "median": 0.004958000034093857,
+            "p95": 0.018333000014536083,
+            "max": 0.04887499997857958,
+            "mean": 0.006729584666822727,
+            "stdev": 0.004668911500651789,
+            "cv": 0.6937889530790532
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 1,
+            "median": 4,
+            "p95": 58,
+            "max": 100,
+            "mean": 11.397333333333334,
+            "stdev": 20.96494199583884,
+            "cv": 1.8394602827420599
+          },
+          "perRepWarmMedianMs": [
+            0.005124999996041879,
+            0.004957999975886196,
+            0.00483300001360476
+          ]
+        },
+        "T3 incoming page (all types)": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.007332999957725406,
+            "median": 0.0094999999855645,
+            "p95": 0.0177910000202246,
+            "max": 0.08441700000548735,
+            "mean": 0.010968720000625277,
+            "stdev": 0.004802025804273744,
+            "cv": 0.4377927236724068
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.007209000003058463,
+            "median": 0.009332999994512647,
+            "p95": 0.016958000021986663,
+            "max": 0.12125000002561137,
+            "mean": 0.010634419555245484,
+            "stdev": 0.004682139802609557,
+            "cv": 0.44028165131965913
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 1,
+            "median": 1,
+            "p95": 11,
+            "max": 100,
+            "mean": 3.1053333333333333,
+            "stdev": 6.108319863559506,
+            "cv": 1.9670416048388277
+          },
+          "perRepWarmMedianMs": [
+            0.009415999986231327,
+            0.0094999999855645,
+            0.009000000020023435
+          ]
+        },
+        "T4 incoming page type=CALLS": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.003958000044804066,
+            "median": 0.005624999990686774,
+            "p95": 0.013374999980442226,
+            "max": 0.05154099996434525,
+            "mean": 0.006991755333767893,
+            "stdev": 0.004536472060152119,
+            "cv": 0.648831637205959
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.0039579999865964055,
+            "median": 0.0055840000277385116,
+            "p95": 0.012500000011641532,
+            "max": 0.06016599998110905,
+            "mean": 0.006838491555070505,
+            "stdev": 0.004275489409007541,
+            "cv": 0.6252094302635226
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 1,
+            "median": 2,
+            "p95": 17,
+            "max": 100,
+            "mean": 5.008666666666667,
+            "stdev": 9.352892149252853,
+            "cv": 1.8673417042299054
+          },
+          "perRepWarmMedianMs": [
+            0.005541999998968095,
+            0.0058330000028945506,
+            0.005395499989390373
+          ]
+        }
+      },
+      "deepPagination": {
+        "T5a outgoing hub": {
+          "rowsInHub": 356,
+          "pagesPerWalk": 4,
+          "perPageMs": {
+            "n": 12,
+            "min": 0.03529199998592958,
+            "median": 0.05570800002897158,
+            "p95": 0.09166600002208725,
+            "max": 0.09166600002208725,
+            "mean": 0.05718741667321107,
+            "stdev": 0.014915204473999315,
+            "cv": 0.26081269869611384
+          },
+          "walks": 3
+        },
+        "T5b incoming hub": {
+          "rowsInHub": 188,
+          "pagesPerWalk": 2,
+          "perPageMs": {
+            "n": 6,
+            "min": 0.0556250000372529,
+            "median": 0.06475000001955777,
+            "p95": 0.08224999997764826,
+            "max": 0.08224999997764826,
+            "mean": 0.06615266667601342,
+            "stdev": 0.00898465760148164,
+            "cv": 0.13581701317476028
+          },
+          "walks": 3
+        }
+      }
+    },
+    {
+      "scale": 1,
+      "journal": "DELETE",
+      "reps": 3,
+      "samplesPerClassPerPass": 500,
+      "classes": {
+        "R1 symbols-by-name (resolver byName, LIMIT 21)": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.011999999987892807,
+            "median": 0.016895500011742115,
+            "p95": 0.023166999977547675,
+            "max": 0.07854099996620789,
+            "mean": 0.016644903332460673,
+            "stdev": 0.004642374115612849,
+            "cv": 0.2789066432461252
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.011832999996840954,
+            "median": 0.016812500020023435,
+            "p95": 0.022415999963413924,
+            "max": 0.05437500000698492,
+            "mean": 0.016236115555770488,
+            "stdev": 0.0037245662203888655,
+            "cv": 0.22940008080104574
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 0,
+            "median": 0,
+            "p95": 2,
+            "max": 12,
+            "mean": 0.618,
+            "stdev": 0.9771093422266821,
+            "cv": 1.5810830780367024
+          },
+          "perRepWarmMedianMs": [
+            0.01699999999254942,
+            0.016417000006185845,
+            0.016895500011742115
+          ]
+        },
+        "R2 files-by-6-paths (import candidates)": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.011415999964810908,
+            "median": 0.012417000019922853,
+            "p95": 0.015750000020489097,
+            "max": 0.06054100004257634,
+            "mean": 0.01294413533352781,
+            "stdev": 0.002623790553611483,
+            "cv": 0.20270110640881192
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.011166999989654869,
+            "median": 0.012250000028871,
+            "p95": 0.01608299999497831,
+            "max": 0.0699579999782145,
+            "mean": 0.012845659111600577,
+            "stdev": 0.002242640320341993,
+            "cv": 0.17458351501144256
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 2,
+            "median": 3,
+            "p95": 3,
+            "max": 3,
+            "mean": 2.994,
+            "stdev": 0.07722693830522939,
+            "cv": 0.025793900569548892
+          },
+          "perRepWarmMedianMs": [
+            0.012250000028871,
+            0.012291999999433756,
+            0.012249999970663339
+          ]
+        },
+        "R3 symbols-in-file by name (resolver same-file)": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.010166000050958246,
+            "median": 0.011667000013403594,
+            "p95": 0.015292000025510788,
+            "max": 0.03299999999580905,
+            "mean": 0.012167227999501241,
+            "stdev": 0.0017179026825954668,
+            "cv": 0.1411909666413654
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.010167000000365078,
+            "median": 0.011541999992914498,
+            "p95": 0.014709000010043383,
+            "max": 0.039458999992348254,
+            "mean": 0.011992161555914208,
+            "stdev": 0.0016828429429574152,
+            "cv": 0.1403285750538845
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 0,
+            "median": 1,
+            "p95": 1,
+            "max": 3,
+            "mean": 0.9626666666666667,
+            "stdev": 0.4774301577775997,
+            "cv": 0.4959454547551243
+          },
+          "perRepWarmMedianMs": [
+            0.011541999992914498,
+            0.011604500003159046,
+            0.011459000001195818
+          ]
+        },
+        "T1 outgoing page (all types, LIMIT 100)": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.009750000026542693,
+            "median": 0.01324999995995313,
+            "p95": 0.03216699999757111,
+            "max": 0.08604099997319281,
+            "mean": 0.016269838666620975,
+            "stdev": 0.008931912290086549,
+            "cv": 0.5489859164007055
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.0094999999855645,
+            "median": 0.01216699997894466,
+            "p95": 0.029207999992650002,
+            "max": 0.07879199995659292,
+            "mean": 0.015038351555717075,
+            "stdev": 0.00787989240048136,
+            "cv": 0.5239864470042722
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 1,
+            "median": 5,
+            "p95": 56,
+            "max": 100,
+            "mean": 11.952,
+            "stdev": 20.298777368764533,
+            "cv": 1.6983582135847166
+          },
+          "perRepWarmMedianMs": [
+            0.012416999961715192,
+            0.012083000037819147,
+            0.011999999987892807
+          ]
+        },
+        "T2 outgoing page type=CALLS": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.005708000040613115,
+            "median": 0.007249999966006726,
+            "p95": 0.02145800000289455,
+            "max": 0.04066699999384582,
+            "mean": 0.009081236667077367,
+            "stdev": 0.004949214787100922,
+            "cv": 0.5449934814542983
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.005541999998968095,
+            "median": 0.007250000024214387,
+            "p95": 0.020625000004656613,
+            "max": 0.037499999976716936,
+            "mean": 0.008982045999831623,
+            "stdev": 0.004620516213107105,
+            "cv": 0.5144168949027561
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 1,
+            "median": 4,
+            "p95": 58,
+            "max": 100,
+            "mean": 11.397333333333334,
+            "stdev": 20.96494199583884,
+            "cv": 1.8394602827420599
+          },
+          "perRepWarmMedianMs": [
+            0.00741700001526624,
+            0.007083999982569367,
+            0.007250000024214387
+          ]
+        },
+        "T3 incoming page (all types)": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.00979199999710545,
+            "median": 0.01158299995586276,
+            "p95": 0.018458999984432012,
+            "max": 0.08091700001386926,
+            "mean": 0.012828161999777269,
+            "stdev": 0.004165432335601858,
+            "cv": 0.32470998851387917
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.009667000034824014,
+            "median": 0.011499999964144081,
+            "p95": 0.017959000018890947,
+            "max": 0.06233300000894815,
+            "mean": 0.012618011999668347,
+            "stdev": 0.0036854563537142854,
+            "cv": 0.292079002128953
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 1,
+            "median": 1,
+            "p95": 11,
+            "max": 100,
+            "mean": 3.1053333333333333,
+            "stdev": 6.108319863559506,
+            "cv": 1.9670416048388277
+          },
+          "perRepWarmMedianMs": [
+            0.011583000014070421,
+            0.011437500012107193,
+            0.011459000001195818
+          ]
+        },
+        "T4 incoming page type=CALLS": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.006292000005487353,
+            "median": 0.007874999981140718,
+            "p95": 0.015333999996073544,
+            "max": 0.04929200001060963,
+            "mean": 0.009158864000424122,
+            "stdev": 0.004343247698021661,
+            "cv": 0.474212489433246
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.006249999976716936,
+            "median": 0.007792000018525869,
+            "p95": 0.014582999981939793,
+            "max": 0.05079200002364814,
+            "mean": 0.008995320666723677,
+            "stdev": 0.003986451199099443,
+            "cv": 0.44316943739943504
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 1,
+            "median": 2,
+            "p95": 17,
+            "max": 100,
+            "mean": 5.008666666666667,
+            "stdev": 9.352892149252853,
+            "cv": 1.8673417042299054
+          },
+          "perRepWarmMedianMs": [
+            0.007792000018525869,
+            0.007875000010244548,
+            0.007709000026807189
+          ]
+        }
+      },
+      "deepPagination": {
+        "T5a outgoing hub": {
+          "rowsInHub": 356,
+          "pagesPerWalk": 4,
+          "perPageMs": {
+            "n": 12,
+            "min": 0.038249999983236194,
+            "median": 0.05441650000284426,
+            "p95": 0.07408400002168491,
+            "max": 0.07408400002168491,
+            "mean": 0.0542776666698046,
+            "stdev": 0.010827192111055685,
+            "cv": 0.19947784743442182
+          },
+          "walks": 3
+        },
+        "T5b incoming hub": {
+          "rowsInHub": 188,
+          "pagesPerWalk": 2,
+          "perPageMs": {
+            "n": 6,
+            "min": 0.054417000035755336,
+            "median": 0.0590000000083819,
+            "p95": 0.06408399995416403,
+            "max": 0.06408399995416403,
+            "mean": 0.058805666669892766,
+            "stdev": 0.0032203517053186704,
+            "cv": 0.05476260856621529
+          },
+          "walks": 3
+        }
+      }
+    },
+    {
+      "scale": 4,
+      "journal": "WAL",
+      "reps": 3,
+      "samplesPerClassPerPass": 500,
+      "classes": {
+        "R1 symbols-by-name (resolver byName, LIMIT 21)": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.009707999997772276,
+            "median": 0.015395499998703599,
+            "p95": 0.022666000004392117,
+            "max": 0.07279200002085418,
+            "mean": 0.01512163466696317,
+            "stdev": 0.004996322786534933,
+            "cv": 0.33040890727578515
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.009625000006053597,
+            "median": 0.015270500007318333,
+            "p95": 0.022333000029902905,
+            "max": 0.06120799999916926,
+            "mean": 0.015017885333185809,
+            "stdev": 0.00446230308120301,
+            "cv": 0.2971325843953826
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 0,
+            "median": 0,
+            "p95": 2,
+            "max": 12,
+            "mean": 0.618,
+            "stdev": 0.9771093422266821,
+            "cv": 1.5810830780367024
+          },
+          "perRepWarmMedianMs": [
+            0.014771000016480684,
+            0.01470800000242889,
+            0.01570799999171868
+          ]
+        },
+        "R2 files-by-6-paths (import candidates)": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.009041999990586191,
+            "median": 0.010125000029802322,
+            "p95": 0.014208000036887825,
+            "max": 0.09679199999663979,
+            "mean": 0.01086155800020788,
+            "stdev": 0.0031113931226905396,
+            "cv": 0.2864591914558658
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.008415999996941537,
+            "median": 0.009874999988824129,
+            "p95": 0.013834000041242689,
+            "max": 0.1058750000083819,
+            "mean": 0.010578159333982816,
+            "stdev": 0.002992204026878215,
+            "cv": 0.28286622770614017
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 2,
+            "median": 3,
+            "p95": 3,
+            "max": 3,
+            "mean": 2.994,
+            "stdev": 0.07722693830522939,
+            "cv": 0.025793900569548892
+          },
+          "perRepWarmMedianMs": [
+            0.009917000017594546,
+            0.009791000047698617,
+            0.009917000017594546
+          ]
+        },
+        "R3 symbols-in-file by name (resolver same-file)": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.010208000021521002,
+            "median": 0.013562500011175871,
+            "p95": 0.019792000006418675,
+            "max": 0.051333999959751964,
+            "mean": 0.014431423333512309,
+            "stdev": 0.0031809065247551498,
+            "cv": 0.22041530147400806
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.010000000009313226,
+            "median": 0.013417000009212643,
+            "p95": 0.01954100001603365,
+            "max": 0.1054160000057891,
+            "mean": 0.014423209555434167,
+            "stdev": 0.0033206165099995814,
+            "cv": 0.2302272942258187
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 0,
+            "median": 1,
+            "p95": 1,
+            "max": 3,
+            "mean": 0.9626666666666667,
+            "stdev": 0.4802147667681726,
+            "cv": 0.49883805412206295
+          },
+          "perRepWarmMedianMs": [
+            0.013291999988723546,
+            0.013417000009212643,
+            0.013645500031998381
+          ]
+        },
+        "T1 outgoing page (all types, LIMIT 100)": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.0072910000453703105,
+            "median": 0.012541000003693625,
+            "p95": 0.03470800002105534,
+            "max": 0.07312499999534339,
+            "mean": 0.015584357333291943,
+            "stdev": 0.009513398539034223,
+            "cv": 0.610445354632065
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.007584000006318092,
+            "median": 0.011916999996174127,
+            "p95": 0.03308299998752773,
+            "max": 0.13787500001490116,
+            "mean": 0.015042732221695283,
+            "stdev": 0.009134329243292657,
+            "cv": 0.6072254101631038
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 1,
+            "median": 5,
+            "p95": 56,
+            "max": 100,
+            "mean": 11.952,
+            "stdev": 20.298777368764533,
+            "cv": 1.6983582135847166
+          },
+          "perRepWarmMedianMs": [
+            0.01187500002561137,
+            0.011834000004455447,
+            0.012042000016663224
+          ]
+        },
+        "T2 outgoing page type=CALLS": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.0039159999578259885,
+            "median": 0.005958000023383647,
+            "p95": 0.021707999985665083,
+            "max": 0.04604099999414757,
+            "mean": 0.008044966666765201,
+            "stdev": 0.005698980389372288,
+            "cv": 0.7083908020297355
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.004207999969366938,
+            "median": 0.0061250000144355,
+            "p95": 0.02145800000289455,
+            "max": 0.04112499998882413,
+            "mean": 0.00812573711028219,
+            "stdev": 0.005304330527177492,
+            "cv": 0.6527814591079336
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 1,
+            "median": 4,
+            "p95": 58,
+            "max": 100,
+            "mean": 11.397333333333334,
+            "stdev": 20.96494199583884,
+            "cv": 1.8394602827420599
+          },
+          "perRepWarmMedianMs": [
+            0.006292000005487353,
+            0.0058750000316649675,
+            0.00620800000615418
+          ]
+        },
+        "T3 incoming page (all types)": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.007958000001963228,
+            "median": 0.010708000016165897,
+            "p95": 0.021041999978478998,
+            "max": 0.13570799998706207,
+            "mean": 0.012304874665724734,
+            "stdev": 0.006148566722887632,
+            "cv": 0.49968544092647144
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.007916999980807304,
+            "median": 0.010333000012906268,
+            "p95": 0.019542000023648143,
+            "max": 0.10266700002830476,
+            "mean": 0.01190654666617047,
+            "stdev": 0.005335348466692726,
+            "cv": 0.4481020917552702
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 1,
+            "median": 1,
+            "p95": 11,
+            "max": 100,
+            "mean": 3.1053333333333333,
+            "stdev": 6.108319863559506,
+            "cv": 1.9670416048388277
+          },
+          "perRepWarmMedianMs": [
+            0.010458000004291534,
+            0.00995800003875047,
+            0.01058299996657297
+          ]
+        },
+        "T4 incoming page type=CALLS": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.004249999998137355,
+            "median": 0.00652049999916926,
+            "p95": 0.01762499997857958,
+            "max": 0.07216700003482401,
+            "mean": 0.00838400466736251,
+            "stdev": 0.005993505505161851,
+            "cv": 0.714873827360037
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.004167000006418675,
+            "median": 0.006416000018361956,
+            "p95": 0.015958000032696873,
+            "max": 0.07487499999115244,
+            "mean": 0.008119229556022522,
+            "stdev": 0.005638100540191472,
+            "cv": 0.6944132446667127
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 1,
+            "median": 2,
+            "p95": 17,
+            "max": 100,
+            "mean": 5.008666666666667,
+            "stdev": 9.352892149252853,
+            "cv": 1.8673417042299054
+          },
+          "perRepWarmMedianMs": [
+            0.006500000017695129,
+            0.006354500015731901,
+            0.006374999997206032
+          ]
+        }
+      },
+      "deepPagination": {
+        "T5a outgoing hub": {
+          "rowsInHub": 356,
+          "pagesPerWalk": 4,
+          "perPageMs": {
+            "n": 12,
+            "min": 0.03708300000289455,
+            "median": 0.060646000027190894,
+            "p95": 0.08520800003316253,
+            "max": 0.08520800003316253,
+            "mean": 0.062340083347711094,
+            "stdev": 0.01607416191274213,
+            "cv": 0.2578463333628558
+          },
+          "walks": 3
+        },
+        "T5b incoming hub": {
+          "rowsInHub": 188,
+          "pagesPerWalk": 2,
+          "perPageMs": {
+            "n": 6,
+            "min": 0.06695899995975196,
+            "median": 0.07397900000796653,
+            "p95": 0.09404100000392646,
+            "max": 0.09404100000392646,
+            "mean": 0.07745150000361416,
+            "stdev": 0.009008470687149935,
+            "cv": 0.11631111969076866
+          },
+          "walks": 3
+        }
+      }
+    },
+    {
+      "scale": 4,
+      "journal": "DELETE",
+      "reps": 3,
+      "samplesPerClassPerPass": 500,
+      "classes": {
+        "R1 symbols-by-name (resolver byName, LIMIT 21)": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.012374999991152436,
+            "median": 0.017812500009313226,
+            "p95": 0.025167000014334917,
+            "max": 0.07004199997754768,
+            "mean": 0.0176338700002525,
+            "stdev": 0.004763780144263107,
+            "cv": 0.27014944219249065
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.012291999999433756,
+            "median": 0.01791699999012053,
+            "p95": 0.024000000033993274,
+            "max": 0.04312500002561137,
+            "mean": 0.017401710000121966,
+            "stdev": 0.003993904027723774,
+            "cv": 0.22951215873013522
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 0,
+            "median": 0,
+            "p95": 2,
+            "max": 12,
+            "mean": 0.618,
+            "stdev": 0.9771093422266821,
+            "cv": 1.5810830780367024
+          },
+          "perRepWarmMedianMs": [
+            0.01816600002348423,
+            0.0169375000114087,
+            0.018125000002328306
+          ]
+        },
+        "R2 files-by-6-paths (import candidates)": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.011541999992914498,
+            "median": 0.012458999990485609,
+            "p95": 0.016208000015467405,
+            "max": 0.07833300001220778,
+            "mean": 0.013082629332823368,
+            "stdev": 0.002968174098616028,
+            "cv": 0.22687901820844947
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.011208000010810792,
+            "median": 0.012250000028871,
+            "p95": 0.015833000012207776,
+            "max": 0.03674999997019768,
+            "mean": 0.012819817556094171,
+            "stdev": 0.001828952077304657,
+            "cv": 0.14266599889600035
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 2,
+            "median": 3,
+            "p95": 3,
+            "max": 3,
+            "mean": 2.994,
+            "stdev": 0.07722693830522939,
+            "cv": 0.025793900569548892
+          },
+          "perRepWarmMedianMs": [
+            0.01233300002058968,
+            0.012208999978611246,
+            0.012250000028871
+          ]
+        },
+        "R3 symbols-in-file by name (resolver same-file)": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.012624999973922968,
+            "median": 0.015958999982103705,
+            "p95": 0.022875000024214387,
+            "max": 0.04404200002318248,
+            "mean": 0.016912627331679687,
+            "stdev": 0.003306598160730748,
+            "cv": 0.19551061439975284
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.012749999994412065,
+            "median": 0.015875000040978193,
+            "p95": 0.02216599998064339,
+            "max": 0.044916999991983175,
+            "mean": 0.016874880666016705,
+            "stdev": 0.003140289224402281,
+            "cv": 0.18609252927792955
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 0,
+            "median": 1,
+            "p95": 1,
+            "max": 3,
+            "mean": 0.9626666666666667,
+            "stdev": 0.4802147667681726,
+            "cv": 0.49883805412206295
+          },
+          "perRepWarmMedianMs": [
+            0.01600000000325963,
+            0.015959000040311366,
+            0.015708999999333173
+          ]
+        },
+        "T1 outgoing page (all types, LIMIT 100)": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.010249999992083758,
+            "median": 0.014874999993480742,
+            "p95": 0.03762499999720603,
+            "max": 0.07737499999348074,
+            "mean": 0.018100491334102117,
+            "stdev": 0.009520207949034878,
+            "cv": 0.5259640621521908
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.010291000013239682,
+            "median": 0.013833500008331612,
+            "p95": 0.03291700000409037,
+            "max": 0.07254100003046915,
+            "mean": 0.016872981555928063,
+            "stdev": 0.008516982425074506,
+            "cv": 0.504770445984527
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 1,
+            "median": 5,
+            "p95": 56,
+            "max": 100,
+            "mean": 11.952,
+            "stdev": 20.298777368764533,
+            "cv": 1.6983582135847166
+          },
+          "perRepWarmMedianMs": [
+            0.014166000008117408,
+            0.01362500002142042,
+            0.013708000013139099
+          ]
+        },
+        "T2 outgoing page type=CALLS": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.006084000051487237,
+            "median": 0.008375000033993274,
+            "p95": 0.023958000005222857,
+            "max": 0.05400000000372529,
+            "mean": 0.010518073333233284,
+            "stdev": 0.005899211800247469,
+            "cv": 0.5608642964684517
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.006457999988924712,
+            "median": 0.008416499971644953,
+            "p95": 0.02191599999787286,
+            "max": 0.04704099998343736,
+            "mean": 0.010233885777596798,
+            "stdev": 0.005042857502459351,
+            "cv": 0.49276077650766537
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 1,
+            "median": 4,
+            "p95": 58,
+            "max": 100,
+            "mean": 11.397333333333334,
+            "stdev": 20.96494199583884,
+            "cv": 1.8394602827420599
+          },
+          "perRepWarmMedianMs": [
+            0.008624999958556145,
+            0.008166999992681667,
+            0.008416499971644953
+          ]
+        },
+        "T3 incoming page (all types)": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.010208000021521002,
+            "median": 0.013291999988723546,
+            "p95": 0.024291999987326562,
+            "max": 0.10845800000242889,
+            "mean": 0.015004274666852628,
+            "stdev": 0.006168549022769256,
+            "cv": 0.41111944160798286
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.010374999954365194,
+            "median": 0.012792000023182482,
+            "p95": 0.021792000043205917,
+            "max": 0.0953330000047572,
+            "mean": 0.014242358444827713,
+            "stdev": 0.004962230774251093,
+            "cv": 0.3484135575911718
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 1,
+            "median": 1,
+            "p95": 11,
+            "max": 100,
+            "mean": 3.1053333333333333,
+            "stdev": 6.108319863559506,
+            "cv": 1.9670416048388277
+          },
+          "perRepWarmMedianMs": [
+            0.01316700002644211,
+            0.012374999991152436,
+            0.01279199996497482
+          ]
+        },
+        "T4 incoming page type=CALLS": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.006624999979976565,
+            "median": 0.008874999999534339,
+            "p95": 0.0202920000301674,
+            "max": 0.07937499997206032,
+            "mean": 0.010749642667011358,
+            "stdev": 0.006136499275695887,
+            "cv": 0.5708561173412448
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.006750000000465661,
+            "median": 0.008625000016763806,
+            "p95": 0.0175419999868609,
+            "max": 0.06837500003166497,
+            "mean": 0.010220607111256363,
+            "stdev": 0.005277636250989734,
+            "cv": 0.5163720895970321
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 1,
+            "median": 2,
+            "p95": 17,
+            "max": 100,
+            "mean": 5.008666666666667,
+            "stdev": 9.352892149252853,
+            "cv": 1.8673417042299054
+          },
+          "perRepWarmMedianMs": [
+            0.008749999979045242,
+            0.008583500020904467,
+            0.008583999995607883
+          ]
+        }
+      },
+      "deepPagination": {
+        "T5a outgoing hub": {
+          "rowsInHub": 356,
+          "pagesPerWalk": 4,
+          "perPageMs": {
+            "n": 12,
+            "min": 0.039708000025711954,
+            "median": 0.058208500006003305,
+            "p95": 0.08737500000279397,
+            "max": 0.08737500000279397,
+            "mean": 0.060482583333699345,
+            "stdev": 0.012562792978353957,
+            "cv": 0.20770926580700944
+          },
+          "walks": 3
+        },
+        "T5b incoming hub": {
+          "rowsInHub": 188,
+          "pagesPerWalk": 2,
+          "perPageMs": {
+            "n": 6,
+            "min": 0.06395899999188259,
+            "median": 0.07029199998942204,
+            "p95": 0.09220800001639873,
+            "max": 0.09220800001639873,
+            "mean": 0.07352799999838074,
+            "stdev": 0.010025683156547874,
+            "cv": 0.1363519088887045
+          },
+          "walks": 3
+        }
+      }
+    },
+    {
+      "scale": 16,
+      "journal": "WAL",
+      "reps": 3,
+      "samplesPerClassPerPass": 500,
+      "classes": {
+        "R1 symbols-by-name (resolver byName, LIMIT 21)": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.010375000012572855,
+            "median": 0.01589600002625957,
+            "p95": 0.02358400000957772,
+            "max": 0.06679200002690777,
+            "mean": 0.015994222000668135,
+            "stdev": 0.005098951487390286,
+            "cv": 0.31879959445212686
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.009915999951772392,
+            "median": 0.01595850003650412,
+            "p95": 0.024291999987326562,
+            "max": 0.08670799998799339,
+            "mean": 0.01600246244412847,
+            "stdev": 0.005123465318090697,
+            "cv": 0.32016730774897517
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 0,
+            "median": 0,
+            "p95": 2,
+            "max": 12,
+            "mean": 0.618,
+            "stdev": 0.9771093422266821,
+            "cv": 1.5810830780367024
+          },
+          "perRepWarmMedianMs": [
+            0.015083999984199181,
+            0.015396000002510846,
+            0.016499999997904524
+          ]
+        },
+        "R2 files-by-6-paths (import candidates)": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.00979199999710545,
+            "median": 0.011082999990321696,
+            "p95": 0.014334000006783754,
+            "max": 0.0640830000047572,
+            "mean": 0.011537085334188305,
+            "stdev": 0.0026005763085812234,
+            "cv": 0.22541016498117006
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.008874999999534339,
+            "median": 0.010125000029802322,
+            "p95": 0.01316700002644211,
+            "max": 0.03950000001350418,
+            "mean": 0.010527164666615943,
+            "stdev": 0.0017126976384720365,
+            "cv": 0.1626931555372544
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 2,
+            "median": 3,
+            "p95": 3,
+            "max": 3,
+            "mean": 2.994,
+            "stdev": 0.07722693830522939,
+            "cv": 0.025793900569548892
+          },
+          "perRepWarmMedianMs": [
+            0.010084000008646399,
+            0.010124999971594661,
+            0.010207999963313341
+          ]
+        },
+        "R3 symbols-in-file by name (resolver same-file)": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.016375000006519258,
+            "median": 0.025375000026542693,
+            "p95": 0.04587500001071021,
+            "max": 0.06833400001050904,
+            "mean": 0.02808297800067036,
+            "stdev": 0.00860857769534289,
+            "cv": 0.3065407698263837
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.01545900001656264,
+            "median": 0.025604499998735264,
+            "p95": 0.047083000012207776,
+            "max": 0.14954200002830476,
+            "mean": 0.028605425111406173,
+            "stdev": 0.009852960560312285,
+            "cv": 0.3444437732331935
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 0,
+            "median": 1,
+            "p95": 1,
+            "max": 3,
+            "mean": 0.9706666666666667,
+            "stdev": 0.49578848536671344,
+            "cv": 0.5107711044299932
+          },
+          "perRepWarmMedianMs": [
+            0.025041000044438988,
+            0.025229499995475635,
+            0.026458000007551163
+          ]
+        },
+        "T1 outgoing page (all types, LIMIT 100)": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.008082999964244664,
+            "median": 0.013333999959286302,
+            "p95": 0.0360420000506565,
+            "max": 0.0787090000230819,
+            "mean": 0.016814485332967404,
+            "stdev": 0.009716443184624744,
+            "cv": 0.5778614683837008
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.00812499999301508,
+            "median": 0.014207999978680164,
+            "p95": 0.03645900002447888,
+            "max": 0.18808399996487424,
+            "mean": 0.01735847488891644,
+            "stdev": 0.010467537706068761,
+            "cv": 0.6030217385487241
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 1,
+            "median": 5,
+            "p95": 56,
+            "max": 100,
+            "mean": 11.952,
+            "stdev": 20.298777368764533,
+            "cv": 1.6983582135847166
+          },
+          "perRepWarmMedianMs": [
+            0.014416999998502433,
+            0.014437500009080395,
+            0.013875000004190952
+          ]
+        },
+        "T2 outgoing page type=CALLS": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.0044590000179596245,
+            "median": 0.007166999974288046,
+            "p95": 0.024166000017430633,
+            "max": 0.052124999987427145,
+            "mean": 0.009242961999805023,
+            "stdev": 0.005858379368082135,
+            "cv": 0.6338205618724512
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.004124999977648258,
+            "median": 0.007707999960985035,
+            "p95": 0.025250000006053597,
+            "max": 0.07416699995519593,
+            "mean": 0.010123331111157314,
+            "stdev": 0.006668085369029368,
+            "cv": 0.658684902806371
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 1,
+            "median": 4,
+            "p95": 58,
+            "max": 100,
+            "mean": 11.397333333333334,
+            "stdev": 20.96494199583884,
+            "cv": 1.8394602827420599
+          },
+          "perRepWarmMedianMs": [
+            0.007708499993896112,
+            0.007541500002844259,
+            0.007792000018525869
+          ]
+        },
+        "T3 incoming page (all types)": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.008374999975785613,
+            "median": 0.01195800001733005,
+            "p95": 0.024333000008482486,
+            "max": 0.12475000001722947,
+            "mean": 0.013944848667364567,
+            "stdev": 0.006971333986715765,
+            "cv": 0.49992181005383945
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.00841700000455603,
+            "median": 0.012875000014901161,
+            "p95": 0.025458000018261373,
+            "max": 0.15537499997299165,
+            "mean": 0.014927084666663884,
+            "stdev": 0.007821130437691972,
+            "cv": 0.5239556559331788
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 1,
+            "median": 1,
+            "p95": 11,
+            "max": 100,
+            "mean": 3.1053333333333333,
+            "stdev": 6.108319863559506,
+            "cv": 1.9670416048388277
+          },
+          "perRepWarmMedianMs": [
+            0.012624999973922968,
+            0.012395499972626567,
+            0.013708000013139099
+          ]
+        },
+        "T4 incoming page type=CALLS": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.005124999966938049,
+            "median": 0.007958000001963228,
+            "p95": 0.02195899997605011,
+            "max": 0.10037499997997656,
+            "mean": 0.010310847334524927,
+            "stdev": 0.00792263295857974,
+            "cv": 0.7683784563516454
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.004958000034093857,
+            "median": 0.008666999987326562,
+            "p95": 0.024875000002793968,
+            "max": 0.13383400003658608,
+            "mean": 0.011253685555058636,
+            "stdev": 0.009101956248347452,
+            "cv": 0.8087978115094959
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 1,
+            "median": 2,
+            "p95": 17,
+            "max": 100,
+            "mean": 5.008666666666667,
+            "stdev": 9.352892149252853,
+            "cv": 1.8673417042299054
+          },
+          "perRepWarmMedianMs": [
+            0.008479499985696748,
+            0.008666500012623146,
+            0.008833000028971583
+          ]
+        }
+      },
+      "deepPagination": {
+        "T5a outgoing hub": {
+          "rowsInHub": 356,
+          "pagesPerWalk": 4,
+          "perPageMs": {
+            "n": 12,
+            "min": 0.03850000002421439,
+            "median": 0.05814599999575876,
+            "p95": 0.09604199999012053,
+            "max": 0.09604199999012053,
+            "mean": 0.06271174999225575,
+            "stdev": 0.019969732913383137,
+            "cv": 0.3184368625632229
+          },
+          "walks": 3
+        },
+        "T5b incoming hub": {
+          "rowsInHub": 188,
+          "pagesPerWalk": 2,
+          "perPageMs": {
+            "n": 6,
+            "min": 0.06254199997056276,
+            "median": 0.07641700000385754,
+            "p95": 0.08237499999813735,
+            "max": 0.08237499999813735,
+            "mean": 0.07488916665897705,
+            "stdev": 0.006776239353493222,
+            "cv": 0.09048357266879731
+          },
+          "walks": 3
+        }
+      }
+    },
+    {
+      "scale": 16,
+      "journal": "DELETE",
+      "reps": 3,
+      "samplesPerClassPerPass": 500,
+      "classes": {
+        "R1 symbols-by-name (resolver byName, LIMIT 21)": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.012500000011641532,
+            "median": 0.01804150000680238,
+            "p95": 0.02441700000781566,
+            "max": 0.061625000031199306,
+            "mean": 0.017709241999701288,
+            "stdev": 0.004566504859649219,
+            "cv": 0.2578599840538768
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.012209000007715076,
+            "median": 0.017749999999068677,
+            "p95": 0.02491599996574223,
+            "max": 0.049457999994046986,
+            "mean": 0.017787406666359553,
+            "stdev": 0.0045296131044009385,
+            "cv": 0.2546528107983033
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 0,
+            "median": 0,
+            "p95": 2,
+            "max": 12,
+            "mean": 0.618,
+            "stdev": 0.9771093422266821,
+            "cv": 1.5810830780367024
+          },
+          "perRepWarmMedianMs": [
+            0.01758350001182407,
+            0.01731250001466833,
+            0.018208499968750402
+          ]
+        },
+        "R2 files-by-6-paths (import candidates)": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.01216699997894466,
+            "median": 0.013500000000931323,
+            "p95": 0.01670800003921613,
+            "max": 0.06279200001154095,
+            "mean": 0.013924342665743704,
+            "stdev": 0.0023797825935167245,
+            "cv": 0.17090807448824152
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.011292000010143965,
+            "median": 0.012500000011641532,
+            "p95": 0.015625,
+            "max": 0.04329199995845556,
+            "mean": 0.012898490222067469,
+            "stdev": 0.0016256994433178494,
+            "cv": 0.12603796377164442
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 2,
+            "median": 3,
+            "p95": 3,
+            "max": 3,
+            "mean": 2.994,
+            "stdev": 0.07722693830522939,
+            "cv": 0.025793900569548892
+          },
+          "perRepWarmMedianMs": [
+            0.012583999952767044,
+            0.012540999974589795,
+            0.012416999961715192
+          ]
+        },
+        "R3 symbols-in-file by name (resolver same-file)": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.018666999996639788,
+            "median": 0.027750000008381903,
+            "p95": 0.04833300004247576,
+            "max": 0.06524999998509884,
+            "mean": 0.030448533333139495,
+            "stdev": 0.008598235813391449,
+            "cv": 0.2823858778128181
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.01770800002850592,
+            "median": 0.02750000002561137,
+            "p95": 0.0487919999868609,
+            "max": 0.09804099996108562,
+            "mean": 0.030667421111190276,
+            "stdev": 0.009680511017708676,
+            "cv": 0.31566107181331726
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 0,
+            "median": 1,
+            "p95": 1,
+            "max": 3,
+            "mean": 0.9706666666666667,
+            "stdev": 0.49578848536671344,
+            "cv": 0.5107711044299932
+          },
+          "perRepWarmMedianMs": [
+            0.027459000004455447,
+            0.02756250000675209,
+            0.027666500012855977
+          ]
+        },
+        "T1 outgoing page (all types, LIMIT 100)": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.010500000033061951,
+            "median": 0.01579099998343736,
+            "p95": 0.036791999998968095,
+            "max": 0.07925000000977889,
+            "mean": 0.019089432666815506,
+            "stdev": 0.009649098951279599,
+            "cv": 0.5054680838186093
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.010583000024780631,
+            "median": 0.015665999962948263,
+            "p95": 0.03637499996693805,
+            "max": 0.08324999996693805,
+            "mean": 0.01882015555551172,
+            "stdev": 0.009288010985719752,
+            "cv": 0.49351403915466785
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 1,
+            "median": 5,
+            "p95": 56,
+            "max": 100,
+            "mean": 11.952,
+            "stdev": 20.298777368764533,
+            "cv": 1.6983582135847166
+          },
+          "perRepWarmMedianMs": [
+            0.01531250000698492,
+            0.015750000020489097,
+            0.015770500001963228
+          ]
+        },
+        "T2 outgoing page type=CALLS": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.006792000029236078,
+            "median": 0.009583999984897673,
+            "p95": 0.024458000028971583,
+            "max": 0.042707999993581325,
+            "mean": 0.011567729333803678,
+            "stdev": 0.0057111897093375845,
+            "cv": 0.4937174396575929
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.006542000046465546,
+            "median": 0.009750000026542693,
+            "p95": 0.026375000015832484,
+            "max": 0.07387500000186265,
+            "mean": 0.011867295777994311,
+            "stdev": 0.005943339475568603,
+            "cv": 0.5008166634381371
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 1,
+            "median": 4,
+            "p95": 58,
+            "max": 100,
+            "mean": 11.397333333333334,
+            "stdev": 20.96494199583884,
+            "cv": 1.8394602827420599
+          },
+          "perRepWarmMedianMs": [
+            0.009707999997772276,
+            0.009749999968335032,
+            0.009874999988824129
+          ]
+        },
+        "T3 incoming page (all types)": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.010540999996010214,
+            "median": 0.015249999996740371,
+            "p95": 0.027708000037819147,
+            "max": 0.12595899996813387,
+            "mean": 0.0171847979996431,
+            "stdev": 0.007215686855565437,
+            "cv": 0.41988779011049737
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.010833000007551163,
+            "median": 0.014375000027939677,
+            "p95": 0.0265829999698326,
+            "max": 0.11387499998090789,
+            "mean": 0.016367969554952448,
+            "stdev": 0.006868930210505815,
+            "cv": 0.41965682960520206
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 1,
+            "median": 1,
+            "p95": 11,
+            "max": 100,
+            "mean": 3.1053333333333333,
+            "stdev": 6.108319863559506,
+            "cv": 1.9670416048388277
+          },
+          "perRepWarmMedianMs": [
+            0.014083000016398728,
+            0.013959000003524125,
+            0.015292000025510788
+          ]
+        },
+        "T4 incoming page type=CALLS": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.0072910000453703105,
+            "median": 0.010333000012906268,
+            "p95": 0.024375000037252903,
+            "max": 0.10875000001396984,
+            "mean": 0.012630822000443005,
+            "stdev": 0.007829204579336642,
+            "cv": 0.6198491736374755
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.006999999983236194,
+            "median": 0.010458000004291534,
+            "p95": 0.024667000048793852,
+            "max": 0.11904099996900186,
+            "mean": 0.01276999911143341,
+            "stdev": 0.00811676959679077,
+            "cv": 0.6356123854013078
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 1,
+            "median": 2,
+            "p95": 17,
+            "max": 100,
+            "mean": 5.008666666666667,
+            "stdev": 9.352892149252853,
+            "cv": 1.8673417042299054
+          },
+          "perRepWarmMedianMs": [
+            0.010165999992750585,
+            0.010354500001994893,
+            0.01087500003632158
+          ]
+        }
+      },
+      "deepPagination": {
+        "T5a outgoing hub": {
+          "rowsInHub": 356,
+          "pagesPerWalk": 4,
+          "perPageMs": {
+            "n": 12,
+            "min": 0.040917000034824014,
+            "median": 0.05837550002615899,
+            "p95": 0.10495800001081079,
+            "max": 0.10495800001081079,
+            "mean": 0.06209725000371691,
+            "stdev": 0.018429660343417285,
+            "cv": 0.29678706130004395
+          },
+          "walks": 3
+        },
+        "T5b incoming hub": {
+          "rowsInHub": 188,
+          "pagesPerWalk": 2,
+          "perPageMs": {
+            "n": 6,
+            "min": 0.06591699999989942,
+            "median": 0.07335450002574362,
+            "p95": 0.08724999998230487,
+            "max": 0.08724999998230487,
+            "mean": 0.07452100000227802,
+            "stdev": 0.006698030473197625,
+            "cv": 0.08988111368597945
+          },
+          "walks": 3
+        }
+      }
+    },
+    {
+      "scale": 64,
+      "journal": "WAL",
+      "reps": 3,
+      "samplesPerClassPerPass": 500,
+      "classes": {
+        "R1 symbols-by-name (resolver byName, LIMIT 21)": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.010083000001031905,
+            "median": 0.016541499993763864,
+            "p95": 0.026374999957624823,
+            "max": 0.12699999997857958,
+            "mean": 0.017118188666024554,
+            "stdev": 0.006566748626214827,
+            "cv": 0.3836123525877611
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.010083000001031905,
+            "median": 0.016500000027008355,
+            "p95": 0.0251249999855645,
+            "max": 0.05316700000548735,
+            "mean": 0.01675001466681715,
+            "stdev": 0.005137794565569614,
+            "cv": 0.3067337353290749
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 0,
+            "median": 0,
+            "p95": 2,
+            "max": 12,
+            "mean": 0.618,
+            "stdev": 0.9771093422266821,
+            "cv": 1.5810830780367024
+          },
+          "perRepWarmMedianMs": [
+            0.017228999990038574,
+            0.015437499998370185,
+            0.017063000035705045
+          ]
+        },
+        "R2 files-by-6-paths (import candidates)": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.009833000018261373,
+            "median": 0.010959000035654753,
+            "p95": 0.014499999990221113,
+            "max": 0.10166700003901497,
+            "mean": 0.011605364000385938,
+            "stdev": 0.003255670367138786,
+            "cv": 0.2805315168943015
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.008624999958556145,
+            "median": 0.010167000000365078,
+            "p95": 0.013667000050190836,
+            "max": 0.039874999958556145,
+            "mean": 0.0106994662223539,
+            "stdev": 0.0019897948074933036,
+            "cv": 0.18597140886674488
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 2,
+            "median": 3,
+            "p95": 3,
+            "max": 3,
+            "mean": 2.994,
+            "stdev": 0.07722693830522939,
+            "cv": 0.025793900569548892
+          },
+          "perRepWarmMedianMs": [
+            0.010291999962646514,
+            0.009958999988157302,
+            0.010207999963313341
+          ]
+        },
+        "R3 symbols-in-file by name (resolver same-file)": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.03333299997029826,
+            "median": 0.07039599999552593,
+            "p95": 0.1524160000262782,
+            "max": 0.32016699999803677,
+            "mean": 0.0820415146672555,
+            "stdev": 0.03712375530765911,
+            "cv": 0.4524996333652039
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.032041999977082014,
+            "median": 0.06941699999151751,
+            "p95": 0.15291699999943376,
+            "max": 0.2854580000275746,
+            "mean": 0.08127649533279085,
+            "stdev": 0.03628077996864523,
+            "cv": 0.446387111305571
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 0,
+            "median": 1,
+            "p95": 1,
+            "max": 3,
+            "mean": 0.9626666666666667,
+            "stdev": 0.4802147667681726,
+            "cv": 0.49883805412206295
+          },
+          "perRepWarmMedianMs": [
+            0.0702080000191927,
+            0.06902100000297651,
+            0.06935400000656955
+          ]
+        },
+        "T1 outgoing page (all types, LIMIT 100)": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.008542000025045127,
+            "median": 0.013624999963212758,
+            "p95": 0.0352089999942109,
+            "max": 0.09179199999198318,
+            "mean": 0.01707635400032935,
+            "stdev": 0.009717294500471567,
+            "cv": 0.5690497222231484
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.008583999995607883,
+            "median": 0.014957999985199422,
+            "p95": 0.03966599999694154,
+            "max": 0.11329199996544048,
+            "mean": 0.018146581111682786,
+            "stdev": 0.010558544841623461,
+            "cv": 0.5818476095657413
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 1,
+            "median": 5,
+            "p95": 56,
+            "max": 100,
+            "mean": 11.952,
+            "stdev": 20.298777368764533,
+            "cv": 1.6983582135847166
+          },
+          "perRepWarmMedianMs": [
+            0.014604500000132248,
+            0.015270499978214502,
+            0.014957999985199422
+          ]
+        },
+        "T2 outgoing page type=CALLS": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.004625000001396984,
+            "median": 0.00812499999301508,
+            "p95": 0.02558300003875047,
+            "max": 0.04999999998835847,
+            "mean": 0.010411486000016642,
+            "stdev": 0.0062282370842623586,
+            "cv": 0.5982082753847436
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.004667000030167401,
+            "median": 0.008458000025711954,
+            "p95": 0.027667000016663224,
+            "max": 0.10108300001593307,
+            "mean": 0.01102815511102219,
+            "stdev": 0.007005121112372949,
+            "cv": 0.635203353766
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 1,
+            "median": 4,
+            "p95": 58,
+            "max": 100,
+            "mean": 11.397333333333334,
+            "stdev": 20.96494199583884,
+            "cv": 1.8394602827420599
+          },
+          "perRepWarmMedianMs": [
+            0.008374999975785613,
+            0.008542000025045127,
+            0.00849999999627471
+          ]
+        },
+        "T3 incoming page (all types)": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.008458000025711954,
+            "median": 0.013000000006286427,
+            "p95": 0.0259580000420101,
+            "max": 0.12179100001230836,
+            "mean": 0.014999855999990055,
+            "stdev": 0.007483468370444241,
+            "cv": 0.4989026808290161
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.00858299998799339,
+            "median": 0.013374999980442226,
+            "p95": 0.02725000004284084,
+            "max": 0.18404200003715232,
+            "mean": 0.015480372889381316,
+            "stdev": 0.008007309605449374,
+            "cv": 0.517255602475955
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 1,
+            "median": 1,
+            "p95": 11,
+            "max": 100,
+            "mean": 3.1053333333333333,
+            "stdev": 6.108319863559506,
+            "cv": 1.9670416048388277
+          },
+          "perRepWarmMedianMs": [
+            0.012812500004656613,
+            0.013333999959286302,
+            0.014104500005487353
+          ]
+        },
+        "T4 incoming page type=CALLS": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.005375000007916242,
+            "median": 0.009291000023949891,
+            "p95": 0.027125000022351742,
+            "max": 0.11249999998835847,
+            "mean": 0.012034497332526371,
+            "stdev": 0.009475273086217826,
+            "cv": 0.7873426554018527
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.005000000004656613,
+            "median": 0.009292000031564385,
+            "p95": 0.027875000028871,
+            "max": 0.12362500000745058,
+            "mean": 0.01225316777793018,
+            "stdev": 0.009932688784755004,
+            "cv": 0.810622115421066
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 1,
+            "median": 2,
+            "p95": 17,
+            "max": 100,
+            "mean": 5.008666666666667,
+            "stdev": 9.352892149252853,
+            "cv": 1.8673417042299054
+          },
+          "perRepWarmMedianMs": [
+            0.009041999990586191,
+            0.009562499995809048,
+            0.009437499975319952
+          ]
+        }
+      },
+      "deepPagination": {
+        "T5a outgoing hub": {
+          "rowsInHub": 356,
+          "pagesPerWalk": 4,
+          "perPageMs": {
+            "n": 12,
+            "min": 0.03866700001526624,
+            "median": 0.05800049999379553,
+            "p95": 0.09049999999115244,
+            "max": 0.09049999999115244,
+            "mean": 0.06194449999020435,
+            "stdev": 0.017035903426112043,
+            "cv": 0.27501882215218515
+          },
+          "walks": 3
+        },
+        "T5b incoming hub": {
+          "rowsInHub": 188,
+          "pagesPerWalk": 2,
+          "perPageMs": {
+            "n": 6,
+            "min": 0.06395899999188259,
+            "median": 0.07312499999534339,
+            "p95": 0.08016700000735,
+            "max": 0.08016700000735,
+            "mean": 0.07234050000746113,
+            "stdev": 0.005468802702997736,
+            "cv": 0.07559807718268036
+          },
+          "walks": 3
+        }
+      }
+    },
+    {
+      "scale": 64,
+      "journal": "DELETE",
+      "reps": 3,
+      "samplesPerClassPerPass": 500,
+      "classes": {
+        "R1 symbols-by-name (resolver byName, LIMIT 21)": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.012749999994412065,
+            "median": 0.0183334999892395,
+            "p95": 0.027166999992914498,
+            "max": 0.06145799998193979,
+            "mean": 0.01893169933425573,
+            "stdev": 0.005302067937374108,
+            "cv": 0.28006296971874817
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.012749999994412065,
+            "median": 0.019208000012440607,
+            "p95": 0.02750000002561137,
+            "max": 0.04820800002198666,
+            "mean": 0.019183555777753807,
+            "stdev": 0.005153568177644108,
+            "cv": 0.2686450956928662
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 0,
+            "median": 0,
+            "p95": 2,
+            "max": 12,
+            "mean": 0.618,
+            "stdev": 0.9771093422266821,
+            "cv": 1.5810830780367024
+          },
+          "perRepWarmMedianMs": [
+            0.019499999994877726,
+            0.018354499974520877,
+            0.019541499990737066
+          ]
+        },
+        "R2 files-by-6-paths (import candidates)": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.01241600001230836,
+            "median": 0.013457999972160906,
+            "p95": 0.016125000023748726,
+            "max": 0.054874999972525984,
+            "mean": 0.013896316666311274,
+            "stdev": 0.00230063213043872,
+            "cv": 0.16555697352638224
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.011041999969165772,
+            "median": 0.012583999952767044,
+            "p95": 0.015667000028770417,
+            "max": 0.0385839999653399,
+            "mean": 0.013006213332875632,
+            "stdev": 0.0018948416762601921,
+            "cv": 0.14568742090909934
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 2,
+            "median": 3,
+            "p95": 3,
+            "max": 3,
+            "mean": 2.994,
+            "stdev": 0.07722693830522939,
+            "cv": 0.025793900569548892
+          },
+          "perRepWarmMedianMs": [
+            0.012583000003360212,
+            0.01233300002058968,
+            0.012791000015567988
+          ]
+        },
+        "R3 symbols-in-file by name (resolver same-file)": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.035957999993115664,
+            "median": 0.07216650000191294,
+            "p95": 0.15395800000987947,
+            "max": 0.25829099997645244,
+            "mean": 0.08312901866727043,
+            "stdev": 0.035149424465169714,
+            "cv": 0.42282977747948264
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.03454199997941032,
+            "median": 0.07210399999166839,
+            "p95": 0.15529099997365847,
+            "max": 0.351375000027474,
+            "mean": 0.08416738733359509,
+            "stdev": 0.03693610715318907,
+            "cv": 0.43884107993983273
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 0,
+            "median": 1,
+            "p95": 1,
+            "max": 3,
+            "mean": 0.9626666666666667,
+            "stdev": 0.4802147667681726,
+            "cv": 0.49883805412206295
+          },
+          "perRepWarmMedianMs": [
+            0.07202100002905354,
+            0.07247949996963143,
+            0.0719379999791272
+          ]
+        },
+        "T1 outgoing page (all types, LIMIT 100)": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.011375000001862645,
+            "median": 0.016334000014467165,
+            "p95": 0.03995900001609698,
+            "max": 0.0788330000359565,
+            "mean": 0.01988842599959268,
+            "stdev": 0.009971846252693527,
+            "cv": 0.5013894137674723
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.011291999951936305,
+            "median": 0.016457999998237938,
+            "p95": 0.04045799997402355,
+            "max": 0.09691699995892122,
+            "mean": 0.020014130888985366,
+            "stdev": 0.010332121526825343,
+            "cv": 0.516241328895853
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 1,
+            "median": 5,
+            "p95": 56,
+            "max": 100,
+            "mean": 11.952,
+            "stdev": 20.298777368764533,
+            "cv": 1.6983582135847166
+          },
+          "perRepWarmMedianMs": [
+            0.01683400000911206,
+            0.016916499997023493,
+            0.015791999991051853
+          ]
+        },
+        "T2 outgoing page type=CALLS": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.0072910000453703105,
+            "median": 0.010708000045269728,
+            "p95": 0.03025000001071021,
+            "max": 0.06112500000745058,
+            "mean": 0.013134374000132084,
+            "stdev": 0.006943165819241425,
+            "cv": 0.5286255606221966
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.006875000020954758,
+            "median": 0.010583000024780631,
+            "p95": 0.02833300002384931,
+            "max": 0.055666000000201166,
+            "mean": 0.01290087822271097,
+            "stdev": 0.00640899305914432,
+            "cv": 0.4967873464507088
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 1,
+            "median": 4,
+            "p95": 58,
+            "max": 100,
+            "mean": 11.397333333333334,
+            "stdev": 20.96494199583884,
+            "cv": 1.8394602827420599
+          },
+          "perRepWarmMedianMs": [
+            0.010707999987062067,
+            0.010541000025114045,
+            0.010540999996010214
+          ]
+        },
+        "T3 incoming page (all types)": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.01087500003632158,
+            "median": 0.015708999999333173,
+            "p95": 0.02787499997066334,
+            "max": 0.13545800000429153,
+            "mean": 0.017597467333854488,
+            "stdev": 0.007706728766380749,
+            "cv": 0.4379453372562502
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.011124999960884452,
+            "median": 0.015833000012207776,
+            "p95": 0.029666999995242804,
+            "max": 2.537458000006154,
+            "mean": 0.018607197999449758,
+            "stdev": 0.039881566925375145,
+            "cv": 2.1433408150197844
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 1,
+            "median": 1,
+            "p95": 11,
+            "max": 100,
+            "mean": 3.1053333333333333,
+            "stdev": 6.108319863559506,
+            "cv": 1.9670416048388277
+          },
+          "perRepWarmMedianMs": [
+            0.01729200000409037,
+            0.015040999976918101,
+            0.01533299998845905
+          ]
+        },
+        "T4 incoming page type=CALLS": {
+          "coldMs": {
+            "n": 1500,
+            "min": 0.007792000018525869,
+            "median": 0.011666000005789101,
+            "p95": 0.030417000001762062,
+            "max": 0.13483400002587587,
+            "mean": 0.014497617333157298,
+            "stdev": 0.00996256690359737,
+            "cv": 0.6871864993161408
+          },
+          "warmMs": {
+            "n": 4500,
+            "min": 0.007208000053651631,
+            "median": 0.01191650002147071,
+            "p95": 0.031041999987792224,
+            "max": 0.14816599996993318,
+            "mean": 0.014933874889561492,
+            "stdev": 0.010285887840323802,
+            "cv": 0.6887621542559896
+          },
+          "rowsReturned": {
+            "n": 1500,
+            "min": 1,
+            "median": 2,
+            "p95": 17,
+            "max": 100,
+            "mean": 5.008666666666667,
+            "stdev": 9.352892149252853,
+            "cv": 1.8673417042299054
+          },
+          "perRepWarmMedianMs": [
+            0.012624999973922968,
+            0.011541999992914498,
+            0.011750000005122274
+          ]
+        }
+      },
+      "deepPagination": {
+        "T5a outgoing hub": {
+          "rowsInHub": 356,
+          "pagesPerWalk": 4,
+          "perPageMs": {
+            "n": 12,
+            "min": 0.04229100001975894,
+            "median": 0.06443700002273545,
+            "p95": 0.11429200001293793,
+            "max": 0.11429200001293793,
+            "mean": 0.06771858333377168,
+            "stdev": 0.020020148191877796,
+            "cv": 0.29563743371893053
+          },
+          "walks": 3
+        },
+        "T5b incoming hub": {
+          "rowsInHub": 188,
+          "pagesPerWalk": 2,
+          "perPageMs": {
+            "n": 6,
+            "min": 0.07120900001609698,
+            "median": 0.07545800000661984,
+            "p95": 0.10837499995250255,
+            "max": 0.10837499995250255,
+            "mean": 0.08483316665903355,
+            "stdev": 0.01543787699390222,
+            "cv": 0.1819792612004105
+          },
+          "walks": 3
+        }
+      }
+    }
+  ],
+  "queryPlans": {
+    "T1 outgoing": [
+      "SEARCH relationships USING INDEX idx_relationships_snapshot_source (snapshot_id=? AND source_kind=? AND source_id=?)",
+      "USE TEMP B-TREE FOR ORDER BY"
+    ],
+    "T2 outgoing typed": [
+      "SEARCH relationships USING INDEX idx_relationships_snapshot_source (snapshot_id=? AND source_kind=? AND source_id=? AND relationship_type=? AND rowid>?)"
+    ],
+    "T3 incoming": [
+      "SEARCH relationships USING INDEX idx_relationships_snapshot_target (snapshot_id=? AND target_kind=? AND target_id=?)",
+      "USE TEMP B-TREE FOR ORDER BY"
+    ],
+    "T4 incoming typed": [
+      "SEARCH relationships USING INDEX idx_relationships_snapshot_target (snapshot_id=? AND target_kind=? AND target_id=? AND relationship_type=? AND rowid>?)"
+    ],
+    "R1 byName": [
+      "SEARCH s USING INDEX idx_symbols_snapshot_name (snapshot_id=? AND name=? AND kind=?)",
+      "SEARCH fe USING INTEGER PRIMARY KEY (rowid=?)",
+      "SEARCH sf USING INTEGER PRIMARY KEY (rowid=?)",
+      "USE TEMP B-TREE FOR ORDER BY"
+    ]
+  },
+  "sizes": [
+    {
+      "scale": 1,
+      "journal": "WAL",
+      "rels": 10755,
+      "cands": 2139,
+      "syms": 662,
+      "pageSize": 4096,
+      "pageCount": 1119,
+      "asBuiltBytes": 4583424,
+      "afterVacuumBytes": 4390912,
+      "bytesPerRelationshipAsBuilt": 426.16680613668063,
+      "objectBytes": {
+        "source": "dbstat",
+        "objects": [
+          {
+            "name": "relationships",
+            "b": 1929216,
+            "pages": 471
+          },
+          {
+            "name": "sqlite_autoindex_relationships_1",
+            "b": 909312,
+            "pages": 222
+          },
+          {
+            "name": "idx_relationships_snapshot_source",
+            "b": 282624,
+            "pages": 69
+          },
+          {
+            "name": "idx_relationships_snapshot_target",
+            "b": 245760,
+            "pages": 60
+          },
+          {
+            "name": "idx_relationships_t7_target_name",
+            "b": 196608,
+            "pages": 48
+          },
+          {
+            "name": "snapshot_files",
+            "b": 135168,
+            "pages": 33
+          },
+          {
+            "name": "idx_relationships_evidence_file",
+            "b": 122880,
+            "pages": 30
+          },
+          {
+            "name": "symbols",
+            "b": 110592,
+            "pages": 27
+          },
+          {
+            "name": "t7_jobs",
+            "b": 94208,
+            "pages": 23
+          },
+          {
+            "name": "sqlite_autoindex_symbols_1",
+            "b": 57344,
+            "pages": 14
+          },
+          {
+            "name": "sqlite_autoindex_relationship_candidates_1",
+            "b": 53248,
+            "pages": 13
+          },
+          {
+            "name": "relationship_candidates",
+            "b": 49152,
+            "pages": 12
+          },
+          {
+            "name": "file_extractions",
+            "b": 45056,
+            "pages": 11
+          },
+          {
+            "name": "idx_snapshot_files_content_hash",
+            "b": 40960,
+            "pages": 10
+          },
+          {
+            "name": "idx_t7_jobs_claim2",
+            "b": 32768,
+            "pages": 8
+          },
+          {
+            "name": "sqlite_autoindex_t7_jobs_1",
+            "b": 28672,
+            "pages": 7
+          },
+          {
+            "name": "sqlite_autoindex_snapshot_files_1",
+            "b": 28672,
+            "pages": 7
+          },
+          {
+            "name": "idx_symbols_snapshot_name",
+            "b": 24576,
+            "pages": 6
+          },
+          {
+            "name": "sqlite_schema",
+            "b": 20480,
+            "pages": 5
+          },
+          {
+            "name": "idx_symbols_snapshot_kind",
+            "b": 16384,
+            "pages": 4
+          },
+          {
+            "name": "idx_file_extractions_snapshot_status",
+            "b": 16384,
+            "pages": 4
+          },
+          {
+            "name": "sqlite_autoindex_file_extractions_1",
+            "b": 12288,
+            "pages": 3
+          },
+          {
+            "name": "idx_symbols_parent",
+            "b": 12288,
+            "pages": 3
+          },
+          {
+            "name": "idx_symbols_file_extraction",
+            "b": 12288,
+            "pages": 3
+          },
+          {
+            "name": "directories",
+            "b": 12288,
+            "pages": 3
+          },
+          {
+            "name": "t7_meta",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "t7_map",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "t7_control",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_sequence",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_t7_meta_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_t7_map_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_snapshots_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_repository_refs_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_repositories_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_relationship_extraction_jobs_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_extraction_jobs_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_directories_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_acquisition_jobs_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "snapshots",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "snapshot_relationship_extractions",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "snapshot_extractions",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "repository_refs",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "repositories",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "relationship_extraction_jobs",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "idx_snapshots_repository_recency",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "extraction_jobs",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "acquisition_jobs",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "acquisition_attempts",
+            "b": 4096,
+            "pages": 1
+          }
+        ]
+      }
+    },
+    {
+      "scale": 1,
+      "journal": "DELETE",
+      "rels": 10755,
+      "cands": 2139,
+      "syms": 662,
+      "pageSize": 4096,
+      "pageCount": 1119,
+      "asBuiltBytes": 4583424,
+      "afterVacuumBytes": 4390912,
+      "bytesPerRelationshipAsBuilt": 426.16680613668063,
+      "objectBytes": {
+        "source": "dbstat",
+        "objects": [
+          {
+            "name": "relationships",
+            "b": 1929216,
+            "pages": 471
+          },
+          {
+            "name": "sqlite_autoindex_relationships_1",
+            "b": 909312,
+            "pages": 222
+          },
+          {
+            "name": "idx_relationships_snapshot_source",
+            "b": 282624,
+            "pages": 69
+          },
+          {
+            "name": "idx_relationships_snapshot_target",
+            "b": 245760,
+            "pages": 60
+          },
+          {
+            "name": "idx_relationships_t7_target_name",
+            "b": 196608,
+            "pages": 48
+          },
+          {
+            "name": "snapshot_files",
+            "b": 135168,
+            "pages": 33
+          },
+          {
+            "name": "idx_relationships_evidence_file",
+            "b": 122880,
+            "pages": 30
+          },
+          {
+            "name": "symbols",
+            "b": 110592,
+            "pages": 27
+          },
+          {
+            "name": "t7_jobs",
+            "b": 94208,
+            "pages": 23
+          },
+          {
+            "name": "sqlite_autoindex_symbols_1",
+            "b": 57344,
+            "pages": 14
+          },
+          {
+            "name": "sqlite_autoindex_relationship_candidates_1",
+            "b": 53248,
+            "pages": 13
+          },
+          {
+            "name": "relationship_candidates",
+            "b": 49152,
+            "pages": 12
+          },
+          {
+            "name": "file_extractions",
+            "b": 45056,
+            "pages": 11
+          },
+          {
+            "name": "idx_snapshot_files_content_hash",
+            "b": 40960,
+            "pages": 10
+          },
+          {
+            "name": "idx_t7_jobs_claim2",
+            "b": 32768,
+            "pages": 8
+          },
+          {
+            "name": "sqlite_autoindex_t7_jobs_1",
+            "b": 28672,
+            "pages": 7
+          },
+          {
+            "name": "sqlite_autoindex_snapshot_files_1",
+            "b": 28672,
+            "pages": 7
+          },
+          {
+            "name": "idx_symbols_snapshot_name",
+            "b": 24576,
+            "pages": 6
+          },
+          {
+            "name": "sqlite_schema",
+            "b": 20480,
+            "pages": 5
+          },
+          {
+            "name": "idx_symbols_snapshot_kind",
+            "b": 16384,
+            "pages": 4
+          },
+          {
+            "name": "idx_file_extractions_snapshot_status",
+            "b": 16384,
+            "pages": 4
+          },
+          {
+            "name": "sqlite_autoindex_file_extractions_1",
+            "b": 12288,
+            "pages": 3
+          },
+          {
+            "name": "idx_symbols_parent",
+            "b": 12288,
+            "pages": 3
+          },
+          {
+            "name": "idx_symbols_file_extraction",
+            "b": 12288,
+            "pages": 3
+          },
+          {
+            "name": "directories",
+            "b": 12288,
+            "pages": 3
+          },
+          {
+            "name": "t7_meta",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "t7_map",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "t7_control",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_sequence",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_t7_meta_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_t7_map_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_snapshots_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_repository_refs_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_repositories_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_relationship_extraction_jobs_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_extraction_jobs_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_directories_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_acquisition_jobs_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "snapshots",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "snapshot_relationship_extractions",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "snapshot_extractions",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "repository_refs",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "repositories",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "relationship_extraction_jobs",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "idx_snapshots_repository_recency",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "extraction_jobs",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "acquisition_jobs",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "acquisition_attempts",
+            "b": 4096,
+            "pages": 1
+          }
+        ]
+      }
+    },
+    {
+      "scale": 4,
+      "journal": "WAL",
+      "rels": 43020,
+      "cands": 8556,
+      "syms": 2648,
+      "pageSize": 4096,
+      "pageCount": 4115,
+      "asBuiltBytes": 16855040,
+      "afterVacuumBytes": 15986688,
+      "bytesPerRelationshipAsBuilt": 391.7954439795444,
+      "objectBytes": {
+        "source": "dbstat",
+        "objects": [
+          {
+            "name": "relationships",
+            "b": 7815168,
+            "pages": 1908
+          },
+          {
+            "name": "sqlite_autoindex_relationships_1",
+            "b": 3686400,
+            "pages": 900
+          },
+          {
+            "name": "idx_relationships_snapshot_source",
+            "b": 1200128,
+            "pages": 293
+          },
+          {
+            "name": "idx_relationships_snapshot_target",
+            "b": 999424,
+            "pages": 244
+          },
+          {
+            "name": "idx_relationships_t7_target_name",
+            "b": 819200,
+            "pages": 200
+          },
+          {
+            "name": "idx_relationships_evidence_file",
+            "b": 491520,
+            "pages": 120
+          },
+          {
+            "name": "symbols",
+            "b": 430080,
+            "pages": 105
+          },
+          {
+            "name": "sqlite_autoindex_symbols_1",
+            "b": 233472,
+            "pages": 57
+          },
+          {
+            "name": "sqlite_autoindex_relationship_candidates_1",
+            "b": 212992,
+            "pages": 52
+          },
+          {
+            "name": "relationship_candidates",
+            "b": 188416,
+            "pages": 46
+          },
+          {
+            "name": "snapshot_files",
+            "b": 135168,
+            "pages": 33
+          },
+          {
+            "name": "idx_symbols_snapshot_name",
+            "b": 102400,
+            "pages": 25
+          },
+          {
+            "name": "t7_jobs",
+            "b": 94208,
+            "pages": 23
+          },
+          {
+            "name": "idx_symbols_snapshot_kind",
+            "b": 53248,
+            "pages": 13
+          },
+          {
+            "name": "file_extractions",
+            "b": 45056,
+            "pages": 11
+          },
+          {
+            "name": "idx_snapshot_files_content_hash",
+            "b": 40960,
+            "pages": 10
+          },
+          {
+            "name": "idx_t7_jobs_claim2",
+            "b": 32768,
+            "pages": 8
+          },
+          {
+            "name": "idx_symbols_file_extraction",
+            "b": 32768,
+            "pages": 8
+          },
+          {
+            "name": "sqlite_autoindex_t7_jobs_1",
+            "b": 28672,
+            "pages": 7
+          },
+          {
+            "name": "sqlite_autoindex_snapshot_files_1",
+            "b": 28672,
+            "pages": 7
+          },
+          {
+            "name": "idx_symbols_parent",
+            "b": 28672,
+            "pages": 7
+          },
+          {
+            "name": "sqlite_schema",
+            "b": 20480,
+            "pages": 5
+          },
+          {
+            "name": "idx_file_extractions_snapshot_status",
+            "b": 16384,
+            "pages": 4
+          },
+          {
+            "name": "sqlite_autoindex_file_extractions_1",
+            "b": 12288,
+            "pages": 3
+          },
+          {
+            "name": "directories",
+            "b": 12288,
+            "pages": 3
+          },
+          {
+            "name": "t7_meta",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "t7_map",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "t7_control",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_sequence",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_t7_meta_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_t7_map_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_snapshots_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_repository_refs_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_repositories_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_relationship_extraction_jobs_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_extraction_jobs_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_directories_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_acquisition_jobs_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "snapshots",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "snapshot_relationship_extractions",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "snapshot_extractions",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "repository_refs",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "repositories",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "relationship_extraction_jobs",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "idx_snapshots_repository_recency",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "extraction_jobs",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "acquisition_jobs",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "acquisition_attempts",
+            "b": 4096,
+            "pages": 1
+          }
+        ]
+      }
+    },
+    {
+      "scale": 4,
+      "journal": "DELETE",
+      "rels": 43020,
+      "cands": 8556,
+      "syms": 2648,
+      "pageSize": 4096,
+      "pageCount": 4115,
+      "asBuiltBytes": 16855040,
+      "afterVacuumBytes": 15986688,
+      "bytesPerRelationshipAsBuilt": 391.7954439795444,
+      "objectBytes": {
+        "source": "dbstat",
+        "objects": [
+          {
+            "name": "relationships",
+            "b": 7815168,
+            "pages": 1908
+          },
+          {
+            "name": "sqlite_autoindex_relationships_1",
+            "b": 3686400,
+            "pages": 900
+          },
+          {
+            "name": "idx_relationships_snapshot_source",
+            "b": 1200128,
+            "pages": 293
+          },
+          {
+            "name": "idx_relationships_snapshot_target",
+            "b": 999424,
+            "pages": 244
+          },
+          {
+            "name": "idx_relationships_t7_target_name",
+            "b": 819200,
+            "pages": 200
+          },
+          {
+            "name": "idx_relationships_evidence_file",
+            "b": 491520,
+            "pages": 120
+          },
+          {
+            "name": "symbols",
+            "b": 430080,
+            "pages": 105
+          },
+          {
+            "name": "sqlite_autoindex_symbols_1",
+            "b": 233472,
+            "pages": 57
+          },
+          {
+            "name": "sqlite_autoindex_relationship_candidates_1",
+            "b": 212992,
+            "pages": 52
+          },
+          {
+            "name": "relationship_candidates",
+            "b": 188416,
+            "pages": 46
+          },
+          {
+            "name": "snapshot_files",
+            "b": 135168,
+            "pages": 33
+          },
+          {
+            "name": "idx_symbols_snapshot_name",
+            "b": 102400,
+            "pages": 25
+          },
+          {
+            "name": "t7_jobs",
+            "b": 94208,
+            "pages": 23
+          },
+          {
+            "name": "idx_symbols_snapshot_kind",
+            "b": 53248,
+            "pages": 13
+          },
+          {
+            "name": "file_extractions",
+            "b": 45056,
+            "pages": 11
+          },
+          {
+            "name": "idx_snapshot_files_content_hash",
+            "b": 40960,
+            "pages": 10
+          },
+          {
+            "name": "idx_t7_jobs_claim2",
+            "b": 32768,
+            "pages": 8
+          },
+          {
+            "name": "idx_symbols_file_extraction",
+            "b": 32768,
+            "pages": 8
+          },
+          {
+            "name": "sqlite_autoindex_t7_jobs_1",
+            "b": 28672,
+            "pages": 7
+          },
+          {
+            "name": "sqlite_autoindex_snapshot_files_1",
+            "b": 28672,
+            "pages": 7
+          },
+          {
+            "name": "idx_symbols_parent",
+            "b": 28672,
+            "pages": 7
+          },
+          {
+            "name": "sqlite_schema",
+            "b": 20480,
+            "pages": 5
+          },
+          {
+            "name": "idx_file_extractions_snapshot_status",
+            "b": 16384,
+            "pages": 4
+          },
+          {
+            "name": "sqlite_autoindex_file_extractions_1",
+            "b": 12288,
+            "pages": 3
+          },
+          {
+            "name": "directories",
+            "b": 12288,
+            "pages": 3
+          },
+          {
+            "name": "t7_meta",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "t7_map",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "t7_control",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_sequence",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_t7_meta_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_t7_map_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_snapshots_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_repository_refs_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_repositories_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_relationship_extraction_jobs_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_extraction_jobs_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_directories_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_acquisition_jobs_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "snapshots",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "snapshot_relationship_extractions",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "snapshot_extractions",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "repository_refs",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "repositories",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "relationship_extraction_jobs",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "idx_snapshots_repository_recency",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "extraction_jobs",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "acquisition_jobs",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "acquisition_attempts",
+            "b": 4096,
+            "pages": 1
+          }
+        ]
+      }
+    },
+    {
+      "scale": 16,
+      "journal": "WAL",
+      "rels": 172080,
+      "cands": 34224,
+      "syms": 10592,
+      "pageSize": 4096,
+      "pageCount": 16171,
+      "asBuiltBytes": 66236416,
+      "afterVacuumBytes": 62799872,
+      "bytesPerRelationshipAsBuilt": 384.9164109716411,
+      "objectBytes": {
+        "source": "dbstat",
+        "objects": [
+          {
+            "name": "relationships",
+            "b": 31440896,
+            "pages": 7676
+          },
+          {
+            "name": "sqlite_autoindex_relationships_1",
+            "b": 14614528,
+            "pages": 3568
+          },
+          {
+            "name": "idx_relationships_snapshot_source",
+            "b": 4964352,
+            "pages": 1212
+          },
+          {
+            "name": "idx_relationships_snapshot_target",
+            "b": 4067328,
+            "pages": 993
+          },
+          {
+            "name": "idx_relationships_t7_target_name",
+            "b": 3297280,
+            "pages": 805
+          },
+          {
+            "name": "idx_relationships_evidence_file",
+            "b": 2117632,
+            "pages": 517
+          },
+          {
+            "name": "symbols",
+            "b": 1724416,
+            "pages": 421
+          },
+          {
+            "name": "sqlite_autoindex_symbols_1",
+            "b": 942080,
+            "pages": 230
+          },
+          {
+            "name": "sqlite_autoindex_relationship_candidates_1",
+            "b": 884736,
+            "pages": 216
+          },
+          {
+            "name": "relationship_candidates",
+            "b": 790528,
+            "pages": 193
+          },
+          {
+            "name": "idx_symbols_snapshot_name",
+            "b": 401408,
+            "pages": 98
+          },
+          {
+            "name": "idx_symbols_snapshot_kind",
+            "b": 204800,
+            "pages": 50
+          },
+          {
+            "name": "snapshot_files",
+            "b": 135168,
+            "pages": 33
+          },
+          {
+            "name": "idx_symbols_file_extraction",
+            "b": 122880,
+            "pages": 30
+          },
+          {
+            "name": "idx_symbols_parent",
+            "b": 102400,
+            "pages": 25
+          },
+          {
+            "name": "t7_jobs",
+            "b": 94208,
+            "pages": 23
+          },
+          {
+            "name": "file_extractions",
+            "b": 45056,
+            "pages": 11
+          },
+          {
+            "name": "idx_snapshot_files_content_hash",
+            "b": 40960,
+            "pages": 10
+          },
+          {
+            "name": "idx_t7_jobs_claim2",
+            "b": 32768,
+            "pages": 8
+          },
+          {
+            "name": "sqlite_autoindex_t7_jobs_1",
+            "b": 28672,
+            "pages": 7
+          },
+          {
+            "name": "sqlite_autoindex_snapshot_files_1",
+            "b": 28672,
+            "pages": 7
+          },
+          {
+            "name": "sqlite_schema",
+            "b": 20480,
+            "pages": 5
+          },
+          {
+            "name": "idx_file_extractions_snapshot_status",
+            "b": 16384,
+            "pages": 4
+          },
+          {
+            "name": "sqlite_autoindex_file_extractions_1",
+            "b": 12288,
+            "pages": 3
+          },
+          {
+            "name": "directories",
+            "b": 12288,
+            "pages": 3
+          },
+          {
+            "name": "t7_meta",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "t7_map",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "t7_control",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_sequence",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_t7_meta_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_t7_map_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_snapshots_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_repository_refs_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_repositories_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_relationship_extraction_jobs_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_extraction_jobs_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_directories_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_acquisition_jobs_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "snapshots",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "snapshot_relationship_extractions",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "snapshot_extractions",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "repository_refs",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "repositories",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "relationship_extraction_jobs",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "idx_snapshots_repository_recency",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "extraction_jobs",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "acquisition_jobs",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "acquisition_attempts",
+            "b": 4096,
+            "pages": 1
+          }
+        ]
+      }
+    },
+    {
+      "scale": 16,
+      "journal": "DELETE",
+      "rels": 172080,
+      "cands": 34224,
+      "syms": 10592,
+      "pageSize": 4096,
+      "pageCount": 16171,
+      "asBuiltBytes": 66236416,
+      "afterVacuumBytes": 62799872,
+      "bytesPerRelationshipAsBuilt": 384.9164109716411,
+      "objectBytes": {
+        "source": "dbstat",
+        "objects": [
+          {
+            "name": "relationships",
+            "b": 31440896,
+            "pages": 7676
+          },
+          {
+            "name": "sqlite_autoindex_relationships_1",
+            "b": 14614528,
+            "pages": 3568
+          },
+          {
+            "name": "idx_relationships_snapshot_source",
+            "b": 4964352,
+            "pages": 1212
+          },
+          {
+            "name": "idx_relationships_snapshot_target",
+            "b": 4067328,
+            "pages": 993
+          },
+          {
+            "name": "idx_relationships_t7_target_name",
+            "b": 3297280,
+            "pages": 805
+          },
+          {
+            "name": "idx_relationships_evidence_file",
+            "b": 2117632,
+            "pages": 517
+          },
+          {
+            "name": "symbols",
+            "b": 1724416,
+            "pages": 421
+          },
+          {
+            "name": "sqlite_autoindex_symbols_1",
+            "b": 942080,
+            "pages": 230
+          },
+          {
+            "name": "sqlite_autoindex_relationship_candidates_1",
+            "b": 884736,
+            "pages": 216
+          },
+          {
+            "name": "relationship_candidates",
+            "b": 790528,
+            "pages": 193
+          },
+          {
+            "name": "idx_symbols_snapshot_name",
+            "b": 401408,
+            "pages": 98
+          },
+          {
+            "name": "idx_symbols_snapshot_kind",
+            "b": 204800,
+            "pages": 50
+          },
+          {
+            "name": "snapshot_files",
+            "b": 135168,
+            "pages": 33
+          },
+          {
+            "name": "idx_symbols_file_extraction",
+            "b": 122880,
+            "pages": 30
+          },
+          {
+            "name": "idx_symbols_parent",
+            "b": 102400,
+            "pages": 25
+          },
+          {
+            "name": "t7_jobs",
+            "b": 94208,
+            "pages": 23
+          },
+          {
+            "name": "file_extractions",
+            "b": 45056,
+            "pages": 11
+          },
+          {
+            "name": "idx_snapshot_files_content_hash",
+            "b": 40960,
+            "pages": 10
+          },
+          {
+            "name": "idx_t7_jobs_claim2",
+            "b": 32768,
+            "pages": 8
+          },
+          {
+            "name": "sqlite_autoindex_t7_jobs_1",
+            "b": 28672,
+            "pages": 7
+          },
+          {
+            "name": "sqlite_autoindex_snapshot_files_1",
+            "b": 28672,
+            "pages": 7
+          },
+          {
+            "name": "sqlite_schema",
+            "b": 20480,
+            "pages": 5
+          },
+          {
+            "name": "idx_file_extractions_snapshot_status",
+            "b": 16384,
+            "pages": 4
+          },
+          {
+            "name": "sqlite_autoindex_file_extractions_1",
+            "b": 12288,
+            "pages": 3
+          },
+          {
+            "name": "directories",
+            "b": 12288,
+            "pages": 3
+          },
+          {
+            "name": "t7_meta",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "t7_map",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "t7_control",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_sequence",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_t7_meta_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_t7_map_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_snapshots_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_repository_refs_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_repositories_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_relationship_extraction_jobs_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_extraction_jobs_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_directories_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_acquisition_jobs_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "snapshots",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "snapshot_relationship_extractions",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "snapshot_extractions",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "repository_refs",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "repositories",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "relationship_extraction_jobs",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "idx_snapshots_repository_recency",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "extraction_jobs",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "acquisition_jobs",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "acquisition_attempts",
+            "b": 4096,
+            "pages": 1
+          }
+        ]
+      }
+    },
+    {
+      "scale": 64,
+      "journal": "WAL",
+      "rels": 688320,
+      "cands": 136896,
+      "syms": 42368,
+      "pageSize": 4096,
+      "pageCount": 64647,
+      "asBuiltBytes": 264794112,
+      "afterVacuumBytes": 250966016,
+      "bytesPerRelationshipAsBuilt": 384.69623430962343,
+      "objectBytes": {
+        "source": "dbstat",
+        "objects": [
+          {
+            "name": "relationships",
+            "b": 126246912,
+            "pages": 30822
+          },
+          {
+            "name": "sqlite_autoindex_relationships_1",
+            "b": 58617856,
+            "pages": 14311
+          },
+          {
+            "name": "idx_relationships_snapshot_source",
+            "b": 20160512,
+            "pages": 4922
+          },
+          {
+            "name": "idx_relationships_snapshot_target",
+            "b": 16343040,
+            "pages": 3990
+          },
+          {
+            "name": "idx_relationships_t7_target_name",
+            "b": 13209600,
+            "pages": 3225
+          },
+          {
+            "name": "idx_relationships_evidence_file",
+            "b": 8511488,
+            "pages": 2078
+          },
+          {
+            "name": "symbols",
+            "b": 6959104,
+            "pages": 1699
+          },
+          {
+            "name": "sqlite_autoindex_symbols_1",
+            "b": 3813376,
+            "pages": 931
+          },
+          {
+            "name": "sqlite_autoindex_relationship_candidates_1",
+            "b": 3710976,
+            "pages": 906
+          },
+          {
+            "name": "relationship_candidates",
+            "b": 3272704,
+            "pages": 799
+          },
+          {
+            "name": "idx_symbols_snapshot_name",
+            "b": 1662976,
+            "pages": 406
+          },
+          {
+            "name": "idx_symbols_snapshot_kind",
+            "b": 835584,
+            "pages": 204
+          },
+          {
+            "name": "idx_symbols_file_extraction",
+            "b": 487424,
+            "pages": 119
+          },
+          {
+            "name": "idx_symbols_parent",
+            "b": 401408,
+            "pages": 98
+          },
+          {
+            "name": "snapshot_files",
+            "b": 135168,
+            "pages": 33
+          },
+          {
+            "name": "t7_jobs",
+            "b": 94208,
+            "pages": 23
+          },
+          {
+            "name": "file_extractions",
+            "b": 45056,
+            "pages": 11
+          },
+          {
+            "name": "idx_snapshot_files_content_hash",
+            "b": 40960,
+            "pages": 10
+          },
+          {
+            "name": "idx_t7_jobs_claim2",
+            "b": 32768,
+            "pages": 8
+          },
+          {
+            "name": "sqlite_autoindex_t7_jobs_1",
+            "b": 28672,
+            "pages": 7
+          },
+          {
+            "name": "sqlite_autoindex_snapshot_files_1",
+            "b": 28672,
+            "pages": 7
+          },
+          {
+            "name": "sqlite_schema",
+            "b": 20480,
+            "pages": 5
+          },
+          {
+            "name": "idx_file_extractions_snapshot_status",
+            "b": 16384,
+            "pages": 4
+          },
+          {
+            "name": "sqlite_autoindex_file_extractions_1",
+            "b": 12288,
+            "pages": 3
+          },
+          {
+            "name": "directories",
+            "b": 12288,
+            "pages": 3
+          },
+          {
+            "name": "t7_meta",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "t7_map",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "t7_control",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_sequence",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_t7_meta_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_t7_map_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_snapshots_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_repository_refs_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_repositories_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_relationship_extraction_jobs_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_extraction_jobs_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_directories_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_acquisition_jobs_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "snapshots",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "snapshot_relationship_extractions",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "snapshot_extractions",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "repository_refs",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "repositories",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "relationship_extraction_jobs",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "idx_snapshots_repository_recency",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "extraction_jobs",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "acquisition_jobs",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "acquisition_attempts",
+            "b": 4096,
+            "pages": 1
+          }
+        ]
+      }
+    },
+    {
+      "scale": 64,
+      "journal": "DELETE",
+      "rels": 688320,
+      "cands": 136896,
+      "syms": 42368,
+      "pageSize": 4096,
+      "pageCount": 64647,
+      "asBuiltBytes": 264794112,
+      "afterVacuumBytes": 250966016,
+      "bytesPerRelationshipAsBuilt": 384.69623430962343,
+      "objectBytes": {
+        "source": "dbstat",
+        "objects": [
+          {
+            "name": "relationships",
+            "b": 126246912,
+            "pages": 30822
+          },
+          {
+            "name": "sqlite_autoindex_relationships_1",
+            "b": 58617856,
+            "pages": 14311
+          },
+          {
+            "name": "idx_relationships_snapshot_source",
+            "b": 20160512,
+            "pages": 4922
+          },
+          {
+            "name": "idx_relationships_snapshot_target",
+            "b": 16343040,
+            "pages": 3990
+          },
+          {
+            "name": "idx_relationships_t7_target_name",
+            "b": 13209600,
+            "pages": 3225
+          },
+          {
+            "name": "idx_relationships_evidence_file",
+            "b": 8511488,
+            "pages": 2078
+          },
+          {
+            "name": "symbols",
+            "b": 6959104,
+            "pages": 1699
+          },
+          {
+            "name": "sqlite_autoindex_symbols_1",
+            "b": 3813376,
+            "pages": 931
+          },
+          {
+            "name": "sqlite_autoindex_relationship_candidates_1",
+            "b": 3710976,
+            "pages": 906
+          },
+          {
+            "name": "relationship_candidates",
+            "b": 3272704,
+            "pages": 799
+          },
+          {
+            "name": "idx_symbols_snapshot_name",
+            "b": 1662976,
+            "pages": 406
+          },
+          {
+            "name": "idx_symbols_snapshot_kind",
+            "b": 835584,
+            "pages": 204
+          },
+          {
+            "name": "idx_symbols_file_extraction",
+            "b": 487424,
+            "pages": 119
+          },
+          {
+            "name": "idx_symbols_parent",
+            "b": 401408,
+            "pages": 98
+          },
+          {
+            "name": "snapshot_files",
+            "b": 135168,
+            "pages": 33
+          },
+          {
+            "name": "t7_jobs",
+            "b": 94208,
+            "pages": 23
+          },
+          {
+            "name": "file_extractions",
+            "b": 45056,
+            "pages": 11
+          },
+          {
+            "name": "idx_snapshot_files_content_hash",
+            "b": 40960,
+            "pages": 10
+          },
+          {
+            "name": "idx_t7_jobs_claim2",
+            "b": 32768,
+            "pages": 8
+          },
+          {
+            "name": "sqlite_autoindex_t7_jobs_1",
+            "b": 28672,
+            "pages": 7
+          },
+          {
+            "name": "sqlite_autoindex_snapshot_files_1",
+            "b": 28672,
+            "pages": 7
+          },
+          {
+            "name": "sqlite_schema",
+            "b": 20480,
+            "pages": 5
+          },
+          {
+            "name": "idx_file_extractions_snapshot_status",
+            "b": 16384,
+            "pages": 4
+          },
+          {
+            "name": "sqlite_autoindex_file_extractions_1",
+            "b": 12288,
+            "pages": 3
+          },
+          {
+            "name": "directories",
+            "b": 12288,
+            "pages": 3
+          },
+          {
+            "name": "t7_meta",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "t7_map",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "t7_control",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_sequence",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_t7_meta_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_t7_map_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_snapshots_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_repository_refs_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_repositories_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_relationship_extraction_jobs_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_extraction_jobs_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_directories_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "sqlite_autoindex_acquisition_jobs_1",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "snapshots",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "snapshot_relationship_extractions",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "snapshot_extractions",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "repository_refs",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "repositories",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "relationship_extraction_jobs",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "idx_snapshots_repository_recency",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "extraction_jobs",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "acquisition_jobs",
+            "b": 4096,
+            "pages": 1
+          },
+          {
+            "name": "acquisition_attempts",
+            "b": 4096,
+            "pages": 1
+          }
+        ]
+      }
+    }
+  ]
+}

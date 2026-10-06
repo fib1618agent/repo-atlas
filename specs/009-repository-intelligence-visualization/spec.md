@@ -148,3 +148,30 @@ Evidence classes (each result is reported PASS / FAIL / NOT VERIFIED): **PROVIDE
 ## Non-Goals / Deferred
 
 Relationship extraction or display (Feature 004); execution paths/processes/blast radius; snapshot acquisition or extraction triggers; diff/history views; editing anything; MCP/agents; AI summaries in this view; graph or vector storage; a 3D renderer (layout keeps that door open).
+
+---
+
+## Amendment A1 — Universe / Repository Graph model (2026-09-25)
+
+**Status: SPECIFIED, NOT IMPLEMENTED. Added by the user-approved local-first architecture revision (`docs/architecture/ADR-001-local-first-runtime.md`). The delivered Feature 009 scope above (read-only SVG repository view, relationship layer `unavailable`, D1–D3) is unchanged and remains the foundation; everything below is additive future scope for this feature. Requirements marked ⏳F004 are additionally gated on Feature 004 delivering data through the `RelationshipLayer` port and cannot be implemented before it.**
+
+### Scope model
+
+Feature 009 owns two visualization scopes over the engine's intelligence (never its own graph model):
+
+- **UNIVERSE** — the existing Explore scene, extended: every discovered repository appears as a marble regardless of graphification (consumes the Feature 003 Amendment A1 catalogue; FR-A1-01 invariant).
+- **REPOSITORY(repositoryId)** — the existing `/repository/$owner/$name` view, grown into the Repository Graph View with focused perspectives.
+
+### New Functional Requirements
+
+- **FR-A1-01 (marble lifecycle states)**: Universe marbles MUST visually distinguish the repository lifecycle states (conceptually `●` DISCOVERED · `◌` QUEUED · `◉` ANALYZING · `✦` GRAPHIFIED · `⊗` FAILED · `◇` PAUSED), preserving the existing visual design language; GRAPHIFIED gets a strong "intelligence ready" state (glow/halo/brightness). No unrelated UI redesign.
+- **FR-A1-02 (zoom transition)**: Clicking a GRAPHIFIED marble MUST transition into the Repository Graph View as a zoom-into-the-marble experience, not a disconnected page; the existing route remains the deep-linkable address of that state.
+- **FR-A1-03 (back to Universe)**: The Repository Graph View MUST always provide `← Back to Universe`, restoring the prior Universe state where practical (zoom, camera position, filters, category selection, source selection, selected repositories, highlighted repository) as a first-class navigation state.
+- **FR-A1-04 (breadcrumb)**: A lightweight breadcrumb `Universe › <repository> › <perspective>` MUST make the visualization scope explicit.
+- **FR-A1-05 (perspectives)** ⏳F004: The Repository Graph View MUST support focused perspectives — Structure, Symbols (both already delivered), Call Graph, Relationships, Processes, Semantic, Impact — as views over the same underlying repository intelligence model; changing perspective changes visual/query scope without rebuilding the model. Relationship data arrives only through the delivered `RelationshipLayer` port backed by a Feature 004 adapter; evidence states (`EXTRACTED/RESOLVED/INFERRED/AMBIGUOUS/UNKNOWN`) and relationship types are displayed, never weakened, never fabricated (existing FR-008/FR-009 stand).
+- **FR-A1-06 (selection from both surfaces)**: Users MUST be able to select repositories for graphification from Universe and Catalogue, with capacity display (`Graphified: n / max`), via Feature 003 Amendment A1's selection contracts; Feature 009 renders and invokes, it does not own capacity logic.
+- **FR-A1-07 (Universe-level intelligence)**: The Universe MAY show repository-level information for non-graphified repositories (categories, language distribution, size, source boundaries, high-level connectivity, lifecycle state) and MUST make the distinction between repository-level information and deep symbol-level intelligence understandable.
+
+### Boundaries (unchanged)
+
+Feature 009 still does not own parsing, graph extraction, queue/job implementation, repository acquisition, MCP, embeddings, or relationship resolution. The delivered accessibility contract (SVG + accessible outline twin, keyboard operation, bounded rendering, honest states) applies to every new perspective; the pure layout module remains the seam through which a 3D zoom renderer is added without changing data or layout contracts (D2 rationale).

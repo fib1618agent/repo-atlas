@@ -6,6 +6,8 @@
 
 ## 1. Status banner
 
+> **SUPERSESSION NOTE (2026-09-25 20:46 +04:00, appended; nothing below is edited or deleted).** Per the user-approved local-first architecture revision (`docs/architecture/ADR-001-local-first-runtime.md`, decisions D-ARCH-3/D-ARCH-4; Feature 004 `research.md` Amendment A6), this decision record is now **historical/superseded evidence**: Cloudflare Queues are no longer RepoAtlas's core execution runtime, and the Feature 004 T008+ gate is the redefined **T007 — Local Relationship Engine Feasibility**, not this record's Cloudflare CPU disposition. The record's content remains preserved verbatim as the evidence chain *Cloudflare feasibility research → useful evidence → not the core runtime → local-native architecture*; its measurement protocol, evidence-acceptability rules and stop-gate discipline are reused by the local T007. `T007-CAL-1` and `LX-1` remain defined, never authorized, never run, and still authorizable on explicit request. This note does not alter Feature 005's COMPLETE status as a decision workstream.
+
 **Feature 004 T007 is NOT cleared by this document. No live Cloudflare operation has been performed or authorized.**
 
 ### Authorization boundary

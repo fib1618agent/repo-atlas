@@ -1,0 +1,56 @@
+{
+  "measurement": "M-L4 part 3 (rev C)",
+  "dataset": "repo-atlas-rm",
+  "environmentHash": "e2b32efaacbd45bf",
+  "loadAvgAtStart": "{ 5.96 5.27 4.69 }",
+  "power": "Now drawing from 'AC Power'  -InternalBattery-0 (id=20578403)\t18%; charging; 11:44 remaining present: true",
+  "cleanReferenceHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+  "cleanRunsEqual": true,
+  "droppedKeyMetricPerCleanRun": [
+    0,
+    0,
+    0
+  ],
+  "test": "F-2 per-file containment (rev C)",
+  "victims": [
+    "tests/contract/symbols/symbol-d1-client.test.ts",
+    "tests/integration/repo-intel/read-model.test.ts",
+    "tests/unit/control-plane/settings-ui.test.tsx"
+  ],
+  "cases": [
+    {
+      "faultPoint": "before any work",
+      "snapshotStatus": "completed_partial",
+      "failedJobs": 3,
+      "failedErrors": [
+        "injected-permanent",
+        "injected-permanent",
+        "injected-permanent"
+      ],
+      "missingLinesVsClean": 963,
+      "extraLinesVsClean": 0,
+      "missingAreExactlyVictimParsedRows": true,
+      "victimContainsRowsRetained": true,
+      "invariantAndCompletenessViolations": [],
+      "classification": "PASS-CRITERIA-MET"
+    },
+    {
+      "faultPoint": "inside persist transaction after rows written (real ROLLBACK)",
+      "snapshotStatus": "completed_partial",
+      "failedJobs": 3,
+      "failedErrors": [
+        "injected-permanent",
+        "injected-permanent",
+        "injected-permanent"
+      ],
+      "missingLinesVsClean": 963,
+      "extraLinesVsClean": 0,
+      "missingAreExactlyVictimParsedRows": true,
+      "victimContainsRowsRetained": true,
+      "invariantAndCompletenessViolations": [],
+      "classification": "PASS-CRITERIA-MET"
+    }
+  ],
+  "classification": "PASS-CRITERIA-MET",
+  "durationMs": 3031.403541999999
+}

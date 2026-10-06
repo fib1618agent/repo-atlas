@@ -1,0 +1,41 @@
+{
+  "measurement": "M-L4 part 3",
+  "dataset": "repo-atlas-rm",
+  "environmentHash": "e2b32efaacbd45bf",
+  "loadAvgAtStart": "{ 4.49 4.28 4.31 }",
+  "power": "Now drawing from 'AC Power'  -InternalBattery-0 (id=20578403)\t19%; charging; (no estimate) present: true",
+  "cleanReferenceHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+  "cleanRunsEqual": true,
+  "test": "F-4 idempotent re-execution",
+  "baseEqualsClean": true,
+  "a_redeliverCheckpointKept": {
+    "redelivered": 25,
+    "shortCircuits": 25,
+    "hashEqualsBase": true,
+    "duplicateKeys": 0,
+    "relationshipCountUnchanged": true
+  },
+  "b_redeliverCheckpointCleared": {
+    "recomputed": 25,
+    "shortCircuits": 0,
+    "hashEqualsBase": true,
+    "duplicateKeys": 0,
+    "relationshipCountUnchanged": true,
+    "duplicateKeysIgnored": 0
+  },
+  "d_wholeRunNoChange": {
+    "shortCircuitedRun": true,
+    "engineTotalMs": 7.311874999999418,
+    "hashEqualsBase": true
+  },
+  "c_symbolsUnitRedelivery": {
+    "redelivered": 0,
+    "symbolRowsBySymbolKeyEqualBase": 662,
+    "hashEqualsBase": true,
+    "invariantViolations": [],
+    "danglingRelationshipEndpoints": 0,
+    "note": "measured behaviour of the unmodified F002 replaceSymbolsForFile (delete + re-insert ⇒ new AUTOINCREMENT ids); relationships store row ids (R6 D-R6-2 known hazard). Not adjusted."
+  },
+  "classification": "PASS-CRITERIA-MET",
+  "durationMs": 1930.4012909999983
+}

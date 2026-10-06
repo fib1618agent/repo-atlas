@@ -1,0 +1,1472 @@
+{
+  "measurement": "M-L7 cold start",
+  "basis": "LOCAL-RUNTIME (WASM Tree-sitter under Bun) + unmodified production getParser / toIntermediateRepresentation; local wall-clock (process.hrtime), NOT native parser",
+  "harnessVersion": "t007-local-harness/1",
+  "environment": {
+    "static": {
+      "os": "macOS 14.5 (23F79), Darwin 23.5.0 arm64",
+      "cpuModel": "Apple M3 Max",
+      "physicalCores": 14,
+      "logicalCores": 14,
+      "perfLevels": "2",
+      "ramBytes": 38654705664,
+      "storage": "Device Name: APPLE SSD AP1024Z           Medium Type: SSD",
+      "bunVersion": "1.3.14",
+      "bunRevision": "0d9b296af33f2b851fcbf4df3e9ec89751734ba4",
+      "nodeVersion": "v22.22.3",
+      "typescriptVersion": "Version 5.9.3",
+      "webTreeSitterVersion": "0.25.10",
+      "sqliteVersion": "3.43.2",
+      "sqliteDriver": "bun:sqlite (built-in)",
+      "repoAtlasCommit": "430e1703386ebd9264122d54a3ba398d43b363f9",
+      "repoAtlasBranch": "feat/atlas-marble-interaction",
+      "packageName": "tanstack_start_ts",
+      "harnessVersion": "t007-local-harness/1",
+      "workerRuntime": "Bun Worker threads (one web-tree-sitter WASM instance + one bun:sqlite connection per worker)",
+      "sqliteJournalModeDefault": "WAL (synchronous=NORMAL, busy_timeout=15000) — recorded variable in M-L3",
+      "atlasEnv": {
+        "BUN_INSTALL": "/Users/imdadareeph/.bun"
+      }
+    },
+    "dynamic": {
+      "capturedAt": "2026-09-26T02:19:55.719Z",
+      "loadAvg": "{ 2.27 2.30 2.28 }",
+      "power": "Now drawing from 'AC Power'  -InternalBattery-0 (id=20578403)\t24%; charging; 4:16 remaining present: true",
+      "thermal": "Note: No thermal warning level has been recorded Note: No performance warning level has been recorded Note: No CPU power status has been recorded",
+      "topCpuProcesses": "6.1 /System/Library/PrivateFrameworks/SkyLight.framework/Resources/WindowServer;  4.2 /usr/libexec/ApplicationFirewall/socketfilterfw;  3.6 /Applications/Cursor.app/Contents/Frameworks/Cursor Helper (Renderer).app/Contents/MacOS/Cursor Helper (Renderer);  3.0 claude;  1.7 /Applications/Cursor.app/Contents/Frameworks/Cursor Helper.app/Contents/MacOS/Cursor Helper;",
+      "freeDiskGiB": "67"
+    },
+    "envHash": "e2b32efaacbd45bf"
+  },
+  "loadAvg": {
+    "start": [
+      2.27,
+      2.3,
+      2.28
+    ],
+    "end": [
+      2.8,
+      2.41,
+      2.32
+    ]
+  },
+  "method": "E6 (specs/002-…/query-cold-start-results.md §3) re-implemented in scripts/t007-local/m-l7.ts; E6 script not executed",
+  "definitions": {
+    "cold": "fresh `bun` process per measurement: empty module state, cold JIT, no compiled Query cache, no grammar loaded, fresh WASM compile. PROCESS-COLD only; OS page cache NOT dropped (needs privileges) so the WASM/grammar/source files are OS-cache-warm",
+    "warm": "steady state inside an already-primed process: 100 files cycling a 10-file set; files 11–100 pooled as steady state; 3 independent processes",
+    "units": "ms; parse = parser.parse(); toIR = production toIntermediateRepresentation (query compile on first call for that language + execution + symbol build); importsMs = dynamic import of harness wasm.ts + toIR module; wasmCompileMs = WebAssembly.compile of core + 4 grammars (local-only, Workers uses build-time modules)"
+  },
+  "config": {
+    "coldProcessesPerLangPerMode": 20,
+    "warmProcessesPerLang": 3,
+    "modes": [
+      "first (10 files)",
+      "split",
+      "init"
+    ],
+    "interleaving": "per repetition, languages × modes interleaved; warm runs last",
+    "fileSelection": "real files 1024–16384 bytes, sorted, 10 evenly spaced; TS/TSX from repo-atlas R-M snapshot copy, JS from GitNexus R-L snapshot copy, Java from iata-one-order R-L snapshot copy (JAXB-generated classes, disclosed limitation; GitNexus has only 9 Java files in range, all tiny test fixtures) (both git-archive scratch copies under .cache/t007-local/datasets; reference repos not touched)",
+    "workers": "single main thread (no worker threads)",
+    "database": "none (parse + extraction only)"
+  },
+  "fileSets": {
+    "java": [
+      {
+        "file": "src/main/java/com/ia/iata/oneorder/ALaCarteOfferItemType.java",
+        "bytes": 15017
+      },
+      {
+        "file": "src/main/java/com/ia/iata/oneorder/BaggageAssociationsType2.java",
+        "bytes": 5008
+      },
+      {
+        "file": "src/main/java/com/ia/iata/oneorder/ConnectionCriteriaType.java",
+        "bytes": 6940
+      },
+      {
+        "file": "src/main/java/com/ia/iata/oneorder/FareCalculationInfoType2.java",
+        "bytes": 3744
+      },
+      {
+        "file": "src/main/java/com/ia/iata/oneorder/InterlineOfferRequestType2.java",
+        "bytes": 7528
+      },
+      {
+        "file": "src/main/java/com/ia/iata/oneorder/OptionalDataListsType.java",
+        "bytes": 15039
+      },
+      {
+        "file": "src/main/java/com/ia/iata/oneorder/POSType2.java",
+        "bytes": 5282
+      },
+      {
+        "file": "src/main/java/com/ia/iata/oneorder/PenaltyListType.java",
+        "bytes": 2315
+      },
+      {
+        "file": "src/main/java/com/ia/iata/oneorder/RulesCoreRequestType.java",
+        "bytes": 2753
+      },
+      {
+        "file": "src/main/java/com/ia/iata/oneorder/ServiceListOfferRequestType.java",
+        "bytes": 2387
+      }
+    ],
+    "javascript": [
+      {
+        "file": "gitnexus-claude-plugin/hooks/hook-lock.js",
+        "bytes": 9736
+      },
+      {
+        "file": "gitnexus-factory-plugin/hooks/hook-lock.js",
+        "bytes": 9736
+      },
+      {
+        "file": "gitnexus-web/src/vendor/leiden/utils.js",
+        "bytes": 9592
+      },
+      {
+        "file": "gitnexus/scripts/build-web.js",
+        "bytes": 2708
+      },
+      {
+        "file": "gitnexus/test/fixtures/dispatch-guard-app/src/server/autoTradeRoutes.js",
+        "bytes": 1254
+      },
+      {
+        "file": "gitnexus/test/fixtures/lang-resolution/javascript-array-method-callback/src/index.js",
+        "bytes": 1056
+      },
+      {
+        "file": "gitnexus/test/fixtures/lang-resolution/javascript-object-properties/destructured.js",
+        "bytes": 1372
+      },
+      {
+        "file": "gitnexus/test/fixtures/lang-resolution/javascript-object-properties/return-shape.js",
+        "bytes": 1920
+      },
+      {
+        "file": "gitnexus/test/fixtures/lang-resolution/parameter-producer/src/consumer.js",
+        "bytes": 1038
+      },
+      {
+        "file": "gitnexus/test/fixtures/lang-resolution/parameter-producer/src/shadow-arrow.js",
+        "bytes": 1026
+      }
+    ],
+    "typescript": [
+      {
+        "file": "plugins/cloudflare-queue.ts",
+        "bytes": 1384
+      },
+      {
+        "file": "src/lib/code-intel/acquisition/archive-pipeline.ts",
+        "bytes": 3634
+      },
+      {
+        "file": "src/lib/code-intel/queue/snapshot-worker.ts",
+        "bytes": 4094
+      },
+      {
+        "file": "src/lib/control-plane/configuration-read-model.ts",
+        "bytes": 5526
+      },
+      {
+        "file": "src/lib/repo-intel/keyboard.ts",
+        "bytes": 3447
+      },
+      {
+        "file": "src/lib/repository-intelligence-extension-points.ts",
+        "bytes": 1607
+      },
+      {
+        "file": "tests/contract/code-intel/tar-stream.test.ts",
+        "bytes": 2989
+      },
+      {
+        "file": "tests/integration/code-intel/duplicate-delivery.test.ts",
+        "bytes": 4825
+      },
+      {
+        "file": "tests/integration/symbols/extraction-pipeline.test.ts",
+        "bytes": 11042
+      },
+      {
+        "file": "tests/unit/control-plane/client-boundary.test.ts",
+        "bytes": 6480
+      }
+    ],
+    "tsx": [
+      {
+        "file": "src/components/atlas/AtlasControls.tsx",
+        "bytes": 1649
+      },
+      {
+        "file": "src/components/repo-intel/CompositionBar.tsx",
+        "bytes": 2264
+      },
+      {
+        "file": "src/components/repo-intel/StructureOutline.tsx",
+        "bytes": 2765
+      },
+      {
+        "file": "src/components/ui/alert-dialog.tsx",
+        "bytes": 4183
+      },
+      {
+        "file": "src/components/ui/calendar.tsx",
+        "bytes": 7226
+      },
+      {
+        "file": "src/components/ui/context-menu.tsx",
+        "bytes": 7360
+      },
+      {
+        "file": "src/components/ui/input-otp.tsx",
+        "bytes": 2232
+      },
+      {
+        "file": "src/components/ui/resizable.tsx",
+        "bytes": 1552
+      },
+      {
+        "file": "src/components/ui/table.tsx",
+        "bytes": 2820
+      },
+      {
+        "file": "src/routes/about.tsx",
+        "bytes": 11921
+      }
+    ]
+  },
+  "perLanguage": {
+    "java": {
+      "cold": {
+        "processWallMs_firstMode": {
+          "n": 20,
+          "min": 51.73362499999985,
+          "median": 53.80654149999964,
+          "p95": 54.50720900000033,
+          "max": 54.580041000001074,
+          "cv": 0.015192319366090999
+        },
+        "setup": {
+          "moduleImportMs": {
+            "n": 20,
+            "min": 2.920375,
+            "median": 3.0797289999999986,
+            "p95": 3.686,
+            "max": 3.8014170000000007,
+            "cv": 0.07999252656547007
+          },
+          "wasmCompileMs_localOnly": {
+            "n": 20,
+            "min": 7.670791999999999,
+            "median": 8.111812500000001,
+            "p95": 8.402542,
+            "max": 8.425374999999999,
+            "cv": 0.020793692149107937
+          },
+          "getParserFirstCallMs": {
+            "n": 20,
+            "min": 4.069040999999999,
+            "median": 4.314687500000002,
+            "p95": 4.7748339999999985,
+            "max": 4.846333000000001,
+            "cv": 0.046668434719513784
+          }
+        },
+        "filePosition": {
+          "file1": {
+            "parse": {
+              "n": 20,
+              "min": 2.8421669999999963,
+              "median": 3.0862709999999964,
+              "p95": 3.2943330000000017,
+              "max": 3.303208999999999,
+              "cv": 0.0359078841069536
+            },
+            "toIR": {
+              "n": 20,
+              "min": 5.177124999999997,
+              "median": 5.398479000000002,
+              "p95": 5.7287079999999975,
+              "max": 5.749457999999997,
+              "cv": 0.028255764639889963
+            },
+            "parsePlusToIR": {
+              "n": 20,
+              "min": 8.147125999999993,
+              "median": 8.496604000000005,
+              "p95": 8.927416000000001,
+              "max": 9.052666999999996,
+              "cv": 0.027347703522861068
+            }
+          },
+          "file2": {
+            "parse": {
+              "n": 20,
+              "min": 0.49433400000000205,
+              "median": 0.5434790000000014,
+              "p95": 0.5848330000000033,
+              "max": 0.5907499999999999,
+              "cv": 0.04291754279360616
+            },
+            "toIR": {
+              "n": 20,
+              "min": 0.1825420000000051,
+              "median": 0.2150420000000004,
+              "p95": 0.25995899999999494,
+              "max": 0.2663750000000036,
+              "cv": 0.1015196748788513
+            },
+            "parsePlusToIR": {
+              "n": 20,
+              "min": 0.7107930000000025,
+              "median": 0.7579369999999983,
+              "p95": 0.8054989999999975,
+              "max": 0.8507089999999948,
+              "cv": 0.04306539109409162
+            }
+          },
+          "file3": {
+            "parse": {
+              "n": 20,
+              "min": 0.4684999999999988,
+              "median": 0.5401669999999967,
+              "p95": 0.6137919999999966,
+              "max": 0.6750839999999982,
+              "cv": 0.09091841094348051
+            },
+            "toIR": {
+              "n": 20,
+              "min": 0.3771249999999995,
+              "median": 0.5109999999999992,
+              "p95": 0.5649590000000018,
+              "max": 0.568916999999999,
+              "cv": 0.11148806397462924
+            },
+            "parsePlusToIR": {
+              "n": 20,
+              "min": 0.8866669999999957,
+              "median": 1.037125500000002,
+              "p95": 1.149124999999998,
+              "max": 1.215958999999998,
+              "cv": 0.07600217482975882
+            }
+          },
+          "file10": {
+            "parse": {
+              "n": 20,
+              "min": 0.1751249999999942,
+              "median": 0.24018749999999756,
+              "p95": 0.3496249999999961,
+              "max": 0.36999999999999744,
+              "cv": 0.22709341592239768
+            },
+            "toIR": {
+              "n": 20,
+              "min": 0.12654100000000312,
+              "median": 0.17508300000000077,
+              "p95": 0.20649999999999835,
+              "max": 0.23204099999999528,
+              "cv": 0.14697015066716576
+            },
+            "parsePlusToIR": {
+              "n": 20,
+              "min": 0.3238329999999934,
+              "median": 0.42439649999999673,
+              "p95": 0.5516669999999948,
+              "max": 0.5736249999999998,
+              "cv": 0.17747902591853948
+            }
+          }
+        },
+        "firstFileLineItems": {
+          "file": "src/main/java/com/ia/iata/oneorder/ALaCarteOfferItemType.java",
+          "symbols": 24,
+          "parseColdMs": {
+            "n": 20,
+            "min": 2.957416000000002,
+            "median": 3.0973334999999995,
+            "p95": 3.2406250000000014,
+            "max": 3.279042000000004,
+            "cv": 0.02797897101650247
+          },
+          "queryCompileColdMs": {
+            "n": 20,
+            "min": 3.0913749999999993,
+            "median": 3.155624999999997,
+            "p95": 3.3673339999999996,
+            "max": 3.3695830000000058,
+            "cv": 0.027931235097486684
+          },
+          "queryExecColdMs": {
+            "n": 20,
+            "min": 1.2348329999999947,
+            "median": 1.3573540000000044,
+            "p95": 1.4507090000000034,
+            "max": 1.490124999999999,
+            "cv": 0.04059220368945943
+          },
+          "queryExecWarmMs": {
+            "n": 20,
+            "min": 0.4054579999999959,
+            "median": 0.42233300000000185,
+            "p95": 0.45641700000000185,
+            "max": 0.47479200000000077,
+            "cv": 0.04656618202339422
+          },
+          "toIRFirstAfterStandaloneMs": {
+            "n": 20,
+            "min": 3.003041000000003,
+            "median": 3.2851455000000023,
+            "p95": 3.5360840000000024,
+            "max": 3.6114589999999964,
+            "cv": 0.0484063750619557
+          },
+          "toIRWarmMs": {
+            "n": 20,
+            "min": 0.4580839999999995,
+            "median": 0.5252705000000013,
+            "p95": 0.5921670000000034,
+            "max": 0.5932499999999976,
+            "cv": 0.07585540046827435
+          },
+          "sumGetParserParseCompileExecMs": {
+            "n": 20,
+            "min": 11.675957000000004,
+            "median": 12.340562000000002,
+            "p95": 12.638209,
+            "max": 12.733041000000014,
+            "cv": 0.029563512689872177
+          }
+        },
+        "initSplit": {
+          "primer": "javascript",
+          "firstGetParserMs": {
+            "n": 20,
+            "min": 4.161415999999999,
+            "median": 4.439104,
+            "p95": 4.947083000000003,
+            "max": 5.526040999999999,
+            "cv": 0.0673767085089768
+          },
+          "secondGetParserMs": {
+            "n": 20,
+            "min": 0.2775829999999999,
+            "median": 0.33062549999999824,
+            "p95": 0.4087079999999972,
+            "max": 0.4230410000000049,
+            "cv": 0.10619191356727421
+          },
+          "estCoreInitMs_diffOfMedians": 4.108478500000002
+        },
+        "processes": {
+          "first": 20,
+          "split": 20,
+          "init": 20
+        }
+      },
+      "warm": {
+        "processes": 3,
+        "filesPerProcess": 100,
+        "file1_coldInWarmProcess": {
+          "n": 3,
+          "min": 8.386749000000009,
+          "median": 8.395665999999995,
+          "p95": 8.780040999999994,
+          "max": 8.780040999999994,
+          "cv": 0.021516009500730286
+        },
+        "files2to10": {
+          "n": 27,
+          "min": 0.19895699999999295,
+          "median": 0.6689999999999969,
+          "p95": 1.8413339999999963,
+          "max": 2.9065419999999946,
+          "cv": 0.7322048830353625
+        },
+        "files11to50": {
+          "n": 120,
+          "min": 0.10633299999999224,
+          "median": 0.3371044999999988,
+          "p95": 0.9371659999999977,
+          "max": 1.1114589999999964,
+          "cv": 0.6784657100680845
+        },
+        "files51to100": {
+          "n": 150,
+          "min": 0.09870899999999949,
+          "median": 0.2518749999999983,
+          "p95": 0.7527499999999918,
+          "max": 0.8713760000000121,
+          "cv": 0.6784002121762148
+        },
+        "files11to100_steadyState": {
+          "n": 270,
+          "min": 0.09870899999999949,
+          "median": 0.30054199999999653,
+          "p95": 0.9100000000000108,
+          "max": 1.1114589999999964,
+          "cv": 0.6937844521511337
+        },
+        "parseOnly_files11to100": {
+          "n": 270,
+          "min": 0.07687500000000114,
+          "median": 0.20327100000000442,
+          "p95": 0.5795830000000066,
+          "max": 0.756541999999996,
+          "cv": 0.6706466420031582
+        },
+        "toIROnly_files11to100": {
+          "n": 270,
+          "min": 0.021833999999998355,
+          "median": 0.08620849999999791,
+          "p95": 0.3096670000000046,
+          "max": 0.3849580000000046,
+          "cv": 0.7765039919810988
+        },
+        "totalMs": {
+          "first10": {
+            "n": 3,
+            "min": 14.943206000000018,
+            "median": 15.425878000000008,
+            "p95": 16.37453899999998,
+            "max": 16.37453899999998,
+            "cv": 0.03815956618996176
+          },
+          "first100": {
+            "n": 3,
+            "min": 47.25803799999996,
+            "median": 48.17800400000006,
+            "p95": 48.599087999999924,
+            "max": 48.599087999999924,
+            "cv": 0.011663127460492207
+          }
+        }
+      }
+    },
+    "javascript": {
+      "cold": {
+        "processWallMs_firstMode": {
+          "n": 20,
+          "min": 84.77116699999988,
+          "median": 87.09385399999974,
+          "p95": 91.67416700000012,
+          "max": 93.02199999999903,
+          "cv": 0.024832354771598373
+        },
+        "setup": {
+          "moduleImportMs": {
+            "n": 20,
+            "min": 2.9298750000000027,
+            "median": 3.3951245000000014,
+            "p95": 3.722875000000002,
+            "max": 3.9297090000000026,
+            "cv": 0.06633941060879998
+          },
+          "wasmCompileMs_localOnly": {
+            "n": 20,
+            "min": 7.816333,
+            "median": 8.1624585,
+            "p95": 8.552332999999997,
+            "max": 8.778875,
+            "cv": 0.028227025842049377
+          },
+          "getParserFirstCallMs": {
+            "n": 20,
+            "min": 4.222541,
+            "median": 4.4502909999999964,
+            "p95": 4.986749999999994,
+            "max": 5.147082999999995,
+            "cv": 0.05899676010870135
+          }
+        },
+        "filePosition": {
+          "file1": {
+            "parse": {
+              "n": 20,
+              "min": 4.392208999999994,
+              "median": 4.594353999999992,
+              "p95": 4.722708000000004,
+              "max": 4.768875000000001,
+              "cv": 0.024994315874390265
+            },
+            "toIR": {
+              "n": 20,
+              "min": 6.006790999999993,
+              "median": 6.323583000000006,
+              "p95": 6.456040999999999,
+              "max": 6.727041,
+              "cv": 0.02120741642593754
+            },
+            "parsePlusToIR": {
+              "n": 20,
+              "min": 10.433040999999996,
+              "median": 10.937895499999996,
+              "p95": 11.141542000000001,
+              "max": 11.337623999999991,
+              "cv": 0.018739784552669007
+            }
+          },
+          "file2": {
+            "parse": {
+              "n": 20,
+              "min": 1.1805829999999986,
+              "median": 1.4222500000000053,
+              "p95": 1.5815829999999949,
+              "max": 1.754334,
+              "cv": 0.09467126067557122
+            },
+            "toIR": {
+              "n": 20,
+              "min": 0.6347499999999968,
+              "median": 0.9920830000000009,
+              "p95": 1.2055409999999966,
+              "max": 1.5160829999999947,
+              "cv": 0.19887044170955293
+            },
+            "parsePlusToIR": {
+              "n": 20,
+              "min": 2.195541999999989,
+              "median": 2.416979000000005,
+              "p95": 2.6966659999999933,
+              "max": 2.705959000000007,
+              "cv": 0.06258531102387221
+            }
+          },
+          "file3": {
+            "parse": {
+              "n": 20,
+              "min": 2.3961670000000055,
+              "median": 2.6333960000000047,
+              "p95": 2.9807500000000005,
+              "max": 2.9840409999999906,
+              "cv": 0.054031831522920085
+            },
+            "toIR": {
+              "n": 20,
+              "min": 0.6089589999999987,
+              "median": 0.6649580000000057,
+              "p95": 0.7542919999999924,
+              "max": 0.7827500000000072,
+              "cv": 0.06520714859356158
+            },
+            "parsePlusToIR": {
+              "n": 20,
+              "min": 3.0539579999999944,
+              "median": 3.2888745000000057,
+              "p95": 3.603583999999998,
+              "max": 3.668040999999988,
+              "cv": 0.04322047768623106
+            }
+          },
+          "file10": {
+            "parse": {
+              "n": 20,
+              "min": 0.12958400000000836,
+              "median": 0.17718750000000227,
+              "p95": 0.2507090000000005,
+              "max": 0.6643749999999926,
+              "cv": 0.5353628083818113
+            },
+            "toIR": {
+              "n": 20,
+              "min": 0.1502090000000038,
+              "median": 0.17708350000000195,
+              "p95": 0.2686250000000001,
+              "max": 0.28812500000000796,
+              "cv": 0.19836059724107732
+            },
+            "parsePlusToIR": {
+              "n": 20,
+              "min": 0.28358400000001893,
+              "median": 0.3614784999999969,
+              "p95": 0.510791999999995,
+              "max": 0.9525000000000006,
+              "cv": 0.3527766457992682
+            }
+          }
+        },
+        "firstFileLineItems": {
+          "file": "gitnexus-claude-plugin/hooks/hook-lock.js",
+          "symbols": 6,
+          "parseColdMs": {
+            "n": 20,
+            "min": 4.428124999999994,
+            "median": 4.553313000000003,
+            "p95": 4.659292000000001,
+            "max": 4.6782499999999985,
+            "cv": 0.014385436562992225
+          },
+          "queryCompileColdMs": {
+            "n": 20,
+            "min": 4.187708000000001,
+            "median": 4.4301664999999915,
+            "p95": 4.614332999999995,
+            "max": 4.644999999999996,
+            "cv": 0.025710266051152574
+          },
+          "queryExecColdMs": {
+            "n": 20,
+            "min": 1.1415000000000077,
+            "median": 1.2471460000000008,
+            "p95": 1.3262920000000094,
+            "max": 1.3425830000000047,
+            "cv": 0.047102059885923614
+          },
+          "queryExecWarmMs": {
+            "n": 20,
+            "min": 0.411042000000009,
+            "median": 0.44518749999999585,
+            "p95": 0.4933340000000044,
+            "max": 0.5004579999999947,
+            "cv": 0.05349337076136962
+          },
+          "toIRFirstAfterStandaloneMs": {
+            "n": 20,
+            "min": 3.994790999999992,
+            "median": 4.235166499999998,
+            "p95": 4.46458299999999,
+            "max": 4.492167000000009,
+            "cv": 0.03484345654898751
+          },
+          "toIRWarmMs": {
+            "n": 20,
+            "min": 0.40449999999999875,
+            "median": 0.4603545000000011,
+            "p95": 0.5167079999999942,
+            "max": 0.5799999999999983,
+            "cv": 0.08167151857394314
+          },
+          "sumGetParserParseCompileExecMs": {
+            "n": 20,
+            "min": 14.208667999999989,
+            "median": 14.697457999999997,
+            "p95": 15.250417000000006,
+            "max": 15.359333000000007,
+            "cv": 0.020814138463214078
+          }
+        },
+        "initSplit": {
+          "primer": "java",
+          "firstGetParserMs": {
+            "n": 20,
+            "min": 4.046791999999996,
+            "median": 4.548437500000002,
+            "p95": 4.892167000000001,
+            "max": 4.952915999999995,
+            "cv": 0.06073898595855654
+          },
+          "secondGetParserMs": {
+            "n": 20,
+            "min": 0.3166670000000025,
+            "median": 0.38266650000000624,
+            "p95": 0.45000000000000284,
+            "max": 0.5147080000000059,
+            "cv": 0.13743056809989376
+          },
+          "estCoreInitMs_diffOfMedians": 4.165770999999996
+        },
+        "processes": {
+          "first": 20,
+          "split": 20,
+          "init": 20
+        }
+      },
+      "warm": {
+        "processes": 3,
+        "filesPerProcess": 100,
+        "file1_coldInWarmProcess": {
+          "n": 3,
+          "min": 10.576416999999992,
+          "median": 10.829917000000009,
+          "p95": 10.86175,
+          "max": 10.86175,
+          "cv": 0.01186937446580273
+        },
+        "files2to10": {
+          "n": 27,
+          "min": 0.15850000000000364,
+          "median": 0.36674999999999613,
+          "p95": 3.4780419999999737,
+          "max": 3.5172910000000144,
+          "cv": 1.1501693690032593
+        },
+        "files11to50": {
+          "n": 120,
+          "min": 0.08054199999999412,
+          "median": 0.19631199999999893,
+          "p95": 1.8355000000000103,
+          "max": 2.030000000000001,
+          "cv": 1.0532680035042161
+        },
+        "files51to100": {
+          "n": 150,
+          "min": 0.07566599999999823,
+          "median": 0.16529149999998793,
+          "p95": 1.594916999999981,
+          "max": 1.7619589999999903,
+          "cv": 1.0463205998859308
+        },
+        "files11to100_steadyState": {
+          "n": 270,
+          "min": 0.07566599999999823,
+          "median": 0.1769999999999996,
+          "p95": 1.5988340000000107,
+          "max": 2.030000000000001,
+          "cv": 1.0539838188757136
+        },
+        "parseOnly_files11to100": {
+          "n": 270,
+          "min": 0.05795799999999929,
+          "median": 0.12885400000000402,
+          "p95": 1.3069590000000062,
+          "max": 1.480833000000004,
+          "cv": 1.0747605835719904
+        },
+        "toIROnly_files11to100": {
+          "n": 270,
+          "min": 0.01654100000000369,
+          "median": 0.055854499999995255,
+          "p95": 0.3134590000000088,
+          "max": 0.5919999999999987,
+          "cv": 1.0370505872484221
+        },
+        "totalMs": {
+          "first10": {
+            "n": 3,
+            "min": 18.930583999999953,
+            "median": 19.11803900000004,
+            "p95": 19.300459000000032,
+            "max": 19.300459000000032,
+            "cv": 0.007899280754917687
+          },
+          "first100": {
+            "n": 3,
+            "min": 63.56899399999992,
+            "median": 63.83100599999999,
+            "p95": 63.938260999999926,
+            "max": 63.938260999999926,
+            "cv": 0.0024318635533607177
+          }
+        }
+      }
+    },
+    "typescript": {
+      "cold": {
+        "processWallMs_firstMode": {
+          "n": 20,
+          "min": 62.54841699999997,
+          "median": 64.71283300000005,
+          "p95": 69.6708749999998,
+          "max": 70.08895800000028,
+          "cv": 0.030460671665205902
+        },
+        "setup": {
+          "moduleImportMs": {
+            "n": 20,
+            "min": 2.8694999999999986,
+            "median": 3.0008125000000003,
+            "p95": 3.8244580000000017,
+            "max": 4.185417000000001,
+            "cv": 0.11537945419696682
+          },
+          "wasmCompileMs_localOnly": {
+            "n": 20,
+            "min": 7.927666000000002,
+            "median": 8.1045415,
+            "p95": 8.947875,
+            "max": 8.969875000000002,
+            "cv": 0.037917373419602524
+          },
+          "getParserFirstCallMs": {
+            "n": 20,
+            "min": 4.422374999999999,
+            "median": 4.680937,
+            "p95": 5.138000000000002,
+            "max": 5.370457999999999,
+            "cv": 0.053591085520885345
+          }
+        },
+        "filePosition": {
+          "file1": {
+            "parse": {
+              "n": 20,
+              "min": 1.9003749999999968,
+              "median": 1.9971460000000008,
+              "p95": 2.048582999999997,
+              "max": 2.0642080000000007,
+              "cv": 0.022437860075501935
+            },
+            "toIR": {
+              "n": 20,
+              "min": 13.3415,
+              "median": 13.638771499999997,
+              "p95": 14.106750000000005,
+              "max": 14.142917000000004,
+              "cv": 0.017031436286821147
+            },
+            "parsePlusToIR": {
+              "n": 20,
+              "min": 15.275625000000002,
+              "median": 15.661104999999997,
+              "p95": 16.134001,
+              "max": 16.170958000000006,
+              "cv": 0.015951779299898525
+            }
+          },
+          "file2": {
+            "parse": {
+              "n": 20,
+              "min": 0.8287910000000025,
+              "median": 0.8864374999999995,
+              "p95": 0.935333,
+              "max": 0.9376660000000001,
+              "cv": 0.03557066603492441
+            },
+            "toIR": {
+              "n": 20,
+              "min": 0.30179199999999895,
+              "median": 0.3202499999999979,
+              "p95": 0.44829199999999503,
+              "max": 0.458750000000002,
+              "cv": 0.12580095616392975
+            },
+            "parsePlusToIR": {
+              "n": 20,
+              "min": 1.1305830000000014,
+              "median": 1.2011874999999996,
+              "p95": 1.3859579999999951,
+              "max": 1.394083000000002,
+              "cv": 0.05532251127616967
+            }
+          },
+          "file3": {
+            "parse": {
+              "n": 20,
+              "min": 0.871457999999997,
+              "median": 0.9283340000000031,
+              "p95": 1.0433750000000046,
+              "max": 1.0615840000000034,
+              "cv": 0.05839838946271649
+            },
+            "toIR": {
+              "n": 20,
+              "min": 0.3374999999999986,
+              "median": 0.4063755000000029,
+              "p95": 0.4973329999999976,
+              "max": 0.5352080000000043,
+              "cv": 0.10550206255081299
+            },
+            "parsePlusToIR": {
+              "n": 20,
+              "min": 1.218083,
+              "median": 1.338916000000001,
+              "p95": 1.4854160000000007,
+              "max": 1.5016250000000042,
+              "cv": 0.05850722408917954
+            }
+          },
+          "file10": {
+            "parse": {
+              "n": 20,
+              "min": 0.8797500000000014,
+              "median": 0.9591664999999985,
+              "p95": 1.0158750000000012,
+              "max": 1.0441670000000016,
+              "cv": 0.0437405689623524
+            },
+            "toIR": {
+              "n": 20,
+              "min": 0.4245420000000024,
+              "median": 0.480125000000001,
+              "p95": 0.6683749999999975,
+              "max": 0.7160000000000011,
+              "cv": 0.14391905723147502
+            },
+            "parsePlusToIR": {
+              "n": 20,
+              "min": 1.3334169999999972,
+              "median": 1.4357495,
+              "p95": 1.603500000000004,
+              "max": 1.7125419999999991,
+              "cv": 0.0602893196525916
+            }
+          }
+        },
+        "firstFileLineItems": {
+          "file": "plugins/cloudflare-queue.ts",
+          "symbols": 2,
+          "parseColdMs": {
+            "n": 20,
+            "min": 1.8778749999999995,
+            "median": 2.0066665000000015,
+            "p95": 2.1134169999999983,
+            "max": 2.2510829999999977,
+            "cv": 0.04144370683821547
+          },
+          "queryCompileColdMs": {
+            "n": 20,
+            "min": 11.920708000000001,
+            "median": 12.300249999999998,
+            "p95": 12.651333999999999,
+            "max": 13.36675,
+            "cv": 0.023809194376677133
+          },
+          "queryExecColdMs": {
+            "n": 20,
+            "min": 0.7176669999999987,
+            "median": 0.8381875000000001,
+            "p95": 0.9572920000000025,
+            "max": 0.9613330000000033,
+            "cv": 0.07547071736569504
+          },
+          "queryExecWarmMs": {
+            "n": 20,
+            "min": 0.0796670000000006,
+            "median": 0.09433299999999889,
+            "p95": 0.10083400000000609,
+            "max": 0.1040829999999957,
+            "cv": 0.07338702457850829
+          },
+          "toIRFirstAfterStandaloneMs": {
+            "n": 20,
+            "min": 10.089292,
+            "median": 10.405770999999998,
+            "p95": 10.746875000000003,
+            "max": 10.774541999999997,
+            "cv": 0.018947000976495768
+          },
+          "toIRWarmMs": {
+            "n": 20,
+            "min": 0.16620899999999494,
+            "median": 0.18745850000000175,
+            "p95": 0.22104199999999707,
+            "max": 0.28416599999999903,
+            "cv": 0.13657554819007345
+          },
+          "sumGetParserParseCompileExecMs": {
+            "n": 20,
+            "min": 19.067165999999997,
+            "median": 19.949602999999996,
+            "p95": 20.580667000000002,
+            "max": 20.983375,
+            "cv": 0.02298502735254672
+          }
+        },
+        "initSplit": {
+          "primer": "javascript",
+          "firstGetParserMs": {
+            "n": 20,
+            "min": 4.113958,
+            "median": 4.338583,
+            "p95": 4.830750000000002,
+            "max": 4.8735,
+            "cv": 0.05356623962784665
+          },
+          "secondGetParserMs": {
+            "n": 20,
+            "min": 0.5672919999999984,
+            "median": 0.6278544999999998,
+            "p95": 0.7189999999999976,
+            "max": 0.7563749999999985,
+            "cv": 0.07887591268924
+          },
+          "estCoreInitMs_diffOfMedians": 3.7107285
+        },
+        "processes": {
+          "first": 20,
+          "split": 20,
+          "init": 20
+        }
+      },
+      "warm": {
+        "processes": 3,
+        "filesPerProcess": 100,
+        "file1_coldInWarmProcess": {
+          "n": 3,
+          "min": 15.986875000000005,
+          "median": 16.009249999999998,
+          "p95": 16.179665999999997,
+          "max": 16.179665999999997,
+          "cv": 0.005361281924670401
+        },
+        "files2to10": {
+          "n": 27,
+          "min": 0.24254100000000278,
+          "median": 1.3320419999999942,
+          "p95": 2.697917000000004,
+          "max": 2.712291999999998,
+          "cv": 0.44270800737215243
+        },
+        "files11to50": {
+          "n": 120,
+          "min": 0.13283400000000256,
+          "median": 0.6918124999999975,
+          "p95": 1.8954999999999984,
+          "max": 2.3231250000000045,
+          "cv": 0.6635531979431124
+        },
+        "files51to100": {
+          "n": 150,
+          "min": 0.10716599999999232,
+          "median": 0.5566244999999981,
+          "p95": 1.8043340000000114,
+          "max": 2.0084579999999903,
+          "cv": 0.6916780702062185
+        },
+        "files11to100_steadyState": {
+          "n": 270,
+          "min": 0.10716599999999232,
+          "median": 0.6188534999999931,
+          "p95": 1.8509579999999914,
+          "max": 2.3231250000000045,
+          "cv": 0.6827964809709463
+        },
+        "parseOnly_files11to100": {
+          "n": 270,
+          "min": 0.08395799999999554,
+          "median": 0.4766665000000003,
+          "p95": 1.4679159999999882,
+          "max": 1.6376249999999999,
+          "cv": 0.6838110363700249
+        },
+        "toIROnly_files11to100": {
+          "n": 270,
+          "min": 0.022625000000005002,
+          "median": 0.13008299999999906,
+          "p95": 0.37699999999999534,
+          "max": 0.7271250000000009,
+          "cv": 0.7211578948331658
+        },
+        "totalMs": {
+          "first10": {
+            "n": 3,
+            "min": 28.613582000000008,
+            "median": 28.695414,
+            "p95": 29.04004199999999,
+            "max": 29.04004199999999,
+            "cv": 0.00642017906158283
+          },
+          "first100": {
+            "n": 3,
+            "min": 90.51286200000007,
+            "median": 91.162965,
+            "p95": 91.51150299999996,
+            "max": 91.51150299999996,
+            "cv": 0.0045446101067068085
+          }
+        }
+      }
+    },
+    "tsx": {
+      "cold": {
+        "processWallMs_firstMode": {
+          "n": 20,
+          "min": 60.61999999999898,
+          "median": 62.18535400000019,
+          "p95": 64.06483399999979,
+          "max": 78.11504199999945,
+          "cv": 0.05711511354694509
+        },
+        "setup": {
+          "moduleImportMs": {
+            "n": 20,
+            "min": 2.865874999999999,
+            "median": 2.9877085,
+            "p95": 3.5295419999999993,
+            "max": 3.6287080000000014,
+            "cv": 0.07391813971879976
+          },
+          "wasmCompileMs_localOnly": {
+            "n": 20,
+            "min": 7.530709000000002,
+            "median": 8.061416499999998,
+            "p95": 8.524708,
+            "max": 11.647167000000001,
+            "cv": 0.09913429579981979
+          },
+          "getParserFirstCallMs": {
+            "n": 20,
+            "min": 4.463041999999998,
+            "median": 4.901833000000002,
+            "p95": 5.289333000000003,
+            "max": 5.380791000000002,
+            "cv": 0.05493801791125024
+          }
+        },
+        "filePosition": {
+          "file1": {
+            "parse": {
+              "n": 20,
+              "min": 2.1872079999999983,
+              "median": 2.2858539999999987,
+              "p95": 2.5197090000000024,
+              "max": 2.9779590000000056,
+              "cv": 0.07304426512213896
+            },
+            "toIR": {
+              "n": 20,
+              "min": 13.382958000000002,
+              "median": 14.0266465,
+              "p95": 14.608208000000005,
+              "max": 18.716459,
+              "cv": 0.07397956737831589
+            },
+            "parsePlusToIR": {
+              "n": 20,
+              "min": 15.596458000000005,
+              "median": 16.363542000000002,
+              "p95": 16.902333000000006,
+              "max": 21.694418000000006,
+              "cv": 0.07256614745337214
+            }
+          },
+          "file2": {
+            "parse": {
+              "n": 20,
+              "min": 0.6670000000000016,
+              "median": 0.7345209999999973,
+              "p95": 0.8307909999999978,
+              "max": 1.6815840000000009,
+              "cv": 0.26824674503078216
+            },
+            "toIR": {
+              "n": 20,
+              "min": 0.2454579999999993,
+              "median": 0.2676034999999999,
+              "p95": 0.3307500000000019,
+              "max": 0.6206249999999969,
+              "cv": 0.27661776865810606
+            },
+            "parsePlusToIR": {
+              "n": 20,
+              "min": 0.9366249999999994,
+              "median": 1.0033329999999978,
+              "p95": 1.126540999999996,
+              "max": 2.3022089999999977,
+              "cv": 0.2672340848604542
+            }
+          },
+          "file3": {
+            "parse": {
+              "n": 20,
+              "min": 0.6473329999999962,
+              "median": 0.6945620000000012,
+              "p95": 0.757041000000001,
+              "max": 1.4840000000000018,
+              "cv": 0.2383000755597185
+            },
+            "toIR": {
+              "n": 20,
+              "min": 0.17979200000000617,
+              "median": 0.20804199999999895,
+              "p95": 0.24866700000000463,
+              "max": 0.48783300000000196,
+              "cv": 0.2803176439593487
+            },
+            "parsePlusToIR": {
+              "n": 20,
+              "min": 0.8414999999999964,
+              "median": 0.9013959999999983,
+              "p95": 1.0057080000000056,
+              "max": 1.9718330000000037,
+              "cv": 0.2471310085710091
+            }
+          },
+          "file10": {
+            "parse": {
+              "n": 20,
+              "min": 1.0924170000000046,
+              "median": 1.209021,
+              "p95": 1.2858330000000038,
+              "max": 1.2927079999999975,
+              "cv": 0.05079941310705379
+            },
+            "toIR": {
+              "n": 20,
+              "min": 0.5289999999999964,
+              "median": 0.5995415000000008,
+              "p95": 0.6408330000000007,
+              "max": 0.6482919999999979,
+              "cv": 0.057904091969839554
+            },
+            "parsePlusToIR": {
+              "n": 20,
+              "min": 1.6324590000000043,
+              "median": 1.8064794999999982,
+              "p95": 1.8955409999999944,
+              "max": 1.9266660000000044,
+              "cv": 0.04590559976393587
+            }
+          }
+        },
+        "firstFileLineItems": {
+          "file": "src/components/atlas/AtlasControls.tsx",
+          "symbols": 1,
+          "parseColdMs": {
+            "n": 20,
+            "min": 2.163292000000002,
+            "median": 2.2554789999999993,
+            "p95": 2.3316250000000025,
+            "max": 2.413792000000001,
+            "cv": 0.025023516001085155
+          },
+          "queryCompileColdMs": {
+            "n": 20,
+            "min": 12.313333,
+            "median": 12.765396000000003,
+            "p95": 13.000042000000004,
+            "max": 13.183291999999998,
+            "cv": 0.01813194737472871
+          },
+          "queryExecColdMs": {
+            "n": 20,
+            "min": 0.8032499999999985,
+            "median": 0.8772294999999986,
+            "p95": 0.9476250000000022,
+            "max": 0.9557079999999942,
+            "cv": 0.05072225243855238
+          },
+          "queryExecWarmMs": {
+            "n": 20,
+            "min": 0.14783299999999855,
+            "median": 0.15639599999999731,
+            "p95": 0.1842499999999987,
+            "max": 0.19712499999999977,
+            "cv": 0.07277072087253365
+          },
+          "toIRFirstAfterStandaloneMs": {
+            "n": 20,
+            "min": 10.102416999999996,
+            "median": 10.422332999999998,
+            "p95": 10.652166999999999,
+            "max": 11.902166999999999,
+            "cv": 0.03492587425658415
+          },
+          "toIRWarmMs": {
+            "n": 20,
+            "min": 0.14229199999999764,
+            "median": 0.15795849999999945,
+            "p95": 0.21433300000000344,
+            "max": 0.21745899999999807,
+            "cv": 0.1279099091710999
+          },
+          "sumGetParserParseCompileExecMs": {
+            "n": 20,
+            "min": 19.905082999999998,
+            "median": 20.6364995,
+            "p95": 21.469040999999997,
+            "max": 21.519834,
+            "cv": 0.022208017584477813
+          }
+        },
+        "initSplit": {
+          "primer": "javascript",
+          "firstGetParserMs": {
+            "n": 20,
+            "min": 4.224833,
+            "median": 4.5535415000000015,
+            "p95": 4.831624999999999,
+            "max": 4.859957999999999,
+            "cv": 0.04482283906627304
+          },
+          "secondGetParserMs": {
+            "n": 20,
+            "min": 0.5756670000000028,
+            "median": 0.6440000000000001,
+            "p95": 0.7436250000000015,
+            "max": 0.7595840000000003,
+            "cv": 0.08494977315958434
+          },
+          "estCoreInitMs_diffOfMedians": 3.9095415000000013
+        },
+        "processes": {
+          "first": 20,
+          "split": 20,
+          "init": 20
+        }
+      },
+      "warm": {
+        "processes": 3,
+        "filesPerProcess": 100,
+        "file1_coldInWarmProcess": {
+          "n": 3,
+          "min": 16.472458000000003,
+          "median": 16.564208000000004,
+          "p95": 16.618623999999997,
+          "max": 16.618623999999997,
+          "cv": 0.0036441656408913257
+        },
+        "files2to10": {
+          "n": 27,
+          "min": 0.21704100000000182,
+          "median": 0.9706670000000059,
+          "p95": 2.087457999999991,
+          "max": 2.2746249999999932,
+          "cv": 0.5136299585565236
+        },
+        "files11to50": {
+          "n": 120,
+          "min": 0.13858299999999701,
+          "median": 0.48266699999999574,
+          "p95": 1.2759580000000028,
+          "max": 1.6876260000000016,
+          "cv": 0.5752151419830338
+        },
+        "files51to100": {
+          "n": 150,
+          "min": 0.13683299999999576,
+          "median": 0.43833400000001177,
+          "p95": 1.1844990000000024,
+          "max": 1.3637080000000026,
+          "cv": 0.5799761280153327
+        },
+        "files11to100_steadyState": {
+          "n": 270,
+          "min": 0.13683299999999576,
+          "median": 0.45327100000000087,
+          "p95": 1.2108329999999938,
+          "max": 1.6876260000000016,
+          "cv": 0.581094132361711
+        },
+        "parseOnly_files11to100": {
+          "n": 270,
+          "min": 0.11354199999999537,
+          "median": 0.36347950000000395,
+          "p95": 0.9654170000000022,
+          "max": 1.1941249999999997,
+          "cv": 0.57151834334341
+        },
+        "toIROnly_files11to100": {
+          "n": 270,
+          "min": 0.023207999999996787,
+          "median": 0.09202099999999547,
+          "p95": 0.2733750000000015,
+          "max": 0.5409590000000009,
+          "cv": 0.6843246546347497
+        },
+        "totalMs": {
+          "first10": {
+            "n": 3,
+            "min": 26.385205999999997,
+            "median": 26.50562400000001,
+            "p95": 26.832334,
+            "max": 26.832334,
+            "cv": 0.007108508301448494
+          },
+          "first100": {
+            "n": 3,
+            "min": 77.12458100000009,
+            "median": 77.57545199999996,
+            "p95": 77.960747,
+            "max": 77.960747,
+            "cv": 0.004406154087282626
+          }
+        }
+      }
+    }
+  }
+}

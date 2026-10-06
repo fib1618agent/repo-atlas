@@ -4865,3 +4865,2926 @@ H. Any remaining blocker.
 
 Stop before committing.
 `````
+
+---
+
+## 2026-09-25 20:46 +04:00 — Architecture revision analysis pass
+
+Read and execute the instructions in: @docs/prompts/architecture-revisit/RepoAtlas_Complete_Architecture_Revision_Prompt.md
+
+This is a SpecKit/spec-driven-development architecture revision.
+
+IMPORTANT:
+Do NOT implement production code yet.
+
+Follow this sequence:
+
+ANALYSE
+→ RESEARCH
+→ SPECIFY
+→ PLAN
+→ TASKS
+→ VALIDATION/CHECKLIST
+
+First inspect the existing repository, current SpecKit structure, roadmap, Features 001–009, current source/repository management, Feature 004/005/T007, Feature 006, Feature 007, and Feature 009.
+
+Reconcile the proposed architecture against the existing specifications rather than blindly replacing them.
+
+Do not modify unrelated working-tree changes.
+Do not push.
+Do not commit.
+
+At the end, report:
+1. What you analysed
+2. Architecture conflicts found
+3. Specifications that need modification
+4. New/changed requirements
+5. Data-model changes
+6. Contract changes
+7. Feature boundary changes
+8. Local runtime/run.sh architecture
+9. Universe vs Repository Graph architecture
+10. Discovery vs graphification model
+11. 5-repository deep-analysis capacity model
+12. T007/Feature 005 changes
+13. Featues
+14. Implementation plan
+15. Proposed tasks
+16. Open decisions requiring my approval
+17. Git status
+
+Do not begin implementation after producing the plan/tasks.
+
+Wait for my review before execution.
+
+---
+
+## 2026-09-25 — Workspace clarification + continue approved architecture-revision work
+
+IMPORTANT WORKSPACE CLARIFICATION:
+
+I started this Claude Code session from the RepoAtlas project directory itself:
+
+/Users/imdadareeph/Documents/dev/git/fib1618agent/repo-atlas
+
+Treat the CURRENT WORKING DIRECTORY as the authoritative RepoAtlas project root.
+
+All SpecKit work, architecture changes, specification changes, plans, contracts, tasks, checklists, roadmap updates, and related documentation changes must be made relative to this repo-atlas project.
+
+There is a sibling reference directory one level above the project:
+
+../repotlas-references/
+
+Its structure is:
+
+../repotlas-references/
+├── codegraph/
+├── GitNexus/
+└── graphify/
+
+These are LOCAL REFERENCE IMPLEMENTATIONS ONLY.
+
+You MAY inspect them when useful for architecture/research/comparison.
+
+You MUST NOT:
+- modify anything inside ../repotlas-references/
+- copy them into this repository
+- add them as dependencies
+- generate files inside them
+- commit changes to them
+- treat them as authoritative over RepoAtlas
+
+Use them oference material when evaluating:
+- AST/indexing architecture
+- symbol extraction
+- call graph construction
+- relationship resolution
+- graph storage
+- repository analysis pipelines
+- incremental indexing
+- local job execution
+- performance/resource management
+- process discovery
+- semantic indexing
+- MCP
+- visualization architecture
+- local runtime architecture
+
+For every significant reference idea you use, distinguish:
+1. What the reference implementation does
+2. Whether RepoAtlas should adopt it
+3. What RepoAtlas should change/improve
+4. What RepoAtlas should explicitly avoid
+
+RepoAtlas requirements, existing specifications, and approved architecture decisions remain authoritative.
+
+IMPORTANT:
+Do not assume ../repotlas-references/ is part of the RepoAtlas source tree.
+It is intentionally outside the project.
+
+Before making any changes, verify:
+
+pwd
+
+and confirm that the working directory is:
+
+/Users/imdadareeph/Documents/dev/git/fib1618agent/repo-atlas
+
+Continue the approved SpecKit architecture-revision work from this project root.
+
+[In-session decision round (AskUserQuestion) answers: D-ARCH-1 = Amend F003 + F004; D-ARCH-3 = Yes, replace gate; D-ARCH-2 = Preference only; D-ARCH-4/5/6 = Adopt all three recommendations.]
+
+---
+
+## 2026-09-25 — Redefined T007 planning pass (verbatim)
+
+The architecture revision is approved.
+
+Proceed with the next SpecKit phase for the redefined Feature 004 T007:
+
+T007 — Local Relationship Engine Feasibility
+
+IMPORTANT:
+This is a SPECIFICATION / PLANNING pass only.
+
+Do NOT execute the feasibility measurements yet.
+Do NOT implement production code.
+Do NOT modify src/ or tests/ for implementation.
+Do NOT start T008+.
+Do NOT commit.
+Do NOT push.
+
+Follow the SpecKit sequence:
+
+ANALYSE
+→ RESEARCH where required
+→ PLAN
+→ TASKS
+→ CHECKLIST / ACCEPTANCE GATES
+→ STOP
+
+First inspect the newly created/updated Feature 004 artifacts and ADR-001, especially:
+
+- docs/architecture/ADR-001-local-first-runtime.md
+- specs/004-engineering-relationship-graph/spec.md
+- specs/004-engineering-relationship-graph/research.md
+- specs/004-engineering-relationship-graph/plan.md
+- specs/004-engineering-relationship-graph/tasks.md
+- specs/004-engineering-relationship-graph/contracts/local-job-engine.md
+- Feature 004 data model/contracts/checklists
+- Feature 005 historire decision record
+- current Feature 001/002 contracts relevant to AST/symbol intelligence
+- current Feature 009 scope only where it constrains the feasibility gate
+
+Also inspect the local reference implementations read-only if useful:
+
+../repotlas-references/GitNexus/
+../repotlas-references/graphify/
+../repotlas-references/codegraph/
+
+Do not modify those reference directories.
+
+T007 PURPOSE
+
+Define how RepoAtlas will prove that the local relationship engine is feasible at repository scale.
+
+T007 must validate, at minimum:
+
+1. Native/local parser throughput
+2. File-size bands
+3. AST extraction
+4. Symbol extraction
+5. Relationship extraction
+6. Relationship resolution
+7. Memory usage
+8. CPU usage
+9. Worker concurrency
+10. SQLite throughput
+11. Durable local job throughput
+12. Incremental indexing
+13. Cold-start behavior
+14. Large-file behavior
+15. Repository-scale graphification
+16. Failure/retry/recovery behavior where relevant
+
+The T007 design must validate the actual local-first architecture.
+
+Do NOT use the old Cloudflare 10 ms CPU limit as the pass/fail constraint.
+
+The old Cloudflare research may be reused as measurement methodology/evidence where useful, but the new gate must measure the local runtime.
+
+IMPORTANT:
+Rust is currently a PREFERRED production direction, not a mandatory implementation dependency for this T007.
+
+Therefore define the feasibility experiment so that it can validate the architecture using the currently available local TypeScript/SQLite path where appropriate, while recording which measurements would later need to be repeated against the Rust Atlas Engine.
+
+Do not force a Rust implementation into this T007 planning pass.
+
+LOCAL-FIRST TARGET
+
+The eventual runtime being validated is:
+
+Repository
+    ↓
+Local snapshot
+    ↓
+Local durable jobs
+    ↓
+AST / symbols
+    ↓
+Relationships
+    ↓
+Resolution
+    ↓
+Graph
+    ↓
+Search / process / impact
+
+Storage:
+
+SQLite
++
+local filesystem
+
+No required:
+
+Cloudflare Workers
+Cloudflare Queues
+D1
+R2
+Redis
+Kafka
+RabbitMQ
+hosted graph datector database
+remote LLM
+
+T007 MUST define measurable boundaries rather than arbitrary limits.
+
+FILE SIZE
+
+The architecture currently documents:
+
+512 KiB = proposed default
+
+This is NOT a final production limit.
+
+T007 must define file-size bands that can provide evidence for the eventual default and any larger hard ceiling.
+
+Do not simply declare 512 KiB successful or unsuccessful without measurement.
+
+REPOSITORY SCALE
+
+The experiment must distinguish:
+
+- individual file behavior
+- small repository behavior
+- medium repository behavior
+- larger repository behavior
+
+Where possible, use representative real repositories or controlled fixtures rather than only synthetic micro-tests.
+
+GRAPHIFICATION
+
+The experiment should validate the complete relevant path:
+
+source snapshot
+→ file classification
+→ parsing
+→ symbols
+→ relationships
+→ resolution
+→ persistence
+→ graph queries
+
+Do not reduce T007 to parser benchmarking alone.
+
+DURABLE JOB ENGINE
+
+Define tests for:
+
+- bounded concurrency
+- job persist/recovery
+- retry behavior
+- idempotency
+- partial completion
+- cancellation/pause where relevant
+
+The architecture requirement is:
+
+STOP/START
+must not destroy local intelligence.
+
+A restart must be able to recover incomplete work.
+
+INCREMENTAL ANALYSIS
+
+Define how T007 measures the difference between:
+
+1. Full repository graphification
+2. No-change re-run
+3. Small source change
+4. Larger source change
+
+The objective is to establish whether snapshot/change-aware processing is viable.
+
+MEMORY / CPU
+
+Define measurements for:
+
+- peak memory
+- average memory
+- CPU utilization
+- parser throughput
+- relationship extraction throughput
+- resolution throughput
+- SQLite write/read throughput
+
+Do not invent universal pass thresholds without evidence.
+
+If thresholds are engineering acceptance criteria rather than externally sourced limits, label them explicitly as RepoAtlas engineering decisions.
+
+FAILURE GATES
+
+Define explicit PASS / FAIL / CONDITIONAL results.
+
+A result must not be considered passing merely because a small fixture works.
+
+Define what evidence is required before T007 can clear the gate for T008+.
+
+T007 should produce a durable evidence artifact containing:
+
+- environment
+- commit/version
+- dataset
+- repository/file counts
+- language mix
+- file-size distribution
+- worker configuration
+- timing
+- CPU
+- memory
+- SQLite metrics
+- job metrics
+- failures
+- retries
+- incremental-analysis results
+- conclusions
+- limitations
+
+Do not make the final artifact dependent on cloud telemetry.
+
+SPEC-KIT OUTPUTS
+
+Create/update only the Feature 004 planning artifacts required for this T007 pass.
+
+Expected outputs should include, where appropriate:
+
+- T007 research
+- T007 plan
+- T007 task breakdown
+- T007 acceptance criteria
+- T007 measurement protocol
+- T007 checklist
+- traceability from requirements → measurements → acceptance gates
+
+Do not prematurely mark T007 complete.
+
+Do not mark T008+ authorized.
+
+Do not change the existing T007 gate outcome until the future measurement execution actually passes the defined cria.
+
+REFERENCE PROJECTS
+
+Use GitNexus, Graphify, and CodeGraph only as supporting engineering references.
+
+For any significant adopted idea, document:
+
+1. Reference behavior
+2. RepoAtlas applicability
+3. RepoAtlas adaptation
+4. RepoAtlas limitation/avoidance
+
+Do not copy their architecture blindly.
+
+NEUTRAL DOMAIN EXAMPLES
+
+Use neutral examples only.
+
+Do not use airline, flight, passenger, booking, reservation, PNR, or fulfilment examples.
+
+Use examples such as:
+
+- car rental
+- payment
+- notification
+- fleet management
+- customer service
+- pricing
+- inventory
+
+FINAL REPORT
+
+When the planning pass is complete, report:
+
+1. What was inspected
+2. T007 requirements
+3. Measurement dimensions
+4. Dataset/fixture strategy
+5. Environment strategy
+6. Performance metrics
+7. Memory/CPU metrics
+8. SQLite metrics
+9. Durable-job metrics
+10. Incremental-analysis metrics
+11. Failure/recovery tests
+12. File-size test bands
+13. Repository-scale test bands
+14. Proposed acceptance criteria
+15. Proposed PASS/FAIL gates
+16. Tasks and dependencies
+17. Expected evidence artifacts
+18. Any remaining decisions requiring approval
+19. Git status
+20. Confirmation that NO measurements were executed
+21. Confirmation that NO production implementation was performed
+22. Confirmation that T008+ remains NOT AUTHORIZED
+
+STOP after the planning/specification pass.
+
+Wait for approval before executing the T007 feasibility measurements.
+
+## 2026-09-25 — New session: confirm T007 state, wait for authorization (verbatim)
+
+We are continuing RepoAtlas using SpecKit/spec-driven development.
+
+This is a NEW SESSION.
+
+The previous session completed:
+
+1. Architecture analysis
+2. D-ARCH-1 through D-ARCH-6 decisions
+3. Local-first architecture revision
+4. Feature 003/004/005/009 specification amendments
+5. ADR-001
+6. Feature 004 T007 planning
+7. T007-LOCAL measurement protocol and acceptance gates
+
+DO NOT repeat the architecture analysis.
+
+DO NOT redesign the architecture.
+
+DO NOT start implementation outside the approved T007 feasibility harness.
+
+First inspect the current repository state and the authoritative T007 planning artifacts, especially:
+
+- docs/architecture/ADR-001-local-first-runtime.md
+- specs/004-engineering-relationship-graph/spec.md
+- specs/004-engineering-relationship-graph/research.md
+- specs/004-engineering-relationship-graph/plan.md
+- specs/004-engineering-relationship-graph/tasks.md
+- specs/004-engineering-relationship-graph/contracts/local-job-engine.md
+- the T007-local-feasibility planning/task artifacts
+- docs/claude_report/reports.md
+
+Also inspect the local reference repositories read-only if required:
+
+../repotlas-references/GitNexus
+../repotlas-references/graphify
+../repotlas-references/codegraph
+
+The reference repositories must not be modified.
+
+Confirm that T007 is currently:
+
+T007 = Local Relationship Engine Feasibility
+DEFINED
+EXECUTION NOT YET AUTHORIZED
+
+Then wait for my execution authorization.
+
+Do not execute measurements yet.
+Do not modify production source code.
+Do not commit.
+Do not push.
+
+## 2026-09-25 — T007-LOCAL EXECUTION AUTHORIZATION (verbatim)
+
+T007-LOCAL EXECUTION IS AUTHORIZED.
+
+Authorize execution of the approved Feature 004 T007 Local Relationship Engine Feasibility plan.
+
+The following decisions are FINAL for this execution and must not be changed during the experiment.
+
+==================================================
+1. APPROVED ENGINEERING THRESHOLDS
+==================================================
+
+G4:
+- R-M = 100–1,000 files: <= 5 minutes
+- R-L = 1,000–5,000 files: <= 30 minutes
+- primary acceptance measurement at concurrency 2
+
+G5:
+- peak RSS <= 1.5 GiB
+- no material positive RSS slope indicating a leak
+
+G6:
+- persistence overhead <= 30%
+- durable-job overhead <= 15%
+
+G7:
+- no-change re-run >= 95% cheaper than the corresponding full run
+
+G8:
+- INC-2 one-file change <= 10% of the corresponding full run
+
+G9:
+- derive the file-size recommendation from measured evidence
+- 512 KiB remains a proposed default, NOT an assumed passing limit
+
+These are RepoAtlas [ENG] decisions, not external platform limits.
+
+Do not modify these thrlds during execution.
+
+==================================================
+2. REFERENCE MACHINE
+==================================================
+
+Use the CURRENT MACHINE as the T007 reference machine.
+
+Before any benchmark, record:
+
+- OS/version
+- CPU model
+- physical/logical cores
+- RAM
+- storage
+- Bun version
+- Node version if applicable
+- TypeScript version if applicable
+- SQLite version
+- repository commit SHA
+- worker configuration
+- SQLite journal mode
+- relevant environment/configuration
+
+Freeze the benchmark environment after recording it.
+
+==================================================
+3. CONCURRENCY
+==================================================
+
+Use the approved concurrency ladder:
+
+1
+2
+4
+8
+
+Concurrency 2 is the primary acceptance configuration.
+
+The other levels are characterization measurements.
+
+Do not alter this ladder unless an actual machine/runtime limitation prevents a level from running. If that occurs, document it and stop the affected measurement rather than silently changing the protocol.
+
+==================================================
+4. DATASET AUTHORIZATION
+==================================================
+
+The following repository is explicitly approved:
+
+- repo-atlas
+
+For the two additional real repositories, DO NOT invent or assume names.
+
+Before beginning the R-L measurements, inspect the locally available repositories and determine whether suitable candidates exist.
+
+Required candidates:
+
+A. Java-dominant repository
+   - 1,000–5,000 files
+
+B. JS/TS-dominant repository
+   - 1,000–5,000 files
+
+Potential local candidates may include:
+
+../repotlas-references/GitNexus
+../repotlas-references/graphify
+../repotlas-references/codegraph
+
+but they are NOT automatically approved as benchmark datasets.
+
+They must qualify based on actual measured:
+
+- file count
+- source-file count
+- language distribution
+- source bytes
+
+If a reference repository qualifies, it may be used READ-ONLY.
+
+If no suitable local Java-dominant R-L repository exists, STOP the Java R-L portion and repore candidates inspected.
+
+If no suitable local JS/TS-dominant R-L repository exists, STOP the JS/TS R-L portion and report the candidates inspected.
+
+Do NOT download another repository.
+Do NOT access the internet to obtain one.
+Do NOT substitute an unsuitable repository merely to complete the gate.
+
+The benchmark must use reproducible local evidence.
+
+==================================================
+5. REFERENCE REPOSITORY SAFETY
+==================================================
+
+These are reference-only:
+
+../repotlas-references/GitNexus
+../repotlas-references/graphify
+../repotlas-references/codegraph
+
+Do NOT:
+
+- modify them
+- create generated files inside them
+- create indexes inside them
+- install dependencies into them
+- change their git state
+- commit
+- push
+
+All T007-generated artifacts must remain inside repo-atlas.
+
+==================================================
+6. RUNTIME UNDER TEST
+==================================================
+
+Test the current local TypeScript/Bun + SQLite architecture.
+
+Do NOT implement Rust.
+
+Rust remains the preferred future production direction only.
+
+Do NOT use:
+
+- Cloudflare Workers
+- Cloudflare Queues
+- D1
+- R2
+- Redis
+- Kafka
+- RabbitMQ
+- hosted graph databases
+- hosted vector databases
+- remote LLMs
+
+Use local filesystem + SQLite.
+
+==================================================
+7. EXECUTION ORDER
+==================================================
+
+Follow the existing T007 task order.
+
+First:
+
+T007-L01 etc.
+↓
+S-L1 harness-fidelity gate
+↓
+measurement phases
+↓
+S-L2 evidence/gate evaluation
+
+Before mass measurement:
+
+1. build the T007 harness
+2. validate the local-job-engine contract
+3. verify scratch storage isolation
+4. verify production RepoAtlas data is untouched
+5. record the reference environment
+6. inspect/select qualifying real repositories
+7. record the dataset inventory
+
+If S-L1 fails:
+
+STOP.
+
+Do not proceed to mass measurement.
+
+==================================================
+8. MEASUREMENT DIMENSIONS
+============================================
+
+Execute the approved dimensions:
+
+M-L0 environment + smoke
+M-L1 file-size bands
+M-L2 per-file pipeline
+M-L3 SQLite
+M-L4 jobs + failures
+M-L5 repository scale
+M-L6 incremental
+M-L7 cold start
+
+Measure raw:
+
+- wall-clock time
+- files/sec
+- symbols/sec
+- relationships/sec
+- resolutions/sec
+- CPU
+- peak RSS
+- average RSS
+- heap/external memory where available
+- SQLite throughput
+- DB size
+- job throughput
+- retry count
+- recovery time
+
+Use the statistical methodology already defined in the T007 plan.
+
+==================================================
+9. FILE-SIZE EXPERIMENT
+==================================================
+
+Run the approved bands:
+
+<=4 KiB
+16 KiB
+64 KiB
+256 KiB
+512 KiB
+1 MiB
+4 MiB
+10 MiB
+
+Do not assume 512 KiB passes.
+
+Produce evidence for:
+
+- recommended default
+- recommended hard ceiling
+- behavior above the ceiling
+
+==================================================
+10. REPOSITORY-SCALE EXPERIMENT
+==================================================
+
+Run:
+
+R-FILE
+R-S
+R-M = 100–1,000 fis
+R-L = 1,000–5,000 files
+
+R-M is the primary scale gate.
+
+R-L is additional scale evidence.
+
+Small fixtures cannot clear T007.
+
+==================================================
+11. DURABLE JOB / RECOVERY
+==================================================
+
+Test:
+
+- concurrency 1
+- concurrency 2
+- concurrency 4
+- concurrency 8
+
+Measure job overhead.
+
+Test:
+
+- retry
+- idempotency
+- failure containment
+- pause/resume where supported
+- cancellation where supported
+- kill/restart recovery
+
+For kill/restart:
+
+1. start analysis
+2. allow partial completion
+3. terminate the process
+4. restart the local engine
+5. recover incomplete jobs
+6. finish analysis
+7. compare final output with clean from-scratch execution
+
+Verify:
+
+- no loss
+- no duplication
+- deterministic final result
+- completed work remains persisted
+
+This is mandatory G2 evidence.
+
+==================================================
+12. INCREMENTAL
+==================================================
+
+Execute:
+
+INC-0 = full
+INC-1 = no change
+INC-2 = one-le change
+INC-3 = approximately 10% change
+
+Compare incremental results against from-scratch results for correctness.
+
+Measure both cost and graph/result differences.
+
+==================================================
+13. RAW EVIDENCE
+==================================================
+
+Record raw measurements BEFORE evaluating gates.
+
+Do not tune the benchmark to pass the thresholds.
+
+Always distinguish:
+
+MEASURED RESULT
+
+from:
+
+ENGINEERING THRESHOLD
+
+from:
+
+GATE RESULT
+
+==================================================
+14. G1–G9 EVALUATION
+==================================================
+
+Evaluate independently:
+
+G1 Determinism
+G2 Durability
+G3 Failure semantics
+G4 Throughput
+G5 Memory
+G6 Persistence/job overhead
+G7 No-change efficiency
+G8 Incremental efficiency
+G9 File-size evidence
+
+G1/G2/G3 are mandatory.
+
+Missing evidence is not PASS.
+
+Do not convert missing evidence into CONDITIONAL.
+
+If a mandatory gate fails:
+
+T007 = NOT FEASIBLE AS DESIGNED
+
+Do not change thresholds to manufacture a pass.
+
+================================================
+15. EVIDENCE ARTIFACTS
+==================================================
+
+Create the approved evidence artifacts inside repo-atlas, including:
+
+t007-local-feasibility-results.md
+
+and:
+
+evidence/t007-local/*.json
+
+Record:
+
+- environment
+- dataset inventory
+- repository commit SHAs
+- file counts
+- language mix
+- file-size distribution
+- worker configuration
+- timing
+- CPU
+- memory
+- SQLite
+- jobs
+- failures
+- retries
+- incremental results
+- cold-start results
+- gate evaluations
+- conclusions
+- limitations
+
+==================================================
+16. SPEC-KIT DISCIPLINE
+==================================================
+
+The architecture and acceptance criteria are frozen for this execution.
+
+Do NOT:
+
+- redesign the architecture
+- change requirements
+- change thresholds
+- modify T008+
+- implement the Rust engine
+- implement production graphification
+- modify production source code outside the approved T007 harness/evidence work
+
+If the execution discovers a genuine contradiction:
+
+STOP the affected measurement.
+
+Document:
+
+- what contradicted the protocol
+- evidence
+- affected gate
+- proposed resolution
+
+Do not silently edit the specification.
+
+==================================================
+17. SOURCE CONTROL
+==================================================
+
+Do not commit.
+
+Do not push.
+
+Do not modify unrelated working-tree files.
+
+At the end run:
+
+git status --short
+
+Clearly distinguish:
+
+- pre-existing documentation/specification changes
+- T007-generated artifacts
+- unexpected changes
+
+==================================================
+18. T007 CLEARANCE
+==================================================
+
+Do NOT automatically authorize T008+.
+
+After the measurements, produce the complete evidence and gate evaluation.
+
+T007 remains pending owner review until the results are reviewed and the formal gate/amendment decision is approved.
+
+==================================================
+19. FINAL REPORT
+==================================================
+
+Report:
+
+1. Execution status
+2. Reference environment
+3. Dataset inventory
+4. Java R-L candidate and qualification evidence
+5. JS/TS R-L candidate and qualification evidence
+6. Synthetic results
+7. File-size results
+8. AST/symbol results
+9. Relationship results
+10. Resolution results
+11. SQLite results
+12. Durable-job results
+13. CPU results
+14. Memory results
+15. Cold-start results
+16. Incremental results
+17. Failure/recovery results
+18. G1–G9 gate table
+19. Raw evidence locations
+20. Protocol deviations
+21. Limitations
+22. File-size recommendation
+23. T007 gate result
+24. Whether T008+ remains blocked
+25. Git status
+26. Confirmation that no production implementation was performed outside the approved T007 harness/evidence work
+
+STOP after the execution report.
+
+Do not commit.
+Do not push.
+Wait for owner review.
+
+## 2026-09-25 — Continue T007-LOCAL from current workspace state; wasm.ts architecture check; stop after S-L1 + first benchmark (verbatim)
+
+Continue T007 Local Relationship Engine Feasibility execution from the exact current workspace state.
+
+The previous Bash execution was interrupted while creating/validating:
+  scripts/t007-local/lib/db.ts
+
+Do NOT restart T007, regenerate existing files blindly, or repeat completed work.
+
+First inspect the current T007 workspace:
+  - scripts/t007-local/
+  - scripts/t007-local/lib/
+  - .cache/t007-local/
+  - any T007 evidence/results already created
+
+Determine exactly which Phase A / S-L1 steps are already complete and which remain incomplete.
+
+IMPORTANT ARCHITECTURE CHECK BEFORE CONTINUING:
+
+I noticed the harness created:
+  scripts/t007-local/lib/wasm.ts
+
+Before proceeding, inspect that implementation and explain in the T007 execution log/report:
+
+1. Why wasm.ts exists.
+2. Whether it invokes the existing RepoAtlas symbol/AST pipeline or introduces a new parser/runtime.
+3. Whether WASM is only an adapter around an existing implementation, or whether the benchmark itself is becoming WASM-dependent.
+4. Whether this conflicts with the approved local-first T007 protocol.
+5. Do NOT silently change the protocol or architecture to accommodate it.
+
+The approved production direction is:
+  - local-first
+  - local TypeScript/Bun runtime for this T007
+  - SQLite
+  - local durable jobs
+  - native/local Tree-sitter preferred
+  - no cloud services
+  - no Rust implementation required for this T007
+  - no remote graph/vector/LLM service
+  - reference repositories remain read-only
+
+If wasm.ts is simply required by the EXISTING RepoAtlas implementation under test, document that distinction and continue.
+If the new harness is introducing an independent WASM implementation merely for convenience, stop and report the issue before changing it.
+
+Then continue the approved execution protocol:
+
+1. Complete/validate Phase A harness and datasets.
+2. Complete S-L1 harness fidelity gate BEFORE any mass measurement.
+3. Verify:
+   - deterministic outputs
+   - correct phase attribution
+   - SQLite persistence correctness
+   - durable-job semantics match local-job-engine.md
+   - failure/retry/idempotency behavior is represented correctly
+   - metrics capture the required dimensions
+4. Record the S-L1 result explicitly as PASS or FAIL.
+5. If S-L1 PASS, proceed to the first controlled T007 benchmark only.
+6. Do not jump directly into the entire G1-G9 measurement suite without validating S-L1.
+7. Do not modify the approved thresholds or dataset protocol.
+8. Do not commit or push anything.
+9. Do not begin T008 or any downstream feature.
+10. Do not tick roadmap/spec task checkboxes unless explicitly authorized.
+
+Approved gates remain unchanged:
+
+G1  deterministic graph output, including resumed execution
+G2  durable recovery / zero-loss / zero-duplication
+G3  failure containment and retry semantics
+G4  R-M <= 5 minutes and R-L <= 30 minutes at primary concurrency 2
+G5  peak memory <= 1.5 GiB with acceptable/flat slope
+G6  persistence overhead <= 30%, durable-job overhead <= 15%
+G7  no-change rerun >= 95% cheaper than full processing
+G8  single-file incremental update <= 10% of full processing
+G9  file-size recommendation must be evidence-derived
+
+Primary concurrency = 2.
+Concurrency ladder = 1 / 2 / 4 / 8.
+
+Use:
+  - repo-atlas as the approved real repository
+  - actual locally available qualifying R-L Java-dominant repository
+  - actual locally available qualifying R-L JS/TS-dominant repository
+
+Do not download repositories merely to satisfy the dataset requirement.
+Do not assume a repository qualifies from one file-count command; complete the qualification criteria from the T007 protocol.
+
+For now, stop after S-L1 plus the first controlled benchmark checkpoint and report:
+
+A. Current workspace state
+B. Files created/modified
+C. Existing work successfully preserved
+D. WASM/native parser assessment
+E. Dataset qualification status
+F. S-L1 checks and results
+G. First benchmark executed, if S-L1 passes
+H. Metrics captured
+I. Any protocol deviations/blockers
+J. Exact next T007 execution step
+
+Do not make architectural decisions implicitly. If something conflicts with the approved T007 protocol, stop and surface it.
+
+## 2026-09-26 — Resume T007-LOCAL after intentional interruption; checkpoint review (verbatim)
+
+Resume T007 Local Relationship Engine Feasibility from the existing workspace state.
+
+This is a continuation after an intentional interruption. Do NOT restart T007 and do NOT discard existing measurements or evidence.
+
+First inspect the existing T007 artifacts and execution log:
+
+- specs/004-engineering-relationship-graph/t007-local-execution-log.md
+- specs/004-engineering-relationship-graph/evidence/t007-local/
+- scripts/t007-local/
+- .cache/t007-local/
+
+Reconstruct exactly what has already been completed.
+
+Known checkpoint before interruption:
+- S-L1 PASS (35/35)
+- S-L1 was repeated successfully across multiple runs
+- durable restart/crash probing produced successful recovery evidence
+- repo-atlas R-M measurement had started
+- concurrency measurements had started
+- no commit/push was authorized
+
+Do not rerun completed work unless required to validate an evidence artifact.
+
+Before continuing mass measurements, perform a concise checkpoint review using these specialist skills where useful:
+
+1. Performance Benchmarker — validate the measurement methodology and whether the collected R-M/concurrency measurements are valid.
+2. LSP / Index Engineer — validate that the measured pipeline actually exercises the intended RepoAtlas AST/symbol/index pipeline.
+3. Database Optimizer — review SQLite measurement methodology and persistence-overhead accounting.
+4. Reality Checker — challenge any premature G1-G9 conclusions or protocol deviations.
+
+These reviews must not change the approved T007 protocol, thresholds, dataset rules, or architecture.
+
+Then continue only with the next unfinished T007 measurement phase.
+
+Important:
+- Do not modify thresholds.
+- Do not silently change datasets.
+- Do not download repositories.
+- Do not modify reference repositories.
+- Do not introduce cloud services.
+- Do not begin T008.
+- Do not commit or push.
+- Do not tick SpecKit task checkboxes.
+- Preserve all existing evidence.
+- If existing measurements are valid, use them rather than rerunning them.
+- If an evidence artifact ilete or invalid, identify exactly why before rerunning anything.
+
+At the next natural checkpoint, report:
+A. completed T007 phases
+B. valid evidence already collected
+C. invalid/incomplete evidence
+D. next measurement
+E. any protocol deviation requiring my decision
+
+Then stop rather than continuing into an unreviewed mass run.
+
+## 2026-09-26 — T007-LOCAL resume from checkpoint; decisions D7/datasets/Java/native/environment/contract gaps; run M-L4 (verbatim)
+
+T007 LOCAL FEASIBILITY — RESUME FROM CHECKPOINT
+
+The T007 resume checkpoint has been reviewed and the following decisions are now authorized.
+
+DO NOT restart completed work.
+DO NOT discard existing evidence.
+DO NOT commit or push.
+DO NOT tick SpecKit task checkboxes.
+DO NOT begin T008.
+DO NOT change T007 thresholds, acceptance criteria, dataset definitions, or execution order.
+
+Authoritative checkpoint:
+- S-L1 PASS 35/35 on the final harness, revalidated 6x.
+- Phase A complete.
+- Authoritative R-M rev-B evidence exists for repo-atlas at c=1 and c=2.
+- Those results are measured evidence only; no gate has been evaluated.
+- Existing evidence and execution log must be preserved.
+
+DECISIONS
+
+D7 — Bun/WASM worker initialization:
+- ACCEPT the serialized worker initialization workaround for T007 measurements.
+- This is a harness/runtime-stability workaround, not a change to T007 thresholds or protocol.
+- Preserve D7 as an explicit runtime finding.
+- Do NOT erase or hide the observed concurrent-initializa SIGTRAP behavior.
+- Continue excluding initialization from engine/work wall exactly as the current protocol defines.
+- Keep initialization included in process-wall measurements.
+- Final reporting must distinguish:
+    a) concurrent WASM initialization instability
+    b) stabilized measurement mode using serialized initialization.
+
+Dataset interpretation:
+- CONFIRM that the T007 R-L size qualification uses Tier-1 files.
+- GitNexus qualifies as R-L with 3,174 Tier-1 files.
+- Report its 5,666 tracked files separately as contextual repository size.
+- Do not reinterpret R-L as total tracked-file count.
+
+Java R-L:
+- ACCEPT local iata-one-order as the Java-dominant R-L dataset.
+- Explicitly disclose that 1,302 of its 1,304 Java files are JAXB-generated model classes.
+- Treat this as a dataset limitation affecting call-resolution representativeness.
+- Do not silently claim it represents a typical Java application.
+- Do not download another repository merely to replace it.
+- A supplemental Java dataset may be considered only if an already-local qualifying candidate exists and can be added without disrupting the current protocol.
+
+Native Tree-sitter:
+- DO NOT add a native parser dependency during this T007 execution.
+- Current T007 runtime remains the existing local Bun + WASM Tree-sitter pipeline.
+- Record native Tree-sitter as a possible separate follow-up experiment, not part of this gate.
+- Do not modify production parser architecture for T007.
+
+Environment:
+- AC power is the reference state for subsequent gate-quality runs.
+- Where practical, quiesce unrelated CPU-intensive applications before final gate runs.
+- Record environment/load information.
+- Do not invent a new load threshold or change any T007 gate.
+
+Contract gaps:
+- DO NOT modify local-job-engine.md during T007.
+- Preserve the identified gaps as findings:
+    PAUSED semantics,
+    CANCELLED state,
+    lease/retry defaults,
+    recovery latency,
+    symbol/job atomicity.
+- These become post-T007 architecture/spec amendment work.
+- Do not silently redefine job semantics to make a gate pass.
+
+Repository disclosure:
+- Preserve the disclosure that git diff --quiet was run once in iata-one-order.
+- No content or HEAD change was reported.
+- Reference repositories remain read-only and untouched.
+
+NEXT EXECUTION PHASE: M-L4
+
+Proceed with M-L4 on repo-atlas R-M first.
+
+M-L4 must cover:
+
+1. Inline baseline against the engine at concurrency 1.
+   - Establish the baseline required for G6 job-overhead measurement.
+   - Ensure the baseline is semantically equivalent to the durable-job path except for job-engine overhead.
+
+2. Concurrency ladder:
+   - c=1
+   - c=2
+   - c=4
+   - c=8
+   - Use the approved primary concurrency c=2.
+   - Capture sufficient repeated runs according to the existing T007 protocol.
+   - Separate cold and warm conditions where the protocol requires it.
+   - Do not infer scalability from one run.
+
+3. Failure suite:
+   - F-1 kill -9 / restart
+   - F-2 per-file containment
+   - F-3 bounded retry/backoff
+   - F-4 idempotent re-execution
+   - F-5 pause/resume + cancel
+   - F-6 oversized-file handling
+   - Ensure F-1 produces the evidence needed for the mandatory G1/G2/G3 evaluation later.
+   - Do not label the existing S-L1 crash probe as G2 evidence.
+
+4. Measure and preserve:
+   - engine wall
+   - process wall
+   - CPU
+   - peak RSS
+   - throughput
+   - job count/state transitions
+   - retries
+   - failures
+   - duplicate/lost work
+   - final graph hash
+   - invariant violations
+   - relevant SQLite timings
+   - recovery latency
+
+SPECIALIST REVIEWS
+
+Use these skills selectively during M-L4:
+
+A. Performance Benchmarker
+   Review the M-L4 measurement methodology and ensure the concurrency,
+   baseline, repetition, and metric calculations are statistically and
+   experimentally sound.
+
+B. Database Optimizer
+   Review SQLite behavior relevant to M-L4:
+   - transactions
+   - WAL behavior
+   - indexes
+   - lookup/write contention
+   - persistence overhead
+   - whether measurements isolate DB overhead correctly.
+
+C. LSP / Index Engineer
+   Verify that the measured work still exercises the intended production
+   symbol/AST/index pipeline and that concurrency/failure behavior is not
+   accidentally measuring only the benchmark harness.
+
+D. Knowledge Graph Engineer
+   Review the graph correctness checks used in F-1/F-4 and deterministic
+   comparison:
+   - canonical graph identity
+   - relationship counts
+   - evidence states
+   - duplicate prevention
+   - final graph equivalence.
+
+E. Reality Checker
+   Use after M-L4 evidence is collected, BEFORE any G1/G2/G3 conclusion.
+   Challenge:
+   - benchmark contamination
+   - incorrect baseline equivalence
+   - hidden retries
+   - false determinism
+   - incomplete crash recovery
+   - unsupported scalability claims
+   - evidence that exceeds the protocol.
+
+Skill reviews are advisory evidence checks. They MUST NOT modify the approved
+T007 protocol or thresholds.
+
+IMPORTANT:
+If a failure occurs, preserve the raw evidence and classify it.
+Do not automatically fix the failure and rerun until the original failure
+has been recorded.
+
+If the current implementation cannot faithfully execute F-5 pause/resume
+and cancel because the contract lacks PAUSED/CANCELLED semantics, do NOT
+invent semantics. Stop that specific test, record the contract limitation,
+and continue with the remaining M-L4 tests where semantics are well-defined.
+
+At the end of this execution checkpoint, STOP and report:
+
+A. M-L4 completed tests
+B. Raw evidence artifacts created
+C. Inline baseline results
+D. c=1/2/4/8 results
+E. F-1 through F-6 results
+F. Any failures and their exact reproduction conditions
+G. Performance Benchmarker findings
+H. Database Optimizer findings
+I. LSP/Index findings
+J. Knowledge Graph findings
+K. Reality Checker findings
+L. Whether G1/G2/G3 have enough evidence for later evaluation
+M. Remaining T007 phases
+N. Any decision that requires owner authorization
+
+Do NOT evaluate the final T007 G1-G9 verdict yet.
+
+
+---
+
+## 2026-09-26 — T007-LOCAL M-L1/M-L2 checkpoint / recording only, fresh session (verbatim)
+
+We are continuing RepoAtlas Feature 004 T007 — Local Relationship Engine Feasibility from a fresh session.
+
+This is a CHECKPOINT/RECORDING phase first. Do not rerun benchmarks yet.
+
+Repository:
+- /Users/imdadareeph/Documents/dev/git/fib1618agent/repo-atlas
+- branch: feat/atlas-marble-interaction
+- expected HEAD: 430e170
+
+T007 execution state already established:
+
+COMPLETED:
+- Phase A environment/setup
+- S-L1: PASS 35/35
+- M-L4 job/failure feasibility measurement
+- M-L5 R-M scale measurement
+- M-L1/M-L2 B1–B6 plus real minified fixture completed
+
+F-4e:
+- Configured 1.5 s lease on R-M: 0 reclaims; 5/5 clean graph matches.
+- 768 KiB TS fixture: longest unit 13.3 s, exceeding the configured lease; duplicate execution/reclaim occurred in all 3 runs.
+- Final graph matched single-worker reference 3/3 at the configured 1.5 s lease.
+- Silent divergence occurred only in the artificial 2 ms stress case, 1/3 runs.
+- Treat this as a known lease/fencing design risk and characterization result, NOT a production sign during T007.
+
+M-L1/M-L2 file-band evidence:
+B1–B6 completed.
+Observed parsed-unit medians:
+TS ordinary: 4 KiB 3 ms, 64 KiB 144 ms, 256 KiB 1.7 s, 512 KiB 6.2 s, 1 MiB 23.8 s
+TS dense: 4 KiB 4 ms, 64 KiB 72 ms, 256 KiB 295 ms, 512 KiB 595 ms, 1 MiB 1.2 s
+Java ordinary: 4 KiB 2 ms, 64 KiB 122 ms, 256 KiB 1.5 s, 512 KiB 5.2 s, 1 MiB 20.1 s
+Java dense: 4 KiB 4 ms, 64 KiB 103 ms, 256 KiB 819 ms, 512 KiB 2.7 s, 1 MiB 9.2 s
+Real minified fixture: approximately 620 KiB, 729 ms/unit.
+
+B7/B8:
+- B7-java-ordinary hit the pre-registered 300 s stall guard; total wall 436.8 s.
+- B8-java-dense hit the pre-registered stall guard; total wall 459.6 s.
+- B7-java-dense completed in approximately 140 s per parsed unit, only 3 iterations, therefore insufficient-N and no p95.
+- B8-java-ordinary was skipped after B7-java-ordinary hit the guard.
+- Additional B7/B8 JS/TS fixtures produced partial/stall evidence before shutdown.
+- B7-typescript-dense has only .partial/.phase because the process was terminated during controlled utdown; there is no final .json for that fixture.
+- The B7/B8 summary file was never written because the orchestrator was intentionally shut down.
+- All salvaged evidence remains authoritative as partial/stall evidence; do not fabricate a summary file.
+
+Evidence root:
+specs/004-engineering-relationship-graph/evidence/t007-local/
+
+Relevant evidence:
+- m-l12/m-l12-bands-B1-B6.json
+- m-l12 per-fixture .json/.partial/.phase files
+- m-l12/logs/bands78.log
+- m-l12/logs/bands16.log
+- m-l12/logs/probes.log
+- m-l12-resolver-probes.json
+- m-l4-f4e-control-lease1500.json
+
+Shutdown:
+- B7/B8 orchestrator pid 29495 is stopped.
+- Its surviving child was also terminated.
+- No T007 benchmark process remains.
+- M-L3 was NOT started.
+
+IMPORTANT REFERENCE-REPOSITORY ISOLATION ISSUE:
+The sibling read-only reference repositories:
+../repotlas-references/GitNexus
+../repotlas-references/graphify
+../repotlas-references/codegraph
+show unexpected external working-tree/build/index changes.
+
+Observed:
+- GitNexus: .gitnexus index, build/dist outputs, node_modules changes, and untracked GITNEXUS_TECHNICAL_IMPLEMENTATION.md.
+- Graphify: newer .venv/graphify.
+- CodeGraph: newer ui/dist.
+- All three .git/index mtimes changed but sizes stayed unchanged.
+- HEADs remain unchanged.
+- These changes were NOT made by the T007 execution.
+- Do NOT clean, reset, checkout, delete, install, build, index, or otherwise modify any of these reference repositories.
+- Do NOT attribute the external changes to RepoAtlas.
+- Record them only as an external/unattributed workspace-isolation observation.
+- The T007 datasets were already extracted using git archive at pinned commits before these observations, so preserve that provenance.
+
+FIRST TASK — DOCUMENTATION-ONLY CHECKPOINT:
+Before doing anything else, inspect the existing T007 execution log, report, prompt log, plan and tasks files and update ONLY the T007 documentation needed to accurately record the completed M-L1/M-L2 execution and shutdown.
+
+Include:
+1. Exact B1–B6 results.
+2. Real minified result.
+3. B completed, insufficient-N, stall, partial, skipped and interrupted states exactly as evidenced.
+4. The 300 s stall-guard observations.
+5. Evidence file paths.
+6. The fact that B7/B8 summary was not generated.
+7. The controlled shutdown and surviving-child termination.
+8. The external reference-repository workspace-change observation.
+9. Explicitly state that reference repositories remain untouched by T007 and must not be cleaned.
+10. Explicitly state that M-L3 has not started.
+11. Preserve all protocol, thresholds, datasets and pre-registered conditions unchanged.
+
+Do NOT:
+- rerun any benchmark
+- start M-L3
+- evaluate G1–G9 yet
+- alter thresholds
+- alter datasets
+- alter parser behavior
+- alter lease settings
+- alter production code
+- modify reference repositories
+- tick task checkboxes
+- commit
+- push
+- create fabricated B7/B8 summary data
+
+After the documentation-only update, STOP and report:
+- exact files changed
+- exact evidence files referenced
+- confirmation that no benchmark process is running
+- cfirmation that no reference repository was modified by you
+- current git status
+- remaining T007 work
+
+This is a documentation checkpoint only. Do not proceed to the next measurement.
+
+
+---
+
+## 2026-09-26 — T007-LOCAL checkpoint accepted; execute M-L3 SQLite characterization only (verbatim)
+
+T007 CHECKPOINT ACCEPTED.
+
+Accept the M-L1/M-L2 B7/B8 evidence exactly as documented. Do NOT run a separately scoped B7/B8 follow-up.
+
+The observed 300 s stalls, insufficient-N cells, interrupted fixture, NOT_ATTEMPTED cells and UNKNOWN missing cells are evidence states. Preserve them exactly. Do not fill gaps by inference and do not fabricate a B7/B8 summary.
+
+Do not modify the reference repositories.
+
+Do not change:
+- T007 protocol
+- thresholds
+- datasets
+- parser behavior
+- lease settings
+- production source
+- existing M-L1/M-L2 evidence
+
+Do not tick any task checkbox.
+Do not commit.
+Do not push.
+
+The T007 task checklist may remain unchecked. Do not change its authorization wording unless a separate documentation amendment is explicitly required.
+
+NEXT: execute M-L3 — SQLite characterization only.
+
+Before execution:
+1. Read the governing T007 plan and the existing M-L3 task/contract sections.
+2. Read the existing T007 execution log/current handoff so the already-established environment and protoc are reused.
+3. Do not redesign the SQLite schema or job model.
+4. Identify exactly which M-L3 measurements are pre-registered and which evidence artifacts they must produce.
+5. State the M-L3 measurement matrix briefly before running it.
+
+M-L3 must remain limited to the pre-registered SQLite characterization:
+- batch persistence throughput
+- relationship/symbol persistence behavior
+- resolution lookup latency
+- bounded graph traversal behavior
+- WAL vs rollback-journal characterization, if explicitly pre-registered
+- database size/persistence overhead
+- relevant SQLite contention/locking measurements already specified by the T007 plan
+
+Use the existing T007 measurement protocol:
+- local wall-clock primary
+- repeated measurements rather than single samples
+- median/p95/max where the protocol requires them
+- preserve warm/cold distinction where applicable
+- record environment and configuration
+- no silent threshold changes
+
+Important:
+- Do NOT start M-L6.
+- Do NOT start M-L7.
+- Do NOT start R-S.
+- Do NOT start R-L.
+- Do NOT evaluate G1–G9.
+- Do NOT perform production optimization.
+- Do NOT redesign SQLite based on observations.
+- Do NOT modify the reference repositories.
+
+If an M-L3 precondition is missing or the governing plan is ambiguous, STOP and report the ambiguity instead of inventing a measurement.
+
+After M-L3 completes, STOP and report:
+1. exact measurements performed
+2. exact configuration
+3. raw/evidence artifact paths
+4. median/p95/max results where applicable
+5. any insufficient-N or invalid cells
+6. any unexpected behavior
+7. exact files changed
+8. confirmation that M-L6/M-L7/R-S/R-L/G1–G9 were not started
+9. current git status
+10. remaining T007 work
+
+Do not proceed to the next T007 phase after the M-L3 report.
+
+
+---
+
+## 2026-09-26 — T007-LOCAL M-L3 accepted; execute M-L7 cold-start characterization only (verbatim)
+
+T007 CHECKPOINT ACCEPTED.
+
+M-L3 is complete and recorded. Accept the M-L3 evidence as-is. Do not rerun or expand M-L3.
+
+Important M-L3 interpretation to preserve:
+- 1× is the real repo-atlas R-M graph and reproduced the reference graph hash.
+- 4×/16×/64× are synthetic row multiplications and MUST NOT be presented as real R-S/R-L measurements.
+- WAL/DELETE comparison was non-interleaved; any apparent read advantage is UNVERIFIED.
+- synchronous=FULL was not run because it was not pre-registered.
+- reader/writer contention was not run because write-lock contention was already characterized in M-L4.
+- 2-hop traversal was not run because it was not pre-registered.
+- No M-L3 cell was insufficient-N or invalid.
+- Preserve the existing 500-sample read protocol, 3 repetitions, cold connection definition, and all recorded caveats.
+
+Do NOT:
+- rerun M-L3
+- change SQLite settings
+- optimize the SQLite implementation
+- redesign schema/indexes
+- change T007 thresholds
+- change datasets
+- modify production sourceodify reference repositories
+- tick task checkboxes
+- commit or push
+- evaluate G1–G9 yet
+
+NEXT: execute M-L7 — cold-start characterization only.
+
+Before execution:
+1. Read the governing T007 plan §6 and the exact M-L7 task/measurement definition.
+2. Read the existing T007 execution log/current handoff.
+3. State the exact pre-registered M-L7 measurement matrix before running anything.
+4. Do not invent additional cold-start experiments.
+5. Keep M-L7 isolated from R-S/R-L, M-L6 and gate evaluation.
+
+For M-L7:
+- Follow the pre-registered cold-start protocol exactly.
+- Distinguish connection/process cold from any stronger OS-cache cold definition.
+- If the plan requires process restart or fresh runtime initialization, measure that explicitly.
+- Record parser/WASM initialization separately if the protocol calls for phase attribution.
+- Record local wall-clock primary.
+- Use repeated runs and median/p95/max where required.
+- Preserve environment details.
+- Do not silently change worker count, parser implemenn, database settings, file bands, thresholds, or datasets.
+
+If a precondition cannot be satisfied, STOP and report the limitation rather than substituting a different experiment.
+
+After M-L7 completes:
+STOP.
+
+Report:
+1. exact M-L7 measurements performed
+2. exact configuration
+3. cold/warm definitions actually used
+4. median/p95/max results where required
+5. phase attribution where available
+6. any insufficient-N or invalid cells
+7. any caveats or protocol limitations
+8. evidence artifact paths
+9. exact files changed
+10. confirmation that R-S, R-L, M-L6 and G1–G9 were NOT started
+11. current git status
+12. remaining T007 work
+
+Do not proceed to R-S, R-L, M-L6 or gate evaluation after the M-L7 report.
+
+---
+
+## T007-LOCAL continuation — R-S and R-L measurements
+
+**Timestamp:** 2026-09-27 18:32 +04:00 (session time)
+
+Continue T007-LOCAL from the current checkpoint.
+
+First read the current T007 execution log, PROGRESS/CURRENT/ROADMAP, T007 plan/tasks, and the latest M-L1/M-L2/M-L3/M-L4/M-L5/M-L7 evidence before doing anything.
+
+Current state:
+- M-L1 COMPLETE
+- M-L2 COMPLETE
+- M-L3 COMPLETE and owner-accepted with its recorded caveats
+- M-L4 COMPLETE/characterized with open G3 findings preserved
+- M-L5 COMPLETE/characterized
+- M-L7 COMPLETE/characterized
+- R-S NOT STARTED
+- R-L NOT STARTED
+- M-L6 NOT STARTED
+- L13 NOT STARTED
+- L14 NOT STARTED
+- S-L2 NOT STARTED
+- G1–G9 NOT EVALUATED
+- No commit/push
+- Do not tick any task checkbox
+- Do not modify production code
+- Do not modify thresholds, datasets, parser/DB settings, worker count, or protocol unless an explicitly documented execution blocker requires it; if so, stop and report rather than silently changing it.
+
+Proceed with the next pre-registered T007 measurements: R-S and R-L.
+
+Requirements:
+
+1. Follow the existing T007 plan and registered protocol exactly.
+2Use the already-qualified datasets/repository snapshots and pinned commits. Do not silently substitute repositories or datasets.
+3. R-S must use the qualified repo-atlas small-repository dataset.
+4. R-L must use the qualified GitNexus large-repository dataset, preserving the existing qualification caveat that its raw file count exceeds 5000 while its Tier-1 analysis set qualifies under the registered interpretation.
+5. Preserve the iata-one-order representativeness caveat; do not substitute it for R-S/R-L unless the registered plan explicitly requires it.
+6. Use the production parser/extraction path exactly as the earlier T007 measurements did.
+7. Preserve the existing local-runtime characterization: Bun + local WASM Tree-sitter. Do not introduce native Rust Tree-sitter in this run.
+8. Keep the measurements local-first and use the existing measurement protocol:
+   - local wall-clock primary
+   - median/p95/max
+   - required repeated runs
+   - cold/warm separation where registered
+   - record CPU/RSS where already required
+   - record graph hash, symbol/relationship/candidate counts, failures, syntax errors and invariants
+   - preserve raw evidence for every run
+9. Do not evaluate G1–G9 yet. R-S/R-L are measurements, not gate verdicts.
+10. Do not start M-L6 in the same execution unless the existing plan explicitly makes it part of the R-S/R-L run. Keep the next measurement boundary clear.
+11. If a pre-registered measurement cannot be completed, record the exact reason and preserve partial evidence. Do not invent results or silently relax the protocol.
+12. Pay particular attention to the existing M-L1/M-L2 finding that ordinary large files can become extremely expensive and that resolver behavior showed approximately 4× growth per 2× input size. Do not reinterpret those observations; simply capture their effect at repository scale.
+13. At the end, produce a checkpoint report containing:
+   - exact datasets/commits
+   - environment
+   - run matrix
+   - raw run summary
+   - median/p95/max
+   - throughput
+   -k RSS
+   - CPU if measured
+   - symbol/relationship/candidate counts
+   - syntax/error counts
+   - graph hashes
+   - invariant results
+   - failures/retries/reclaims
+   - deviations from protocol
+   - evidence paths
+   - remaining T007 work
+   - explicit statement that G1–G9 remain NOT EVALUATED.
+
+Do not commit or push.
+
+After completing the measurement, stop and report. Do not proceed automatically to M-L6 or gate evaluation.
+
+---
+
+## T007-LOCAL M-L6 only
+
+**Timestamp:** 2026-09-27 18:41 +04:00 (session time)
+
+Proceed with T007-LOCAL M-L6 only.
+
+First read the current T007 execution log, PROGRESS/CURRENT/ROADMAP, T007 plan/tasks, and the completed M-L1 through M-L7 evidence.
+
+Current authoritative state:
+- M-L1 COMPLETE
+- M-L2 COMPLETE
+- M-L3 COMPLETE and owner-accepted with caveats preserved
+- M-L4 COMPLETE/characterized with open G3 findings preserved
+- M-L5 COMPLETE across R-S/R-M/R-L
+- M-L7 COMPLETE/characterized
+- M-L6 NOT STARTED
+- L13 NOT STARTED
+- L14 NOT STARTED
+- S-L2 NOT STARTED
+- G1–G9 NOT EVALUATED
+- No commit/push
+- No task checkboxes are to be ticked
+- No production-code changes
+- T008+ remain unauthorized
+
+Execute only the pre-registered M-L6 incremental/no-change measurement.
+
+Requirements:
+
+1. Follow the existing T007 M-L6 protocol exactly as specified in the plan. Do not invent a new incremental benchmark.
+2. Use the already-qualified repository snapshot/dataset and pinned commit required by the plan.
+3. Establish the registered full-analysis baseline first if required by the existing M6 method, then perform the no-change rerun and the registered incremental/change scenario.
+4. Measure the pre-registered quantities, including:
+   - full-run baseline
+   - no-change rerun cost
+   - incremental/change cost
+   - relevant file/symbol/relationship work
+   - persisted graph/result correctness
+   - graph hash consistency where applicable
+   - invariant checks
+   - retries/reclaims/failures
+5. Preserve the registered G7/G8 interpretation:
+   - G7 = no-change rerun ≥95% cheaper
+   - G8 = incremental run ≤10% of full run
+   Do NOT evaluate G7/G8 yet; report measurements only.
+6. Do not alter thresholds, datasets, parser settings, DB settings, worker count, or production code.
+7. Preserve all existing T007 findings and caveats. In particular, do not reinterpret the M-L1/M-L2 large-file observations or the M-L5 R-L results.
+8. If the registered M-L6 scenario cannot be completed exactly, stop that cell, preserve evidence, and document the deviation rather than silently modifying the protocol.
+9. Wrthe appropriate raw and summarized evidence under the existing T007 evidence structure.
+10. Update the execution log, PROGRESS/CURRENT/ROADMAP checkpoint entries, and prompt log as appropriate.
+11. Do NOT proceed to L13, L14, S-L2, or gate evaluation after M-L6.
+12. Do NOT commit or push.
+
+At the end, provide a checkpoint report with:
+- exact dataset/commit
+- method
+- baseline measurements
+- no-change measurements
+- incremental-change measurements
+- speedup/reduction calculations
+- graph/hash/invariant results
+- failures/retries/reclaims
+- protocol deviations
+- evidence paths
+- remaining T007 work
+- explicit statement that G1–G9 remain NOT EVALUATED.
+
+Stop after M-L6 and report.
+
+---
+
+## T007-LOCAL L13 only — evidence consolidation
+
+**Timestamp:** 2026-09-27 (session time, continuing the M-L6 checkpoint)
+
+Continue T007-LOCAL with L13 only: evidence consolidation.
+
+Read the complete T007 plan/tasks and all M-L1 through M-L7 evidence, including the latest M-L6 checkpoint and execution log §16.
+
+Authoritative state:
+- M-L1 COMPLETE/CHARACTERIZED
+- M-L2 COMPLETE/CHARACTERIZED
+- M-L3 COMPLETE/CHARACTERIZED
+- M-L4 COMPLETE/CHARACTERIZED
+- M-L5 COMPLETE/CHARACTERIZED across R-S/R-M/R-L
+- M-L6 COMPLETE/CHARACTERIZED
+- M-L7 COMPLETE/CHARACTERIZED
+- L13 NOT STARTED
+- L14 NOT STARTED
+- S-L2 NOT STARTED
+- G1–G9 NOT EVALUATED
+- No checkbox ticking
+- No production-code changes
+- No threshold/protocol/dataset/parser/DB/worker changes
+- No commit
+- No push
+- T008+ NOT AUTHORIZED
+
+Execute ONLY L13.
+
+Objective:
+Create the authoritative T007 evidence/results artifact that consolidates the completed measurements and preserves all caveats, deviations, and known mechanism gaps without changing them.
+
+Requirements:
+
+1. Reconcile M-L1, M-L2, M-L3, M-L4, M-L5, M-L6 and M-L7 into the registered T007 evidence structure.
+2. Preserve the distinction between:
+   - measured FACT
+   - characterization
+   - caveat/limitation
+   - protocol deviation
+   - known architecture/mechanism gap
+   - gate criterion
+   - gate verdict (which must remain NOT EVALUATED during L13).
+3. Include the complete R-S/R-M/R-L repository-scale results.
+4. Include the M-L6 result:
+   - INC-0 baseline
+   - INC-1 no-change short-circuit
+   - INC-2 1-file changed snapshot
+   - INC-3 24/239 changed snapshot
+   - 100% measured no-change reduction
+   - no cross-snapshot incremental reuse mechanism
+   - no unauthorized implementation of such a mechanism.
+5. Explicitly preserve the existing M-L6 deviation:
+   genuine incremental-vs-full comparison could not be exercised because no incremental-recompute path exists; changed-snapshot runs therefore measured the current full-reprocessing behavior.
+6. Preserve the comment-only edit caveat and explain why identical graph hashes do NOT demonstrate that the edits were ignored.
+7. Preserve the M-L4 open findings around G3, including symbols-stage redelivery divergence, reclaim/attempt semantics, and PAUSED/CANCELLED contract limitations.
+8. Preserve the M-L5 GitNexus R-L finding of 62% CALLS UNKNOWN as a measured characterization result, not a gate verdict.
+9. Preserve the iata-one-order JAXB representativeness limitation.
+10. Preserve the M-L7 process-cold/WASM/Bun limitations.
+11. Preserve all registered thresholds and gate definitions exactly. Do not evaluate them yet.
+12. Build a clear evidence index mapping every measurement requirement to its evidence file/path.
+13. Identify any evidence that is insufficient for L14 gate evaluation, but do not perform the gate evaluation itself.
+14. Produce the registered L13 artifact at the location specified by the T007 plan, likely:
+    specs/004-engineering-relationship-graph/evidence/t007-local/t007-local-feasibility-results.md
+    Use the actual registered path if the plan specifies a different one.
+15. Update only the appropriate execution/progress/checkpoint documentation required by L13.
+16. Do not modify production source, tests, schema, configuration, thresholds, or benchmark protocol.
+17. Do not commit or push.
+18. Do not start L14 or S-L2 after completing L13.
+
+At the end, report:
+- artifact created
+- measurements consolidated
+- evidence coverage
+- unresolved evidence gaps for L14
+- all known caveats/deviations
+- remaining work: L14 then S-L2
+- explicit statement: G1–G9 remain NOT EVALUATED.
+
+Stop after L13.
+
+---
+
+## T007-LOCAL L14 — Gate Evaluation
+
+**Timestamp:** 2026-09-27 (session time, continuing the L13 checkpoint)
+
+Proceed with T007-LOCAL L14 — Gate Evaluation.
+
+This is an evaluation-only phase. Do NOT implement fixes or modify production code.
+
+First read:
+1. T007 plan and registered LRF-01…16 requirements.
+2. specs/004-engineering-relationship-graph/t007-local-feasibility-results.md
+3. Full T007 execution log through §17.
+4. All referenced evidence needed for each G1–G9.
+5. Existing owner decisions already recorded for T007.
+
+Authoritative state:
+- M-L0 through M-L7 COMPLETE/CHARACTERIZED
+- L13 COMPLETE
+- L14 NOT STARTED
+- S-L2 NOT STARTED
+- G1–G9 NOT EVALUATED
+- No task checkbox ticking
+- No production-code changes
+- No threshold/protocol/dataset/parser/DB/worker changes
+- No commit
+- No push
+- T008+ NOT AUTHORIZED
+
+L14 objective:
+Evaluate G1–G9 strictly against the pre-registered plan §9 and the consolidated L13 evidence.
+
+Rules:
+
+1. Do NOT reinterpret, soften, strengthen, or silently repair any evidence.
+2. Do NOT invent missing evidence.
+3. Do NOT treat an incomplete measurement as a PASS merely because observed results look reasonable.
+4. Do NOT turn a characterization finding into a gate failure unless the registered gate explicitly makes it one.
+5. For every gate, cite the exact evidence supporting the determination.
+6. Explicitly distinguish:
+   - PASS
+   - CONDITIONAL
+   - FAIL
+   - INSUFFICIENT EVIDENCE
+   where the registered gate semantics permit/require the distinction.
+7. Preserve the mandatory gates G1/G2/G3 exactly as registered.
+8. Preserve the existing owner decisions:
+   - F-4 symbols-stage redelivery is a known F002/R6/D-R6-2 hazard; no production redesign during T007.
+   - F-4e targeted characterization only; no fencing implementation during T007.
+   - crash-reclaim attempt semantics remain an amendment candidate.
+   - G2 remains within the approved SIGKILL/restart scope; no FULL/power-loss/commit-targeted experiments.
+   - G6 keeps WAL+NORMAL; no sync=FULL experiment.
+   - unmodified production symbol path remains authoritative.
+9. Evaluate the M-L6 result exactly as measured:
+   - INC-1 no-change = 100% reduction.
+   - INC-2/INC-3 have no cross-snapshot incremental reuse and therefore do not demonstrate genuine change-scoped incremental recomputation.
+   - Do not manufacture an incremental-saving result.
+10. Evaluate G7/G8 according to the registered definitions, explicitly accounting for the mechanism gap and what the evidence can actually establish.
+11. Evaluate G9 using the actual B7/B8 evidence and the registered file-size evidence rules. Do not silently fill the six incomplete cells.
+12. Preserve the GitNexus 62% CALLS UNKNOWN result as characterization unless a registered gate explicitly makes it relevant.
+13. Preserve the iata-one-order JAXB limitation and the zero-candidate result.
+14. Preserve all M-L4 G3 open items and determine their effect on G3 strictly from the registered gate.
+15. Evaluate G4/G5 using the available repository-scale evidence and explicitly address the absence of R-L concurrency-4/8 measurements.
+16. Evaluate G6 using the available R-M inline baseline and explicitly address the absence of R-S/R-L inline baselines.
+17. Evaluate G1 using the adapted/degenerate graph-diff evidence exactly as documented. Decide whether it satisfies the registered G1 requirement; do not silently upgrade the evidence.
+18. Evaluate G2 using only the actual R-M failure/durability evidence and explicitly state its scope limitations.
+19. Evaluate G3 using the owner decisions and actual F-1…F-6 evidence; do not run additional failure tests.
+20. Do not run additional measurements unless the existing plan explicitly requires an evaluation-time calculation from already captured evidence.
+
+Then produce:
+
+A. A G1–G9 gate table:
+   - Gate
+   - Registered criterion
+   - Evidence
+   - Determination
+   - Reason
+   - Evidence limitation
+   - Required follow-up, if any
+
+B. Overall T007 feasibility conclusion according to the registered gate logic.
+
+C. Mandatory-gate summary:
+   - G1
+   - G2
+   - G3
+
+D. File-size recommendation:
+   - recommended default
+   - recommended ceiling
+   - evidence supporting it
+   - confidence/limitations
+   - explicitly distinguish measured evidence from engineering recommendation
+
+E. Draft research/spec amendment A7 as required by the plan.
+   Do not implement A7; only draft the amendment for S-L2 owner review.
+
+F. T007 follow-up register:
+   - mandatory before T008
+   - conditional/owner-accepted
+   - post-T007 engineering improvements
+   - evidence gaps that do NOT block the registered gate, if any
+
+G. Explicitly state:
+   - no production code changed
+   - no thresholds changed
+   - no benchmark rerun
+   - no checkbox ticked
+   - no commit/push
+   - S-L2 is still pending owner review
+   - T008+ remain unauthorized
+
+IMPORTANT:
+Do not proceed to S-L2 after completing L14.
+Do not commit or push.
+Stop after producing the L14 gate-evaluation report and wait for owner review.
+
+---
+
+## T007-LOCAL S-L2 owner review
+
+**Timestamp:** 2026-09-27 (session time, continuing the L14 checkpoint)
+
+We are now at T007 S-L2 owner review.
+
+STOP implementation. Do not modify src/, tests/, schema, config, thresholds, benchmark datasets, evidence JSON, research.md, or any reference repository.
+
+Do not run new benchmarks.
+
+Use these existing artifacts as the authoritative basis:
+
+1. specs/004-engineering-relationship-graph/t007-local-gate-evaluation.md
+2. specs/004-engineering-relationship-graph/research-amendment-A7-draft.md
+3. specs/004-engineering-relationship-graph/t007-local-feasibility-results.md
+4. specs/004-engineering-relationship-graph/t007-local-execution-log.md
+5. docs/claude_report/reports.md
+6. docs/ROADMAP.md
+7. docs/progress/PROGRESS.md
+8. docs/session_handoffs/CURRENT.md
+
+Perform ONLY the T007 S-L2 owner-review analysis.
+
+Objectives:
+
+A. Reconcile the L14 gate determinations exactly as registered:
+
+G1 PASS
+G2 PASS
+G3 CONDITIONAL
+G4 PASS
+G5 CONDITIONAL
+G6 FAIL
+G7 PASS
+G8 CONDITIONAL
+G9 FAIL
+
+B. Review research-amendment-A7-draft.md and classify every proposed amendment/decision into:
+
+1. ACCEPT — owner accepts the proposed direction
+2. REJECT — owner rejects the proposed direction
+3. DEFER — valid but intentionally postponed
+4. NEEDS-EVIDENCE — cannot be decided until additional evidence exists
+
+Do not invent decisions.
+
+C. For G3, explicitly review each open issue:
+- F-4 symbols-stage redelivery / symbol identity stability
+- F-4e artificial lease stress result
+- F-5 undefined CANCELLED state
+- PAUSED contract
+- lease defaults
+- retry defaults
+- crash-reclaim attempt semantics
+
+For each, state:
+- current evidence
+- current contract gap
+- proposed A7 amendment
+- owner decision required
+- whether it blocks T008+
+
+D. For G6, treat the 62–68% persistence share as the decisive measured result.
+
+Do NOT reinterpret or soften it.
+
+Evaluate the proposed persistence remediation direction in A7 and determine whether the correct owner decision is:
+- remediation required before T008,
+- conditional acceptance with explicit technical debt,
+- or another documented disposition.
+
+Do not design the implementation yet.
+
+E. For G8, explicitly acknowledge that INC-2/INC-3 currently cost approximately 92–93% of INC-0 and that the current mechanism does not provide meaningful incremental savings.
+
+Review whether the proposed change-scoped incremental mechanism should be:
+- accepted as a follow-up requirement,
+- deferred,
+- or treated as a T008 blocker.
+
+Do not implement it.
+
+F. For G9, review the incomplete B7/B8 evidence.
+
+Explicitly preserve the fact that:
+- 6/16 cells are missing/stalled/unusable
+- the 512 KiB B5 evidence itself is usable
+- the overall G9 gate is still FAIL
+
+Determine the owner decision:
+- complete missing evidence,
+- formally narrow/amend the criterion,
+- or defer the missing bands.
+
+Do not rerun the benchmark yet.
+
+G. Review the file-size recommendation:
+- default ≈ 64 KiB
+- ceiling ≈ 512 KiB
+
+Confirm that this is engineering synthesis, not a measured G9 pass.
+
+Explicitly identify that the current proposed 512 KiB default should not be silently retained as the default if the owner accepts the B3/B5 recommendation.
+
+H. Produce an explicit T007 S-L2 decision record containing:
+
+1. Gate outcome
+2. Owner decision for G3
+3. Owner decision for G5
+4. Owner decision for G6
+5. Owner decision for G8
+6. Owner decision for G9
+7. File-size default decision
+8. File-size ceiling decision
+9. Which A7 amendments are accepted/rejected/deferred/needs-evidence
+10. Exact conditions that must be satisfied before T008
+11. Whether T008 remains blocked
+12. Whether any SpecKit amendment/specification work is required before implementation
+
+I. Do not change task checkboxes.
+
+J. Do not commit or push.
+
+K. Do not claim T008 is authorized.
+
+L. If the owner decisions require implementation, do NOT implement them in this pass. Instead produce the exact SpecKit follow-up work required:
+ANALYSE → RESEARCH → SPECIFY → PLAN → TASKS → CHECKLIST → AUTHORIZATION
+
+At the end, produce:
+
+## T007 S-L2 OWNER REVIEW
+## DECISIONS
+## ACCEPTED A7 ITEMS
+## REJECTED A7 ITEMS
+## DEFERRED A7 ITEMS
+## NEEDS-EVIDENCE ITEMS
+## T008 BLOCKED / SPECKIT FOLLOW-UP
+## FILES CHANGED
+## COMMIT/PUSH STATUS
+
+Stop after the owner-review record.
+
+---
+
+## T007 remediation SpecKit planning cycle (K.1/K.2/K.3)
+
+**Timestamp:** 2026-09-27 (session time, continuing the S-L2 owner-review checkpoint)
+
+We have completed T007 S-L2 owner review.
+
+The owner ratifies the recommended dispositions from:
+- specs/004-engineering-relationship-graph/t007-s-l2-owner-review.md
+- specs/004-engineering-relationship-graph/t007-local-gate-evaluation.md
+
+IMPORTANT:
+This is NOT T008 authorization.
+Do NOT implement production changes yet.
+Do NOT run benchmarks yet.
+Do NOT tick any task checkbox.
+Do NOT commit or push.
+
+We are now starting the next SpecKit cycle for the T007 remediation work.
+
+The approved working direction is:
+
+G3:
+- Remediation required before T008.
+- Symbols-stage identity stability must be addressed.
+- Crash-reclaim attempts semantics must be addressed.
+- CANCELLED state contract amendment accepted.
+- Lease/retry/backoff defaults must be explicitly named in the contract.
+- PAUSED representation remains a design decision requiring SPECIFY.
+- F-4e lease fencing implementation remains deferred; document the interim operating constraint.
+- G3 must ultimately become PASS, unless the owner explicitly issues a documented waiver naming the residual risk.
+
+G5:
+- Remains CONDITIONAL and is NOT a T008 blocker.
+- Peak RSS passes.
+- RSS/heap profiling remains a non-blocking follow-up.
+- Do not change the G5 threshold.
+
+G6:
+- Remediation REQUIRED before T008.
+- Treat 62–68% persistence share across R-S/R-M/GitNexus/iata-one-order as the decisive finding.
+- Do not soften this finding.
+- Accepted remediation direction: persistence batching.
+- Batching sufficiency is currently NEEDS-EVIDENCE.
+- No implementation yet.
+- No benchmark yet.
+- The existing registered G6 criterion remains authoritative unless a later owner-approved amendment explicitly changes it.
+
+G8:
+- Accepted as a tracked follow-up.
+- NOT a T008 blocker.
+- Do not implement K.4 in this cycle.
+- Preserve the measured finding that INC-2/INC-3 cost approximately 92–93% of INC-0.
+
+G9:
+- Current gate remains FAIL.
+- Owner direction is to formally narrow the criterion to the adopted ceiling region.
+- Proposed file-size recommendation:
+  - default = 64 KiB ceiling = 512 KiB
+- Do NOT silently change the gate status.
+- Do NOT delete or alter existing evidence.
+- Do NOT rerun B7/B8 yet.
+- The criterion amendment must be explicitly specified and approved before it can affect gate evaluation.
+- Update ADR-001 / D-ARCH-6 and the relevant T007 plan/spec wording only during the appropriate SpecKit execution phase, not now.
+
+We need to execute the SpecKit process in strict order.
+
+==================================================
+PHASE 1 — ANALYSE
+==================================================
+
+Analyse K.1, K.2 and K.3 together, but keep their boundaries explicit.
+
+K.1 — G3 remediation
+K.2 — G6 persistence remediation
+K.3 — G9 criterion amendment
+
+For each track identify:
+- problem statement
+- evidence
+- current contract
+- violated/unsatisfied gate condition
+- existing relevant requirements
+- impacted F001/F002/F003/F004/F006/F009 documents
+- dependencies
+- risks
+- ambiguity
+- questions that require SPECIFY decisions
+
+Pay particular attention to cross-ownership:
+K.1 crosses F002/F004.
+K.2 is primarily F004/local-job-engine persistence.
+K.3 is primarily F004/T007 governance/specification.
+
+Do not invent requirements.
+
+==================================================
+PHASE 2 — RESEARCH
+==================================================
+
+Perform repository-local research only.
+
+Inspect the current authoritative documents and implementation relevant to:
+
+K.1:
+- symbol persistence/idempotency path
+- relationship/symbol redelivery behavior
+- current local-job-engine contract
+- existing F002 R6/D-R6-2 constraints
+- crash reclaim/attempt handling
+- PAUSED/CANCELLED semantics
+- lease/retry/backoff configuration/defaults
+
+K.2:
+- exact SQLite persistence path
+- transaction boundaries
+- batch sizes
+- WAL behavior
+- symbol/relationship/candidate writes
+- indexes involved
+- job bookkeeping writes
+- where the 62–68% persist share originates
+- existing M-L3 evidence for batch sizes
+- identify whether batching can be introduced without changing graph semantics
+
+K.3:
+- current T007 file-size requirements
+- t007-local-feasibility-plan.md §5.1
+- ADR-001 D-ARCH-6
+- G9 gate definition
+- B3/B5/B7/B8 evidence structure
+- any other document that currently calls 512 KiB the default
+
+Research must preserve evidence/source separation.
+
+Do NOT modify files during research.
+
+==================================================
+PHASE 3 — SPECIFY
+==================================================
+
+After analysis/research, produce explicit proposed requirements for:
+
+K.1:
+- symbol identity stability on redelivery
+- crash reclaim attempt semantics
+- CANCELLED state
+- PAUSED semantics
+- lease/retry/backoff defaults
+- F-4e operating constraint
+
+K.2:
+- persistence batching behavior
+- transaction boundaries
+- durability guarantees
+- idempotency requirements
+- ordering requirements, if any
+- failure/retry semantics
+- acceptance measurement for G6
+- explicit rollback/failure behavior
+
+K.3:
+- amended G9 criterion wording
+- exact scope of file-size bands included in "complete evidence"
+- relationship between adopted default and ceiling
+- exact amendment to D-ARCH-6
+- exact wording required to prevent stale "512 KiB default" references
+
+Every proposed requirement must have:
+- ID
+- rationale
+- source/evidence
+- acceptance condition
+- affected component/document
+
+Do not implement.
+
+==================================================
+PHASE 4 — PLAN
+==================================================
+
+Create a concrete implementation plan for K.1/K.2/K.3.
+
+Separate:
+- documentation-only changes
+- contract/specification changes
+- production code changes
+- tests
+- benchmark/evidence work
+- gate re-evaluation
+
+Define dependencies and execution order.
+
+Important sequencing:
+
+K.3 documentation/criterion amendment must be approved before relying on it to clear G9.
+
+K.1 implementation must precede G3 re-measurement.
+
+K.2 implementation must precede G6 re-measurement.
+
+G3 and G6 should be independently measurable.
+
+Do NOT execute the plan yet.
+
+==================================================
+PHASE 5 — TASKS
+==================================================
+
+Produce explicit numbered tasks with:
+- task ID
+- objective
+- inputs
+- outputs
+- files likely affected
+- validation
+- dependency
+- whether task is documentation-only, implementation, test, or evidence
+
+Include a final gate-validation task for:
+- G3
+- G6
+- G9
+
+Do not tick existing roadmap/task checkboxes.
+
+==================================================
+PHASE 6 — CHECKLIST
+==================================================
+
+Produce a pre-execution checklist covering:
+
+- SpecKit requirements complete
+- research complete
+- plan complete
+- task dependencies resolved
+- no ambiguity remaining
+- no threshold changes hidden in implementation
+- no dataset changes
+- no reference-repo modifications
+- local-first architecture preserved
+- SQLite durability preserved
+- evidence provenance preserved
+- rollback/recovery behavior defined
+- benchmark protocol preserved
+- no T008 authorization implied
+
+==================================================
+FINAL OUTPUT
+==================================================
+
+Create/update ONLY the appropriate SpecKit analysis/planning artifacts if those artifacts already exist and the repository's established SpecKit convention requires them.
+
+Do NOT modify:
+- src/
+- tests/
+- schema
+- config
+- benchmark datasets
+- evidence JSON
+- reference repositories
+- research.md
+- task checkboxes
+
+Do not commit.
+Do not push.
+
+At the end report exactly:
+
+## T007 REMEDIATION SPECKIT ANALYSIS
+## K.1 G3 ANALYSIS
+## K.2 G6 ANALYSIS
+## K.3 G9 ANALYSIS
+## RESEARCH FINDINGS
+## SPECIFICATION
+## IMPLEMENTATION PLAN
+## TASK BREAKDOWN
+## PRE-EXECUTION CHECKLIST
+## DEPENDENCIES
+## OPEN OWNER DECISIONS
+## EXECUTION AUTHORIZATION REQUIRED
+## FILES CHANGED
+## COMMIT/PUSH STATUS
+
+The final line must explicitly state:
+
+T008 remains blocked and no implementation authorization has been granted.
+
+STOP after completing this SpecKit planning cycle.
+
+---
+
+## T007 remediation — owner decision resolution
+
+**Timestamp:** 2026-09-27 (session time, continuing the remediation SpecKit planning checkpoint)
+
+T007 remediation SpecKit planning is complete.
+
+The owner now resolves the open design decisions as follows.
+
+IMPORTANT:
+Do NOT implement yet.
+Do NOT run benchmarks yet.
+Do NOT tick task checkboxes.
+Do NOT commit.
+Do NOT push.
+Do NOT claim T008 authorization.
+
+Use the existing authoritative plan:
+
+specs/004-engineering-relationship-graph/t007-remediation-speckit-plan.md
+
+and the owner-review:
+
+specs/004-engineering-relationship-graph/t007-s-l2-owner-review.md
+
+==================================================
+OWNER DECISIONS
+==================================================
+
+1. RT-01 / SYMBOL IDENTITY OWNERSHIP
+
+Decision:
+Keep symbol-identity-stability changes inside the F004 resolver/local relationship layer initially.
+
+Do NOT modify F002 schema as part of the first implementation.
+
+If implementation proves that the existing F002 schema cannot represent the required stable identity, STOP and raise an explicit F002/F004 cross-feature amendment rather than changing F002 implicitly.
+
+Record this as an explicit architectural boundary decision.
+
+--------------------------------------------------
+
+2. PAUSED JOB STATE
+
+Decision:
+Introduce PAUSED as an explicit job lifecycle state.
+
+Do not weaken or reinterpret guarantee 7 merely to avoid adding the state.
+
+Specify:
+- PAUSED meaning
+- valid transitions into PAUSED
+- valid transitions out of PAUSED
+- interaction with cancel/cancelHalt
+- interaction with leases
+- interaction with retries/reclaims
+- terminal vs non-terminal semantics
+- persistence requirements
+
+Do not implement yet.
+
+--------------------------------------------------
+
+3. RT-09 / PERSISTENCE BATCHING
+
+Decision:
+Use bounded row-based batching as the primary batching axis.
+
+The design may also use bounded:
+- file count
+- elapsed time
+
+as safety limits.
+
+However:
+
+CRITICAL:
+Preserve per-file completion-write semantics and per-file containment semantics in the first remediation implementation.
+
+Do NOT silently move completion semantics from per-file to per-batch.
+
+Do NOT silently change the durability contract.
+
+The initial design goal is:
+
+reduce transaction overhead by batching database persistence,
+
+while preserving:
+
+file-level completion atomicity
+file-level containment
+failure/retry semantics
+idempotency
+durability expectations
+
+If this cannot be achieved with the existing contract, STOP and raise a specification amendment before implementation.
+
+The existing M-L3 batch evidence may be used as supporting evidence, but do not assume that its throughput improvement automatically proves G6 remediation sufficiency.
+
+--------------------------------------------------
+
+4. G9 CRITERION
+
+Approve the proposed G9 criterion-narrowing direction.
+
+The "complete band table" requirement should cover the evidence bands at or below the adopted ceiling.
+
+The adopted ceiling is B5 / approximately 512 KiB.
+
+Therefore B1–B6 / real-minified evidence is the relevant evidence region according to the existing plan's terminology.
+
+B7/B8 remain tracked non-blocking research evidence.
+
+IMPORTANT:
+G9 must remain FAIL until the amended criterion is formally written and approved.
+
+Do not silently convert FAIL to PASS.
+
+--------------------------------------------------
+
+5. FILE SIZE POLICY
+
+Approve:
+
+default = approximately 64 KiB / B3
+ceiling = approximately 512 KiB / B5
+
+The 512 KiB value is no longer the default.
+
+This must eventually update the stale authoritative references identified during research:
+
+docs/architecture/ADR-001-local-first-runtime.md:29
+docs/architecture/ADR-001-local-first-runtime.md:135
+specs/004-engineering-relationship-graph/research.md:213
+
+Do not edit them in this decision-resolution step unless the existing SpecKit process explicitly requires it.
+
+--------------------------------------------------
+
+6. G5
+
+No change.
+
+G5 remains CONDITIONAL and non-blocking.
+
+Do not alter the threshold.
+
+RSS/heap profiling remains a follow-up.
+
+--------------------------------------------------
+
+7. G8
+
+No change.
+
+G8 remains a tracked follow-up and is NOT a T008 blocker.
+
+Do not implement K.4 now.
+
+==================================================
+TASK AUTHORIZATION
+==================================================
+
+After recording the above decisions, update the SpecKit plan so that the unresolved design questions are no longer ambiguous.
+
+However, this pass is ONLY decision resolution.
+
+DO NOT authorize implementation yet.
+
+Specifically:
+
+- RT-01 decision resolved
+- PAUSED design decision resolved
+- RT-09 batch-axis decision resolved
+- FSIZE-01 wording direction approved
+- 64 KiB / 512 KiB recommendation approved
+
+Then produce the exact next execution authorization set.
+
+The next authorization should be structured into independent groups:
+
+GROUP A — G3 specification/contract preparation
+GROUP B — G6 implementation preparation
+GROUP C — G9 documentation amendment
+GROUP D — later G8 work (NOT authorized)
+
+Do not execute Group A/B/C in this pass.
+
+==================================================
+REQUIRED OUTPUT
+==================================================
+
+Report exactly:
+
+## T007 DECISION RESOLUTION
+
+## RT-01 DECISION
+State the F004 resolver-layer boundary and F002 escalation rule.
+
+## PAUSED DECISION
+State the explicit PAUSED lifecycle-state decision and required semantics.
+
+## RT-09 DECISION
+State the row-batching decision and preservation of per-file completion/containment semantics.
+
+## G9 DECISION
+State the approved criterion-narrowing direction while preserving current FAIL status until amendment.
+
+## FILE-SIZE DECISION
+State 64 KiB default / 512 KiB ceiling.
+
+## UPDATED OPEN QUESTIONS
+Only genuinely unresolved questions may remain.
+
+## NEXT EXECUTION GROUPS
+List exact RT task IDs that should be considered for the next explicit authorization.
+
+## GATES
+Explicitly state:
+G3 = CONDITIONAL
+G6 = FAIL
+G9 = FAIL
+T008 = BLOCKED
+
+## FILES CHANGED
+List only actual changes.
+
+## COMMIT/PUSH STATUS
+
+End with:
+
+"No implementation authorization has been granted by this pass."
+
+STOP.
+
+---
+
+## T007 remediation — Group A/C task authorization: RT-02, RT-05, RT-15
+
+**Timestamp:** 2026-09-27 (session time, continuing the decision-resolution checkpoint)
+
+T007 remediation decision resolution is complete.
+
+AUTHORIZE ONLY:
+
+GROUP A — G3 SPECIFICATION / CONTRACT PREPARATION
+- RT-02
+- RT-05
+
+GROUP C — G9 DOCUMENTATION AMENDMENT PREPARATION
+- RT-15
+
+Do NOT authorize Group B.
+Do NOT authorize RT-09 or RT-10.
+Do NOT authorize Group D / K.4 / G8.
+
+This is explicit task-level authorization for RT-02, RT-05 and RT-15 only.
+
+==================================================
+GLOBAL CONSTRAINTS
+==================================================
+
+Follow the established SpecKit task boundaries exactly.
+
+ANALYSE → RESEARCH → SPECIFY → PLAN → TASK EXECUTION → REVIEW
+
+Do not skip analysis or research.
+
+Do not run T007 performance benchmarks in this pass.
+
+Do not modify production implementation in this pass.
+
+Do not modify:
+- src/
+- tests/
+- schema
+- runtime configuration
+- benchmark datasets
+- evidence JSON
+- reference repositories
+
+Do not modify G3/G6/G9 thresholds.
+
+Do not modify G8.
+
+Do not tick unrelated roadmap/task checkboxes.
+
+Do not commit or push until authorized tasks are reviewed and explicitly approved.
+
+==================================================
+RT-02 — STABLE SYMBOL IDENTITY
+==================================================
+
+Execute RT-02 only.
+
+Objective:
+Design the stable symbol-identity key required to resolve the F-4 symbols-stage redelivery/idempotency problem.
+
+Known boundary from Decision D1:
+
+- ownership is F004 resolver/local-relationship layer
+- F002 schema remains untouched
+- if the existing F002 schema proves insufficient, STOP immediately
+- do NOT modify F002 implicitly
+- raise an explicit F002/F004 cross-feature amendment instead
+
+Research actual current implementation and schema before deciding the key.
+
+Evaluate:
+- language
+- repository identity
+- snapshot/commit identity where relevant
+- file/path identity
+- symbol kind
+- symbol name
+- enclosing symbol/context
+- source location/range
+- overload/collision risks
+- generated code
+- duplicate names across files
+- nested symbols
+- anonymous/unnamed constructs
+- redelivery behavior
+- determinism across repeated extraction
+- compatibility with existing persisted symbols/relationships
+
+Do not invent fields that do not exist without documenting the requirement.
+
+Produce:
+1. exact proposed stable-key formula
+2. canonical input fields
+3. normalization rules
+4. collision analysis
+5. examples
+6. migration implications, if any
+7. impact on existing F002 contracts
+8. proof that the first implementation can remain entirely within F004
+9. acceptance criteria for SYM-01/SYM-02/etc.
+10. explicit hard-stop condition if F002 schema becomes insufficient
+
+Do not implement the key yet.
+
+==================================================
+RT-05 — G3 CONTRACT AMENDMENTS
+==================================================
+
+Execute RT-05 only.
+
+Draft the exact contract amendments required for:
+
+1. CANCELLED
+2. PAUSED
+3. lease defaults
+4. retry defaults
+5. backoff defaults
+6. F-4e lease-margin operating constraint
+7. crash-reclaim attempt semantics
+
+PAUSED is now an explicit persisted eighth job state.
+
+The contract MUST define:
+
+- state meaning
+- valid transitions
+- PENDING → PAUSED
+- PAUSED → PENDING
+- PAUSED → FAILED('cancelled') via cancel()
+- no RUNNING → PAUSED
+- no CLAIMED → PAUSED
+- PAUSED has no lease
+- retry/reclaim interaction
+- cancelHalt interaction
+- non-terminal semantics
+- persistence across restart
+
+For crash reclaim:
+- attempts must increment when a crashed/reclaimed job is reclaimed
+- retry limits must be explicit
+- behavior at retry exhaustion must be explicit
+
+For lease/retry/backoff:
+- draft explicit defaults, but clearly distinguish contract defaults from implementation tuning
+- do not silently invent performance thresholds
+
+For F-4e:
+- document the accepted interim constraint that the lease must exceed realistic maximum unit duration
+- preserve the fact that the artificial 2ms stress result was characterization-only
+
+Produce exact proposed contract wording and acceptance criteria.
+
+Do not implement pause()/resume() or job-state changes.
+
+==================================================
+RT-15 — G9 CRITERION AMENDMENT
+==================================================
+
+Execute RT-15 only.
+
+Finalize the exact wording of the G9 criterion amendment.
+
+Approved direction:
+
+The "complete band table" evidence requirement applies to:
+- B1
+- B2
+- B3
+- B4
+- B5
+- B6
+- real-minified fixture
+
+B7/B8 remain tracked non-blocking research evidence.
+
+The adopted file-size policy is:
+- default ≈ 64 KiB / B3
+- ceiling ≈ 512 KiB / B5
+
+Important:
+Do not silently convert G9 from FAIL to PASS.
+
+The output must clearly distinguish:
+
+CURRENT G9 STATUS = FAIL
+
+from:
+
+PROPOSED AMENDED CRITERION = ...
+
+and:
+
+RE-SCORING REQUIRED = RT-16
+
+Review all current references to G9 and ensure the proposed wording does not accidentally alter the registered gate semantics beyond the approved scope.
+
+Do NOT yet perform RT-16.
+
+Do NOT edit ADR-001 or research.md in this pass unless RT-15's established task definition explicitly requires only the criterion artifact itself. Group C documentation edits beyond RT-15 remain separately controlled.
+
+==================================================
+REVIEW / VALIDATION
+==================================================
+
+After RT-02, RT-05 and RT-15:
+
+Verify:
+- no production code changed
+- no benchmark executed
+- no threshold changed
+- no dataset changed
+- no evidence JSON changed
+- no F002 schema changed
+- no G6 implementation performed
+- no G8 work performed
+- G9 remains FAIL pending RT-16
+- T008 remains blocked
+
+Identify any newly discovered ambiguity.
+
+If RT-02 discovers that F002 schema is insufficient:
+STOP RT-02 immediately and report the required F002/F004 amendment. Do not work around it.
+
+==================================================
+REQUIRED REPORT
+==================================================
+
+## GROUP A / C EXECUTION REPORT
+
+## RT-02 SYMBOL IDENTITY
+## RT-05 CONTRACT AMENDMENTS
+## RT-15 G9 CRITERION
+
+## VALIDATION
+## NEW OPEN QUESTIONS
+## UNAUTHORIZED WORK NOT PERFORMED
+## GATE STATUS
+## FILES CHANGED
+## COMMIT/PUSH STATUS
+
+Gate status must remain:
+
+G3 = CONDITIONAL
+G6 = FAIL
+G9 = FAIL
+T008 = BLOCKED
+
+End with:
+
+"RT-02, RT-05 and RT-15 completed within authorization. No Group B or Group D task was authorized or executed."
+
+STOP.

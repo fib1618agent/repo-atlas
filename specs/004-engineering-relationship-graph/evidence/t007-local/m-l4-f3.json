@@ -1,0 +1,93 @@
+{
+  "measurement": "M-L4 part 3",
+  "dataset": "repo-atlas-rm",
+  "environmentHash": "e2b32efaacbd45bf",
+  "loadAvgAtStart": "{ 4.49 4.27 4.31 }",
+  "power": "Now drawing from 'AC Power'  -InternalBattery-0 (id=20578403)\t19%; charging; (no estimate) present: true",
+  "cleanReferenceHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+  "cleanRunsEqual": true,
+  "test": "F-3 bounded retry/backoff",
+  "transientRecoverable": {
+    "label": "m-l4-f3a",
+    "injected": 20,
+    "engineRetries": 24,
+    "attemptsDistribution": [
+      {
+        "attempts": 1,
+        "state": "COMPLETED",
+        "n": 16
+      },
+      {
+        "attempts": 2,
+        "state": "COMPLETED",
+        "n": 4
+      }
+    ],
+    "snapshotStatus": "completed",
+    "hashEqualsClean": true,
+    "backoffGapsMs": {
+      "n": 24,
+      "min": 25,
+      "median": 26,
+      "p95": 50,
+      "max": 54,
+      "mean": 31.5,
+      "stdev": 9.403013701291021,
+      "cv": 0.2985083714695562
+    },
+    "minGapMs": 25,
+    "jobs": {
+      "states": {
+        "COMPLETED": 1181,
+        "SKIPPED": 5
+      },
+      "attemptsSum": 24,
+      "reclaimsSum": 0,
+      "jobRows": 1186
+    },
+    "invariantViolations": []
+  },
+  "exhausted": {
+    "label": "m-l4-f3b",
+    "injected": 2,
+    "engineRetries": 4,
+    "attemptsDistribution": [
+      {
+        "attempts": 3,
+        "state": "FAILED",
+        "n": 2
+      }
+    ],
+    "snapshotStatus": "completed_partial",
+    "hashEqualsClean": false,
+    "backoffGapsMs": {
+      "n": 4,
+      "min": 28,
+      "median": 40,
+      "p95": 52,
+      "max": 52,
+      "mean": 40,
+      "stdev": 11.510864433221338,
+      "cv": 0.28777161083053343
+    },
+    "minGapMs": 28,
+    "jobs": {
+      "states": {
+        "COMPLETED": 1179,
+        "FAILED": 2,
+        "SKIPPED": 5
+      },
+      "attemptsSum": 6,
+      "reclaimsSum": 0,
+      "jobRows": 1186
+    },
+    "invariantViolations": []
+  },
+  "expectations": {
+    "recoverableAllCompleteAndHashEqualsClean": true,
+    "backoffAtLeastBase": true,
+    "exhaustedBoundedAt3AndPartial": true
+  },
+  "classification": "PASS-CRITERIA-MET",
+  "durationMs": 3467.6100420000002
+}

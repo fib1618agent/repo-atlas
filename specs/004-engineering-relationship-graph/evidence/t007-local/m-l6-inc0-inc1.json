@@ -1,0 +1,248 @@
+{
+  "measurement": "M-L6 (INC-0 baseline + INC-1 no-change rerun)",
+  "basis": "LOCAL-RUNTIME (+PROTOTYPE relationship stage)",
+  "warmth": "cold (fresh process per run; INC-1 immediately follows INC-0 on the same DB, in-process-cache-cold, DB-warm)",
+  "dataset": "repo-atlas-rm",
+  "workers": 2,
+  "runs": 3,
+  "environmentHash": "e2b32efaacbd45bf",
+  "harnessRev": "revB (sequential worker init; indexed fe join)",
+  "environment": {
+    "os": "macOS 14.5 (23F79), Darwin 23.5.0 arm64",
+    "cpuModel": "Apple M3 Max",
+    "physicalCores": 14,
+    "logicalCores": 14,
+    "perfLevels": "2",
+    "ramBytes": 38654705664,
+    "storage": "Device Name: APPLE SSD AP1024Z           Medium Type: SSD",
+    "bunVersion": "1.3.14",
+    "bunRevision": "0d9b296af33f2b851fcbf4df3e9ec89751734ba4",
+    "nodeVersion": "v22.22.3",
+    "typescriptVersion": "Version 5.9.3",
+    "webTreeSitterVersion": "0.25.10",
+    "sqliteVersion": "3.43.2",
+    "sqliteDriver": "bun:sqlite (built-in)",
+    "repoAtlasCommit": "430e1703386ebd9264122d54a3ba398d43b363f9",
+    "repoAtlasBranch": "feat/atlas-marble-interaction",
+    "packageName": "tanstack_start_ts",
+    "harnessVersion": "t007-local-harness/1",
+    "workerRuntime": "Bun Worker threads (one web-tree-sitter WASM instance + one bun:sqlite connection per worker)",
+    "sqliteJournalModeDefault": "WAL (synchronous=NORMAL, busy_timeout=15000) — recorded variable in M-L3",
+    "atlasEnv": {
+      "BUN_INSTALL": "/Users/imdadareeph/.bun"
+    }
+  },
+  "summary": {
+    "inc0EngineWallMs": {
+      "n": 3,
+      "min": 1127.7295000000001,
+      "median": 1128.493791,
+      "p95": 1181.6446669999998,
+      "max": 1181.6446669999998,
+      "mean": 1145.955986,
+      "stdev": 25.23763722198758,
+      "cv": 0.022023216886435968
+    },
+    "inc0ProcessWallMs": {
+      "n": 3,
+      "min": 1191.224416,
+      "median": 1192.058709,
+      "p95": 1249.029125,
+      "max": 1249.029125,
+      "mean": 1210.77075,
+      "stdev": 27.05490041172989,
+      "cv": 0.022345188312262988
+    },
+    "inc1EngineWallMs": {
+      "n": 3,
+      "min": 0,
+      "median": 0,
+      "p95": 0,
+      "max": 0,
+      "mean": 0,
+      "stdev": 0,
+      "cv": 0
+    },
+    "inc1ProcessWallMs": {
+      "n": 3,
+      "min": 28.020958000000064,
+      "median": 29.857500000000073,
+      "p95": 34.56425000000036,
+      "max": 34.56425000000036,
+      "mean": 30.814236000000164,
+      "stdev": 2.7556215729049938,
+      "cv": 0.08942689907693896
+    },
+    "allInc1ShortCircuited": true,
+    "reductionPct": {
+      "n": 3,
+      "min": 100,
+      "median": 100,
+      "p95": 100,
+      "max": 100,
+      "mean": 100,
+      "stdev": 0,
+      "cv": 0
+    },
+    "graphIdenticalInc0VsInc1": true,
+    "deterministicInc0": true
+  },
+  "runsData": [
+    {
+      "run": 0,
+      "inc0": {
+        "processWallMs": 1249.029125,
+        "engineWallMs": 1181.6446669999998,
+        "shortCircuited": false,
+        "cpu": {
+          "userMs": 1475.73,
+          "systemMs": 442.58,
+          "cpuWallRatio": 1.6234237360629498
+        },
+        "peakRssMiB": 335.6,
+        "jobsAfter": {
+          "COMPLETED": 1181,
+          "SKIPPED": 5
+        },
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "counts": {
+          "symbols": 662,
+          "files": 473,
+          "dirs": 104,
+          "relationships": 10755,
+          "candidates": 2139
+        },
+        "invariantViolations": []
+      },
+      "inc1": {
+        "processWallMs": 34.56425000000036,
+        "engineWallMs": 0,
+        "shortCircuited": true,
+        "enqueued": 0,
+        "jobsBefore": {
+          "COMPLETED": 1181,
+          "SKIPPED": 5
+        },
+        "jobsAfter": {
+          "COMPLETED": 1181,
+          "SKIPPED": 5
+        },
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "counts": {
+          "symbols": 662,
+          "files": 473,
+          "dirs": 104,
+          "relationships": 10755,
+          "candidates": 2139
+        },
+        "invariantViolations": []
+      },
+      "dbBytesAfterInc1": 4595712,
+      "reduction": 1
+    },
+    {
+      "run": 1,
+      "inc0": {
+        "processWallMs": 1191.224416,
+        "engineWallMs": 1127.7295000000001,
+        "shortCircuited": false,
+        "cpu": {
+          "userMs": 1483.336,
+          "systemMs": 446.22,
+          "cpuWallRatio": 1.711009599376446
+        },
+        "peakRssMiB": 321.7,
+        "jobsAfter": {
+          "COMPLETED": 1181,
+          "SKIPPED": 5
+        },
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "counts": {
+          "symbols": 662,
+          "files": 473,
+          "dirs": 104,
+          "relationships": 10755,
+          "candidates": 2139
+        },
+        "invariantViolations": []
+      },
+      "inc1": {
+        "processWallMs": 28.020958000000064,
+        "engineWallMs": 0,
+        "shortCircuited": true,
+        "enqueued": 0,
+        "jobsBefore": {
+          "COMPLETED": 1181,
+          "SKIPPED": 5
+        },
+        "jobsAfter": {
+          "COMPLETED": 1181,
+          "SKIPPED": 5
+        },
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "counts": {
+          "symbols": 662,
+          "files": 473,
+          "dirs": 104,
+          "relationships": 10755,
+          "candidates": 2139
+        },
+        "invariantViolations": []
+      },
+      "dbBytesAfterInc1": 4612096,
+      "reduction": 1
+    },
+    {
+      "run": 2,
+      "inc0": {
+        "processWallMs": 1192.058709,
+        "engineWallMs": 1128.493791,
+        "shortCircuited": false,
+        "cpu": {
+          "userMs": 1471.186,
+          "systemMs": 418.477,
+          "cpuWallRatio": 1.6745001302359845
+        },
+        "peakRssMiB": 338.6,
+        "jobsAfter": {
+          "COMPLETED": 1181,
+          "SKIPPED": 5
+        },
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "counts": {
+          "symbols": 662,
+          "files": 473,
+          "dirs": 104,
+          "relationships": 10755,
+          "candidates": 2139
+        },
+        "invariantViolations": []
+      },
+      "inc1": {
+        "processWallMs": 29.857500000000073,
+        "engineWallMs": 0,
+        "shortCircuited": true,
+        "enqueued": 0,
+        "jobsBefore": {
+          "COMPLETED": 1181,
+          "SKIPPED": 5
+        },
+        "jobsAfter": {
+          "COMPLETED": 1181,
+          "SKIPPED": 5
+        },
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "counts": {
+          "symbols": 662,
+          "files": 473,
+          "dirs": 104,
+          "relationships": 10755,
+          "candidates": 2139
+        },
+        "invariantViolations": []
+      },
+      "dbBytesAfterInc1": 4595712,
+      "reduction": 1
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "measurement": "M-L4 part 3 (rev C)",
+  "dataset": "repo-atlas-rm",
+  "environmentHash": "e2b32efaacbd45bf",
+  "loadAvgAtStart": "{ 2.49 2.74 2.91 }",
+  "power": "Now drawing from 'AC Power'  -InternalBattery-0 (id=20578403)\t19%; charging; 9:15 remaining present: true",
+  "cleanReferenceHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+  "cleanRunsEqual": true,
+  "droppedKeyMetricPerCleanRun": [
+    0,
+    0,
+    0
+  ],
+  "test": "F-4e control (owner decision 2026-09-26): configured lease 1500 ms",
+  "parts": {
+    "rmLease1500": {
+      "runs": [
+        {
+          "run": 0,
+          "hashEqualsClean": true,
+          "reclaimsSum": 0,
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "maxUnitMs": 364.02633299999997,
+          "violations": 0
+        },
+        {
+          "run": 1,
+          "hashEqualsClean": true,
+          "reclaimsSum": 0,
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "maxUnitMs": 684.254875,
+          "violations": 0
+        },
+        {
+          "run": 2,
+          "hashEqualsClean": true,
+          "reclaimsSum": 0,
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "maxUnitMs": 201.56770899999992,
+          "violations": 0
+        },
+        {
+          "run": 3,
+          "hashEqualsClean": true,
+          "reclaimsSum": 0,
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "maxUnitMs": 152.66075,
+          "violations": 0
+        },
+        {
+          "run": 4,
+          "hashEqualsClean": true,
+          "reclaimsSum": 0,
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "maxUnitMs": 205.64520800000014,
+          "violations": 0
+        }
+      ],
+      "allEqualClean": true,
+      "totalReclaims": 0
+    },
+    "largeFileLease1500": {
+      "referenceWallMs": 14266.534083999999,
+      "referenceLongestUnitMs": 13311.827167,
+      "leaseMs": 1500,
+      "runs": [
+        {
+          "run": 0,
+          "hashEqualsReference": true,
+          "missingLinesVsReference": 0,
+          "reclaimsSum": 1,
+          "attemptsSum": 0,
+          "states": {
+            "COMPLETED": 22
+          },
+          "engineWallMs": 15581.975458,
+          "violations": []
+        },
+        {
+          "run": 1,
+          "hashEqualsReference": true,
+          "missingLinesVsReference": 0,
+          "reclaimsSum": 1,
+          "attemptsSum": 0,
+          "states": {
+            "COMPLETED": 22
+          },
+          "engineWallMs": 15536.256458000003,
+          "violations": []
+        },
+        {
+          "run": 2,
+          "hashEqualsReference": true,
+          "missingLinesVsReference": 0,
+          "reclaimsSum": 1,
+          "attemptsSum": 0,
+          "states": {
+            "COMPLETED": 22
+          },
+          "engineWallMs": 15746.566292000003,
+          "violations": []
+        }
+      ],
+      "anyReclaim": true,
+      "anyDivergence": false
+    }
+  },
+  "classification": "NOT-REPRODUCED-UNDER-1500ms-LEASE (see reclaim counts: reachability depends on a unit exceeding the lease)",
+  "durationMs": 280814.258917,
+  "interpretation": "At the configured 1500 ms lease: R-M (all units <= 684 ms) had 0 reclaims and 5/5 runs equal to clean. With a legitimately large file (768 KiB TS, longest unit 13.3 s) a stale-live duplicate execution DID occur under the 1500 ms lease (1 reclaim in each of 3 runs) but the final graph was identical to the single-worker reference in 3/3 runs, no invariant violations. So: duplicate execution is reachable under the configured lease whenever a unit exceeds it; silent divergence was NOT reproduced there (n=3) and was seen only under the 2 ms stress case (1 of 3). Absence of divergence in 3 runs is not proof of safety."
+}

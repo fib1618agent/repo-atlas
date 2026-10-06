@@ -1,0 +1,1686 @@
+{
+  "measurement": "M-L4 part 3",
+  "dataset": "repo-atlas-rm",
+  "environmentHash": "e2b32efaacbd45bf",
+  "loadAvgAtStart": "{ 3.67 4.06 4.25 }",
+  "power": "Now drawing from 'AC Power'  -InternalBattery-0 (id=20578403)\t20%; charging; (no estimate) present: true",
+  "cleanReferenceHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+  "cleanRunsEqual": true,
+  "test": "F-1 kill -9 / restart (mandatory G1/G2 evidence)",
+  "cleanReference": {
+    "hash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+    "cleanRunsEqual": true
+  },
+  "attempts": [
+    {
+      "scenario": "m-l4-f1b-0",
+      "workers": 1,
+      "killFractions": [
+        0.82
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.821247892074199,
+          "killLatencyMs": 0.06058300000040617,
+          "statesAtTrigger": {
+            "COMPLETED": 973,
+            "PENDING": 211,
+            "RUNNING": 1,
+            "SKIPPED": 1
+          },
+          "killedAtEpochMs": 1790377874129,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 973,
+              "PENDING": 211,
+              "RUNNING": 1,
+              "SKIPPED": 1
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "invariantViolations": [],
+            "completedWorkPreserved": true,
+            "exitCode": 137
+          },
+          "completedCountAtTrigger": 973,
+          "nextRestartFirstProgressMs": null
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 1492.8513750000002,
+        "firstProgressAfterRestartMs": 53.00812500000029,
+        "stderr": ""
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 1,
+          "jobRows": 1186
+        },
+        "totals": {
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139,
+          "fe": 473
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "changedCompletedFiles": 0,
+        "reexecutedUnits": 1
+      }
+    },
+    {
+      "scenario": "m-l4-f1b-1",
+      "workers": 1,
+      "killFractions": [
+        0.82
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.821247892074199,
+          "killLatencyMs": 0.01712500000030559,
+          "statesAtTrigger": {
+            "COMPLETED": 973,
+            "PENDING": 211,
+            "RUNNING": 1,
+            "SKIPPED": 1
+          },
+          "killedAtEpochMs": 1790377876776,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 974,
+              "PENDING": 211,
+              "SKIPPED": 1
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "invariantViolations": [],
+            "completedWorkPreserved": true,
+            "exitCode": 137
+          },
+          "completedCountAtTrigger": 973,
+          "nextRestartFirstProgressMs": null
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 864.4876659999991,
+        "firstProgressAfterRestartMs": 54.15195799999856,
+        "stderr": ""
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 0,
+          "jobRows": 1186
+        },
+        "totals": {
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139,
+          "fe": 473
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "changedCompletedFiles": 0,
+        "reexecutedUnits": 0
+      }
+    },
+    {
+      "scenario": "m-l4-f1b-2",
+      "workers": 1,
+      "killFractions": [
+        0.86
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.8608768971332209,
+          "killLatencyMs": 0.016249999998763087,
+          "statesAtTrigger": {
+            "COMPLETED": 1017,
+            "PENDING": 164,
+            "RUNNING": 1,
+            "SKIPPED": 4
+          },
+          "killedAtEpochMs": 1790377878861,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 1018,
+              "PENDING": 164,
+              "SKIPPED": 4
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "invariantViolations": [],
+            "completedWorkPreserved": true,
+            "exitCode": 137
+          },
+          "completedCountAtTrigger": 1017,
+          "nextRestartFirstProgressMs": null
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 788.7065409999996,
+        "firstProgressAfterRestartMs": 56.28966599999876,
+        "stderr": ""
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 0,
+          "jobRows": 1186
+        },
+        "totals": {
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139,
+          "fe": 473
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "changedCompletedFiles": 0,
+        "reexecutedUnits": 0
+      }
+    },
+    {
+      "scenario": "m-l4-f1b-3",
+      "workers": 1,
+      "killFractions": [
+        0.86
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.8608768971332209,
+          "killLatencyMs": 0.018749999999272404,
+          "statesAtTrigger": {
+            "COMPLETED": 1017,
+            "PENDING": 164,
+            "RUNNING": 1,
+            "SKIPPED": 4
+          },
+          "killedAtEpochMs": 1790377880854,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 1018,
+              "PENDING": 163,
+              "RUNNING": 1,
+              "SKIPPED": 4
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "invariantViolations": [],
+            "completedWorkPreserved": true,
+            "exitCode": 137
+          },
+          "completedCountAtTrigger": 1017,
+          "nextRestartFirstProgressMs": null
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 1494.3176249999997,
+        "firstProgressAfterRestartMs": 56.78870900000038,
+        "stderr": ""
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 1,
+          "jobRows": 1186
+        },
+        "totals": {
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139,
+          "fe": 473
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "changedCompletedFiles": 0,
+        "reexecutedUnits": 1
+      }
+    },
+    {
+      "scenario": "m-l4-f1b-4",
+      "workers": 1,
+      "killFractions": [
+        0.9
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.9013490725126475,
+          "killLatencyMs": 0.017749999999068677,
+          "statesAtTrigger": {
+            "COMPLETED": 1065,
+            "PENDING": 116,
+            "RUNNING": 1,
+            "SKIPPED": 4
+          },
+          "killedAtEpochMs": 1790377883652,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 1065,
+              "PENDING": 116,
+              "RUNNING": 1,
+              "SKIPPED": 4
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "invariantViolations": [],
+            "completedWorkPreserved": true,
+            "exitCode": 137
+          },
+          "completedCountAtTrigger": 1065,
+          "nextRestartFirstProgressMs": null
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 1482.0082079999993,
+        "firstProgressAfterRestartMs": 54.03608299999905,
+        "stderr": ""
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 1,
+          "jobRows": 1186
+        },
+        "totals": {
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139,
+          "fe": 473
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "changedCompletedFiles": 0,
+        "reexecutedUnits": 1
+      }
+    },
+    {
+      "scenario": "m-l4-f1b-5",
+      "workers": 1,
+      "killFractions": [
+        0.9
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.9013490725126475,
+          "killLatencyMs": 0.014708999999129446,
+          "statesAtTrigger": {
+            "COMPLETED": 1065,
+            "PENDING": 116,
+            "RUNNING": 1,
+            "SKIPPED": 4
+          },
+          "killedAtEpochMs": 1790377886457,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 1065,
+              "PENDING": 116,
+              "RUNNING": 1,
+              "SKIPPED": 4
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "invariantViolations": [],
+            "completedWorkPreserved": true,
+            "exitCode": 137
+          },
+          "completedCountAtTrigger": 1065,
+          "nextRestartFirstProgressMs": null
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 1486.1224580000016,
+        "firstProgressAfterRestartMs": 55.47516600000017,
+        "stderr": ""
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 1,
+          "jobRows": 1186
+        },
+        "totals": {
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139,
+          "fe": 473
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "changedCompletedFiles": 0,
+        "reexecutedUnits": 1
+      }
+    },
+    {
+      "scenario": "m-l4-f1b-6",
+      "workers": 1,
+      "killFractions": [
+        0.94
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.9401349072512648,
+          "killLatencyMs": 0.023000000001047738,
+          "statesAtTrigger": {
+            "COMPLETED": 1110,
+            "PENDING": 70,
+            "RUNNING": 1,
+            "SKIPPED": 5
+          },
+          "killedAtEpochMs": 1790377889391,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 1110,
+              "PENDING": 70,
+              "RUNNING": 1,
+              "SKIPPED": 5
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "invariantViolations": [],
+            "completedWorkPreserved": true,
+            "exitCode": 137
+          },
+          "completedCountAtTrigger": 1110,
+          "nextRestartFirstProgressMs": null
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 1471.637791000001,
+        "firstProgressAfterRestartMs": 54.978665999999066,
+        "stderr": ""
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 1,
+          "jobRows": 1186
+        },
+        "totals": {
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139,
+          "fe": 473
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "changedCompletedFiles": 0,
+        "reexecutedUnits": 1
+      }
+    },
+    {
+      "scenario": "m-l4-f1b-7",
+      "workers": 1,
+      "killFractions": [
+        0.94
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.9401349072512648,
+          "killLatencyMs": 0.013833000000886386,
+          "statesAtTrigger": {
+            "COMPLETED": 1110,
+            "PENDING": 70,
+            "RUNNING": 1,
+            "SKIPPED": 5
+          },
+          "killedAtEpochMs": 1790377892304,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 1110,
+              "PENDING": 70,
+              "RUNNING": 1,
+              "SKIPPED": 5
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "invariantViolations": [],
+            "completedWorkPreserved": true,
+            "exitCode": 137
+          },
+          "completedCountAtTrigger": 1110,
+          "nextRestartFirstProgressMs": null
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 1472.4445419999975,
+        "firstProgressAfterRestartMs": 55.01483299999745,
+        "stderr": ""
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 1,
+          "jobRows": 1186
+        },
+        "totals": {
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139,
+          "fe": 473
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "changedCompletedFiles": 0,
+        "reexecutedUnits": 1
+      }
+    },
+    {
+      "scenario": "m-l4-f1b-8",
+      "workers": 1,
+      "killFractions": [
+        0.97
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.9704890387858347,
+          "killLatencyMs": 0.014250000000174623,
+          "statesAtTrigger": {
+            "COMPLETED": 1146,
+            "PENDING": 34,
+            "RUNNING": 1,
+            "SKIPPED": 5
+          },
+          "killedAtEpochMs": 1790377895347,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 1146,
+              "PENDING": 34,
+              "RUNNING": 1,
+              "SKIPPED": 5
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "invariantViolations": [],
+            "completedWorkPreserved": true,
+            "exitCode": 137
+          },
+          "completedCountAtTrigger": 1146,
+          "nextRestartFirstProgressMs": null
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 1463.327792,
+        "firstProgressAfterRestartMs": 56.223250000002736,
+        "stderr": ""
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 1,
+          "jobRows": 1186
+        },
+        "totals": {
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139,
+          "fe": 473
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "changedCompletedFiles": 0,
+        "reexecutedUnits": 1
+      }
+    },
+    {
+      "scenario": "m-l4-f1b-9",
+      "workers": 1,
+      "killFractions": [
+        0.97
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.9704890387858347,
+          "killLatencyMs": 0.014917000000423286,
+          "statesAtTrigger": {
+            "COMPLETED": 1146,
+            "PENDING": 34,
+            "RUNNING": 1,
+            "SKIPPED": 5
+          },
+          "killedAtEpochMs": 1790377898427,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 1146,
+              "PENDING": 34,
+              "RUNNING": 1,
+              "SKIPPED": 5
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "invariantViolations": [],
+            "completedWorkPreserved": true,
+            "exitCode": 137
+          },
+          "completedCountAtTrigger": 1146,
+          "nextRestartFirstProgressMs": null
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 1452.7384999999995,
+        "firstProgressAfterRestartMs": 55.12574999999924,
+        "stderr": ""
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 1,
+          "jobRows": 1186
+        },
+        "totals": {
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139,
+          "fe": 473
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "changedCompletedFiles": 0,
+        "reexecutedUnits": 1
+      }
+    },
+    {
+      "scenario": "m-l4-f1b-10",
+      "workers": 2,
+      "killFractions": [
+        0.82
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.8204047217537943,
+          "killLatencyMs": 0.014041999995242804,
+          "statesAtTrigger": {
+            "COMPLETED": 973,
+            "PENDING": 211,
+            "RUNNING": 1,
+            "SKIPPED": 1
+          },
+          "killedAtEpochMs": 1790377901134,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 973,
+              "PENDING": 210,
+              "RUNNING": 2,
+              "SKIPPED": 1
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "invariantViolations": [],
+            "completedWorkPreserved": true,
+            "exitCode": 137
+          },
+          "completedCountAtTrigger": 973,
+          "nextRestartFirstProgressMs": null
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 1488.423791000001,
+        "firstProgressAfterRestartMs": 72.53020799999649,
+        "stderr": ""
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 2,
+          "jobRows": 1186
+        },
+        "totals": {
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139,
+          "fe": 473
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "changedCompletedFiles": 0,
+        "reexecutedUnits": 2
+      }
+    },
+    {
+      "scenario": "m-l4-f1b-11",
+      "workers": 2,
+      "killFractions": [
+        0.82
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.8204047217537943,
+          "killLatencyMs": 0.012792000001354609,
+          "statesAtTrigger": {
+            "COMPLETED": 972,
+            "PENDING": 211,
+            "RUNNING": 2,
+            "SKIPPED": 1
+          },
+          "killedAtEpochMs": 1790377903804,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 972,
+              "PENDING": 211,
+              "RUNNING": 2,
+              "SKIPPED": 1
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "invariantViolations": [],
+            "completedWorkPreserved": true,
+            "exitCode": 137
+          },
+          "completedCountAtTrigger": 972,
+          "nextRestartFirstProgressMs": null
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 1490.9020830000009,
+        "firstProgressAfterRestartMs": 66.24262499999895,
+        "stderr": ""
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 2,
+          "jobRows": 1186
+        },
+        "totals": {
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139,
+          "fe": 473
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "changedCompletedFiles": 0,
+        "reexecutedUnits": 2
+      }
+    },
+    {
+      "scenario": "m-l4-f1b-12",
+      "workers": 2,
+      "killFractions": [
+        0.86
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.8600337268128162,
+          "killLatencyMs": 0.01654199999757111,
+          "statesAtTrigger": {
+            "COMPLETED": 1016,
+            "PENDING": 164,
+            "RUNNING": 2,
+            "SKIPPED": 4
+          },
+          "killedAtEpochMs": 1790377906487,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 1017,
+              "PENDING": 164,
+              "RUNNING": 1,
+              "SKIPPED": 4
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "invariantViolations": [],
+            "completedWorkPreserved": true,
+            "exitCode": 137
+          },
+          "completedCountAtTrigger": 1016,
+          "nextRestartFirstProgressMs": null
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 1461.5634580000042,
+        "firstProgressAfterRestartMs": 63.900125000000116,
+        "stderr": ""
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 1,
+          "jobRows": 1186
+        },
+        "totals": {
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139,
+          "fe": 473
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "changedCompletedFiles": 0,
+        "reexecutedUnits": 1
+      }
+    },
+    {
+      "scenario": "m-l4-f1b-13",
+      "workers": 2,
+      "killFractions": [
+        0.86
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.8608768971332209,
+          "killLatencyMs": 0.0148750000007567,
+          "statesAtTrigger": {
+            "COMPLETED": 1017,
+            "PENDING": 163,
+            "RUNNING": 2,
+            "SKIPPED": 4
+          },
+          "killedAtEpochMs": 1790377909120,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 1017,
+              "PENDING": 163,
+              "RUNNING": 2,
+              "SKIPPED": 4
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "invariantViolations": [],
+            "completedWorkPreserved": true,
+            "exitCode": 137
+          },
+          "completedCountAtTrigger": 1017,
+          "nextRestartFirstProgressMs": null
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 1493.2930829999968,
+        "firstProgressAfterRestartMs": 62.735374999996566,
+        "stderr": ""
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 2,
+          "jobRows": 1186
+        },
+        "totals": {
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139,
+          "fe": 473
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "changedCompletedFiles": 0,
+        "reexecutedUnits": 2
+      }
+    },
+    {
+      "scenario": "m-l4-f1b-14",
+      "workers": 2,
+      "killFractions": [
+        0.9
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.9005059021922428,
+          "killLatencyMs": 0.013832999997248407,
+          "statesAtTrigger": {
+            "COMPLETED": 1064,
+            "PENDING": 116,
+            "RUNNING": 2,
+            "SKIPPED": 4
+          },
+          "killedAtEpochMs": 1790377911894,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 1064,
+              "PENDING": 116,
+              "RUNNING": 2,
+              "SKIPPED": 4
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "invariantViolations": [],
+            "completedWorkPreserved": true,
+            "exitCode": 137
+          },
+          "completedCountAtTrigger": 1064,
+          "nextRestartFirstProgressMs": null
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 1496.7608330000003,
+        "firstProgressAfterRestartMs": 65.00866600000154,
+        "stderr": ""
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 2,
+          "jobRows": 1186
+        },
+        "totals": {
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139,
+          "fe": 473
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "changedCompletedFiles": 0,
+        "reexecutedUnits": 2
+      }
+    },
+    {
+      "scenario": "m-l4-f1b-15",
+      "workers": 2,
+      "killFractions": [
+        0.9
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.9005059021922428,
+          "killLatencyMs": 0.017334000003756955,
+          "statesAtTrigger": {
+            "COMPLETED": 1064,
+            "PENDING": 116,
+            "RUNNING": 2,
+            "SKIPPED": 4
+          },
+          "killedAtEpochMs": 1790377914725,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 1064,
+              "PENDING": 116,
+              "RUNNING": 2,
+              "SKIPPED": 4
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "invariantViolations": [],
+            "completedWorkPreserved": true,
+            "exitCode": 137
+          },
+          "completedCountAtTrigger": 1064,
+          "nextRestartFirstProgressMs": null
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 1488.1039999999994,
+        "firstProgressAfterRestartMs": 64.1640419999967,
+        "stderr": ""
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 2,
+          "jobRows": 1186
+        },
+        "totals": {
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139,
+          "fe": 473
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "changedCompletedFiles": 0,
+        "reexecutedUnits": 2
+      }
+    },
+    {
+      "scenario": "m-l4-f1b-16",
+      "workers": 2,
+      "killFractions": [
+        0.94
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.9401349072512648,
+          "killLatencyMs": 0.021000000000640284,
+          "statesAtTrigger": {
+            "COMPLETED": 1111,
+            "PENDING": 69,
+            "RUNNING": 1,
+            "SKIPPED": 5
+          },
+          "killedAtEpochMs": 1790377917587,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 1111,
+              "PENDING": 68,
+              "RUNNING": 2,
+              "SKIPPED": 5
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "invariantViolations": [],
+            "completedWorkPreserved": true,
+            "exitCode": 137
+          },
+          "completedCountAtTrigger": 1111,
+          "nextRestartFirstProgressMs": null
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 1481.1187500000015,
+        "firstProgressAfterRestartMs": 61.85441699999501,
+        "stderr": ""
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 2,
+          "jobRows": 1186
+        },
+        "totals": {
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139,
+          "fe": 473
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "changedCompletedFiles": 0,
+        "reexecutedUnits": 2
+      }
+    },
+    {
+      "scenario": "m-l4-f1b-17",
+      "workers": 2,
+      "killFractions": [
+        0.94
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.9401349072512648,
+          "killLatencyMs": 0.019209000005503185,
+          "statesAtTrigger": {
+            "COMPLETED": 1110,
+            "PENDING": 69,
+            "RUNNING": 2,
+            "SKIPPED": 5
+          },
+          "killedAtEpochMs": 1790377920460,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 1110,
+              "PENDING": 69,
+              "RUNNING": 2,
+              "SKIPPED": 5
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "invariantViolations": [],
+            "completedWorkPreserved": true,
+            "exitCode": 137
+          },
+          "completedCountAtTrigger": 1110,
+          "nextRestartFirstProgressMs": null
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 1481.3422500000015,
+        "firstProgressAfterRestartMs": 64.04170900000463,
+        "stderr": ""
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 2,
+          "jobRows": 1186
+        },
+        "totals": {
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139,
+          "fe": 473
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "changedCompletedFiles": 0,
+        "reexecutedUnits": 2
+      }
+    },
+    {
+      "scenario": "m-l4-f1b-18",
+      "workers": 2,
+      "killFractions": [
+        0.97
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.9704890387858347,
+          "killLatencyMs": 0.012500000004365575,
+          "statesAtTrigger": {
+            "COMPLETED": 1146,
+            "PENDING": 33,
+            "RUNNING": 2,
+            "SKIPPED": 5
+          },
+          "killedAtEpochMs": 1790377923461,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 1146,
+              "PENDING": 33,
+              "RUNNING": 2,
+              "SKIPPED": 5
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "invariantViolations": [],
+            "completedWorkPreserved": true,
+            "exitCode": 137
+          },
+          "completedCountAtTrigger": 1146,
+          "nextRestartFirstProgressMs": null
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 1482.4190830000007,
+        "firstProgressAfterRestartMs": 63.96483299999818,
+        "stderr": ""
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 2,
+          "jobRows": 1186
+        },
+        "totals": {
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139,
+          "fe": 473
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "changedCompletedFiles": 0,
+        "reexecutedUnits": 2
+      }
+    },
+    {
+      "scenario": "m-l4-f1b-19",
+      "workers": 2,
+      "killFractions": [
+        0.97
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.9704890387858347,
+          "killLatencyMs": 0.014916999993147328,
+          "statesAtTrigger": {
+            "COMPLETED": 1146,
+            "PENDING": 33,
+            "RUNNING": 2,
+            "SKIPPED": 5
+          },
+          "killedAtEpochMs": 1790377926541,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 1146,
+              "PENDING": 33,
+              "RUNNING": 2,
+              "SKIPPED": 5
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "invariantViolations": [],
+            "completedWorkPreserved": true,
+            "exitCode": 137
+          },
+          "completedCountAtTrigger": 1146,
+          "nextRestartFirstProgressMs": null
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 1472.8484580000004,
+        "firstProgressAfterRestartMs": 61.60212499999761,
+        "stderr": ""
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 2,
+          "jobRows": 1186
+        },
+        "totals": {
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139,
+          "fe": 473
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "changedCompletedFiles": 0,
+        "reexecutedUnits": 2
+      }
+    },
+    {
+      "scenario": "m-l4-f1b-20",
+      "workers": 2,
+      "killFractions": [
+        0.83,
+        0.93
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.8313659359190556,
+          "killLatencyMs": 0.022666999997454695,
+          "statesAtTrigger": {
+            "COMPLETED": 984,
+            "PENDING": 198,
+            "RUNNING": 2,
+            "SKIPPED": 2
+          },
+          "killedAtEpochMs": 1790377929186,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 985,
+              "PENDING": 197,
+              "RUNNING": 2,
+              "SKIPPED": 2
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "invariantViolations": [],
+            "completedWorkPreserved": true,
+            "exitCode": 137
+          },
+          "completedCountAtTrigger": 984,
+          "nextRestartFirstProgressMs": null
+        },
+        {
+          "triggerFraction": 0.9308600337268128,
+          "killLatencyMs": 0.014708999995491467,
+          "statesAtTrigger": {
+            "COMPLETED": 1100,
+            "PENDING": 79,
+            "RUNNING": 3,
+            "SKIPPED": 4
+          },
+          "killedAtEpochMs": 1790377929572,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 1100,
+              "PENDING": 79,
+              "RUNNING": 3,
+              "SKIPPED": 4
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "invariantViolations": [],
+            "completedWorkPreserved": true,
+            "exitCode": 137
+          },
+          "completedCountAtTrigger": 1100,
+          "nextRestartFirstProgressMs": null
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 1477.2957079999978,
+        "firstProgressAfterRestartMs": 59.145416999999725,
+        "stderr": ""
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 3,
+          "jobRows": 1186
+        },
+        "totals": {
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139,
+          "fe": 473
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "changedCompletedFiles": 0,
+        "reexecutedUnits": 3
+      }
+    },
+    {
+      "scenario": "m-l4-f1b-21",
+      "workers": 2,
+      "killFractions": [
+        0.85,
+        0.95
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.8507588532883642,
+          "killLatencyMs": 0.01591700001154095,
+          "statesAtTrigger": {
+            "COMPLETED": 1007,
+            "PENDING": 175,
+            "RUNNING": 1,
+            "SKIPPED": 3
+          },
+          "killedAtEpochMs": 1790377932214,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 1007,
+              "PENDING": 174,
+              "RUNNING": 2,
+              "SKIPPED": 3
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "invariantViolations": [],
+            "completedWorkPreserved": true,
+            "exitCode": 137
+          },
+          "completedCountAtTrigger": 1007,
+          "nextRestartFirstProgressMs": null
+        },
+        {
+          "triggerFraction": 0.9502529510961214,
+          "killLatencyMs": 0.012417000005370937,
+          "statesAtTrigger": {
+            "COMPLETED": 1122,
+            "PENDING": 55,
+            "RUNNING": 4,
+            "SKIPPED": 5
+          },
+          "killedAtEpochMs": 1790377932622,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 1122,
+              "PENDING": 55,
+              "RUNNING": 4,
+              "SKIPPED": 5
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "invariantViolations": [],
+            "completedWorkPreserved": true,
+            "exitCode": 137
+          },
+          "completedCountAtTrigger": 1122,
+          "nextRestartFirstProgressMs": null
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 1473.398874999999,
+        "firstProgressAfterRestartMs": 62.355540999997174,
+        "stderr": ""
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 4,
+          "jobRows": 1186
+        },
+        "totals": {
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139,
+          "fe": 473
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "changedCompletedFiles": 0,
+        "reexecutedUnits": 4
+      }
+    },
+    {
+      "scenario": "m-l4-f1b-22",
+      "workers": 2,
+      "killFractions": [
+        0.4,
+        0.88
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.40219224283305227,
+          "killLatencyMs": 0.020041000010678545,
+          "statesAtTrigger": {
+            "COMPLETED": 477,
+            "PENDING": 707,
+            "RUNNING": 2
+          },
+          "killedAtEpochMs": 1790377934837,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 479,
+              "PENDING": 706,
+              "RUNNING": 1
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "invariantViolations": [],
+            "completedWorkPreserved": true,
+            "exitCode": 137
+          },
+          "completedCountAtTrigger": 477,
+          "nextRestartFirstProgressMs": null
+        },
+        {
+          "triggerFraction": 0.8802698145025295,
+          "killLatencyMs": 0.014917000007699244,
+          "statesAtTrigger": {
+            "COMPLETED": 1040,
+            "PENDING": 140,
+            "RUNNING": 2,
+            "SKIPPED": 4
+          },
+          "killedAtEpochMs": 1790377936647,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 1040,
+              "PENDING": 140,
+              "RUNNING": 2,
+              "SKIPPED": 4
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 1,
+            "jobRows": 1186,
+            "invariantViolations": [],
+            "completedWorkPreserved": true,
+            "exitCode": 137
+          },
+          "completedCountAtTrigger": 1040,
+          "nextRestartFirstProgressMs": null
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 1492.8766250000044,
+        "firstProgressAfterRestartMs": 66.61537499999395,
+        "stderr": ""
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 3,
+          "jobRows": 1186
+        },
+        "totals": {
+          "sy": 662,
+          "re": 10755,
+          "ca": 2139,
+          "fe": 473
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "changedCompletedFiles": 0,
+        "reexecutedUnits": 3
+      }
+    }
+  ],
+  "summary": {
+    "attempts": 23,
+    "criteriaMet": 23,
+    "other": [],
+    "restartWallMs": {
+      "n": 23,
+      "min": 788.7065409999996,
+      "median": 1481.3422500000015,
+      "p95": 1494.3176249999997,
+      "max": 1496.7608330000003,
+      "mean": 1423.869108478261,
+      "stdev": 184.99895599821772,
+      "cv": 0.12992693984065193
+    },
+    "firstProgressAfterRestartMs": {
+      "n": 23,
+      "min": 53.00812500000029,
+      "median": 61.60212499999761,
+      "p95": 66.61537499999395,
+      "max": 72.53020799999649,
+      "mean": 60.22837669565097,
+      "stdev": 5.10453474374118,
+      "cv": 0.08475298561566201
+    }
+  },
+  "durationMs": 65149.435750000004
+}

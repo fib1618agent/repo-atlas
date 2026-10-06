@@ -174,12 +174,14 @@ Feature B may begin when its actual prerequisites are resolved:
 
 **Known state-model inconsistency (recorded, not reconciled):** `specs/004-engineering-relationship-graph/tasks.md` line 36 shows **T007 as `[X]`**, while Feature 005 governance (`specs/005-…/decision-record.md`) and its final report state **Feature 004 T007 is STOPPED / not cleared**. Safety interpretation: **T007 remains STOPPED** unless the explicit Feature 004/005 governance process clears it. This document does not resolve or reinterpret it.
 
+**Update 2026-09-25 (architecture revision, ADR-001 / F004 research.md A6):** the Cloudflare CPU gate above is **SUPERSEDED** (closed as superseded, not satisfied). The operative Feature 004 gate is the redefined **T007 — Local Relationship Engine Feasibility** (NOT STARTED / NOT AUTHORIZED). The `[X]` still records only the historical Cloudflare decision passes. Safety interpretation is unchanged in effect: **Feature 004 T008+ remain NOT AUTHORIZED** until the redefined T007 is executed and reviewed, or the user waives it by name. Feature 005's record is historical evidence (`specs/005-…/decision-record.md` §1 supersession note).
+
 ## 13. Safety and Authorization
 
 - No live Cloudflare operation, and no production resource mutation, without explicit authorization for that operation. Cloudflare Free plan only.
 - No Git push without explicit authorization. No destructive Git operations. No commit unless asked.
 - Local-first validation where specified. Feature-specific safety rules in `specs/` stay authoritative for that feature.
-- **Feature 004 T007 = STOPPED** (see §12).
+- **Feature 004 gate: redefined T007 (Local Relationship Engine Feasibility) NOT STARTED / NOT AUTHORIZED; T008+ NOT AUTHORIZED** (see §12 update 2026-09-25; the former Cloudflare-CPU STOPPED gate is superseded, not cleared).
 - Graph tools and personas confer no authorization.
 
 ## 14. Claude / Cursor Relationship

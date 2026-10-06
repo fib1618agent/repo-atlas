@@ -1,0 +1,2698 @@
+{
+  "measurement": "M-L4 part 3 (rev C)",
+  "dataset": "repo-atlas-rm",
+  "environmentHash": "e2b32efaacbd45bf",
+  "loadAvgAtStart": "{ 4.59 5.04 4.64 }",
+  "power": "Now drawing from 'AC Power'  -InternalBattery-0 (id=20578403)\t16%; charging; 11:34 remaining present: true",
+  "cleanReferenceHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+  "cleanRunsEqual": true,
+  "droppedKeyMetricPerCleanRun": [
+    0,
+    0,
+    0
+  ],
+  "test": "F-1 kill -9 / restart (rev C: strengthened assertions)",
+  "cleanRunsEqualAsserted": true,
+  "cleanHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+  "attempts": [
+    {
+      "scenario": "m-l4-c-f1-0",
+      "workers": 1,
+      "killFractions": [
+        0.1
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.10033726812816189,
+          "byKindAtTrigger": [
+            {
+              "kind": "contains",
+              "state": "PENDING",
+              "n": 474
+            },
+            {
+              "kind": "parsed",
+              "state": "PENDING",
+              "n": 239
+            },
+            {
+              "kind": "symbols",
+              "state": "COMPLETED",
+              "n": 119
+            },
+            {
+              "kind": "symbols",
+              "state": "PENDING",
+              "n": 353
+            },
+            {
+              "kind": "symbols",
+              "state": "RUNNING",
+              "n": 1
+            }
+          ],
+          "runningSymbolsAtTrigger": 1,
+          "runningParsedAtTrigger": 0,
+          "killedAtEpochMs": 1790378732463,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 119,
+              "PENDING": 1066,
+              "RUNNING": 1
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "completedJobStateAndCheckpointPreserved": true,
+            "completedParsedCheckpointRowsMismatch": 0,
+            "invariantViolations": [],
+            "exitCode": 137
+          }
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 2458.1415829999996,
+        "firstProgressAfterRestartMs": 55.494833000000654,
+        "reclaimed": 1,
+        "restartParsedDroppedKeyMetric": 0,
+        "restartUnitsExecuted": {
+          "symbols": 354,
+          "contains": 474,
+          "parsed": 239
+        }
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantAndCompletenessViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 1,
+          "jobRows": 1186
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "completedParsedFilesChangedAfterRestart": 0,
+        "completedParsedFilesChecked": 0,
+        "reexecutedUnitsViaReclaim": 1
+      }
+    },
+    {
+      "scenario": "m-l4-c-f1-1",
+      "workers": 1,
+      "killFractions": [
+        0.25
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.25126475548060706,
+          "byKindAtTrigger": [
+            {
+              "kind": "contains",
+              "state": "PENDING",
+              "n": 474
+            },
+            {
+              "kind": "parsed",
+              "state": "PENDING",
+              "n": 239
+            },
+            {
+              "kind": "symbols",
+              "state": "COMPLETED",
+              "n": 299
+            },
+            {
+              "kind": "symbols",
+              "state": "PENDING",
+              "n": 173
+            },
+            {
+              "kind": "symbols",
+              "state": "RUNNING",
+              "n": 1
+            }
+          ],
+          "runningSymbolsAtTrigger": 1,
+          "runningParsedAtTrigger": 0,
+          "killedAtEpochMs": 1790378735305,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 299,
+              "PENDING": 886,
+              "RUNNING": 1
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "completedJobStateAndCheckpointPreserved": true,
+            "completedParsedCheckpointRowsMismatch": 0,
+            "invariantViolations": [],
+            "exitCode": 137
+          }
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 2447.1069580000003,
+        "firstProgressAfterRestartMs": 52.54583300000013,
+        "reclaimed": 1,
+        "restartParsedDroppedKeyMetric": 0,
+        "restartUnitsExecuted": {
+          "symbols": 174,
+          "contains": 474,
+          "parsed": 239
+        }
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantAndCompletenessViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 1,
+          "jobRows": 1186
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "completedParsedFilesChangedAfterRestart": 0,
+        "completedParsedFilesChecked": 0,
+        "reexecutedUnitsViaReclaim": 1
+      }
+    },
+    {
+      "scenario": "m-l4-c-f1-2",
+      "workers": 1,
+      "killFractions": [
+        0.4
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.403035413153457,
+          "byKindAtTrigger": [
+            {
+              "kind": "contains",
+              "state": "COMPLETED",
+              "n": 6
+            },
+            {
+              "kind": "contains",
+              "state": "PENDING",
+              "n": 468
+            },
+            {
+              "kind": "parsed",
+              "state": "PENDING",
+              "n": 239
+            },
+            {
+              "kind": "symbols",
+              "state": "COMPLETED",
+              "n": 473
+            }
+          ],
+          "runningSymbolsAtTrigger": 0,
+          "runningParsedAtTrigger": 0,
+          "killedAtEpochMs": 1790378738343,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 480,
+              "PENDING": 706
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "completedJobStateAndCheckpointPreserved": true,
+            "completedParsedCheckpointRowsMismatch": 0,
+            "invariantViolations": [],
+            "exitCode": 137
+          }
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 1062.9693750000006,
+        "firstProgressAfterRestartMs": 54.50020899999981,
+        "reclaimed": 0,
+        "restartParsedDroppedKeyMetric": 0,
+        "restartUnitsExecuted": {
+          "contains": 467,
+          "parsed": 239
+        }
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantAndCompletenessViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 0,
+          "jobRows": 1186
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "completedParsedFilesChangedAfterRestart": 0,
+        "completedParsedFilesChecked": 0,
+        "reexecutedUnitsViaReclaim": 0
+      }
+    },
+    {
+      "scenario": "m-l4-c-f1-3",
+      "workers": 1,
+      "killFractions": [
+        0.55
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.554806070826307,
+          "byKindAtTrigger": [
+            {
+              "kind": "contains",
+              "state": "COMPLETED",
+              "n": 187
+            },
+            {
+              "kind": "contains",
+              "state": "PENDING",
+              "n": 286
+            },
+            {
+              "kind": "contains",
+              "state": "RUNNING",
+              "n": 1
+            },
+            {
+              "kind": "parsed",
+              "state": "PENDING",
+              "n": 239
+            },
+            {
+              "kind": "symbols",
+              "state": "COMPLETED",
+              "n": 473
+            }
+          ],
+          "runningSymbolsAtTrigger": 0,
+          "runningParsedAtTrigger": 0,
+          "killedAtEpochMs": 1790378740055,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 662,
+              "PENDING": 523,
+              "RUNNING": 1
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "completedJobStateAndCheckpointPreserved": true,
+            "completedParsedCheckpointRowsMismatch": 0,
+            "invariantViolations": [],
+            "exitCode": 137
+          }
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 2369.434291999998,
+        "firstProgressAfterRestartMs": 55.08258399999977,
+        "reclaimed": 1,
+        "restartParsedDroppedKeyMetric": 0,
+        "restartUnitsExecuted": {
+          "contains": 285,
+          "parsed": 239
+        }
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantAndCompletenessViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 1,
+          "jobRows": 1186
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "completedParsedFilesChangedAfterRestart": 0,
+        "completedParsedFilesChecked": 0,
+        "reexecutedUnitsViaReclaim": 1
+      }
+    },
+    {
+      "scenario": "m-l4-c-f1-4",
+      "workers": 1,
+      "killFractions": [
+        0.7
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.7006745362563238,
+          "byKindAtTrigger": [
+            {
+              "kind": "contains",
+              "state": "COMPLETED",
+              "n": 360
+            },
+            {
+              "kind": "contains",
+              "state": "PENDING",
+              "n": 113
+            },
+            {
+              "kind": "contains",
+              "state": "RUNNING",
+              "n": 1
+            },
+            {
+              "kind": "parsed",
+              "state": "PENDING",
+              "n": 239
+            },
+            {
+              "kind": "symbols",
+              "state": "COMPLETED",
+              "n": 473
+            }
+          ],
+          "runningSymbolsAtTrigger": 0,
+          "runningParsedAtTrigger": 0,
+          "killedAtEpochMs": 1790378743147,
+          "afterKill": {
+            "states": {
+              "CLAIMED": 1,
+              "COMPLETED": 834,
+              "PENDING": 351
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "completedJobStateAndCheckpointPreserved": true,
+            "completedParsedCheckpointRowsMismatch": 0,
+            "invariantViolations": [],
+            "exitCode": 137
+          }
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 2409.7544589999998,
+        "firstProgressAfterRestartMs": 56.64558399999805,
+        "reclaimed": 1,
+        "restartParsedDroppedKeyMetric": 0,
+        "restartUnitsExecuted": {
+          "contains": 113,
+          "parsed": 239
+        }
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantAndCompletenessViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 1,
+          "jobRows": 1186
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "completedParsedFilesChangedAfterRestart": 0,
+        "completedParsedFilesChecked": 0,
+        "reexecutedUnitsViaReclaim": 1
+      }
+    },
+    {
+      "scenario": "m-l4-c-f1-5",
+      "workers": 1,
+      "killFractions": [
+        0.82
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.8204047217537943,
+          "byKindAtTrigger": [
+            {
+              "kind": "contains",
+              "state": "COMPLETED",
+              "n": 474
+            },
+            {
+              "kind": "parsed",
+              "state": "COMPLETED",
+              "n": 26
+            },
+            {
+              "kind": "parsed",
+              "state": "PENDING",
+              "n": 211
+            },
+            {
+              "kind": "parsed",
+              "state": "RUNNING",
+              "n": 1
+            },
+            {
+              "kind": "parsed",
+              "state": "SKIPPED",
+              "n": 1
+            },
+            {
+              "kind": "symbols",
+              "state": "COMPLETED",
+              "n": 473
+            }
+          ],
+          "runningSymbolsAtTrigger": 0,
+          "runningParsedAtTrigger": 1,
+          "killedAtEpochMs": 1790378746474,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 973,
+              "PENDING": 211,
+              "RUNNING": 1,
+              "SKIPPED": 1
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "completedJobStateAndCheckpointPreserved": true,
+            "completedParsedCheckpointRowsMismatch": 0,
+            "invariantViolations": [],
+            "exitCode": 137
+          }
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 1491.7843329999996,
+        "firstProgressAfterRestartMs": 54.71924999999828,
+        "reclaimed": 1,
+        "restartParsedDroppedKeyMetric": 0,
+        "restartUnitsExecuted": {
+          "parsed": 212
+        }
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantAndCompletenessViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 1,
+          "jobRows": 1186
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "completedParsedFilesChangedAfterRestart": 0,
+        "completedParsedFilesChecked": 26,
+        "reexecutedUnitsViaReclaim": 1
+      }
+    },
+    {
+      "scenario": "m-l4-c-f1-6",
+      "workers": 1,
+      "killFractions": [
+        0.86
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.8600337268128162,
+          "byKindAtTrigger": [
+            {
+              "kind": "contains",
+              "state": "COMPLETED",
+              "n": 474
+            },
+            {
+              "kind": "parsed",
+              "state": "CLAIMED",
+              "n": 1
+            },
+            {
+              "kind": "parsed",
+              "state": "COMPLETED",
+              "n": 70
+            },
+            {
+              "kind": "parsed",
+              "state": "PENDING",
+              "n": 164
+            },
+            {
+              "kind": "parsed",
+              "state": "SKIPPED",
+              "n": 4
+            },
+            {
+              "kind": "symbols",
+              "state": "COMPLETED",
+              "n": 473
+            }
+          ],
+          "runningSymbolsAtTrigger": 0,
+          "runningParsedAtTrigger": 0,
+          "killedAtEpochMs": 1790378748996,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 1017,
+              "PENDING": 164,
+              "RUNNING": 1,
+              "SKIPPED": 4
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "completedJobStateAndCheckpointPreserved": true,
+            "completedParsedCheckpointRowsMismatch": 0,
+            "invariantViolations": [],
+            "exitCode": 137
+          }
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 1485.4625410000008,
+        "firstProgressAfterRestartMs": 56.643583000000945,
+        "reclaimed": 1,
+        "restartParsedDroppedKeyMetric": 0,
+        "restartUnitsExecuted": {
+          "parsed": 165
+        }
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantAndCompletenessViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 1,
+          "jobRows": 1186
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "completedParsedFilesChangedAfterRestart": 0,
+        "completedParsedFilesChecked": 69,
+        "reexecutedUnitsViaReclaim": 1
+      }
+    },
+    {
+      "scenario": "m-l4-c-f1-7",
+      "workers": 1,
+      "killFractions": [
+        0.9
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.9013490725126475,
+          "byKindAtTrigger": [
+            {
+              "kind": "contains",
+              "state": "COMPLETED",
+              "n": 474
+            },
+            {
+              "kind": "parsed",
+              "state": "COMPLETED",
+              "n": 118
+            },
+            {
+              "kind": "parsed",
+              "state": "PENDING",
+              "n": 116
+            },
+            {
+              "kind": "parsed",
+              "state": "RUNNING",
+              "n": 1
+            },
+            {
+              "kind": "parsed",
+              "state": "SKIPPED",
+              "n": 4
+            },
+            {
+              "kind": "symbols",
+              "state": "COMPLETED",
+              "n": 473
+            }
+          ],
+          "runningSymbolsAtTrigger": 0,
+          "runningParsedAtTrigger": 1,
+          "killedAtEpochMs": 1790378751583,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 1065,
+              "PENDING": 116,
+              "RUNNING": 1,
+              "SKIPPED": 4
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "completedJobStateAndCheckpointPreserved": true,
+            "completedParsedCheckpointRowsMismatch": 0,
+            "invariantViolations": [],
+            "exitCode": 137
+          }
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 1485.1026669999992,
+        "firstProgressAfterRestartMs": 55.24166700000205,
+        "reclaimed": 1,
+        "restartParsedDroppedKeyMetric": 0,
+        "restartUnitsExecuted": {
+          "parsed": 117
+        }
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantAndCompletenessViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 1,
+          "jobRows": 1186
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "completedParsedFilesChangedAfterRestart": 0,
+        "completedParsedFilesChecked": 118,
+        "reexecutedUnitsViaReclaim": 1
+      }
+    },
+    {
+      "scenario": "m-l4-c-f1-8",
+      "workers": 1,
+      "killFractions": [
+        0.94
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.9401349072512648,
+          "byKindAtTrigger": [
+            {
+              "kind": "contains",
+              "state": "COMPLETED",
+              "n": 474
+            },
+            {
+              "kind": "parsed",
+              "state": "COMPLETED",
+              "n": 163
+            },
+            {
+              "kind": "parsed",
+              "state": "PENDING",
+              "n": 70
+            },
+            {
+              "kind": "parsed",
+              "state": "RUNNING",
+              "n": 1
+            },
+            {
+              "kind": "parsed",
+              "state": "SKIPPED",
+              "n": 5
+            },
+            {
+              "kind": "symbols",
+              "state": "COMPLETED",
+              "n": 473
+            }
+          ],
+          "runningSymbolsAtTrigger": 0,
+          "runningParsedAtTrigger": 1,
+          "killedAtEpochMs": 1790378754262,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 1110,
+              "PENDING": 70,
+              "RUNNING": 1,
+              "SKIPPED": 5
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "completedJobStateAndCheckpointPreserved": true,
+            "completedParsedCheckpointRowsMismatch": 0,
+            "invariantViolations": [],
+            "exitCode": 137
+          }
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 1479.069792000002,
+        "firstProgressAfterRestartMs": 56.8739170000008,
+        "reclaimed": 1,
+        "restartParsedDroppedKeyMetric": 0,
+        "restartUnitsExecuted": {
+          "parsed": 71
+        }
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantAndCompletenessViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 1,
+          "jobRows": 1186
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "completedParsedFilesChangedAfterRestart": 0,
+        "completedParsedFilesChecked": 163,
+        "reexecutedUnitsViaReclaim": 1
+      }
+    },
+    {
+      "scenario": "m-l4-c-f1-9",
+      "workers": 1,
+      "killFractions": [
+        0.97
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.9704890387858347,
+          "byKindAtTrigger": [
+            {
+              "kind": "contains",
+              "state": "COMPLETED",
+              "n": 474
+            },
+            {
+              "kind": "parsed",
+              "state": "COMPLETED",
+              "n": 199
+            },
+            {
+              "kind": "parsed",
+              "state": "PENDING",
+              "n": 34
+            },
+            {
+              "kind": "parsed",
+              "state": "RUNNING",
+              "n": 1
+            },
+            {
+              "kind": "parsed",
+              "state": "SKIPPED",
+              "n": 5
+            },
+            {
+              "kind": "symbols",
+              "state": "COMPLETED",
+              "n": 473
+            }
+          ],
+          "runningSymbolsAtTrigger": 0,
+          "runningParsedAtTrigger": 1,
+          "killedAtEpochMs": 1790378757119,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 1146,
+              "PENDING": 34,
+              "RUNNING": 1,
+              "SKIPPED": 5
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "completedJobStateAndCheckpointPreserved": true,
+            "completedParsedCheckpointRowsMismatch": 0,
+            "invariantViolations": [],
+            "exitCode": 137
+          }
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 1458.0841669999973,
+        "firstProgressAfterRestartMs": 54.483124999998836,
+        "reclaimed": 1,
+        "restartParsedDroppedKeyMetric": 0,
+        "restartUnitsExecuted": {
+          "parsed": 35
+        }
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantAndCompletenessViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 1,
+          "jobRows": 1186
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "completedParsedFilesChangedAfterRestart": 0,
+        "completedParsedFilesChecked": 199,
+        "reexecutedUnitsViaReclaim": 1
+      }
+    },
+    {
+      "scenario": "m-l4-c-f1-10",
+      "workers": 2,
+      "killFractions": [
+        0.1
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.10118043844856661,
+          "byKindAtTrigger": [
+            {
+              "kind": "contains",
+              "state": "PENDING",
+              "n": 474
+            },
+            {
+              "kind": "parsed",
+              "state": "PENDING",
+              "n": 239
+            },
+            {
+              "kind": "symbols",
+              "state": "COMPLETED",
+              "n": 121
+            },
+            {
+              "kind": "symbols",
+              "state": "PENDING",
+              "n": 350
+            },
+            {
+              "kind": "symbols",
+              "state": "RUNNING",
+              "n": 2
+            }
+          ],
+          "runningSymbolsAtTrigger": 2,
+          "runningParsedAtTrigger": 0,
+          "killedAtEpochMs": 1790378758923,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 121,
+              "PENDING": 1063,
+              "RUNNING": 2
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "completedJobStateAndCheckpointPreserved": true,
+            "completedParsedCheckpointRowsMismatch": 0,
+            "invariantViolations": [],
+            "exitCode": 137
+          }
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 2339.222750000001,
+        "firstProgressAfterRestartMs": 63.53125,
+        "reclaimed": 2,
+        "restartParsedDroppedKeyMetric": 0,
+        "restartUnitsExecuted": {
+          "symbols": 352,
+          "contains": 474,
+          "parsed": 239
+        }
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantAndCompletenessViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 2,
+          "jobRows": 1186
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "completedParsedFilesChangedAfterRestart": 0,
+        "completedParsedFilesChecked": 0,
+        "reexecutedUnitsViaReclaim": 2
+      }
+    },
+    {
+      "scenario": "m-l4-c-f1-11",
+      "workers": 2,
+      "killFractions": [
+        0.25
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.25042158516020235,
+          "byKindAtTrigger": [
+            {
+              "kind": "contains",
+              "state": "PENDING",
+              "n": 474
+            },
+            {
+              "kind": "parsed",
+              "state": "PENDING",
+              "n": 239
+            },
+            {
+              "kind": "symbols",
+              "state": "COMPLETED",
+              "n": 297
+            },
+            {
+              "kind": "symbols",
+              "state": "PENDING",
+              "n": 174
+            },
+            {
+              "kind": "symbols",
+              "state": "RUNNING",
+              "n": 2
+            }
+          ],
+          "runningSymbolsAtTrigger": 2,
+          "runningParsedAtTrigger": 0,
+          "killedAtEpochMs": 1790378761674,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 297,
+              "PENDING": 887,
+              "RUNNING": 2
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "completedJobStateAndCheckpointPreserved": true,
+            "completedParsedCheckpointRowsMismatch": 0,
+            "invariantViolations": [],
+            "exitCode": 137
+          }
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 2401.827333000001,
+        "firstProgressAfterRestartMs": 66.59229100000084,
+        "reclaimed": 2,
+        "restartParsedDroppedKeyMetric": 0,
+        "restartUnitsExecuted": {
+          "symbols": 176,
+          "contains": 474,
+          "parsed": 239
+        }
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantAndCompletenessViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 2,
+          "jobRows": 1186
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "completedParsedFilesChangedAfterRestart": 0,
+        "completedParsedFilesChecked": 0,
+        "reexecutedUnitsViaReclaim": 2
+      }
+    },
+    {
+      "scenario": "m-l4-c-f1-12",
+      "workers": 2,
+      "killFractions": [
+        0.4
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.40050590219224286,
+          "byKindAtTrigger": [
+            {
+              "kind": "contains",
+              "state": "COMPLETED",
+              "n": 2
+            },
+            {
+              "kind": "contains",
+              "state": "PENDING",
+              "n": 470
+            },
+            {
+              "kind": "contains",
+              "state": "RUNNING",
+              "n": 2
+            },
+            {
+              "kind": "parsed",
+              "state": "PENDING",
+              "n": 239
+            },
+            {
+              "kind": "symbols",
+              "state": "COMPLETED",
+              "n": 473
+            }
+          ],
+          "runningSymbolsAtTrigger": 0,
+          "runningParsedAtTrigger": 0,
+          "killedAtEpochMs": 1790378764679,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 475,
+              "PENDING": 709,
+              "RUNNING": 2
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "completedJobStateAndCheckpointPreserved": true,
+            "completedParsedCheckpointRowsMismatch": 0,
+            "invariantViolations": [],
+            "exitCode": 137
+          }
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 2253.8951249999955,
+        "firstProgressAfterRestartMs": 60.86754199999996,
+        "reclaimed": 2,
+        "restartParsedDroppedKeyMetric": 0,
+        "restartUnitsExecuted": {
+          "contains": 472,
+          "parsed": 239
+        }
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantAndCompletenessViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 2,
+          "jobRows": 1186
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "completedParsedFilesChangedAfterRestart": 0,
+        "completedParsedFilesChecked": 0,
+        "reexecutedUnitsViaReclaim": 2
+      }
+    },
+    {
+      "scenario": "m-l4-c-f1-13",
+      "workers": 2,
+      "killFractions": [
+        0.55
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.551433389544688,
+          "byKindAtTrigger": [
+            {
+              "kind": "contains",
+              "state": "COMPLETED",
+              "n": 183
+            },
+            {
+              "kind": "contains",
+              "state": "PENDING",
+              "n": 289
+            },
+            {
+              "kind": "contains",
+              "state": "RUNNING",
+              "n": 2
+            },
+            {
+              "kind": "parsed",
+              "state": "PENDING",
+              "n": 239
+            },
+            {
+              "kind": "symbols",
+              "state": "COMPLETED",
+              "n": 473
+            }
+          ],
+          "runningSymbolsAtTrigger": 0,
+          "runningParsedAtTrigger": 0,
+          "killedAtEpochMs": 1790378767570,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 658,
+              "PENDING": 526,
+              "RUNNING": 2
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "completedJobStateAndCheckpointPreserved": true,
+            "completedParsedCheckpointRowsMismatch": 0,
+            "invariantViolations": [],
+            "exitCode": 137
+          }
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 2188.660416999999,
+        "firstProgressAfterRestartMs": 61.98383399999875,
+        "reclaimed": 2,
+        "restartParsedDroppedKeyMetric": 0,
+        "restartUnitsExecuted": {
+          "contains": 289,
+          "parsed": 239
+        }
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantAndCompletenessViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 2,
+          "jobRows": 1186
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "completedParsedFilesChangedAfterRestart": 0,
+        "completedParsedFilesChecked": 0,
+        "reexecutedUnitsViaReclaim": 2
+      }
+    },
+    {
+      "scenario": "m-l4-c-f1-14",
+      "workers": 2,
+      "killFractions": [
+        0.7
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.7023608768971332,
+          "byKindAtTrigger": [
+            {
+              "kind": "contains",
+              "state": "CLAIMED",
+              "n": 1
+            },
+            {
+              "kind": "contains",
+              "state": "COMPLETED",
+              "n": 362
+            },
+            {
+              "kind": "contains",
+              "state": "PENDING",
+              "n": 111
+            },
+            {
+              "kind": "parsed",
+              "state": "PENDING",
+              "n": 239
+            },
+            {
+              "kind": "symbols",
+              "state": "COMPLETED",
+              "n": 473
+            }
+          ],
+          "runningSymbolsAtTrigger": 0,
+          "runningParsedAtTrigger": 0,
+          "killedAtEpochMs": 1790378770447,
+          "afterKill": {
+            "states": {
+              "CLAIMED": 1,
+              "COMPLETED": 836,
+              "PENDING": 348,
+              "RUNNING": 1
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "completedJobStateAndCheckpointPreserved": true,
+            "completedParsedCheckpointRowsMismatch": 0,
+            "invariantViolations": [],
+            "exitCode": 137
+          }
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 2293.4902500000026,
+        "firstProgressAfterRestartMs": 60.68725000000268,
+        "reclaimed": 2,
+        "restartParsedDroppedKeyMetric": 0,
+        "restartUnitsExecuted": {
+          "contains": 111,
+          "parsed": 239
+        }
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantAndCompletenessViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 2,
+          "jobRows": 1186
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "completedParsedFilesChangedAfterRestart": 0,
+        "completedParsedFilesChecked": 0,
+        "reexecutedUnitsViaReclaim": 2
+      }
+    },
+    {
+      "scenario": "m-l4-c-f1-15",
+      "workers": 2,
+      "killFractions": [
+        0.82
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.8204047217537943,
+          "byKindAtTrigger": [
+            {
+              "kind": "contains",
+              "state": "COMPLETED",
+              "n": 474
+            },
+            {
+              "kind": "parsed",
+              "state": "COMPLETED",
+              "n": 25
+            },
+            {
+              "kind": "parsed",
+              "state": "PENDING",
+              "n": 211
+            },
+            {
+              "kind": "parsed",
+              "state": "RUNNING",
+              "n": 2
+            },
+            {
+              "kind": "parsed",
+              "state": "SKIPPED",
+              "n": 1
+            },
+            {
+              "kind": "symbols",
+              "state": "COMPLETED",
+              "n": 473
+            }
+          ],
+          "runningSymbolsAtTrigger": 0,
+          "runningParsedAtTrigger": 2,
+          "killedAtEpochMs": 1790378773656,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 973,
+              "PENDING": 211,
+              "RUNNING": 1,
+              "SKIPPED": 1
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "completedJobStateAndCheckpointPreserved": true,
+            "completedParsedCheckpointRowsMismatch": 0,
+            "invariantViolations": [],
+            "exitCode": 137
+          }
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 1478.1928750000006,
+        "firstProgressAfterRestartMs": 63.96495899999718,
+        "reclaimed": 1,
+        "restartParsedDroppedKeyMetric": 0,
+        "restartUnitsExecuted": {
+          "parsed": 212
+        }
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantAndCompletenessViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 1,
+          "jobRows": 1186
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "completedParsedFilesChangedAfterRestart": 0,
+        "completedParsedFilesChecked": 25,
+        "reexecutedUnitsViaReclaim": 1
+      }
+    },
+    {
+      "scenario": "m-l4-c-f1-16",
+      "workers": 2,
+      "killFractions": [
+        0.86
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.8600337268128162,
+          "byKindAtTrigger": [
+            {
+              "kind": "contains",
+              "state": "COMPLETED",
+              "n": 474
+            },
+            {
+              "kind": "parsed",
+              "state": "COMPLETED",
+              "n": 69
+            },
+            {
+              "kind": "parsed",
+              "state": "PENDING",
+              "n": 166
+            },
+            {
+              "kind": "parsed",
+              "state": "SKIPPED",
+              "n": 4
+            },
+            {
+              "kind": "symbols",
+              "state": "COMPLETED",
+              "n": 473
+            }
+          ],
+          "runningSymbolsAtTrigger": 0,
+          "runningParsedAtTrigger": 0,
+          "killedAtEpochMs": 1790378776079,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 1016,
+              "PENDING": 166,
+              "SKIPPED": 4
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "completedJobStateAndCheckpointPreserved": true,
+            "completedParsedCheckpointRowsMismatch": 0,
+            "invariantViolations": [],
+            "exitCode": 137
+          }
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 665.8389999999999,
+        "firstProgressAfterRestartMs": 66.39508400000341,
+        "reclaimed": 0,
+        "restartParsedDroppedKeyMetric": 0,
+        "restartUnitsExecuted": {
+          "parsed": 166
+        }
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantAndCompletenessViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 0,
+          "jobRows": 1186
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "completedParsedFilesChangedAfterRestart": 0,
+        "completedParsedFilesChecked": 69,
+        "reexecutedUnitsViaReclaim": 0
+      }
+    },
+    {
+      "scenario": "m-l4-c-f1-17",
+      "workers": 2,
+      "killFractions": [
+        0.9
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.9005059021922428,
+          "byKindAtTrigger": [
+            {
+              "kind": "contains",
+              "state": "COMPLETED",
+              "n": 474
+            },
+            {
+              "kind": "parsed",
+              "state": "COMPLETED",
+              "n": 117
+            },
+            {
+              "kind": "parsed",
+              "state": "PENDING",
+              "n": 116
+            },
+            {
+              "kind": "parsed",
+              "state": "RUNNING",
+              "n": 2
+            },
+            {
+              "kind": "parsed",
+              "state": "SKIPPED",
+              "n": 4
+            },
+            {
+              "kind": "symbols",
+              "state": "COMPLETED",
+              "n": 473
+            }
+          ],
+          "runningSymbolsAtTrigger": 0,
+          "runningParsedAtTrigger": 2,
+          "killedAtEpochMs": 1790378777851,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 1064,
+              "PENDING": 116,
+              "RUNNING": 2,
+              "SKIPPED": 4
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "completedJobStateAndCheckpointPreserved": true,
+            "completedParsedCheckpointRowsMismatch": 0,
+            "invariantViolations": [],
+            "exitCode": 137
+          }
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 1479.132292000002,
+        "firstProgressAfterRestartMs": 63.109375,
+        "reclaimed": 2,
+        "restartParsedDroppedKeyMetric": 0,
+        "restartUnitsExecuted": {
+          "parsed": 118
+        }
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantAndCompletenessViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 2,
+          "jobRows": 1186
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "completedParsedFilesChangedAfterRestart": 0,
+        "completedParsedFilesChecked": 117,
+        "reexecutedUnitsViaReclaim": 2
+      }
+    },
+    {
+      "scenario": "m-l4-c-f1-18",
+      "workers": 2,
+      "killFractions": [
+        0.94
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.9401349072512648,
+          "byKindAtTrigger": [
+            {
+              "kind": "contains",
+              "state": "COMPLETED",
+              "n": 474
+            },
+            {
+              "kind": "parsed",
+              "state": "COMPLETED",
+              "n": 163
+            },
+            {
+              "kind": "parsed",
+              "state": "PENDING",
+              "n": 69
+            },
+            {
+              "kind": "parsed",
+              "state": "RUNNING",
+              "n": 2
+            },
+            {
+              "kind": "parsed",
+              "state": "SKIPPED",
+              "n": 5
+            },
+            {
+              "kind": "symbols",
+              "state": "COMPLETED",
+              "n": 473
+            }
+          ],
+          "runningSymbolsAtTrigger": 0,
+          "runningParsedAtTrigger": 2,
+          "killedAtEpochMs": 1790378780509,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 1110,
+              "PENDING": 69,
+              "RUNNING": 2,
+              "SKIPPED": 5
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "completedJobStateAndCheckpointPreserved": true,
+            "completedParsedCheckpointRowsMismatch": 0,
+            "invariantViolations": [],
+            "exitCode": 137
+          }
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 1481.8265420000025,
+        "firstProgressAfterRestartMs": 65.5088340000002,
+        "reclaimed": 2,
+        "restartParsedDroppedKeyMetric": 0,
+        "restartUnitsExecuted": {
+          "parsed": 71
+        }
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantAndCompletenessViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 2,
+          "jobRows": 1186
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "completedParsedFilesChangedAfterRestart": 0,
+        "completedParsedFilesChecked": 163,
+        "reexecutedUnitsViaReclaim": 2
+      }
+    },
+    {
+      "scenario": "m-l4-c-f1-19",
+      "workers": 2,
+      "killFractions": [
+        0.97
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.9704890387858347,
+          "byKindAtTrigger": [
+            {
+              "kind": "contains",
+              "state": "COMPLETED",
+              "n": 474
+            },
+            {
+              "kind": "parsed",
+              "state": "COMPLETED",
+              "n": 199
+            },
+            {
+              "kind": "parsed",
+              "state": "PENDING",
+              "n": 33
+            },
+            {
+              "kind": "parsed",
+              "state": "RUNNING",
+              "n": 2
+            },
+            {
+              "kind": "parsed",
+              "state": "SKIPPED",
+              "n": 5
+            },
+            {
+              "kind": "symbols",
+              "state": "COMPLETED",
+              "n": 473
+            }
+          ],
+          "runningSymbolsAtTrigger": 0,
+          "runningParsedAtTrigger": 2,
+          "killedAtEpochMs": 1790378783335,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 1146,
+              "PENDING": 33,
+              "RUNNING": 2,
+              "SKIPPED": 5
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "completedJobStateAndCheckpointPreserved": true,
+            "completedParsedCheckpointRowsMismatch": 0,
+            "invariantViolations": [],
+            "exitCode": 137
+          }
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 1482.022708000004,
+        "firstProgressAfterRestartMs": 65.9152080000058,
+        "reclaimed": 2,
+        "restartParsedDroppedKeyMetric": 0,
+        "restartUnitsExecuted": {
+          "parsed": 35
+        }
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantAndCompletenessViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 2,
+          "jobRows": 1186
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "completedParsedFilesChangedAfterRestart": 0,
+        "completedParsedFilesChecked": 199,
+        "reexecutedUnitsViaReclaim": 2
+      }
+    },
+    {
+      "scenario": "m-l4-c-f1-20",
+      "workers": 2,
+      "killFractions": [
+        0.3,
+        0.7
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.30016863406408095,
+          "byKindAtTrigger": [
+            {
+              "kind": "contains",
+              "state": "PENDING",
+              "n": 474
+            },
+            {
+              "kind": "parsed",
+              "state": "PENDING",
+              "n": 239
+            },
+            {
+              "kind": "symbols",
+              "state": "COMPLETED",
+              "n": 357
+            },
+            {
+              "kind": "symbols",
+              "state": "PENDING",
+              "n": 114
+            },
+            {
+              "kind": "symbols",
+              "state": "RUNNING",
+              "n": 2
+            }
+          ],
+          "runningSymbolsAtTrigger": 2,
+          "runningParsedAtTrigger": 0,
+          "killedAtEpochMs": 1790378785359,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 357,
+              "PENDING": 827,
+              "RUNNING": 2
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "completedJobStateAndCheckpointPreserved": true,
+            "completedParsedCheckpointRowsMismatch": 0,
+            "invariantViolations": [],
+            "exitCode": 137
+          }
+        },
+        {
+          "triggerFraction": 0.7006745362563238,
+          "byKindAtTrigger": [
+            {
+              "kind": "contains",
+              "state": "COMPLETED",
+              "n": 360
+            },
+            {
+              "kind": "contains",
+              "state": "PENDING",
+              "n": 113
+            },
+            {
+              "kind": "contains",
+              "state": "RUNNING",
+              "n": 1
+            },
+            {
+              "kind": "parsed",
+              "state": "PENDING",
+              "n": 239
+            },
+            {
+              "kind": "symbols",
+              "state": "COMPLETED",
+              "n": 473
+            }
+          ],
+          "runningSymbolsAtTrigger": 0,
+          "runningParsedAtTrigger": 0,
+          "killedAtEpochMs": 1790378786967,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 834,
+              "PENDING": 351,
+              "RUNNING": 1
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 2,
+            "jobRows": 1186,
+            "completedJobStateAndCheckpointPreserved": true,
+            "completedParsedCheckpointRowsMismatch": 0,
+            "invariantViolations": [],
+            "exitCode": 137
+          }
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 2278.9016249999986,
+        "firstProgressAfterRestartMs": 63.35208300000522,
+        "reclaimed": 1,
+        "restartParsedDroppedKeyMetric": 0,
+        "restartUnitsExecuted": {
+          "parsed": 239,
+          "contains": 113
+        }
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantAndCompletenessViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 3,
+          "jobRows": 1186
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "completedParsedFilesChangedAfterRestart": 0,
+        "completedParsedFilesChecked": 0,
+        "reexecutedUnitsViaReclaim": 3
+      }
+    },
+    {
+      "scenario": "m-l4-c-f1-21",
+      "workers": 2,
+      "killFractions": [
+        0.2,
+        0.5
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.2015177065767285,
+          "byKindAtTrigger": [
+            {
+              "kind": "contains",
+              "state": "PENDING",
+              "n": 474
+            },
+            {
+              "kind": "parsed",
+              "state": "PENDING",
+              "n": 239
+            },
+            {
+              "kind": "symbols",
+              "state": "COMPLETED",
+              "n": 239
+            },
+            {
+              "kind": "symbols",
+              "state": "PENDING",
+              "n": 232
+            },
+            {
+              "kind": "symbols",
+              "state": "RUNNING",
+              "n": 2
+            }
+          ],
+          "runningSymbolsAtTrigger": 2,
+          "runningParsedAtTrigger": 0,
+          "killedAtEpochMs": 1790378789591,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 239,
+              "PENDING": 945,
+              "RUNNING": 2
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "completedJobStateAndCheckpointPreserved": true,
+            "completedParsedCheckpointRowsMismatch": 0,
+            "invariantViolations": [],
+            "exitCode": 137
+          }
+        },
+        {
+          "triggerFraction": 0.5025295109612141,
+          "byKindAtTrigger": [
+            {
+              "kind": "contains",
+              "state": "COMPLETED",
+              "n": 126
+            },
+            {
+              "kind": "contains",
+              "state": "PENDING",
+              "n": 347
+            },
+            {
+              "kind": "contains",
+              "state": "RUNNING",
+              "n": 1
+            },
+            {
+              "kind": "parsed",
+              "state": "PENDING",
+              "n": 239
+            },
+            {
+              "kind": "symbols",
+              "state": "COMPLETED",
+              "n": 473
+            }
+          ],
+          "runningSymbolsAtTrigger": 0,
+          "runningParsedAtTrigger": 0,
+          "killedAtEpochMs": 1790378791150,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 601,
+              "PENDING": 584,
+              "RUNNING": 1
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 2,
+            "jobRows": 1186,
+            "completedJobStateAndCheckpointPreserved": true,
+            "completedParsedCheckpointRowsMismatch": 0,
+            "invariantViolations": [],
+            "exitCode": 137
+          }
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 2250.2277079999913,
+        "firstProgressAfterRestartMs": 79.9517499999929,
+        "reclaimed": 1,
+        "restartParsedDroppedKeyMetric": 0,
+        "restartUnitsExecuted": {
+          "contains": 346,
+          "parsed": 239
+        }
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantAndCompletenessViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 3,
+          "jobRows": 1186
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "completedParsedFilesChangedAfterRestart": 0,
+        "completedParsedFilesChecked": 0,
+        "reexecutedUnitsViaReclaim": 3
+      }
+    },
+    {
+      "scenario": "m-l4-c-f1-22",
+      "workers": 2,
+      "killFractions": [
+        0.45,
+        0.8
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.45531197301854975,
+          "byKindAtTrigger": [
+            {
+              "kind": "contains",
+              "state": "COMPLETED",
+              "n": 69
+            },
+            {
+              "kind": "contains",
+              "state": "PENDING",
+              "n": 404
+            },
+            {
+              "kind": "contains",
+              "state": "RUNNING",
+              "n": 1
+            },
+            {
+              "kind": "parsed",
+              "state": "PENDING",
+              "n": 239
+            },
+            {
+              "kind": "symbols",
+              "state": "COMPLETED",
+              "n": 473
+            }
+          ],
+          "runningSymbolsAtTrigger": 0,
+          "runningParsedAtTrigger": 0,
+          "killedAtEpochMs": 1790378794043,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 544,
+              "PENDING": 641,
+              "RUNNING": 1
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "completedJobStateAndCheckpointPreserved": true,
+            "completedParsedCheckpointRowsMismatch": 0,
+            "invariantViolations": [],
+            "exitCode": 137
+          }
+        },
+        {
+          "triggerFraction": 0.8001686340640809,
+          "byKindAtTrigger": [
+            {
+              "kind": "contains",
+              "state": "COMPLETED",
+              "n": 474
+            },
+            {
+              "kind": "parsed",
+              "state": "COMPLETED",
+              "n": 2
+            },
+            {
+              "kind": "parsed",
+              "state": "PENDING",
+              "n": 235
+            },
+            {
+              "kind": "parsed",
+              "state": "RUNNING",
+              "n": 2
+            },
+            {
+              "kind": "symbols",
+              "state": "COMPLETED",
+              "n": 473
+            }
+          ],
+          "runningSymbolsAtTrigger": 0,
+          "runningParsedAtTrigger": 2,
+          "killedAtEpochMs": 1790378795587,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 949,
+              "PENDING": 235,
+              "RUNNING": 2
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 1,
+            "jobRows": 1186,
+            "completedJobStateAndCheckpointPreserved": true,
+            "completedParsedCheckpointRowsMismatch": 0,
+            "invariantViolations": [],
+            "exitCode": 137
+          }
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 1499.2470420000027,
+        "firstProgressAfterRestartMs": 67.9131250000064,
+        "reclaimed": 2,
+        "restartParsedDroppedKeyMetric": 0,
+        "restartUnitsExecuted": {
+          "parsed": 237
+        }
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantAndCompletenessViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 3,
+          "jobRows": 1186
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "completedParsedFilesChangedAfterRestart": 0,
+        "completedParsedFilesChecked": 2,
+        "reexecutedUnitsViaReclaim": 3
+      }
+    },
+    {
+      "scenario": "m-l4-c-f1-23",
+      "workers": 2,
+      "killFractions": [
+        0.83,
+        0.93
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.8305227655986509,
+          "byKindAtTrigger": [
+            {
+              "kind": "contains",
+              "state": "COMPLETED",
+              "n": 474
+            },
+            {
+              "kind": "parsed",
+              "state": "COMPLETED",
+              "n": 37
+            },
+            {
+              "kind": "parsed",
+              "state": "PENDING",
+              "n": 199
+            },
+            {
+              "kind": "parsed",
+              "state": "RUNNING",
+              "n": 1
+            },
+            {
+              "kind": "parsed",
+              "state": "SKIPPED",
+              "n": 2
+            },
+            {
+              "kind": "symbols",
+              "state": "COMPLETED",
+              "n": 473
+            }
+          ],
+          "runningSymbolsAtTrigger": 0,
+          "runningParsedAtTrigger": 1,
+          "killedAtEpochMs": 1790378798015,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 984,
+              "PENDING": 198,
+              "RUNNING": 2,
+              "SKIPPED": 2
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "completedJobStateAndCheckpointPreserved": true,
+            "completedParsedCheckpointRowsMismatch": 0,
+            "invariantViolations": [],
+            "exitCode": 137
+          }
+        },
+        {
+          "triggerFraction": 0.9300168634064081,
+          "byKindAtTrigger": [
+            {
+              "kind": "contains",
+              "state": "COMPLETED",
+              "n": 474
+            },
+            {
+              "kind": "parsed",
+              "state": "COMPLETED",
+              "n": 152
+            },
+            {
+              "kind": "parsed",
+              "state": "PENDING",
+              "n": 79
+            },
+            {
+              "kind": "parsed",
+              "state": "RUNNING",
+              "n": 4
+            },
+            {
+              "kind": "parsed",
+              "state": "SKIPPED",
+              "n": 4
+            },
+            {
+              "kind": "symbols",
+              "state": "COMPLETED",
+              "n": 473
+            }
+          ],
+          "runningSymbolsAtTrigger": 0,
+          "runningParsedAtTrigger": 4,
+          "killedAtEpochMs": 1790378798406,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 1100,
+              "PENDING": 78,
+              "RUNNING": 4,
+              "SKIPPED": 4
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "completedJobStateAndCheckpointPreserved": true,
+            "completedParsedCheckpointRowsMismatch": 0,
+            "invariantViolations": [],
+            "exitCode": 137
+          }
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 1474.901874999996,
+        "firstProgressAfterRestartMs": 67.02045799999905,
+        "reclaimed": 4,
+        "restartParsedDroppedKeyMetric": 0,
+        "restartUnitsExecuted": {
+          "parsed": 82
+        }
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantAndCompletenessViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 4,
+          "jobRows": 1186
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "completedParsedFilesChangedAfterRestart": 0,
+        "completedParsedFilesChecked": 152,
+        "reexecutedUnitsViaReclaim": 4
+      }
+    },
+    {
+      "scenario": "m-l4-c-f1-24",
+      "workers": 2,
+      "killFractions": [
+        0.85,
+        0.95
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.851602023608769,
+          "byKindAtTrigger": [
+            {
+              "kind": "contains",
+              "state": "COMPLETED",
+              "n": 474
+            },
+            {
+              "kind": "parsed",
+              "state": "COMPLETED",
+              "n": 61
+            },
+            {
+              "kind": "parsed",
+              "state": "PENDING",
+              "n": 173
+            },
+            {
+              "kind": "parsed",
+              "state": "RUNNING",
+              "n": 2
+            },
+            {
+              "kind": "parsed",
+              "state": "SKIPPED",
+              "n": 3
+            },
+            {
+              "kind": "symbols",
+              "state": "COMPLETED",
+              "n": 473
+            }
+          ],
+          "runningSymbolsAtTrigger": 0,
+          "runningParsedAtTrigger": 2,
+          "killedAtEpochMs": 1790378800898,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 1008,
+              "PENDING": 173,
+              "RUNNING": 2,
+              "SKIPPED": 3
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "completedJobStateAndCheckpointPreserved": true,
+            "completedParsedCheckpointRowsMismatch": 0,
+            "invariantViolations": [],
+            "exitCode": 137
+          }
+        },
+        {
+          "triggerFraction": 0.9502529510961214,
+          "byKindAtTrigger": [
+            {
+              "kind": "contains",
+              "state": "COMPLETED",
+              "n": 474
+            },
+            {
+              "kind": "parsed",
+              "state": "COMPLETED",
+              "n": 175
+            },
+            {
+              "kind": "parsed",
+              "state": "PENDING",
+              "n": 55
+            },
+            {
+              "kind": "parsed",
+              "state": "RUNNING",
+              "n": 4
+            },
+            {
+              "kind": "parsed",
+              "state": "SKIPPED",
+              "n": 5
+            },
+            {
+              "kind": "symbols",
+              "state": "COMPLETED",
+              "n": 473
+            }
+          ],
+          "runningSymbolsAtTrigger": 0,
+          "runningParsedAtTrigger": 4,
+          "killedAtEpochMs": 1790378801297,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 1122,
+              "PENDING": 55,
+              "RUNNING": 4,
+              "SKIPPED": 5
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "completedJobStateAndCheckpointPreserved": true,
+            "completedParsedCheckpointRowsMismatch": 0,
+            "invariantViolations": [],
+            "exitCode": 137
+          }
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 1478.8477500000008,
+        "firstProgressAfterRestartMs": 66.02749999999651,
+        "reclaimed": 4,
+        "restartParsedDroppedKeyMetric": 0,
+        "restartUnitsExecuted": {
+          "parsed": 59
+        }
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantAndCompletenessViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 4,
+          "jobRows": 1186
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "completedParsedFilesChangedAfterRestart": 0,
+        "completedParsedFilesChecked": 175,
+        "reexecutedUnitsViaReclaim": 4
+      }
+    },
+    {
+      "scenario": "m-l4-c-f1-25",
+      "workers": 2,
+      "killFractions": [
+        0.4,
+        0.88
+      ],
+      "leaseMs": 1500,
+      "kills": [
+        {
+          "triggerFraction": 0.403035413153457,
+          "byKindAtTrigger": [
+            {
+              "kind": "contains",
+              "state": "COMPLETED",
+              "n": 7
+            },
+            {
+              "kind": "contains",
+              "state": "PENDING",
+              "n": 466
+            },
+            {
+              "kind": "contains",
+              "state": "RUNNING",
+              "n": 1
+            },
+            {
+              "kind": "parsed",
+              "state": "PENDING",
+              "n": 239
+            },
+            {
+              "kind": "symbols",
+              "state": "COMPLETED",
+              "n": 473
+            }
+          ],
+          "runningSymbolsAtTrigger": 0,
+          "runningParsedAtTrigger": 0,
+          "killedAtEpochMs": 1790378803466,
+          "afterKill": {
+            "states": {
+              "CLAIMED": 1,
+              "COMPLETED": 482,
+              "PENDING": 703
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 0,
+            "jobRows": 1186,
+            "completedJobStateAndCheckpointPreserved": true,
+            "completedParsedCheckpointRowsMismatch": 0,
+            "invariantViolations": [],
+            "exitCode": 137
+          }
+        },
+        {
+          "triggerFraction": 0.8802698145025295,
+          "byKindAtTrigger": [
+            {
+              "kind": "contains",
+              "state": "COMPLETED",
+              "n": 474
+            },
+            {
+              "kind": "parsed",
+              "state": "CLAIMED",
+              "n": 1
+            },
+            {
+              "kind": "parsed",
+              "state": "COMPLETED",
+              "n": 94
+            },
+            {
+              "kind": "parsed",
+              "state": "PENDING",
+              "n": 139
+            },
+            {
+              "kind": "parsed",
+              "state": "RUNNING",
+              "n": 1
+            },
+            {
+              "kind": "parsed",
+              "state": "SKIPPED",
+              "n": 4
+            },
+            {
+              "kind": "symbols",
+              "state": "COMPLETED",
+              "n": 473
+            }
+          ],
+          "runningSymbolsAtTrigger": 0,
+          "runningParsedAtTrigger": 1,
+          "killedAtEpochMs": 1790378805243,
+          "afterKill": {
+            "states": {
+              "COMPLETED": 1041,
+              "PENDING": 139,
+              "RUNNING": 2,
+              "SKIPPED": 4
+            },
+            "attemptsSum": 0,
+            "reclaimsSum": 1,
+            "jobRows": 1186,
+            "completedJobStateAndCheckpointPreserved": true,
+            "completedParsedCheckpointRowsMismatch": 0,
+            "invariantViolations": [],
+            "exitCode": 137
+          }
+        }
+      ],
+      "classification": "PASS-CRITERIA-MET",
+      "finalRestart": {
+        "exitCode": 0,
+        "wallMs": 1492.6314169999969,
+        "firstProgressAfterRestartMs": 68.3809590000019,
+        "reclaimed": 2,
+        "restartParsedDroppedKeyMetric": 0,
+        "restartUnitsExecuted": {
+          "parsed": 141
+        }
+      },
+      "final": {
+        "graphHash": "616ca53f21cabf6935c1b4b8716c8ca9d8e4b875c94e5a18ae14be2b8c47f13b",
+        "equalsClean": true,
+        "invariantAndCompletenessViolations": [],
+        "jobs": {
+          "states": {
+            "COMPLETED": 1181,
+            "SKIPPED": 5
+          },
+          "attemptsSum": 0,
+          "reclaimsSum": 3,
+          "jobRows": 1186
+        },
+        "totalsEqualClean": true,
+        "failedJobs": 0,
+        "completedParsedFilesChangedAfterRestart": 0,
+        "completedParsedFilesChecked": 94,
+        "reexecutedUnitsViaReclaim": 3
+      }
+    }
+  ],
+  "summary": {
+    "attempts": 26,
+    "criteriaMet": 26,
+    "notMet": [],
+    "killsWithRunningSymbolsUnit": 6,
+    "killsWithRunningParsedUnit": 14,
+    "totalKills": 32,
+    "restartWallMs": {
+      "n": 26,
+      "min": 665.8389999999999,
+      "median": 1492.2078749999982,
+      "p95": 2447.1069580000003,
+      "max": 2458.1415829999996,
+      "mean": 1795.6068029230769,
+      "stdev": 495.2938298058551,
+      "cv": 0.27583646319426053
+    },
+    "firstProgressAfterRestartMs": {
+      "n": 26,
+      "min": 52.54583300000013,
+      "median": 62.546604499999376,
+      "p95": 68.3809590000019,
+      "max": 79.9517499999929,
+      "mean": 61.670464884615775,
+      "stdev": 6.175286205344443,
+      "cv": 0.10013360880120299
+    }
+  },
+  "durationMs": 74603.43925000001
+}
