@@ -1,5 +1,7 @@
 # Contract: `extractSnapshotRelationships` server function
 
+> **[AMENDED 2026-09-25 — A6 (ADR-001):** enqueue targets in this contract (`RELATIONSHIP_QUEUE`) describe the optional Cloudflare deployment adapter. In the core local runtime the same unit sequence is enqueued to the local durable job engine (`contracts/local-job-engine.md`); request/response shapes and idempotency semantics are unchanged.**]**
+
 `src/lib/code-intel/relationship.functions.ts`. Same `createServerFn` plain-handler/wrapper pattern as `symbol.functions.ts`'s `extractSnapshotSymbols`. Internal/developer-triggered only — no UI calls this in this feature.
 
 ```ts

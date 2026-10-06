@@ -204,3 +204,33 @@ For repositories selected via Add Sources (either mode), the system exposes a de
 - `loadInitialSources`/`initialSources` is deployment/operator-level configuration (mirroring the existing `ATLAS_DEFAULT_OWNER`-style env-var pattern), not a visitor-facing settings UI — visitors continue to control their own session via Add Sources / Reset to default as today.
 - Only GitHub is functionally supported for Mode 1/Mode 2 fetching and for `initialSources` in this feature; GitLab/Bitbucket/local/enterprise are represented only as reserved entries in the Connected Sources data model for forward compatibility, matching the existing "GitLab" icon already shown (statically) in today's navbar.
 - The existing 5-source cap (`ATLAS_MAX_SOURCES`), dedupe behavior, and per-row validation apply uniformly across Mode 1 and Mode 2 combined, not as separate independent caps.
+
+---
+
+## Amendment A1 — Repository Discovery, Catalogue, Lifecycle, Selection, Capacity, Remove/Purge (2026-09-25)
+
+**Status: SPECIFIED, NOT IMPLEMENTED. Added by the user-approved local-first architecture revision (`docs/architecture/ADR-001-local-first-runtime.md`, decision D-ARCH-1). Nothing in the delivered Feature 003 scope above is changed or retro-claimed; every requirement below is new, future scope owned by this feature. Implementation requires its own SpecKit plan/tasks pass and explicit authorization.**
+
+### Context
+
+The delivered Feature 003 already implements the discovery half of ADR-001's flow (source URLs → spiral discovery → metadata-only repository listing, capped by `ATLAS_MAX_SPIRAL_REPOS`/`ATLAS_MAX_STORED_REPOS` as presentation/resource safeguards). What no feature owns today — and this amendment specifies — is the middle of the flow: catalogue lifecycle, selection, deep-analysis capacity, and remove/purge semantics. Deep analysis itself (jobs, extraction) belongs to Features 001/002/004; visualization belongs to Feature 009.
+
+```text
+SOURCE → DISCOVERY → REPOSITORY CATALOGUE → FILTER/SELECT → DEEP ANALYSIS PLAN → QUEUE → GRAPHIFICATION
+        (delivered)   (this amendment)      (this amendment)                    (Feature 004 job engine)
+```
+
+### New Functional Requirements
+
+- **FR-A1-01 (catalogue invariant)**: The Catalogue and Universe MUST show **all** discovered repositories regardless of analysis state. Catalogue/Universe visibility is independent of deep-analysis capacity; pagination/lazy rendering are presentation concerns only, never analysis restrictions.
+- **FR-A1-02 (discovery is lightweight)**: Discovery MUST collect metadata only — provider repository ID, owner, name, URL, default branch, visibility, primary language, size, updated timestamp, archived state, fork state, source association — and MUST NOT trigger snapshot acquisition, parsing, or any expensive analysis.
+- **FR-A1-03 (lifecycle)**: Every catalogued repository MUST carry exactly one lifecycle state: `DISCOVERED`, `SELECTED`, `QUEUED`, `ANALYZING`, `GRAPHIFIED`, `FAILED`, `PAUSED`, `REMOVED`, `PURGED` — semantics per ADR-001 §5.2. `FAILED` repositories remain visible. States `QUEUED`/`ANALYZING`/`GRAPHIFIED`/`FAILED` are projections of Feature 004 job/extraction state (contract `specs/004-…/contracts/local-job-engine.md` guarantee 7), not a second bookkeeping store.
+- **FR-A1-04 (selection)**: Users MUST be able to select/deselect repositories for deep graphification from both the Catalogue and the Universe; selection feeds the deep-analysis plan. The UI MUST show current capacity usage (e.g. `Graphified: 3 / 5`).
+- **FR-A1-05 (capacity)**: Concurrently GRAPHIFIED repositories are bounded by `ATLAS_MAX_DEEP_ANALYSIS_REPOS` (default 5, configurable; a product default, not an architectural constant). At capacity the system MUST NOT silently evict a graphified repository and MUST NOT silently select the first N discovered; the user must explicitly deselect, pause or remove one first. Companions: `ATLAS_MAX_CONCURRENT_ANALYSES` (default 2), `ATLAS_MAX_QUEUED_ANALYSES` (default 20). All are RepoAtlas-local resource controls (category B in Feature 006's read-only classification), distinct from the existing `ATLAS_MAX_SOURCES` source-URL cap, which is unchanged.
+- **FR-A1-06 (canonical identity and dedup)**: A repository's canonical identity MUST be its provider identity (provider repository ID), with `(provider, owner, name)` retained as a lookup. The same repository discovered through multiple sources MUST resolve to one repository record with many-to-many source associations — never duplicate intelligence.
+- **FR-A1-07 (remove vs purge)**: The system MUST distinguish, with distinct explicit actions and confirmations: **remove source** (stop using that source association; repositories discovered only through it leave the active set), **remove repository** (drop a repository from the active set; retained local intelligence is kept), and **purge repository** (after explicit confirmation, delete locally retained intelligence: source snapshots, AST/symbol indexes, relationships, process/impact data, semantic index, caches, queued jobs — per a purge manifest). Existing add/replace/clear/remove-source behavior is preserved; `Clear Sources` MUST NOT silently mean permanent deletion.
+- **FR-A1-08 (progressive visibility)**: The catalogue and Universe MUST be able to represent progressive graphification stages (ADR-001 §5.2) honestly — intermediate stages are shown as what they are, never as complete intelligence (constitution data-fidelity principle).
+
+### Boundaries
+
+This amendment does not implement or own: the job engine (Feature 004), snapshot acquisition/extraction (Features 001/002), visualization of the states (Feature 009), MCP (Feature 007), or any settings mutation surface (Feature 006 stays read-only). Neutral examples only in derived documentation (ADR-001 §12).

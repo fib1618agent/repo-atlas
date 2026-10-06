@@ -103,3 +103,9 @@ SourcesDialog (extended)
    ├─ SourceInputMode (new, transient)
    └─ on Mode 2 confirm ──► SelectedRepositoryForAnalysis[] (new, inert — no call made)
 ```
+
+---
+
+## Amendment A1 (2026-09-25) — Catalogue / lifecycle entities (SPECIFIED, NOT IMPLEMENTED)
+
+The architecture revision (ADR-001; spec.md Amendment A1) adds, as future scope: a `catalogue_repository` entity keyed by canonical provider identity (`provider_repo_id`) with `(provider, owner, name)` retained as lookup, many-to-many source associations, a nine-state lifecycle (`DISCOVERED/SELECTED/QUEUED/ANALYZING/GRAPHIFIED/FAILED/PAUSED/REMOVED/PURGED`), selection state and a progressive graphification stage marker. Shapes: `contracts/repository-catalogue-lifecycle.md`. No delivered Feature 003 entity above is changed.
